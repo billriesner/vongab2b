@@ -3,18 +3,14 @@ import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="bg-navy text-bg">
+    <footer className="text-bg" style={{ backgroundColor: '#303E55' }}>
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Company */}
           <div>
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="h-8 w-8 rounded bg-accent"></div>
-              <span className="text-xl font-bold">Vonga</span>
+            <div className="flex items-center justify-start mb-4">
+              <img src="/logo.svg" alt="Vonga" className="h-30 w-auto" style={{ filter: 'brightness(0) saturate(100%) invert(68%) sepia(66%) saturate(459%) hue-rotate(140deg) brightness(94%) contrast(87%)' }} />
             </div>
-            <p className="text-sm text-gray-300 mb-4">
-              Live Connected. Apparel that unlocks real-world rewards.
-            </p>
             <div className="flex space-x-4 mt-6">
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-accent transition-colors">
                 <Twitter className="w-5 h-5" />
@@ -33,7 +29,7 @@ export function Footer() {
 
           {/* Products */}
           <div>
-            <h3 className="font-semibold mb-4">Products</h3>
+            <h3 className="font-semibold mb-4" style={{ color: '#33BECC' }}>Products</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/shop" className="text-gray-300 hover:text-accent transition-colors">
@@ -55,7 +51,7 @@ export function Footer() {
 
           {/* Company */}
           <div>
-            <h3 className="font-semibold mb-4">Company</h3>
+            <h3 className="font-semibold mb-4" style={{ color: '#33BECC' }}>Company</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/technology" className="text-gray-300 hover:text-accent transition-colors">
@@ -87,7 +83,7 @@ export function Footer() {
 
           {/* Support */}
           <div>
-            <h3 className="font-semibold mb-4">Support</h3>
+            <h3 className="font-semibold mb-4" style={{ color: '#33BECC' }}>Support</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/faq" className="text-gray-300 hover:text-accent transition-colors">
@@ -114,7 +110,7 @@ export function Footer() {
 
           {/* Legal */}
           <div>
-            <h3 className="font-semibold mb-4">Legal</h3>
+            <h3 className="font-semibold mb-4" style={{ color: '#33BECC' }}>Legal</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/legal/terms" className="text-gray-300 hover:text-accent transition-colors">
