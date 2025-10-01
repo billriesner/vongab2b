@@ -55,60 +55,63 @@ export default function HomePage() {
       >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3xl max-w-6xl mx-auto">
           {/* Shop Vonga Card */}
-          <Card className="text-center hover:shadow-lg transition-shadow bg-white border border-muted">
+          <Card className="text-center hover:shadow-xl transition-shadow border-2 border-muted" style={{ backgroundColor: '#FFFFFF' }}>
             <CardHeader className="items-center text-center">
-              <div className="w-12 h-12 bg-accent rounded-full flex items-center justify-center mb-md">
-                <ShoppingBag className="w-6 h-6 text-white" />
+              <div className="w-20 h-20 rounded-full flex items-center justify-center mb-md mx-auto shadow-lg" style={{ backgroundColor: '#33BECC' }}>
+                <ShoppingBag className="w-10 h-10 text-white" />
               </div>
-              <CardTitle className="text-navy text-xl" style={{ textAlign: 'center' }}>Shop Vonga</CardTitle>
-              <CardDescription className="text-sm text-accent mt-sm" style={{ textAlign: 'center' }}>
+              <CardTitle className="text-navy text-2xl font-bold" style={{ textAlign: 'center' }}>Shop Vonga</CardTitle>
+              <CardDescription className="text-base font-semibold mt-sm" style={{ textAlign: 'center', color: '#33BECC' }}>
                 Sustainable athleisure with NFC built-in
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <Button className="w-full bg-accent hover:bg-accent/90 text-white" asChild>
+              <p className="text-sm text-navy" style={{ marginBottom: '48px' }}>
+                Premium connected apparel for everyday wear. Each piece features embedded NFC technology that unlocks digital experiences.
+              </p>
+              <Button className="w-full bg-gray-200 hover:bg-gray-300 text-black font-semibold shadow-md" asChild>
                 <a href="/shop">Shop the Collection</a>
               </Button>
             </CardContent>
           </Card>
 
           {/* Club Vonga Card */}
-          <Card className="text-center hover:shadow-lg transition-shadow bg-white border border-muted">
+          <Card className="text-center hover:shadow-xl transition-shadow border-2 border-navy" style={{ backgroundColor: '#303E55' }}>
             <CardHeader className="items-center text-center">
-              <div className="w-12 h-12 bg-navy rounded-full flex items-center justify-center mb-md">
-                <Users className="w-6 h-6 text-accent" />
+              <div className="w-20 h-20 bg-accent rounded-full flex items-center justify-center mb-md mx-auto shadow-lg">
+                <Users className="w-10 h-10 text-navy" />
               </div>
-              <CardTitle className="text-navy text-xl" style={{ textAlign: 'center' }}>Club Vonga</CardTitle>
-              <CardDescription className="text-sm text-accent mt-sm" style={{ textAlign: 'center' }}>
+              <CardTitle className="text-accent text-2xl font-bold" style={{ textAlign: 'center' }}>Club Vonga</CardTitle>
+              <CardDescription className="text-base font-semibold mt-sm" style={{ textAlign: 'center', color: '#33BECC' }}>
                 Rethink your community's apparel
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-text/70 mb-lg">
+              <p className="text-sm text-white" style={{ marginBottom: '48px' }}>
                 On-body tech for gyms, golf courses or any community. We help you launch rewards and member perks with ease.
               </p>
-              <Button className="w-full bg-navy hover:bg-navy/90 text-white" asChild>
+              <Button className="w-full bg-gray-200 hover:bg-gray-300 text-black font-semibold shadow-md" asChild>
                 <a href="/club">See Starter Kits</a>
               </Button>
             </CardContent>
           </Card>
 
           {/* Enterprise Card */}
-          <Card className="text-center hover:shadow-lg transition-shadow bg-white border border-muted">
+          <Card className="text-center hover:shadow-xl transition-shadow border-2 border-muted" style={{ backgroundColor: '#FFFFFF' }}>
             <CardHeader className="items-center text-center">
-              <div className="w-12 h-12 bg-accent rounded-full flex items-center justify-center mb-md">
-                <Building2 className="w-6 h-6 text-white" />
+              <div className="w-20 h-20 rounded-full flex items-center justify-center mb-md mx-auto shadow-lg" style={{ backgroundColor: '#33BECC' }}>
+                <Building2 className="w-10 h-10 text-white" />
               </div>
-              <CardTitle className="text-navy text-xl" style={{ textAlign: 'center' }}>Enterprise</CardTitle>
-              <CardDescription className="text-sm text-accent mt-sm" style={{ textAlign: 'center' }}>
+              <CardTitle className="text-navy text-2xl font-bold" style={{ textAlign: 'center' }}>Enterprise</CardTitle>
+              <CardDescription className="text-base font-semibold mt-sm" style={{ textAlign: 'center', color: '#33BECC' }}>
                 Own the Season. Own the Moment.
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-text/70 mb-lg">
+              <p className="text-sm text-navy" style={{ marginBottom: '48px' }}>
                 Season-scale activations for teams and universities. Create custom apparel and digital rewards.
               </p>
-              <Button className="w-full bg-accent hover:bg-accent/90 text-white" asChild>
+              <Button className="w-full bg-gray-200 hover:bg-gray-300 text-black font-semibold shadow-md" asChild>
                 <a href="/enterprise">Request a Proposal</a>
               </Button>
             </CardContent>
