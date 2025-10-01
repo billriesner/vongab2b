@@ -281,68 +281,87 @@ export default function HomePage() {
         </div>
       </Section>
 
+      {/* Visual Divider */}
+      <section style={{ backgroundColor: '#FFFFFF', paddingTop: '64px', paddingBottom: '64px' }}>
+        <div className="max-w-4xl mx-auto px-4">
+          <div style={{ height: '2px', backgroundColor: '#33BECC', opacity: 0.3 }}></div>
+        </div>
+      </section>
+
       {/* Split Lead Capture Section */}
       <Section 
-        className="py-5xl relative"
-        style={{ backgroundColor: '#F7F7F7' }}
+        className="py-4xl"
+        style={{ backgroundColor: '#FFFFFF' }}
         title="Stay Connected"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3xl max-w-5xl mx-auto">
           {/* Consumers */}
-          <div className="bg-white border border-muted rounded-lg p-3xl hover:shadow-lg transition-shadow">
-            <div className="w-12 h-12 bg-accent rounded-full flex items-center justify-center mb-lg">
-              <ShoppingBag className="w-6 h-6 text-white" />
-            </div>
-            <h3 className="text-xl font-semibold text-navy mb-sm">For You</h3>
-            <p className="text-sm text-text/70 mb-lg">
-              Get drops and early access.
-            </p>
-            <form className="space-y-md">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="w-full px-md py-sm border border-muted rounded focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-text"
-                required
-              />
-              <Button type="submit" className="w-full bg-accent hover:bg-accent/90 text-white">
-                Subscribe
-              </Button>
-            </form>
-          </div>
+          <Card className="text-center hover:shadow-xl transition-shadow border-2 border-navy" style={{ backgroundColor: '#303E55' }}>
+            <CardHeader className="items-center text-center">
+              <div className="w-20 h-20 bg-accent rounded-full flex items-center justify-center mb-md mx-auto shadow-lg">
+                <ShoppingBag className="w-10 h-10 text-navy" />
+              </div>
+              <CardTitle className="text-accent text-2xl font-bold" style={{ textAlign: 'center' }}>For You</CardTitle>
+              <CardDescription className="text-base font-semibold mt-sm" style={{ textAlign: 'center', color: '#33BECC' }}>
+                Get drops and early access
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form>
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="w-full px-lg py-md border-2 border-muted rounded focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-text bg-white"
+                  style={{ marginBottom: '24px' }}
+                  required
+                />
+                <Button type="submit" className="w-full bg-gray-200 hover:bg-gray-300 text-black font-semibold shadow-md">
+                  Subscribe
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
 
           {/* Businesses */}
-          <div className="bg-white border border-muted rounded-lg p-3xl hover:shadow-lg transition-shadow">
-            <div className="w-12 h-12 bg-navy rounded-full flex items-center justify-center mb-lg">
-              <Building2 className="w-6 h-6 text-accent" />
-            </div>
-            <h3 className="text-xl font-semibold text-navy mb-sm">For Business</h3>
-            <p className="text-sm text-text/70 mb-lg">
-              Book a discovery call.
-            </p>
-            <form className="space-y-md">
-              <input
-                type="text"
-                placeholder="Name"
-                className="w-full px-md py-sm border border-muted rounded focus:outline-none focus:ring-2 focus:ring-navy focus:border-navy text-text"
-                required
-              />
-              <input
-                type="email"
-                placeholder="Email"
-                className="w-full px-md py-sm border border-muted rounded focus:outline-none focus:ring-2 focus:ring-navy focus:border-navy text-text"
-                required
-              />
-              <input
-                type="text"
-                placeholder="Company"
-                className="w-full px-md py-sm border border-muted rounded focus:outline-none focus:ring-2 focus:ring-navy focus:border-navy text-text"
-                required
-              />
-              <Button type="submit" className="w-full bg-navy hover:bg-navy/90 text-white">
-                Book a Demo
-              </Button>
-            </form>
-          </div>
+          <Card className="text-center hover:shadow-xl transition-shadow border-2 border-accent" style={{ backgroundColor: '#33BECC' }}>
+            <CardHeader className="items-center text-center">
+              <div className="w-20 h-20 rounded-full flex items-center justify-center mb-md mx-auto shadow-lg" style={{ backgroundColor: '#303E55' }}>
+                <Building2 className="w-10 h-10 text-white" />
+              </div>
+              <CardTitle className="text-navy text-2xl font-bold" style={{ textAlign: 'center' }}>For Business</CardTitle>
+              <CardDescription className="text-base font-semibold mt-sm text-navy" style={{ textAlign: 'center' }}>
+                Book a discovery call
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form>
+                <input
+                  type="text"
+                  placeholder="Name"
+                  className="w-full px-lg py-md border-2 border-muted rounded focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-text bg-white placeholder:text-text/60"
+                  style={{ marginBottom: '24px' }}
+                  required
+                />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  className="w-full px-lg py-md border-2 border-muted rounded focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-text bg-white placeholder:text-text/60"
+                  style={{ marginBottom: '24px' }}
+                  required
+                />
+                <input
+                  type="text"
+                  placeholder="Company"
+                  className="w-full px-lg py-md border-2 border-muted rounded focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-text bg-white placeholder:text-text/60"
+                  style={{ marginBottom: '24px' }}
+                  required
+                />
+                <Button type="submit" className="w-full bg-gray-200 hover:bg-gray-300 text-black font-semibold shadow-md">
+                  Book a Demo
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
         </div>
       </Section>
     </div>
