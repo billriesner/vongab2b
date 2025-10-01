@@ -14,7 +14,7 @@ export default function HomePage() {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: 'url(/hero-placeholder.jpg)' }}
         ></div>
-        <div className="absolute inset-0 bg-white/40"></div>
+        <div className="absolute inset-0 bg-white/60"></div>
         <div className="max-w-7xl mx-auto px-4 py-5xl md:py-[120px] relative z-10 w-full">
           <div className="text-center max-w-5xl mx-auto">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-2xl">
@@ -22,8 +22,8 @@ export default function HomePage() {
               <br />
               <span style={{ color: '#33BECC' }}>Live Connected.</span>
             </h1>
-            <p className="text-lg md:text-xl text-black mb-3xl max-w-3xl mx-auto leading-relaxed">
-              Apparel with embedded NFC that links people and brands—turning everyday wear into access and rewards.
+            <p className="text-lg md:text-xl font-semibold mb-3xl max-w-3xl mx-auto leading-relaxed" style={{ color: '#000000', textShadow: '0 2px 4px rgba(255,255,255,0.8)' }}>
+              On-body tech that links people and brands. Turn everyday wear into access and rewards.
             </p>
             <div className="flex flex-col sm:flex-row gap-md justify-center items-center">
               <Button 
@@ -121,41 +121,65 @@ export default function HomePage() {
 
       {/* How It Works Section */}
       <Section 
-        className="py-5xl relative"
+        className="py-4xl"
         style={{ backgroundColor: '#F7F7F7' }}
         title="How It Works"
         description="Seamless connection from apparel to experience"
       >
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3xl max-w-5xl mx-auto">
-          <div className="text-center">
-            <div className="w-20 h-20 bg-accent rounded-full flex items-center justify-center mx-auto mb-lg">
-              <Shirt className="w-10 h-10 text-white" />
-            </div>
-            <h3 className="text-xl font-semibold text-navy mb-sm">Wear</h3>
-            <p className="text-sm text-text/70 max-w-xs mx-auto">
-              NFC embedded inside every piece.
-            </p>
-          </div>
-          
-          <div className="text-center">
-            <div className="w-20 h-20 bg-navy rounded-full flex items-center justify-center mx-auto mb-lg">
-              <Smartphone className="w-10 h-10 text-accent" />
-            </div>
-            <h3 className="text-xl font-semibold text-navy mb-sm">Tap</h3>
-            <p className="text-sm text-text/70 max-w-xs mx-auto">
-              Connect with your phone. No app needed.
-            </p>
-          </div>
-          
-          <div className="text-center">
-            <div className="w-20 h-20 bg-accent rounded-full flex items-center justify-center mx-auto mb-lg">
-              <Gift className="w-10 h-10 text-white" />
-            </div>
-            <h3 className="text-xl font-semibold text-navy mb-sm">Unlock</h3>
-            <p className="text-sm text-text/70 max-w-xs mx-auto">
-              Access rewards and experiences.
-            </p>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3xl max-w-6xl mx-auto">
+          {/* Wear Card */}
+          <Card className="text-center hover:shadow-xl transition-shadow border-2 border-navy" style={{ backgroundColor: '#303E55' }}>
+            <CardHeader className="items-center text-center">
+              <div className="w-20 h-20 bg-accent rounded-full flex items-center justify-center mb-md mx-auto shadow-lg">
+                <Shirt className="w-10 h-10 text-navy" />
+              </div>
+              <CardTitle className="text-accent text-2xl font-bold" style={{ textAlign: 'center' }}>Wear</CardTitle>
+              <CardDescription className="text-base font-semibold mt-sm" style={{ textAlign: 'center', color: '#33BECC' }}>
+                NFC embedded inside every piece
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-white" style={{ marginBottom: '48px' }}>
+                Every Vonga product features invisible NFC technology woven into the fabric. Lightweight, durable, and machine washable.
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* Tap Card */}
+          <Card className="text-center hover:shadow-xl transition-shadow border-2 border-muted" style={{ backgroundColor: '#FFFFFF' }}>
+            <CardHeader className="items-center text-center">
+              <div className="w-20 h-20 rounded-full flex items-center justify-center mb-md mx-auto shadow-lg" style={{ backgroundColor: '#33BECC' }}>
+                <Smartphone className="w-10 h-10 text-white" />
+              </div>
+              <CardTitle className="text-navy text-2xl font-bold" style={{ textAlign: 'center' }}>Tap</CardTitle>
+              <CardDescription className="text-base font-semibold mt-sm" style={{ textAlign: 'center', color: '#33BECC' }}>
+                Connect with your phone. No app needed
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-navy" style={{ marginBottom: '48px' }}>
+                Simply hold your phone near the Vonga logo. Your phone instantly recognizes the connection without downloads or setup.
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* Unlock Card */}
+          <Card className="text-center hover:shadow-xl transition-shadow border-2 border-navy" style={{ backgroundColor: '#303E55' }}>
+            <CardHeader className="items-center text-center">
+              <div className="w-20 h-20 bg-accent rounded-full flex items-center justify-center mb-md mx-auto shadow-lg">
+                <Gift className="w-10 h-10 text-navy" />
+              </div>
+              <CardTitle className="text-accent text-2xl font-bold" style={{ textAlign: 'center' }}>Unlock</CardTitle>
+              <CardDescription className="text-base font-semibold mt-sm" style={{ textAlign: 'center', color: '#33BECC' }}>
+                Access rewards and experiences
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-white" style={{ marginBottom: '48px' }}>
+                Get instant access to exclusive content, rewards, and experiences. From event entry to loyalty points, all in one tap.
+              </p>
+            </CardContent>
+          </Card>
         </div>
       </Section>
 
