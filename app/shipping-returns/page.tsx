@@ -1,58 +1,100 @@
+import { Section } from "@/components/Section";
+import { Truck, Package, RefreshCw } from "lucide-react";
+
 export default function ShippingReturnsPage() {
   return (
-    <div className="container mx-auto px-4 py-16">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold text-brand-navy mb-8">Shipping & Returns</h1>
-        
-        <div className="space-y-12">
-          <section>
-            <h2 className="text-2xl font-semibold mb-6">Shipping Information</h2>
-            <div className="prose prose-lg max-w-none">
-              <h3 className="text-lg font-semibold mb-4">Standard Shipping</h3>
-              <p className="text-muted-foreground mb-4">
-                Free standard shipping on orders over $50 within the United States. Orders under $50 have a flat rate of $5.95.
+    <div>
+      {/* Hero Section */}
+      <Section 
+        className="py-5xl"
+        style={{ backgroundColor: '#FFFFFF' }}
+        title="Shipping & Returns"
+        description="Everything you need to know"
+      >
+      </Section>
+
+      {/* Shipping Section */}
+      <Section 
+        className="py-4xl"
+        style={{ backgroundColor: '#F7F7F7' }}
+      >
+        <div className="max-w-4xl mx-auto">
+          <div className="flex items-center gap-md mb-3xl">
+            <div className="w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#33BECC' }}>
+              <Truck className="w-8 h-8 text-white" />
+            </div>
+            <h2 className="text-3xl font-bold text-navy">Shipping Information</h2>
+          </div>
+          
+          <div className="space-y-xl bg-white border-2 border-muted rounded-lg p-3xl">
+            <div>
+              <h3 className="text-xl font-bold text-navy mb-md">Standard Shipping</h3>
+              <p className="text-text/70 mb-sm">
+                Free standard shipping on orders over $75 within the United States. Orders under $75 have a flat rate of $5.95.
               </p>
-              <p className="text-muted-foreground mb-4">
+              <p className="text-text/70">
                 Standard shipping typically takes 3-5 business days for domestic orders.
               </p>
-              
-              <h3 className="text-lg font-semibold mb-4">Express Shipping</h3>
-              <p className="text-muted-foreground mb-4">
+            </div>
+            
+            <div>
+              <h3 className="text-xl font-bold text-navy mb-md">Express Shipping</h3>
+              <p className="text-text/70">
                 Express shipping is available for $12.95 and typically delivers within 1-2 business days.
               </p>
-              
-              <h3 className="text-lg font-semibold mb-4">International Shipping</h3>
-              <p className="text-muted-foreground">
+            </div>
+            
+            <div>
+              <h3 className="text-xl font-bold text-navy mb-md">International Shipping</h3>
+              <p className="text-text/70">
                 We ship internationally with rates calculated at checkout based on destination and package weight.
               </p>
             </div>
-          </section>
+          </div>
+        </div>
+      </Section>
 
-          <section>
-            <h2 className="text-2xl font-semibold mb-6">Returns & Exchanges</h2>
-            <div className="prose prose-lg max-w-none">
-              <h3 className="text-lg font-semibold mb-4">Return Policy</h3>
-              <p className="text-muted-foreground mb-4">
-                We offer a 30-day return policy for most items. Items must be in original condition with tags attached and in original packaging.
+      {/* Returns Section */}
+      <Section 
+        className="py-4xl"
+        style={{ backgroundColor: '#FFFFFF' }}
+      >
+        <div className="max-w-4xl mx-auto">
+          <div className="flex items-center gap-md mb-3xl">
+            <div className="w-16 h-16 bg-navy rounded-full flex items-center justify-center flex-shrink-0">
+              <RefreshCw className="w-8 h-8 text-accent" />
+            </div>
+            <h2 className="text-3xl font-bold text-navy">Returns & Exchanges</h2>
+          </div>
+          
+          <div className="space-y-xl bg-white border-2 border-muted rounded-lg p-3xl">
+            <div>
+              <h3 className="text-xl font-bold text-navy mb-md">Return Policy</h3>
+              <p className="text-text/70">
+                We offer a 30-day return policy for unworn items with original tags attached and in original packaging. We want you to love your Vonga gear.
               </p>
-              
-              <h3 className="text-lg font-semibold mb-4">How to Return</h3>
-              <ol className="list-decimal list-inside text-muted-foreground space-y-2">
+            </div>
+            
+            <div>
+              <h3 className="text-xl font-bold text-navy mb-md">How to Return</h3>
+              <ol className="list-decimal list-inside text-text/70 space-y-sm">
                 <li>Contact our customer service team to initiate a return</li>
                 <li>You'll receive a prepaid return label via email</li>
                 <li>Package your items securely and attach the return label</li>
                 <li>Drop off at any authorized shipping location</li>
                 <li>Refunds will be processed within 5-7 business days</li>
               </ol>
-              
-              <h3 className="text-lg font-semibold mb-4">Exchanges</h3>
-              <p className="text-muted-foreground">
+            </div>
+            
+            <div>
+              <h3 className="text-xl font-bold text-navy mb-md">Exchanges</h3>
+              <p className="text-text/70">
                 Exchanges for different sizes or colors are subject to availability. Please contact customer service for assistance with exchanges.
               </p>
             </div>
-          </section>
+          </div>
         </div>
-      </div>
+      </Section>
     </div>
   );
 }

@@ -1,40 +1,69 @@
+import { Section } from "@/components/Section";
+
 export default function FAQPage() {
   const faqs = [
     {
-      question: "What is Vonga?",
-      answer: "Vonga is a company dedicated to creating innovative solutions that empower communities and individuals to achieve their goals."
+      question: "What is NFC and how does it work?",
+      answer: "NFC (Near Field Communication) is wireless technology embedded in your Vonga apparel. Just tap your phone to the logo and instantly connect. No app downloads or batteries needed."
     },
     {
-      question: "How do I join the Vonga Club?",
-      answer: "You can join the Vonga Club by visiting our club page and signing up with your email address. Membership includes exclusive benefits and early access to new products."
+      question: "Is the NFC chip safe to wear?",
+      answer: "Absolutely. NFC is passive technology that only activates when near a phone. It's the same tech used in contactless payments. The chips are also waterproof and machine washable."
     },
     {
-      question: "What are your shipping policies?",
-      answer: "We offer free shipping on orders over $50 within the United States. International shipping is available with additional fees."
+      question: "How do I set up my Vonga product?",
+      answer: "No setup required. Just tap your phone to the Vonga logo on your apparel. Your phone will automatically recognize it and take you to your digital experience."
     },
     {
-      question: "How can I track my order?",
-      answer: "Once your order ships, you'll receive a tracking number via email that you can use to monitor your package's progress."
+      question: "What rewards can I unlock?",
+      answer: "It depends on the program. Vonga Shop customers can unlock exclusive content and experiences. Club and Enterprise partners set their own custom rewards from discounts to VIP access."
     },
     {
-      question: "What is your return policy?",
-      answer: "We offer a 30-day return policy for most items. Items must be in original condition with tags attached."
+      question: "What's your shipping policy?",
+      answer: "Free shipping on orders over $75 within the United States. Most orders ship within 3-5 business days. International shipping available with additional fees."
+    },
+    {
+      question: "What's your return policy?",
+      answer: "30-day returns for unworn items with original tags. We want you to love your Vonga gear, so if it's not right, we'll make it right."
+    },
+    {
+      question: "Can I wash my Vonga apparel?",
+      answer: "Yes! Machine wash cold, tumble dry low. The NFC technology is fully waterproof and built to last through hundreds of wash cycles."
+    },
+    {
+      question: "How do I become a Club or Enterprise partner?",
+      answer: "Visit our Club or Enterprise pages and book a call. We'll discuss your needs and create a custom solution for your community or organization."
     }
   ];
 
   return (
-    <div className="container mx-auto px-4 py-16">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold text-brand-navy mb-8">Frequently Asked Questions</h1>
-        <div className="space-y-6">
-          {faqs.map((faq, index) => (
-            <div key={index} className="bg-card border rounded-lg p-6">
-              <h3 className="text-lg font-semibold mb-3">{faq.question}</h3>
-              <p className="text-muted-foreground">{faq.answer}</p>
-            </div>
-          ))}
+    <div>
+      {/* Hero Section */}
+      <Section 
+        className="py-5xl"
+        style={{ backgroundColor: '#303E55' }}
+        title="Frequently Asked Questions"
+        description="Everything you need to know about Vonga"
+        dark={true}
+      >
+      </Section>
+
+      {/* FAQ Section */}
+      <Section 
+        className="py-4xl"
+        style={{ backgroundColor: '#FFFFFF' }}
+      >
+        <div className="max-w-4xl mx-auto">
+          <div className="space-y-md">
+            {faqs.map((faq, index) => (
+              <div key={index} className="bg-white border-2 border-muted rounded-lg p-xl hover:shadow-lg transition-shadow">
+                <h3 className="text-lg font-bold text-navy mb-md">{faq.question}</h3>
+                <p className="text-text/70 leading-relaxed">{faq.answer}</p>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      </Section>
     </div>
   );
 }

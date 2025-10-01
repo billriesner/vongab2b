@@ -1,66 +1,87 @@
+import { Section } from "@/components/Section";
+import { Ruler } from "lucide-react";
+
 export default function SizeGuidePage() {
   return (
-    <div className="container mx-auto px-4 py-16">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold text-brand-navy mb-8">Size Guide</h1>
-        <div className="prose prose-lg max-w-none mb-12">
-          <p className="text-muted-foreground mb-6">
-            Finding the right size is important for comfort and fit. Use our comprehensive size guide to ensure you select the perfect size.
-          </p>
-        </div>
+    <div>
+      {/* Hero Section */}
+      <Section 
+        className="py-5xl"
+        style={{ backgroundColor: '#FFFFFF' }}
+        title="Size Guide"
+        description="Find your perfect fit"
+      >
+      </Section>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div>
-            <h2 className="text-2xl font-semibold mb-6">Clothing Sizes</h2>
-            <div className="overflow-x-auto">
-              <table className="w-full border-collapse border border-border">
-                <thead>
-                  <tr className="bg-muted">
-                    <th className="border border-border p-3 text-left">Size</th>
-                    <th className="border border-border p-3 text-left">Chest (in)</th>
-                    <th className="border border-border p-3 text-left">Waist (in)</th>
-                    <th className="border border-border p-3 text-left">Length (in)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {[
-                    { size: "XS", chest: "32-34", waist: "26-28", length: "27" },
-                    { size: "S", chest: "34-36", waist: "28-30", length: "28" },
-                    { size: "M", chest: "36-38", waist: "30-32", length: "29" },
-                    { size: "L", chest: "38-40", waist: "32-34", length: "30" },
-                    { size: "XL", chest: "40-42", waist: "34-36", length: "31" },
-                  ].map((row, index) => (
-                    <tr key={index}>
-                      <td className="border border-border p-3 font-medium">{row.size}</td>
-                      <td className="border border-border p-3">{row.chest}</td>
-                      <td className="border border-border p-3">{row.waist}</td>
-                      <td className="border border-border p-3">{row.length}</td>
+      {/* Size Tables Section */}
+      <Section 
+        className="py-4xl"
+        style={{ backgroundColor: '#F7F7F7' }}
+      >
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3xl">
+            <div>
+              <div className="flex items-center gap-md mb-xl">
+                <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ backgroundColor: '#33BECC' }}>
+                  <Ruler className="w-6 h-6 text-white" />
+                </div>
+                <h2 className="text-2xl font-bold text-navy">Clothing Sizes</h2>
+              </div>
+              <div className="overflow-x-auto bg-white border-2 border-muted rounded-lg p-lg">
+                <table className="w-full">
+                  <thead>
+                    <tr style={{ backgroundColor: '#E6F7F9' }}>
+                      <th className="p-md text-left text-navy font-bold">Size</th>
+                      <th className="p-md text-left text-navy font-bold">Chest (in)</th>
+                      <th className="p-md text-left text-navy font-bold">Waist (in)</th>
+                      <th className="p-md text-left text-navy font-bold">Length (in)</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {[
+                      { size: "XS", chest: "32-34", waist: "26-28", length: "27" },
+                      { size: "S", chest: "34-36", waist: "28-30", length: "28" },
+                      { size: "M", chest: "36-38", waist: "30-32", length: "29" },
+                      { size: "L", chest: "38-40", waist: "32-34", length: "30" },
+                      { size: "XL", chest: "40-42", waist: "34-36", length: "31" },
+                      { size: "2XL", chest: "42-44", waist: "36-38", length: "32" },
+                    ].map((row, index) => (
+                      <tr key={index} className="border-t border-muted">
+                        <td className="p-md font-semibold text-navy">{row.size}</td>
+                        <td className="p-md text-text/70">{row.chest}</td>
+                        <td className="p-md text-text/70">{row.waist}</td>
+                        <td className="p-md text-text/70">{row.length}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
 
-          <div>
-            <h2 className="text-2xl font-semibold mb-6">How to Measure</h2>
-            <div className="space-y-6">
-              <div>
-                <h3 className="font-semibold mb-2">Chest/Bust</h3>
-                <p className="text-muted-foreground">Measure around the fullest part of your chest, keeping the tape horizontal.</p>
-              </div>
-              <div>
-                <h3 className="font-semibold mb-2">Waist</h3>
-                <p className="text-muted-foreground">Measure around your natural waistline, which is typically the narrowest part of your torso.</p>
-              </div>
-              <div>
-                <h3 className="font-semibold mb-2">Length</h3>
-                <p className="text-muted-foreground">For tops, measure from the highest point of your shoulder to your desired length.</p>
+            <div>
+              <h2 className="text-2xl font-bold text-navy mb-xl">How to Measure</h2>
+              <div className="space-y-xl bg-white border-2 border-muted rounded-lg p-xl">
+                <div>
+                  <h3 className="text-lg font-bold text-navy mb-sm">Chest/Bust</h3>
+                  <p className="text-sm text-text/70">Measure around the fullest part of your chest, keeping the tape horizontal.</p>
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-navy mb-sm">Waist</h3>
+                  <p className="text-sm text-text/70">Measure around your natural waistline, which is typically the narrowest part of your torso.</p>
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-navy mb-sm">Length</h3>
+                  <p className="text-sm text-text/70">For tops, measure from the highest point of your shoulder to your desired length.</p>
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-navy mb-sm">Between Sizes?</h3>
+                  <p className="text-sm text-text/70">We recommend sizing up for a relaxed fit or sizing down for a more fitted look. All Vonga apparel is designed for comfort and movement.</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </Section>
     </div>
   );
 }

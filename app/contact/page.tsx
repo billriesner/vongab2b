@@ -1,77 +1,112 @@
+import { Section } from "@/components/Section";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Mail, Phone, MapPin } from "lucide-react";
+
 export default function ContactPage() {
   return (
-    <div className="container mx-auto px-4 py-16">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold text-brand-navy mb-8">Contact Us</h1>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+    <div>
+      {/* Hero Section */}
+      <Section 
+        className="py-5xl"
+        style={{ backgroundColor: '#FFFFFF' }}
+        title="Contact Us"
+        description="We'd love to hear from you"
+      >
+      </Section>
+
+      {/* Contact Form and Info Section */}
+      <Section 
+        className="py-4xl"
+        style={{ backgroundColor: '#F7F7F7' }}
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3xl max-w-6xl mx-auto">
+          {/* Contact Info */}
           <div>
-            <h2 className="text-2xl font-semibold mb-6">Get in Touch</h2>
-            <p className="text-muted-foreground mb-8">
-              We'd love to hear from you. Send us a message and we'll respond as soon as possible.
-            </p>
-            <div className="space-y-4">
-              <div>
-                <h3 className="font-semibold">Email</h3>
-                <p className="text-muted-foreground">hello@vonga.com</p>
+            <h2 className="text-2xl font-bold text-navy mb-3xl">Get in Touch</h2>
+            <div className="space-y-xl">
+              <div className="flex items-start gap-md">
+                <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#33BECC' }}>
+                  <Mail className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-navy mb-sm">Email</h3>
+                  <p className="text-text/70">hello@vonga.io</p>
+                </div>
               </div>
-              <div>
-                <h3 className="font-semibold">Phone</h3>
-                <p className="text-muted-foreground">+1 (555) 123-4567</p>
+              <div className="flex items-start gap-md">
+                <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#303E55' }}>
+                  <Phone className="w-6 h-6 text-accent" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-navy mb-sm">Phone</h3>
+                  <p className="text-text/70">+1 (555) 123-4567</p>
+                </div>
               </div>
-              <div>
-                <h3 className="font-semibold">Address</h3>
-                <p className="text-muted-foreground">123 Innovation Street<br />Tech City, TC 12345</p>
+              <div className="flex items-start gap-md">
+                <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#33BECC' }}>
+                  <MapPin className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-navy mb-sm">Address</h3>
+                  <p className="text-text/70">123 Innovation Street<br />Tech City, TC 12345</p>
+                </div>
               </div>
             </div>
           </div>
-          <div>
-            <form className="space-y-6">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium mb-2">Full Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  className="w-full px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-brand-accent"
-                  placeholder="Enter your full name"
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium mb-2">Email Address</label>
-                <input
-                  type="email"
-                  id="email"
-                  className="w-full px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-brand-accent"
-                  placeholder="Enter your email"
-                />
-              </div>
-              <div>
-                <label htmlFor="subject" className="block text-sm font-medium mb-2">Subject</label>
-                <input
-                  type="text"
-                  id="subject"
-                  className="w-full px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-brand-accent"
-                  placeholder="Enter subject"
-                />
-              </div>
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium mb-2">Message</label>
-                <textarea
-                  id="message"
-                  rows={6}
-                  className="w-full px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-brand-accent"
-                  placeholder="Enter your message"
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full bg-brand-accent text-white py-3 rounded-md hover:bg-brand-accent/90 transition-colors"
-              >
-                Send Message
-              </button>
-            </form>
-          </div>
+
+          {/* Contact Form */}
+          <Card className="border-2 border-muted bg-white shadow-xl">
+            <CardContent className="p-3xl">
+              <form>
+                <div style={{ marginBottom: '24px' }}>
+                  <label htmlFor="name" className="block text-sm font-semibold text-navy mb-sm">Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    className="w-full px-lg py-md border-2 border-muted rounded focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-text bg-white"
+                    placeholder="Your name"
+                    required
+                  />
+                </div>
+                <div style={{ marginBottom: '24px' }}>
+                  <label htmlFor="email" className="block text-sm font-semibold text-navy mb-sm">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    className="w-full px-lg py-md border-2 border-muted rounded focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-text bg-white"
+                    placeholder="your@email.com"
+                    required
+                  />
+                </div>
+                <div style={{ marginBottom: '24px' }}>
+                  <label htmlFor="subject" className="block text-sm font-semibold text-navy mb-sm">Subject</label>
+                  <input
+                    type="text"
+                    id="subject"
+                    className="w-full px-lg py-md border-2 border-muted rounded focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-text bg-white"
+                    placeholder="What's this about?"
+                    required
+                  />
+                </div>
+                <div style={{ marginBottom: '24px' }}>
+                  <label htmlFor="message" className="block text-sm font-semibold text-navy mb-sm">Message</label>
+                  <textarea
+                    id="message"
+                    rows={6}
+                    className="w-full px-lg py-md border-2 border-muted rounded focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-text bg-white"
+                    placeholder="Tell us what you're thinking..."
+                    required
+                  />
+                </div>
+                <Button type="submit" className="w-full bg-gray-200 hover:bg-gray-300 text-black font-semibold shadow-md" size="lg">
+                  Send Message
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
         </div>
-      </div>
+      </Section>
     </div>
   );
 }

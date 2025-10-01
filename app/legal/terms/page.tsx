@@ -1,56 +1,64 @@
+import { Section } from "@/components/Section";
+
 export default function TermsPage() {
   return (
-    <div className="container mx-auto px-4 py-16">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold text-brand-navy mb-8">Terms of Service</h1>
-        
-        <div className="prose prose-lg max-w-none space-y-8">
-          <section>
-            <h2 className="text-2xl font-semibold mb-4">Acceptance of Terms</h2>
-            <p className="text-muted-foreground">
-              By accessing and using this website, you accept and agree to be bound by the terms and provision of this agreement.
-            </p>
-          </section>
+    <div>
+      {/* Hero Section */}
+      <Section 
+        className="py-5xl"
+        style={{ backgroundColor: '#303E55' }}
+        title="Terms of Service"
+        description="Agreement for using Vonga products and services"
+        dark={true}
+      >
+      </Section>
 
-          <section>
-            <h2 className="text-2xl font-semibold mb-4">Use License</h2>
-            <p className="text-muted-foreground mb-4">
-              Permission is granted to temporarily download one copy of the materials on Vonga's website for personal, non-commercial transitory viewing only.
-            </p>
-            <p className="text-muted-foreground">
-              This is the grant of a license, not a transfer of title, and under this license you may not modify or copy the materials.
-            </p>
-          </section>
+      {/* Terms Content */}
+      <Section 
+        className="py-4xl"
+        style={{ backgroundColor: '#FFFFFF' }}
+      >
+        <div className="max-w-4xl mx-auto prose prose-lg">
+          <p className="text-text/70 mb-xl">
+            Last updated: {new Date().toLocaleDateString()}
+          </p>
 
-          <section>
-            <h2 className="text-2xl font-semibold mb-4">Product Information</h2>
-            <p className="text-muted-foreground">
-              We strive to provide accurate product information, but we do not warrant that product descriptions or other content is accurate, complete, reliable, current, or error-free.
-            </p>
-          </section>
+          <h2 className="text-2xl font-bold text-navy mt-3xl mb-lg">Agreement</h2>
+          <p className="text-text/70 mb-lg">
+            By using Vonga products and services, you agree to these terms. Please read them carefully.
+          </p>
 
-          <section>
-            <h2 className="text-2xl font-semibold mb-4">Pricing</h2>
-            <p className="text-muted-foreground">
-              All prices are subject to change without notice. We reserve the right to modify or discontinue any product or service at any time.
-            </p>
-          </section>
+          <h2 className="text-2xl font-bold text-navy mt-3xl mb-lg">Use of Products</h2>
+          <p className="text-text/70 mb-lg">
+            Vonga products are intended for personal use. The NFC technology embedded in our apparel is designed to connect you with digital experiences, rewards, and access.
+          </p>
 
-          <section>
-            <h2 className="text-2xl font-semibold mb-4">Limitation of Liability</h2>
-            <p className="text-muted-foreground">
-              In no event shall Vonga or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on Vonga's website.
-            </p>
-          </section>
+          <h2 className="text-2xl font-bold text-navy mt-3xl mb-lg">Digital Services</h2>
+          <p className="text-text/70 mb-lg">
+            Our digital platform provides rewards, authentication, and community features. We reserve the right to modify or discontinue features with reasonable notice to users.
+          </p>
 
-          <section>
-            <h2 className="text-2xl font-semibold mb-4">Governing Law</h2>
-            <p className="text-muted-foreground">
-              These terms and conditions are governed by and construed in accordance with the laws of the United States and you irrevocably submit to the exclusive jurisdiction of the courts in that state or location.
-            </p>
-          </section>
+          <h2 className="text-2xl font-bold text-navy mt-3xl mb-lg">Intellectual Property</h2>
+          <p className="text-text/70 mb-lg">
+            All Vonga branding, designs, and technology are protected by intellectual property rights. Unauthorized reproduction or use is prohibited.
+          </p>
+
+          <h2 className="text-2xl font-bold text-navy mt-3xl mb-lg">Limitation of Liability</h2>
+          <p className="text-text/70 mb-lg">
+            Vonga provides products and services "as is." While we strive for excellence, we cannot guarantee uninterrupted access to digital features.
+          </p>
+
+          <h2 className="text-2xl font-bold text-navy mt-3xl mb-lg">Changes to Terms</h2>
+          <p className="text-text/70 mb-lg">
+            We may update these terms from time to time. Continued use of Vonga products constitutes acceptance of updated terms.
+          </p>
+
+          <h2 className="text-2xl font-bold text-navy mt-3xl mb-lg">Contact</h2>
+          <p className="text-text/70">
+            Questions about these terms? Email us at legal@vonga.io
+          </p>
         </div>
-      </div>
+      </Section>
     </div>
   );
 }
