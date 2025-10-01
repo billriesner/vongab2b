@@ -44,6 +44,39 @@
 }
 
 :root {
+  /* Design Tokens */
+  
+  /* Colors */
+  --color-accent: #33BECC;
+  --color-accent-rgb: 51, 190, 204;
+  --color-navy: #303E55;
+  --color-navy-rgb: 48, 62, 85;
+  --color-text: #0A0A0A;
+  --color-bg: #FFFFFF;
+  --color-muted: #E6F7F9;
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+  
+  /* Radius */
+  --radius: 16px;
+  --radius-lg: 20px;
+  
+  /* Shadow */
+  --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
+  
+  /* Spacing (8px grid) */
+  --spacing-xs: 8px;
+  --spacing-sm: 16px;
+  --spacing-md: 24px;
+  --spacing-lg: 32px;
+  --spacing-xl: 40px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 64px;
+  --spacing-4xl: 80px;
+  --spacing-5xl: 96px;
+  
+  /* Legacy shadcn/ui variables for compatibility */
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
