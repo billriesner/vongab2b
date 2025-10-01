@@ -121,11 +121,8 @@ export default function HomePage() {
 
       {/* Image Section */}
       <section className="relative overflow-hidden" style={{ backgroundColor: '#FFFFFF' }}>
-        <div className="relative w-full" style={{ paddingBottom: '50%' }}>
-          <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: 'url(/hero-2.svg)' }}
-          ></div>
+        <div className="w-full">
+          <img src="/hero-2.svg" alt="Vonga showcase" className="w-full h-auto" />
         </div>
       </section>
 
