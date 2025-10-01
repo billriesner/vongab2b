@@ -119,6 +119,21 @@ export default function HomePage() {
         </div>
       </Section>
 
+      {/* Image Placeholder Section */}
+      <section className="relative overflow-hidden" style={{ backgroundColor: '#FFFFFF' }}>
+        <div className="relative w-full" style={{ paddingBottom: '50%' }}>
+          <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
+            <div className="text-center">
+              <svg className="w-24 h-24 text-gray-400 mx-auto mb-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <p className="text-gray-500 text-lg font-semibold">Hero Image Placeholder</p>
+              <p className="text-gray-400 text-sm mt-sm">Showcase product or lifestyle imagery</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* How It Works Section */}
       <Section 
         className="py-4xl"
@@ -183,6 +198,25 @@ export default function HomePage() {
         </div>
       </Section>
 
+      {/* Video Placeholder Section */}
+      <section className="py-5xl" style={{ backgroundColor: '#000000' }}>
+        <div className="w-full">
+          <div className="relative bg-navy overflow-hidden" style={{ paddingBottom: '56.25%' }}>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="text-center">
+                <div className="w-24 h-24 bg-accent rounded-full flex items-center justify-center mx-auto mb-md shadow-lg">
+                  <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+                <p className="text-accent text-xl font-semibold">Video: See Vonga in Action</p>
+                <p className="text-white/70 text-sm mt-sm">Watch how our technology works</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Proof & Outcomes Section */}
       <Section 
         className="py-4xl"
@@ -192,141 +226,58 @@ export default function HomePage() {
       >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3xl max-w-6xl mx-auto">
           {/* Engagement Card */}
-          <Card className="text-center hover:shadow-lg transition-shadow bg-white border border-muted">
+          <Card className="text-center hover:shadow-xl transition-shadow border-2 border-muted" style={{ backgroundColor: '#FFFFFF' }}>
             <CardHeader className="items-center text-center">
-              <div className="w-12 h-12 bg-accent rounded-full flex items-center justify-center mb-md">
-                <TrendingUp className="w-6 h-6 text-white" />
+              <div className="w-20 h-20 rounded-full flex items-center justify-center mb-md mx-auto shadow-lg" style={{ backgroundColor: '#33BECC' }}>
+                <TrendingUp className="w-10 h-10 text-white" />
               </div>
-              <CardTitle className="text-navy text-xl" style={{ textAlign: 'center' }}>Engagement</CardTitle>
-              <CardDescription className="text-sm text-accent mt-sm" style={{ textAlign: 'center' }}>
+              <CardTitle className="text-navy text-2xl font-bold" style={{ textAlign: 'center' }}>Engagement</CardTitle>
+              <CardDescription className="text-base font-semibold mt-sm" style={{ textAlign: 'center', color: '#33BECC' }}>
                 Higher check-ins and repeat visits
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-text/70">
+              <p className="text-sm text-navy" style={{ marginBottom: '48px' }}>
                 Members tap in more often, creating consistent touchpoints that drive loyalty and community connection.
               </p>
             </CardContent>
           </Card>
 
           {/* Loyalty Card */}
-          <Card className="text-center hover:shadow-lg transition-shadow bg-white border border-muted">
+          <Card className="text-center hover:shadow-xl transition-shadow border-2 border-navy" style={{ backgroundColor: '#303E55' }}>
             <CardHeader className="items-center text-center">
-              <div className="w-12 h-12 bg-accent rounded-full flex items-center justify-center mb-md">
-                <Heart className="w-6 h-6 text-white" />
+              <div className="w-20 h-20 bg-accent rounded-full flex items-center justify-center mb-md mx-auto shadow-lg">
+                <Heart className="w-10 h-10 text-navy" />
               </div>
-              <CardTitle className="text-navy text-xl" style={{ textAlign: 'center' }}>Loyalty</CardTitle>
-              <CardDescription className="text-sm text-accent mt-sm" style={{ textAlign: 'center' }}>
+              <CardTitle className="text-accent text-2xl font-bold" style={{ textAlign: 'center' }}>Loyalty</CardTitle>
+              <CardDescription className="text-base font-semibold mt-sm" style={{ textAlign: 'center', color: '#33BECC' }}>
                 Real rewards, not just points in a void
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-text/70">
+              <p className="text-sm text-white" style={{ marginBottom: '48px' }}>
                 Tangible rewards that customers actually want, delivered instantly through their connected apparel.
               </p>
             </CardContent>
           </Card>
 
           {/* Data Card */}
-          <Card className="text-center hover:shadow-lg transition-shadow bg-white border border-muted">
+          <Card className="text-center hover:shadow-xl transition-shadow border-2 border-muted" style={{ backgroundColor: '#FFFFFF' }}>
             <CardHeader className="items-center text-center">
-              <div className="w-12 h-12 bg-accent rounded-full flex items-center justify-center mb-md">
-                <Lock className="w-6 h-6 text-white" />
+              <div className="w-20 h-20 rounded-full flex items-center justify-center mb-md mx-auto shadow-lg" style={{ backgroundColor: '#33BECC' }}>
+                <Lock className="w-10 h-10 text-white" />
               </div>
-              <CardTitle className="text-navy text-xl" style={{ textAlign: 'center' }}>Data (ethically)</CardTitle>
-              <CardDescription className="text-sm text-accent mt-sm" style={{ textAlign: 'center' }}>
+              <CardTitle className="text-navy text-2xl font-bold" style={{ textAlign: 'center' }}>Data (ethically)</CardTitle>
+              <CardDescription className="text-base font-semibold mt-sm" style={{ textAlign: 'center', color: '#33BECC' }}>
                 Opt-in, event-level insights
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-text/70">
+              <p className="text-sm text-navy" style={{ marginBottom: '48px' }}>
                 Privacy-first analytics that respect your customers while giving you actionable insights.
               </p>
             </CardContent>
           </Card>
-        </div>
-      </Section>
-
-      {/* The Platform Section */}
-      <Section 
-        className="py-5xl"
-        style={{ backgroundColor: '#F7F7F7' }}
-        title="The Platform"
-      >
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3xl max-w-5xl mx-auto">
-          <div className="text-center p-2xl bg-white rounded-lg border border-muted hover:shadow-lg transition-shadow">
-            <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-lg">
-              <Shirt className="w-8 h-8 text-white" />
-            </div>
-            <h3 className="text-lg font-semibold text-navy mb-sm">Digital Twin</h3>
-            <p className="text-sm text-text/70">
-              Verifiable ownership for each item.
-            </p>
-          </div>
-          
-          <div className="text-center p-2xl bg-white rounded-lg border border-muted hover:shadow-lg transition-shadow">
-            <div className="w-16 h-16 bg-navy rounded-full flex items-center justify-center mx-auto mb-lg">
-              <Gift className="w-8 h-8 text-accent" />
-            </div>
-            <h3 className="text-lg font-semibold text-navy mb-sm">Rewards</h3>
-            <p className="text-sm text-text/70">
-              Level up through actions and engagement.
-            </p>
-          </div>
-          
-          <div className="text-center p-2xl bg-white rounded-lg border border-muted hover:shadow-lg transition-shadow">
-            <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-lg">
-              <Lock className="w-8 h-8 text-white" />
-            </div>
-            <h3 className="text-lg font-semibold text-navy mb-sm">Privacy-First</h3>
-            <p className="text-sm text-text/70">
-              You control your data. Always.
-            </p>
-          </div>
-        </div>
-        <div className="text-center mt-3xl">
-          <Button size="lg" className="bg-navy hover:bg-navy/90 text-white" asChild>
-            <a href="/technology">Learn More</a>
-          </Button>
-        </div>
-      </Section>
-
-      {/* Sustainability & Quality Section */}
-      <Section 
-        className="py-5xl"
-        style={{ backgroundColor: '#FFFFFF' }}
-        title="Built to Last"
-      >
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3xl max-w-5xl mx-auto">
-          <div className="text-center">
-            <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-lg">
-              <Leaf className="w-8 h-8 text-white" />
-            </div>
-            <h3 className="text-lg font-semibold text-navy mb-sm">Sustainable</h3>
-            <p className="text-sm text-text/70">
-              Lower waste. Made on demand.
-            </p>
-          </div>
-          
-          <div className="text-center">
-            <div className="w-16 h-16 bg-navy rounded-full flex items-center justify-center mx-auto mb-lg">
-              <CheckCircle2 className="w-8 h-8 text-accent" />
-            </div>
-            <h3 className="text-lg font-semibold text-navy mb-sm">Durable</h3>
-            <p className="text-sm text-text/70">
-              High-quality fabrics. Built for life.
-            </p>
-          </div>
-          
-          <div className="text-center">
-            <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-lg">
-              <Shirt className="w-8 h-8 text-white" />
-            </div>
-            <h3 className="text-lg font-semibold text-navy mb-sm">Versatile</h3>
-            <p className="text-sm text-text/70">
-              From gym to weekend. One wardrobe.
-            </p>
-          </div>
         </div>
       </Section>
 
