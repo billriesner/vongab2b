@@ -6,8 +6,57 @@ import { ShoppingBag, Users, Building2, Shirt, Smartphone, Gift, TrendingUp, Hea
 import Image from "next/image";
 
 export default function HomePage() {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Vonga",
+    "alternateName": "Vonga Live Connected",
+    "url": "https://vonga.io",
+    "logo": "https://vonga.io/logo.svg",
+    "description": "Vonga makes connected apparel that unlocks rewards and real-world access. Shop tap-ready gear, launch Club Vonga for communities, or scale Enterprise activations.",
+    "sameAs": [
+      "https://twitter.com/vonga",
+      "https://instagram.com/vonga",
+      "https://linkedin.com/company/vonga"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "Customer Service",
+      "email": "hello@vonga.io"
+    },
+    "offers": {
+      "@type": "AggregateOffer",
+      "offerCount": "3",
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Shop Vonga",
+          "description": "Sustainable athleisure with NFC built-in",
+          "url": "https://vonga.io/shop"
+        },
+        {
+          "@type": "Offer",
+          "name": "Club Vonga",
+          "description": "On-body tech for gyms, golf courses or any community",
+          "url": "https://vonga.io/club"
+        },
+        {
+          "@type": "Offer",
+          "name": "Enterprise",
+          "description": "Season-scale activations for teams and universities",
+          "url": "https://vonga.io/enterprise"
+        }
+      ]
+    }
+  };
+
   return (
     <div>
+      {/* Structured Data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       {/* Hero Section */}
       <section className="relative overflow-hidden min-h-[600px] flex items-center">
         <div 
