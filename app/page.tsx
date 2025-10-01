@@ -14,25 +14,22 @@ export default function HomePage() {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: 'url(/hero-placeholder.jpg)' }}
         ></div>
-        <div className="absolute inset-0 bg-navy/70"></div>
+        <div className="absolute inset-0 bg-white/40"></div>
         <div className="max-w-7xl mx-auto px-4 py-5xl md:py-[120px] relative z-10 w-full">
           <div className="text-center max-w-5xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-md py-xs rounded-full bg-accent/20 border border-accent/40 mb-3xl backdrop-blur-sm">
-              <div className="w-2 h-2 bg-accent rounded-full animate-pulse"></div>
-              <span className="text-sm font-medium text-accent">Now Available</span>
-            </div>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-2xl text-white">
-              <span className="text-white">Wear it. Tap in.</span>{" "}
-              <span className="text-accent">Live Connected.</span>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-2xl">
+              <span className="text-navy">Wear it. Tap in.</span>
+              <br />
+              <span style={{ color: '#33BECC' }}>Live Connected.</span>
             </h1>
-            <p className="text-lg md:text-xl text-white/90 mb-3xl max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-black mb-3xl max-w-3xl mx-auto leading-relaxed">
               Apparel with embedded NFC that links people and brands—turning everyday wear into access and rewards.
             </p>
             <div className="flex flex-col sm:flex-row gap-md justify-center items-center">
               <Button 
                 size="lg" 
                 variant="primary"
-                className="min-w-[160px] bg-accent hover:bg-accent/90 text-white"
+                className="min-w-[160px] bg-accent hover:bg-accent/90 text-black shadow-lg"
                 asChild
               >
                 <a href="/shop">Shop Vonga</a>
@@ -40,7 +37,7 @@ export default function HomePage() {
               <Button 
                 size="lg" 
                 variant="outline"
-                className="min-w-[160px] border-2 border-white text-white hover:bg-white hover:text-navy"
+                className="min-w-[160px] border-2 border-navy bg-white text-navy hover:bg-navy hover:text-white shadow-lg"
                 asChild
               >
                 <a href="/enterprise#demo">Book a Demo</a>
