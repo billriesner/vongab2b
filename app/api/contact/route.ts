@@ -55,9 +55,13 @@ export async function POST(request: NextRequest) {
       // Determine submission type
       const isFAQ = company === 'FAQ Submission';
       const isPrivacy = company === 'Privacy Question';
-      const title = isPrivacy ? '🔒 New Privacy Question' : (isFAQ ? '❓ New FAQ Question' : '🚀 New Contact Form Submission');
+      const isTerms = company === 'Terms Question';
+      const title = isPrivacy ? '🔒 New Privacy Question' : 
+                    (isFAQ ? '❓ New FAQ Question' : 
+                    (isTerms ? '📜 New Terms Question' : 
+                    '🚀 New Contact Form Submission'));
       
-      // Build fields array - exclude company field for FAQ and Privacy submissions
+      // Build fields array - exclude company field for FAQ, Privacy, and Terms submissions
       const fields = [
         {
           type: 'mrkdwn',
@@ -69,8 +73,8 @@ export async function POST(request: NextRequest) {
         }
       ];
       
-      // Only add company field if not FAQ or Privacy
-      if (!isFAQ && !isPrivacy) {
+      // Only add company field if not FAQ, Privacy, or Terms
+      if (!isFAQ && !isPrivacy && !isTerms) {
         fields.push({
           type: 'mrkdwn',
           text: `*Company:*\n${company}`
@@ -78,7 +82,10 @@ export async function POST(request: NextRequest) {
       }
       
       // Add message/question field with appropriate label
-      const messageLabel = isPrivacy ? 'Privacy Question' : (isFAQ ? 'Question' : 'Message');
+      const messageLabel = isPrivacy ? 'Privacy Question' : 
+                          (isFAQ ? 'Question' : 
+                          (isTerms ? 'Terms Question' : 
+                          'Message'));
       fields.push({
         type: 'mrkdwn',
         text: `*${messageLabel}:*\n${message}`

@@ -2,7 +2,7 @@ import { Section } from "@/components/Section";
 import { FileText, Users, ShoppingCart, Shield, Scale, AlertCircle, HelpCircle } from "lucide-react";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
-import { FAQContactForm } from "@/components/FAQContactForm";
+import { TermsContactForm } from "@/components/TermsContactForm";
 
 export default function TermsPage() {
   return (
@@ -416,7 +416,7 @@ export default function TermsPage() {
           </p>
           <Card className="border-2 border-navy" style={{ backgroundColor: '#303E55' }}>
             <CardContent className="p-3xl">
-              <FAQContactForm />
+              <TermsContactForm />
             </CardContent>
           </Card>
         </div>
