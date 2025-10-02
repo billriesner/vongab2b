@@ -100,7 +100,9 @@ export function FAQContactForm({ className = '' }: FAQContactFormProps) {
         {isSubmitting ? 'Sending...' : 'Submit Question'}
       </Button>
       {submitStatus === 'success' && (
-        <p className="mt-md text-center text-success">Thanks! We'll get back to you soon.</p>
+        <p className="mt-md text-center font-semibold py-md px-lg rounded" style={{ backgroundColor: '#33BECC', color: '#FFFFFF' }}>
+          Thanks! We'll get back to you soon.
+        </p>
       )}
       {submitStatus === 'error' && (
         <p className="mt-md text-center text-error">{errorMessage}</p>
