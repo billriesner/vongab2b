@@ -32,6 +32,58 @@ export default async function ShopPage() {
         </div>
       </div>
 
+      {/* Two Ways to Shop */}
+      <Section className="py-5xl" style={{ backgroundColor: '#F7F7F7' }}>
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-black text-center mb-3xl">
+            Two Ways to Shop
+          </h2>
+          <p className="text-lg text-black text-center max-w-3xl mx-auto mb-5xl">
+            Vonga gives you two ways to shop, whether you want to simply buy premium athleisure-wear or shape the direction of the brand.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Core Collection Card */}
+            <Card className="border-2 border-muted bg-white hover:border-accent transition-all hover:shadow-xl">
+              <CardContent className="p-8 text-center">
+                <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-lg shadow-lg" style={{ backgroundColor: '#33BECC' }}>
+                  <ShoppingBag className="w-10 h-10 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-navy mb-md">Core Collection</h3>
+                <p className="text-base text-black leading-relaxed mb-xl">
+                  Shop our Core Collection of in stock premium athleisure-wear where we can have most items on your doorstep within days of your order.
+                </p>
+                <Link 
+                  href="/shop/collections/core-collection"
+                  className="inline-block bg-gray-200 hover:bg-gray-300 text-black px-xl py-md rounded font-semibold shadow-md transition-colors"
+                >
+                  Shop Core Collection
+                </Link>
+              </CardContent>
+            </Card>
+
+            {/* Concept Collection Card */}
+            <Card className="border-2 border-muted bg-white hover:border-accent transition-all hover:shadow-xl">
+              <CardContent className="p-8 text-center">
+                <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-lg shadow-lg" style={{ backgroundColor: '#303E55' }}>
+                  <ShoppingBag className="w-10 h-10 text-accent" />
+                </div>
+                <h3 className="text-2xl font-bold text-navy mb-md">Concept Collection</h3>
+                <p className="text-base text-black leading-relaxed mb-xl">
+                  Decide what we make next and save. New design campaigns launched each month. Orders shipped within 90 days of funding. Discounts provided for those who help shape the Vonga brand.
+                </p>
+                <Link 
+                  href="/shop/collections/concept-collection"
+                  className="inline-block bg-gray-200 hover:bg-gray-300 text-black px-xl py-md rounded font-semibold shadow-md transition-colors"
+                >
+                  Shop Concept Collection
+                </Link>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </Section>
+
       {/* Products Grid */}
       <Section className="py-5xl" style={{ backgroundColor: '#FFFFFF' }}>
         <div className="max-w-7xl mx-auto">
