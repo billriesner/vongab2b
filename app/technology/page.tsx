@@ -137,29 +137,29 @@ export default function TechnologyPage() {
             Your phone already knows how to do this. Just hold it near the garment's tag or patch.
           </p>
 
-          <div className="max-w-2xl mx-auto" style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-            <div className="flex items-center p-xl bg-white rounded-lg border-2 border-muted hover:shadow-xl transition-shadow" style={{ gap: '32px' }}>
+          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-lg md:gap-xl">
+            <div className="flex items-center p-xl bg-white rounded-lg border-2 border-muted hover:shadow-xl transition-shadow" style={{ gap: '24px' }}>
               <div className="w-20 h-20 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg" style={{ backgroundColor: '#33BECC' }}>
                 <Trophy className="w-10 h-10 text-white" />
               </div>
               <p className="text-xl font-bold text-black text-left">Earn loyalty points</p>
             </div>
 
-            <div className="flex items-center p-xl bg-white rounded-lg border-2 border-muted hover:shadow-xl transition-shadow" style={{ gap: '32px' }}>
+            <div className="flex items-center p-xl bg-white rounded-lg border-2 border-muted hover:shadow-xl transition-shadow" style={{ gap: '24px' }}>
               <div className="w-20 h-20 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg" style={{ backgroundColor: '#303E55' }}>
                 <Zap className="w-10 h-10 text-white" />
               </div>
               <p className="text-xl font-bold text-black text-left">Unlock event access</p>
             </div>
 
-            <div className="flex items-center p-xl bg-white rounded-lg border-2 border-muted hover:shadow-xl transition-shadow" style={{ gap: '32px' }}>
+            <div className="flex items-center p-xl bg-white rounded-lg border-2 border-muted hover:shadow-xl transition-shadow" style={{ gap: '24px' }}>
               <div className="w-20 h-20 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg" style={{ backgroundColor: '#33BECC' }}>
                 <Gift className="w-10 h-10 text-white" />
               </div>
               <p className="text-xl font-bold text-black text-left">Get member-only content</p>
             </div>
 
-            <div className="flex items-center p-xl bg-white rounded-lg border-2 border-muted hover:shadow-xl transition-shadow" style={{ gap: '32px' }}>
+            <div className="flex items-center p-xl bg-white rounded-lg border-2 border-muted hover:shadow-xl transition-shadow" style={{ gap: '24px' }}>
               <div className="w-20 h-20 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg" style={{ backgroundColor: '#303E55' }}>
                 <Sparkles className="w-10 h-10 text-white" />
               </div>
@@ -168,6 +168,20 @@ export default function TechnologyPage() {
           </div>
         </div>
       </Section>
+
+      {/* Image Placeholder */}
+      <section className="w-full" style={{ backgroundColor: '#F7F7F7' }}>
+        <div className="w-full relative bg-gray-200 overflow-hidden" style={{ paddingBottom: '40%' }}>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-center">
+              <svg className="w-24 h-24 text-gray-400 mx-auto mb-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <p className="text-gray-500 text-lg font-semibold">Image: NFC Technology in Action</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Rewards & Gamification Section */}
       <Section 
@@ -198,6 +212,11 @@ export default function TechnologyPage() {
                   By showing up
                 </CardDescription>
               </CardHeader>
+              <CardContent>
+                <p className="text-sm text-white" style={{ marginBottom: '48px' }}>
+                  Every visit, every tap, every interaction earns you points. Show up and watch your status grow.
+                </p>
+              </CardContent>
             </Card>
 
             <Card className="text-center hover:shadow-xl transition-shadow border-2 border-muted" style={{ backgroundColor: '#FFFFFF' }}>
@@ -210,6 +229,11 @@ export default function TechnologyPage() {
                   Rewards as you hit milestones
                 </CardDescription>
               </CardHeader>
+              <CardContent>
+                <p className="text-sm text-navy" style={{ marginBottom: '48px' }}>
+                  Hit milestones and unlock digital badges. Collect achievements that show off your loyalty.
+                </p>
+              </CardContent>
             </Card>
 
             <Card className="text-center hover:shadow-xl transition-shadow border-2 border-navy" style={{ backgroundColor: '#303E55' }}>
@@ -222,10 +246,22 @@ export default function TechnologyPage() {
                   That actually matter
                 </CardDescription>
               </CardHeader>
+              <CardContent>
+                <p className="text-sm text-white" style={{ marginBottom: '48px' }}>
+                  Real rewards like event access, exclusive drops, and VIP experiences. Not just coupons.
+                </p>
+              </CardContent>
             </Card>
           </div>
         </div>
       </Section>
+
+      {/* Visual Divider */}
+      <section className="py-4xl" style={{ backgroundColor: '#FFFFFF' }}>
+        <div className="max-w-4xl mx-auto">
+          <div className="h-0.5 w-full" style={{ backgroundColor: '#33BECC', opacity: 0.3 }}></div>
+        </div>
+      </section>
 
       {/* Privacy & Security Section */}
       <Section 
@@ -291,6 +327,20 @@ export default function TechnologyPage() {
         </div>
       </Section>
 
+      {/* Image Placeholder */}
+      <section className="w-full" style={{ backgroundColor: '#FFFFFF' }}>
+        <div className="w-full relative bg-gray-200 overflow-hidden" style={{ paddingBottom: '40%' }}>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-center">
+              <svg className="w-24 h-24 text-gray-400 mx-auto mb-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <p className="text-gray-500 text-lg font-semibold">Image: Privacy & Security Features</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* For Businesses Section */}
       <Section 
         className="py-5xl"
@@ -320,6 +370,11 @@ export default function TechnologyPage() {
                   Custom workflows
                 </CardDescription>
               </CardHeader>
+              <CardContent>
+                <p className="text-sm text-navy" style={{ marginBottom: '48px' }}>
+                  Build custom integrations with our API. Connect Vonga to your existing systems and automate workflows.
+                </p>
+              </CardContent>
             </Card>
 
             <Card className="text-center hover:shadow-xl transition-shadow border-2 border-navy" style={{ backgroundColor: '#303E55' }}>
@@ -332,6 +387,11 @@ export default function TechnologyPage() {
                   Real-time engagement
                 </CardDescription>
               </CardHeader>
+              <CardContent>
+                <p className="text-sm text-white" style={{ marginBottom: '48px' }}>
+                  Track taps, engagement rates, and customer behavior. Get insights that help you optimize your customer experiences.
+                </p>
+              </CardContent>
             </Card>
 
             <Card className="text-center hover:shadow-xl transition-shadow border-2 border-muted" style={{ backgroundColor: '#FFFFFF' }}>
@@ -344,67 +404,10 @@ export default function TechnologyPage() {
                   For staff and members
                 </CardDescription>
               </CardHeader>
-            </Card>
-          </div>
-
-          <div className="text-center" style={{ marginTop: '64px' }}>
-            <Button 
-              size="lg" 
-              className="bg-navy hover:bg-navy/90 text-white shadow-lg"
-              asChild
-            >
-              <Link href="/enterprise#demo">Book a Demo</Link>
-            </Button>
-          </div>
-        </div>
-      </Section>
-
-      {/* Final CTA Section */}
-      <Section 
-        className="py-5xl"
-        style={{ backgroundColor: '#FFFFFF' }}
-      >
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3xl">
-            {/* Consumer CTA */}
-            <Card className="text-center hover:shadow-xl transition-shadow border-2 border-muted" style={{ backgroundColor: '#FFFFFF' }}>
-              <CardHeader className="items-center text-center">
-                <div className="w-20 h-20 rounded-full flex items-center justify-center mb-md mx-auto shadow-lg" style={{ backgroundColor: '#33BECC' }}>
-                  <Shirt className="w-10 h-10 text-white" />
-                </div>
-                <CardTitle className="text-navy text-2xl font-bold" style={{ textAlign: 'center' }}>For You</CardTitle>
-                <CardDescription className="text-base font-semibold mt-sm" style={{ textAlign: 'center', color: '#33BECC' }}>
-                  Get the gear
-                </CardDescription>
-              </CardHeader>
               <CardContent>
-                <p className="text-base text-black" style={{ marginBottom: '32px' }}>
-                  Shop connected apparel that unlocks experiences with every tap.
+                <p className="text-sm text-navy" style={{ marginBottom: '48px' }}>
+                  Simple setup for your team and frictionless experience for your members.
                 </p>
-                <Button className="w-full bg-gray-200 hover:bg-gray-300 text-black font-semibold shadow-md" asChild>
-                  <Link href="/shop">Shop Vonga</Link>
-                </Button>
-              </CardContent>
-            </Card>
-
-            {/* Business CTA */}
-            <Card className="text-center hover:shadow-xl transition-shadow border-2 border-navy" style={{ backgroundColor: '#303E55' }}>
-              <CardHeader className="items-center text-center">
-                <div className="w-20 h-20 bg-accent rounded-full flex items-center justify-center mb-md mx-auto shadow-lg">
-                  <Code className="w-10 h-10 text-navy" />
-                </div>
-                <CardTitle className="text-accent text-2xl font-bold" style={{ textAlign: 'center' }}>For Business</CardTitle>
-                <CardDescription className="text-base font-semibold mt-sm" style={{ textAlign: 'center', color: '#33BECC' }}>
-                  Launch your program
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-base text-white" style={{ marginBottom: '32px' }}>
-                  Start Club Vonga or book a demo for enterprise activations.
-                </p>
-                <Button className="w-full bg-gray-200 hover:bg-gray-300 text-black font-semibold shadow-md" asChild>
-                  <Link href="/enterprise#demo">Book a Demo</Link>
-                </Button>
               </CardContent>
             </Card>
           </div>
