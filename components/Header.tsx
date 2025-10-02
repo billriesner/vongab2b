@@ -25,7 +25,7 @@ export function Header() {
                 <Link href="/shop">Shop Vonga</Link>
               </Button>
               <Button variant="outline" size="sm" asChild>
-                <Link href="/enterprise#demo">Book a Demo</Link>
+                <Link href="/enterprise#talk">Let's Talk</Link>
               </Button>
             </div>
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -100,8 +100,8 @@ export function Header() {
                       </Link>
                     </Button>
                     <Button variant="secondary" asChild style={{ backgroundColor: '#E5E5E5', color: '#0A0A0A' }}>
-                      <Link href="/enterprise#demo" onClick={() => setIsOpen(false)}>
-                        Book a Demo
+                      <Link href="/enterprise#talk" onClick={() => setIsOpen(false)}>
+                        Let's Talk
                       </Link>
                     </Button>
                   </div>

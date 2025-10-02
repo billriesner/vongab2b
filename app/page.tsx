@@ -89,7 +89,7 @@ export default function HomePage() {
                 className="min-w-[160px] border-2 border-navy bg-white text-navy hover:bg-navy hover:text-white shadow-lg"
                 asChild
               >
-                <a href="/enterprise#demo">Book a Demo</a>
+                <a href="/enterprise#talk">Let's Talk</a>
               </Button>
             </div>
           </div>
@@ -398,7 +398,7 @@ export default function HomePage() {
                   required
                 />
                 <Button type="submit" className="w-full bg-gray-200 hover:bg-gray-300 text-black font-semibold shadow-md">
-                  Book a Demo
+                  Schedule a Call
                 </Button>
               </form>
             </CardContent>
