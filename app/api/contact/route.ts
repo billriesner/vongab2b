@@ -52,36 +52,49 @@ export async function POST(request: NextRequest) {
 
     // Send Slack notification
     if (process.env.SLACK_WEBHOOK_URL) {
+      // Determine if this is an FAQ submission
+      const isFAQ = company === 'FAQ Submission';
+      const title = isFAQ ? '❓ New FAQ Question' : '🚀 New Contact Form Submission';
+      
+      // Build fields array - exclude company field for FAQ submissions
+      const fields = [
+        {
+          type: 'mrkdwn',
+          text: `*Name:*\n${name}`
+        },
+        {
+          type: 'mrkdwn',
+          text: `*Email:*\n${email}`
+        }
+      ];
+      
+      // Only add company field if not FAQ
+      if (!isFAQ) {
+        fields.push({
+          type: 'mrkdwn',
+          text: `*Company:*\n${company}`
+        });
+      }
+      
+      // Add message/question field
+      fields.push({
+        type: 'mrkdwn',
+        text: isFAQ ? `*Question:*\n${message}` : `*Message:*\n${message}`
+      });
+
       const slackMessage = {
-        text: '🚀 New Contact Form Submission',
+        text: title,
         blocks: [
           {
             type: 'header',
             text: {
               type: 'plain_text',
-              text: '🚀 New Contact Form Submission'
+              text: title
             }
           },
           {
             type: 'section',
-            fields: [
-              {
-                type: 'mrkdwn',
-                text: `*Name:*\n${name}`
-              },
-              {
-                type: 'mrkdwn',
-                text: `*Email:*\n${email}`
-              },
-              {
-                type: 'mrkdwn',
-                text: `*Company:*\n${company}`
-              },
-              {
-                type: 'mrkdwn',
-                text: `*Message:*\n${message}`
-              }
-            ]
+            fields: fields
           },
           {
             type: 'context',
