@@ -7,9 +7,9 @@ import { Button } from '@/components/ui/button';
 import { ShoppingBag, ArrowLeft, Check, Truck, Shield, RefreshCw } from 'lucide-react';
 
 interface ProductPageProps {
-  params: {
+  params: Promise<{
     handle: string;
-  };
+  }>;
 }
 
 export default function ProductPage({ params }: ProductPageProps) {
@@ -20,13 +20,27 @@ export default function ProductPage({ params }: ProductPageProps) {
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState<string>('');
   const [selectedColor, setSelectedColor] = useState<string>('');
+  const [handle, setHandle] = useState<string>('');
 
   useEffect(() => {
+    async function init() {
+      const resolvedParams = await params;
+      setHandle(resolvedParams.handle);
+    }
+    init();
+  }, [params]);
+
+  useEffect(() => {
+    if (!handle) return;
+    
     async function fetchProduct() {
       try {
-        const res = await fetch(`/api/shopify/product?handle=${params.handle}`);
+        const res = await fetch(`/api/shopify/product?handle=${handle}`);
         const data = await res.json();
         setProduct(data);
+        
+        console.log('Product collections:', data?.collections?.edges?.map((e: any) => e.node.title));
+        
         if (data?.variants?.edges?.length > 0) {
           const firstVariant = data.variants.edges[0].node;
           setSelectedVariant(firstVariant);
@@ -49,7 +63,7 @@ export default function ProductPage({ params }: ProductPageProps) {
     }
 
     fetchProduct();
-  }, [params.handle]);
+  }, [handle]);
 
   // Update selected variant when size or color changes
   useEffect(() => {
@@ -127,9 +141,13 @@ export default function ProductPage({ params }: ProductPageProps) {
   }).format(price);
 
   // Check if product is in Concept collection
-  const isConcept = product.collections?.edges?.some((item: any) => 
-    item.node.title.toLowerCase() === 'concept' || item.node.handle === 'concept'
-  ) || false;
+  const isConcept = product.collections?.edges?.some((item: any) => {
+    const title = item.node.title.toLowerCase();
+    const handle = item.node.handle.toLowerCase();
+    return title.includes('concept') || handle.includes('concept');
+  }) || false;
+
+  console.log('Is Concept product?', isConcept, 'Collections:', product.collections?.edges?.map((e: any) => e.node.title));
 
   return (
     <div>
