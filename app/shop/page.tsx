@@ -42,7 +42,7 @@ export default async function ShopPage() {
             Vonga gives you two ways to shop, whether you want to simply buy premium athleisure-wear or shape the direction of the brand.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8" style={{ marginTop: '64px' }}>
             {/* Core Collection Card */}
             <Card className="border-2 border-muted bg-white hover:border-accent transition-all hover:shadow-xl">
               <CardContent className="p-8 text-center">
