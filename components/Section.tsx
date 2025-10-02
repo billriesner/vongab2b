@@ -9,6 +9,7 @@ interface SectionProps {
   title?: string;
   description?: string;
   dark?: boolean; // For sections with dark backgrounds
+  id?: string; // For anchor links
 }
 
 export function Section({ 
@@ -18,10 +19,11 @@ export function Section({
   eyebrow,
   title,
   description,
-  dark = false
+  dark = false,
+  id
 }: SectionProps) {
   return (
-    <section className={cn("py-6 md:py-8", className)} style={style}>
+    <section id={id} className={cn("py-6 md:py-8", className)} style={style}>
       <div className="max-w-7xl mx-auto px-4">
         {(eyebrow || title || description) && (
           <div className="text-center mb-12">
