@@ -32,36 +32,44 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
   return (
     <div>
       {/* Hero Section */}
-      <Section className="py-5xl" style={{ backgroundColor: '#FFFFFF' }}>
-        <div className="max-w-6xl mx-auto">
+      <div
+        className="relative bg-cover bg-center py-5xl text-white flex items-center justify-center"
+        style={{
+          backgroundImage: 'url(/hero-placeholder.jpg)',
+          backgroundColor: '#303E55',
+          minHeight: '400px',
+        }}
+      >
+        <div className="absolute inset-0 bg-white/60"></div>
+        <div className="relative z-10 max-w-6xl mx-auto px-md w-full">
           {/* Breadcrumb Navigation */}
           <div className="mb-xl">
             <nav className="flex items-center gap-2 text-sm">
-              <Link href="/" className="hover:underline" style={{ color: '#33BECC' }}>
+              <Link href="/" className="hover:underline font-semibold" style={{ color: '#303E55', textShadow: '0 1px 2px rgba(255,255,255,0.8)' }}>
                 Home
               </Link>
-              <span className="text-black">/</span>
-              <Link href="/shop" className="hover:underline" style={{ color: '#33BECC' }}>
+              <span className="text-navy font-bold" style={{ textShadow: '0 1px 2px rgba(255,255,255,0.8)' }}>/</span>
+              <Link href="/shop" className="hover:underline font-semibold" style={{ color: '#303E55', textShadow: '0 1px 2px rgba(255,255,255,0.8)' }}>
                 Shop
               </Link>
-              <span className="text-black">/</span>
-              <span className="text-navy font-semibold">{collection.title}</span>
+              <span className="text-navy font-bold" style={{ textShadow: '0 1px 2px rgba(255,255,255,0.8)' }}>/</span>
+              <span className="text-navy font-bold" style={{ textShadow: '0 1px 2px rgba(255,255,255,0.8)' }}>{collection.title}</span>
             </nav>
           </div>
 
           {/* Collection Title & Description */}
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-navy mb-lg">
+            <h1 className="text-5xl md:text-6xl font-bold mb-lg" style={{ color: '#33BECC', textShadow: '0 2px 8px rgba(255,255,255,0.9)', marginBottom: '48px' }}>
               {collection.title}
             </h1>
             {collection.description && (
-              <p className="text-lg text-black leading-relaxed max-w-3xl mx-auto">
+              <p className="text-xl md:text-2xl font-semibold text-black leading-relaxed max-w-3xl mx-auto" style={{ textShadow: '0 1px 4px rgba(255,255,255,0.8)' }}>
                 {collection.description}
               </p>
             )}
           </div>
         </div>
-      </Section>
+      </div>
 
       {/* Products Grid */}
       <Section className="py-5xl" style={{ backgroundColor: '#F7F7F7' }}>
