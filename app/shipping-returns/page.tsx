@@ -56,7 +56,7 @@ export default function ShippingReturnsPage() {
           {/* Retail Orders */}
           <div className="mb-4xl">
             <h3 className="text-2xl font-bold mb-lg" style={{ color: '#33BECC' }}>
-              Retail Orders (Shop Vonga)
+              Retail Orders
             </h3>
             <ul className="space-y-md text-lg text-black leading-relaxed">
               <li><strong>Processing Time:</strong> Orders are typically processed within 2–3 business days.</li>
