@@ -134,36 +134,36 @@ export default function TechnologyPage() {
           <h3 className="text-2xl md:text-3xl font-bold" style={{ color: '#33BECC', marginBottom: '32px' }}>Wear. Tap. Connect.</h3>
           
           <p className="text-lg text-black leading-relaxed max-w-3xl mx-auto" style={{ marginBottom: '64px' }}>
-            Your phone already knows how to do this. Just hold it near the garment's tag or patch. In seconds, you can:
+            Your phone already knows how to do this. Just hold it near the garment's tag or patch.
           </p>
 
-          <div className="max-w-2xl mx-auto space-y-lg">
-            <div className="flex items-center gap-lg p-lg bg-white rounded-lg border-2 border-muted hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#33BECC' }}>
-                <Trophy className="w-6 h-6 text-white" />
+          <div className="max-w-2xl mx-auto" style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+            <div className="flex items-center p-xl bg-white rounded-lg border-2 border-muted hover:shadow-xl transition-shadow" style={{ gap: '32px' }}>
+              <div className="w-20 h-20 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg" style={{ backgroundColor: '#33BECC' }}>
+                <Trophy className="w-10 h-10 text-white" />
               </div>
-              <p className="text-lg font-semibold text-black text-left">Earn loyalty points</p>
+              <p className="text-xl font-bold text-black text-left">Earn loyalty points</p>
             </div>
 
-            <div className="flex items-center gap-lg p-lg bg-white rounded-lg border-2 border-muted hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-navy rounded-full flex items-center justify-center flex-shrink-0">
-                <Zap className="w-6 h-6 text-accent" />
+            <div className="flex items-center p-xl bg-white rounded-lg border-2 border-muted hover:shadow-xl transition-shadow" style={{ gap: '32px' }}>
+              <div className="w-20 h-20 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg" style={{ backgroundColor: '#303E55' }}>
+                <Zap className="w-10 h-10 text-white" />
               </div>
-              <p className="text-lg font-semibold text-black text-left">Unlock event access</p>
+              <p className="text-xl font-bold text-black text-left">Unlock event access</p>
             </div>
 
-            <div className="flex items-center gap-lg p-lg bg-white rounded-lg border-2 border-muted hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#33BECC' }}>
-                <Gift className="w-6 h-6 text-white" />
+            <div className="flex items-center p-xl bg-white rounded-lg border-2 border-muted hover:shadow-xl transition-shadow" style={{ gap: '32px' }}>
+              <div className="w-20 h-20 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg" style={{ backgroundColor: '#33BECC' }}>
+                <Gift className="w-10 h-10 text-white" />
               </div>
-              <p className="text-lg font-semibold text-black text-left">Get member-only content</p>
+              <p className="text-xl font-bold text-black text-left">Get member-only content</p>
             </div>
 
-            <div className="flex items-center gap-lg p-lg bg-white rounded-lg border-2 border-muted hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-navy rounded-full flex items-center justify-center flex-shrink-0">
-                <Sparkles className="w-6 h-6 text-accent" />
+            <div className="flex items-center p-xl bg-white rounded-lg border-2 border-muted hover:shadow-xl transition-shadow" style={{ gap: '32px' }}>
+              <div className="w-20 h-20 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg" style={{ backgroundColor: '#303E55' }}>
+                <Sparkles className="w-10 h-10 text-white" />
               </div>
-              <p className="text-lg font-semibold text-black text-left">Claim rewards</p>
+              <p className="text-xl font-bold text-black text-left">Claim rewards</p>
             </div>
           </div>
         </div>
