@@ -50,7 +50,7 @@ export default async function ShopPage() {
                   <ShoppingBag className="w-10 h-10 text-white" />
                 </div>
                 <h3 className="text-2xl font-bold text-navy mb-md">Core Collection</h3>
-                <p className="text-base text-black leading-relaxed mb-xl">
+                <p className="text-base text-black leading-relaxed" style={{ marginBottom: '48px' }}>
                   Shop our Core Collection of in stock premium athleisure-wear where we can have most items on your doorstep within days of your order.
                 </p>
                 <Link 
@@ -69,7 +69,7 @@ export default async function ShopPage() {
                   <ShoppingBag className="w-10 h-10 text-accent" />
                 </div>
                 <h3 className="text-2xl font-bold text-navy mb-md">Concept Collection</h3>
-                <p className="text-base text-black leading-relaxed mb-xl">
+                <p className="text-base text-black leading-relaxed" style={{ marginBottom: '48px' }}>
                   Decide what we make next and save. New design campaigns launched each month. Orders shipped within 90 days of funding. Discounts provided for those who help shape the Vonga brand.
                 </p>
                 <Link 
