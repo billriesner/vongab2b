@@ -3,6 +3,7 @@ import { Truck, Package, RefreshCw, HelpCircle } from "lucide-react";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { ReturnForm } from "@/components/ReturnForm";
+import { ContactForm } from "@/components/ContactForm";
 
 export default function ShippingReturnsPage() {
   return (
@@ -234,21 +235,23 @@ export default function ShippingReturnsPage() {
 
       {/* Need Help Section */}
       <Section className="py-5xl" style={{ backgroundColor: '#F7F7F7' }}>
-        <div className="max-w-3xl mx-auto text-center">
+        <div className="max-w-3xl mx-auto">
           <div className="flex items-center justify-center" style={{ marginBottom: '32px' }}>
             <div className="w-20 h-20 rounded-full flex items-center justify-center shadow-lg" style={{ backgroundColor: '#33BECC' }}>
               <HelpCircle className="w-10 h-10 text-white" />
             </div>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-black" style={{ marginBottom: '32px' }}>
+          <h2 className="text-3xl md:text-4xl font-bold text-black text-center" style={{ marginBottom: '32px' }}>
             Need Help?
           </h2>
-          <p className="text-lg text-black leading-relaxed" style={{ marginBottom: '32px' }}>
-            Still have questions about shipping or returns?
+          <p className="text-lg text-black leading-relaxed text-center" style={{ marginBottom: '64px' }}>
+            Still have questions about shipping or returns? Send us a message and we'll make sure you're taken care of.
           </p>
-          <p className="text-lg text-black leading-relaxed">
-            Visit our <Link href="/contact" className="font-semibold hover:underline" style={{ color: '#33BECC' }}>Contact Page</Link> and select Retail, Club, or Enterprise — our team will make sure you're taken care of.
-          </p>
+          <Card className="border-2 border-navy" style={{ backgroundColor: '#303E55' }}>
+            <CardContent className="p-3xl">
+              <ContactForm />
+            </CardContent>
+          </Card>
         </div>
       </Section>
     </div>
