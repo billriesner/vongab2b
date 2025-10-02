@@ -17,7 +17,7 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-4 py-5xl relative z-10 w-full">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-xl">
-              <span className="text-navy">Contact Us</span>
+              <span style={{ color: '#33BECC', textShadow: '0 2px 8px rgba(255,255,255,0.9)' }}>Contact Us</span>
             </h1>
             <p className="text-2xl md:text-3xl font-bold text-black" style={{ textShadow: '0 2px 8px rgba(255,255,255,0.9)' }}>
               We'd love to hear from you
