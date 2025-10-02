@@ -60,7 +60,6 @@ export default async function ShopPage() {
                 {products.map((item: any) => {
                   const product = item.node;
                   const image = product.images.edges[0]?.node;
-                  const collection = product.collections?.edges?.[0]?.node?.title || product.productType || 'Shop Vonga';
                   const price = parseFloat(product.priceRange.minVariantPrice.amount);
                   const formattedPrice = new Intl.NumberFormat('en-US', {
                     style: 'currency',
@@ -92,17 +91,14 @@ export default async function ShopPage() {
                           </div>
                         </CardContent>
                         <div className="p-4 flex flex-col flex-1">
-                          <h3 className="font-bold text-lg text-navy mb-2 group-hover:text-accent transition-colors">
+                          <h3 className="font-bold text-lg text-navy mb-4 group-hover:text-accent transition-colors">
                             {product.title}
                           </h3>
-                          <p className="text-sm font-semibold mb-4 flex-1 line-clamp-2" style={{ color: '#33BECC' }}>
-                            {collection}
-                          </p>
-                          <div className="flex items-center justify-between">
+                          <div className="flex items-center justify-between mt-auto">
                             <span className="text-2xl font-bold text-black">
                               {formattedPrice}
                             </span>
-                            <span className="text-sm font-semibold text-accent">
+                            <span className="text-sm font-semibold" style={{ color: '#33BECC' }}>
                               View Details →
                             </span>
                           </div>
