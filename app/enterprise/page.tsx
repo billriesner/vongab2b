@@ -2,6 +2,7 @@ import { Section } from "@/components/Section";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Building2, Users, Trophy, BarChart3, Zap, Shield } from "lucide-react";
+import { ContactForm } from "@/components/ContactForm";
 
 export default function EnterprisePage() {
   return (
@@ -164,51 +165,7 @@ export default function EnterprisePage() {
 
           <Card className="border-2 border-navy" style={{ backgroundColor: '#303E55' }}>
             <CardContent className="p-3xl">
-              <form>
-                <div style={{ marginBottom: '24px' }}>
-                  <label htmlFor="name" className="block text-sm font-semibold mb-sm" style={{ color: '#FFFFFF' }}>Name</label>
-                  <input
-                    type="text"
-                    id="name"
-                    className="w-full px-lg py-md border-2 border-muted rounded focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-navy bg-white"
-                    placeholder="Your name"
-                    required
-                  />
-                </div>
-                <div style={{ marginBottom: '24px' }}>
-                  <label htmlFor="email" className="block text-sm font-semibold mb-sm" style={{ color: '#FFFFFF' }}>Email</label>
-                  <input
-                    type="email"
-                    id="email"
-                    className="w-full px-lg py-md border-2 border-muted rounded focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-navy bg-white"
-                    placeholder="your@email.com"
-                    required
-                  />
-                </div>
-                <div style={{ marginBottom: '24px' }}>
-                  <label htmlFor="company" className="block text-sm font-semibold mb-sm" style={{ color: '#FFFFFF' }}>Company/Organization</label>
-                  <input
-                    type="text"
-                    id="company"
-                    className="w-full px-lg py-md border-2 border-muted rounded focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-navy bg-white"
-                    placeholder="Your organization"
-                    required
-                  />
-                </div>
-                <div style={{ marginBottom: '24px' }}>
-                  <label htmlFor="message" className="block text-sm font-semibold mb-sm" style={{ color: '#FFFFFF' }}>Tell us about your project</label>
-                  <textarea
-                    id="message"
-                    rows={4}
-                    className="w-full px-lg py-md border-2 border-muted rounded focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-navy bg-white"
-                    placeholder="What are you looking to create?"
-                    required
-                  />
-                </div>
-                <Button type="submit" className="w-full bg-gray-200 hover:bg-gray-300 text-black font-semibold shadow-md" size="lg">
-                  Schedule a Call
-                </Button>
-              </form>
+              <ContactForm />
             </CardContent>
           </Card>
         </div>
