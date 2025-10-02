@@ -1,7 +1,9 @@
 import { Section } from "@/components/Section";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Card, CardContent } from "@/components/ui/card";
 import { HelpCircle } from "lucide-react";
 import Link from "next/link";
+import { ContactForm } from "@/components/ContactForm";
 
 export default function FAQPage() {
   return (
@@ -285,30 +287,38 @@ export default function FAQPage() {
                 </AccordionContent>
               </AccordionItem>
 
-              {/* SUPPORT */}
-              <AccordionItem value="support" className="border-2 border-muted rounded-lg mb-lg p-lg bg-white shadow-md">
-                <AccordionTrigger className="text-xl font-bold text-navy hover:text-accent">
-                  Support
-                </AccordionTrigger>
-                <AccordionContent>
-                  <Accordion type="single" collapsible className="w-full mt-md">
-                    <AccordionItem value="support-contact">
-                      <AccordionTrigger className="text-base font-semibold text-navy">
-                        How do I get help?
-                      </AccordionTrigger>
-                      <AccordionContent className="text-base text-black">
-                        Visit our{' '}
-                        <Link href="/contact" className="hover:underline font-semibold" style={{ color: '#33BECC' }}>
-                          Contact page
-                        </Link>{' '}
-                        and select Retail, Club, or Enterprise. We'll route you to the right team.
-                      </AccordionContent>
-                    </AccordionItem>
-                  </Accordion>
-                </AccordionContent>
-              </AccordionItem>
             </Accordion>
           </div>
+        </div>
+      </Section>
+
+      {/* Questions Form Section */}
+      <Section 
+        className="py-5xl"
+        style={{ backgroundColor: '#F7F7F7' }}
+      >
+        <div className="max-w-3xl mx-auto text-center">
+          <div className="flex items-center justify-center" style={{ marginBottom: '32px' }}>
+            <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto shadow-lg" style={{ backgroundColor: '#303E55' }}>
+              <HelpCircle className="w-10 h-10 text-accent" />
+            </div>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold text-black" style={{ marginBottom: '32px' }}>
+            Still Have Questions?
+          </h2>
+          <h3 className="text-2xl md:text-3xl font-bold" style={{ color: '#33BECC', marginBottom: '32px' }}>
+            We're here to help
+          </h3>
+          
+          <p className="text-lg text-black leading-relaxed max-w-2xl mx-auto" style={{ marginBottom: '64px' }}>
+            Can't find what you're looking for? Send us your question and we'll get back to you.
+          </p>
+
+          <Card className="border-2 border-navy" style={{ backgroundColor: '#303E55' }}>
+            <CardContent className="p-3xl">
+              <ContactForm />
+            </CardContent>
+          </Card>
         </div>
       </Section>
     </div>
