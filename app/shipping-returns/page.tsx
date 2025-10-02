@@ -3,7 +3,7 @@ import { Truck, Package, RefreshCw, HelpCircle } from "lucide-react";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { ReturnForm } from "@/components/ReturnForm";
-import { ContactForm } from "@/components/ContactForm";
+import { FAQContactForm } from "@/components/FAQContactForm";
 
 export default function ShippingReturnsPage() {
   return (
@@ -249,7 +249,7 @@ export default function ShippingReturnsPage() {
           </p>
           <Card className="border-2 border-navy" style={{ backgroundColor: '#303E55' }}>
             <CardContent className="p-3xl">
-              <ContactForm />
+              <FAQContactForm />
             </CardContent>
           </Card>
         </div>
