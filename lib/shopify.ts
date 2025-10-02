@@ -134,6 +134,14 @@ export async function getProduct(handle: string) {
         handle
         description
         descriptionHtml
+        collections(first: 5) {
+          edges {
+            node {
+              title
+              handle
+            }
+          }
+        }
         priceRange {
           minVariantPrice {
             amount

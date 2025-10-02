@@ -126,6 +126,11 @@ export default function ProductPage({ params }: ProductPageProps) {
     currency: selectedVariant?.priceV2.currencyCode || 'USD',
   }).format(price);
 
+  // Check if product is in Concept collection
+  const isConcept = product.collections?.edges?.some((item: any) => 
+    item.node.title.toLowerCase() === 'concept' || item.node.handle === 'concept'
+  ) || false;
+
   return (
     <div>
       {/* Breadcrumb */}
@@ -354,8 +359,10 @@ export default function ProductPage({ params }: ProductPageProps) {
                   <Truck className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-navy">Fast Shipping</h3>
-                  <p className="text-sm font-semibold" style={{ color: '#33BECC' }}>Ships within 2-3 business days</p>
+                  <h3 className="font-bold text-navy">{isConcept ? 'Pre-Order Shipping' : 'Fast Shipping'}</h3>
+                  <p className="text-sm font-semibold" style={{ color: '#33BECC' }}>
+                    {isConcept ? 'Ships within 90 days of campaign being funded' : 'Ships within 2-3 business days'}
+                  </p>
                 </div>
               </div>
             </div>
