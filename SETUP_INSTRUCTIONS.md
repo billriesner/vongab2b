@@ -52,6 +52,25 @@ create policy "Allow insert for service role"
   for insert
   to service_role
   with check (true);
+
+-- Return Requests Table
+create table return_requests (
+  id uuid default gen_random_uuid() primary key,
+  name text not null,
+  email text not null,
+  order_number text not null,
+  items text not null,
+  reason text,
+  created_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+alter table return_requests enable row level security;
+
+create policy "Allow insert for service role"
+  on return_requests
+  for insert
+  to service_role
+  with check (true);
 ```
 
 ### 1.3 Get Your API Credentials
@@ -99,20 +118,40 @@ If deploying on **Vercel**:
 
 For other platforms, add the same variables to their environment settings.
 
-## Step 4: Test the Form
+## Step 4: Test the Forms
 
 ### 4.1 Local Testing
+
 1. Restart your dev server: `npm run dev`
-2. Go to http://localhost:3000/enterprise#talk
-3. Fill out and submit the form
-4. Check:
-   - You should see a success message
-   - Check Supabase dashboard → Table Editor → `contact_submissions`
-   - Check your Slack channel for the notification
 
-### 4.2 Test Slack Message Format
-The Slack notification will look like:
+2. **Test Contact Form** (Enterprise/Contact pages):
+   - Go to http://localhost:3000/enterprise#talk
+   - Fill out and submit the form
+   - Check:
+     - You should see a success message
+     - Check Supabase dashboard → Table Editor → `contact_submissions`
+     - Check your Slack channel for the 🚀 notification
 
+3. **Test Newsletter Form** (Homepage):
+   - Go to http://localhost:3000/#stay-connected
+   - Fill out and submit the Subscribe form
+   - Check:
+     - You should see a success message
+     - Check Supabase dashboard → Table Editor → `newsletter_subscriptions`
+     - Check your Slack channel for the 📧 notification
+
+4. **Test Return Form** (Shipping & Returns page):
+   - Go to http://localhost:3000/shipping-returns
+   - Scroll to "How to Start a Return" section
+   - Fill out and submit the return request form
+   - Check:
+     - You should see a success message
+     - Check Supabase dashboard → Table Editor → `return_requests`
+     - Check your Slack channel for the 🔄 notification
+
+### 4.2 Slack Message Formats
+
+**Contact Form:**
 ```
 🚀 New Contact Form Submission
 
@@ -120,6 +159,28 @@ Name: John Doe
 Email: john@example.com
 Company: Acme Corp
 Message: Looking to create custom apparel for our team
+
+Submitted at: [timestamp]
+```
+
+**Newsletter:**
+```
+📧 New Newsletter Subscription
+
+Email: john@example.com
+
+Subscribed at: [timestamp]
+```
+
+**Return Request:**
+```
+🔄 New Return Request
+
+Name: Jane Smith
+Email: jane@example.com
+Order Number: #12345
+Items: Vonga Classic Hoodie (Size M)
+Reason: Size too small
 
 Submitted at: [timestamp]
 ```

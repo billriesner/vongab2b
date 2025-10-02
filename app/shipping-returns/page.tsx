@@ -1,6 +1,8 @@
 import { Section } from "@/components/Section";
 import { Truck, Package, RefreshCw, HelpCircle } from "lucide-react";
 import Link from "next/link";
+import { Card, CardContent } from "@/components/ui/card";
+import { ReturnForm } from "@/components/ReturnForm";
 
 export default function ShippingReturnsPage() {
   return (
@@ -164,11 +166,14 @@ export default function ShippingReturnsPage() {
             <h3 className="text-2xl font-bold mb-lg" style={{ color: '#33BECC', marginTop: '32px' }}>
               How to Start a Return
             </h3>
-            <ol className="list-decimal list-inside space-y-md text-lg text-black leading-relaxed">
-              <li>Visit our <Link href="/contact" className="font-semibold hover:underline" style={{ color: '#33BECC' }}>Contact Page</Link> and select Retail Support.</li>
-              <li>Provide your order number and the item(s) to return.</li>
-              <li>We'll email you a prepaid return label.</li>
-            </ol>
+            <p className="text-lg text-black leading-relaxed mb-xl">
+              Fill out the form below and we'll email you a prepaid return label.
+            </p>
+            <Card className="border-2 border-muted" style={{ backgroundColor: '#F7F7F7' }}>
+              <CardContent className="p-3xl">
+                <ReturnForm />
+              </CardContent>
+            </Card>
           </div>
 
           {/* Refunds */}
