@@ -224,9 +224,9 @@ export default function ProductPage({ params }: ProductPageProps) {
               <span className="text-4xl font-bold text-black">
                 {formattedPrice}
               </span>
-              <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold text-white" style={{ backgroundColor: '#33BECC' }}>
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold text-white" style={{ backgroundColor: isConcept ? '#303E55' : '#33BECC' }}>
                 <Check className="w-4 h-4 mr-1" />
-                In Stock
+                {isConcept ? 'Pre-Order Now' : 'In Stock'}
               </span>
             </div>
 
