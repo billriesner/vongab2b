@@ -125,7 +125,7 @@ export default function FAQPage() {
                       </AccordionTrigger>
                       <AccordionContent className="text-base text-black">
                         Returns and exchanges are accepted within 30 days of delivery for unworn items. See our{' '}
-                        <Link href="/shipping-returns" className="text-accent hover:underline font-semibold">
+                        <Link href="/shipping-returns" className="hover:underline font-semibold" style={{ color: '#33BECC' }}>
                           Shipping & Returns
                         </Link>{' '}
                         page for details.
@@ -266,7 +266,7 @@ export default function FAQPage() {
                       </AccordionTrigger>
                       <AccordionContent className="text-base text-black">
                         Yes.{' '}
-                        <Link href="/enterprise#talk" className="text-accent hover:underline font-semibold">
+                        <Link href="/enterprise#talk" className="hover:underline font-semibold" style={{ color: '#33BECC' }}>
                           Let's talk
                         </Link>{' '}
                         and we'll show you how Vonga can fit your organization.
@@ -298,7 +298,7 @@ export default function FAQPage() {
                       </AccordionTrigger>
                       <AccordionContent className="text-base text-black">
                         Visit our{' '}
-                        <Link href="/contact" className="text-accent hover:underline font-semibold">
+                        <Link href="/contact" className="hover:underline font-semibold" style={{ color: '#33BECC' }}>
                           Contact page
                         </Link>{' '}
                         and select Retail, Club, or Enterprise. We'll route you to the right team.
