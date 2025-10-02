@@ -29,14 +29,11 @@ export default function PrivacyPage() {
 
       {/* Introduction */}
       <Section className="py-5xl" style={{ backgroundColor: '#FFFFFF' }}>
-        <div className="max-w-4xl mx-auto">
-          <p className="text-sm text-black mb-xl">
-            <strong>Effective Date:</strong> October 2, 2025
+        <div className="max-w-4xl mx-auto text-center">
+          <p className="text-sm text-black/60 mb-xl">
+            Effective Date: October 2, 2025
           </p>
-          <p className="text-sm text-black mb-3xl">
-            <strong>Who We Are:</strong> Vonga, Inc. ("Vonga", "we", "our", "us")
-          </p>
-          <p className="text-lg text-black leading-relaxed">
+          <p className="text-lg text-black leading-relaxed max-w-3xl mx-auto">
             Vonga makes NFC-enabled apparel that unlocks experiences with a simple tap—no app required. This Privacy Policy explains what we collect, how we use it, and the choices you have.
           </p>
         </div>
