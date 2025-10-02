@@ -52,11 +52,12 @@ export async function POST(request: NextRequest) {
 
     // Send Slack notification
     if (process.env.SLACK_WEBHOOK_URL) {
-      // Determine if this is an FAQ submission
+      // Determine submission type
       const isFAQ = company === 'FAQ Submission';
-      const title = isFAQ ? '❓ New FAQ Question' : '🚀 New Contact Form Submission';
+      const isPrivacy = company === 'Privacy Question';
+      const title = isPrivacy ? '🔒 New Privacy Question' : (isFAQ ? '❓ New FAQ Question' : '🚀 New Contact Form Submission');
       
-      // Build fields array - exclude company field for FAQ submissions
+      // Build fields array - exclude company field for FAQ and Privacy submissions
       const fields = [
         {
           type: 'mrkdwn',
@@ -68,18 +69,19 @@ export async function POST(request: NextRequest) {
         }
       ];
       
-      // Only add company field if not FAQ
-      if (!isFAQ) {
+      // Only add company field if not FAQ or Privacy
+      if (!isFAQ && !isPrivacy) {
         fields.push({
           type: 'mrkdwn',
           text: `*Company:*\n${company}`
         });
       }
       
-      // Add message/question field
+      // Add message/question field with appropriate label
+      const messageLabel = isPrivacy ? 'Privacy Question' : (isFAQ ? 'Question' : 'Message');
       fields.push({
         type: 'mrkdwn',
-        text: isFAQ ? `*Question:*\n${message}` : `*Message:*\n${message}`
+        text: `*${messageLabel}:*\n${message}`
       });
 
       const slackMessage = {

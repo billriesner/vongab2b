@@ -2,7 +2,7 @@ import { Section } from "@/components/Section";
 import { Shield, Eye, Lock, UserCheck, Globe, HelpCircle } from "lucide-react";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
-import { FAQContactForm } from "@/components/FAQContactForm";
+import { PrivacyForm } from "@/components/PrivacyForm";
 
 export default function PrivacyPage() {
   return (
@@ -366,7 +366,7 @@ export default function PrivacyPage() {
           </p>
           <Card className="border-2 border-navy" style={{ backgroundColor: '#303E55' }}>
             <CardContent className="p-3xl">
-              <FAQContactForm />
+              <PrivacyForm />
             </CardContent>
           </Card>
         </div>
