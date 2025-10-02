@@ -125,6 +125,61 @@ export async function getAllProducts() {
   }
 }
 
+export async function getProductsByCollection(collectionHandle: string) {
+  const query = `
+    {
+      collection(handle: "${collectionHandle}") {
+        title
+        description
+        products(first: 25) {
+          edges {
+            node {
+              id
+              title
+              handle
+              description
+              productType
+              collections(first: 1) {
+                edges {
+                  node {
+                    title
+                  }
+                }
+              }
+              priceRange {
+                minVariantPrice {
+                  amount
+                  currencyCode
+                }
+              }
+              images(first: 5) {
+                edges {
+                  node {
+                    url
+                    altText
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const response = await ShopifyData(query);
+
+    const collection = response?.data?.collection || null;
+    const products = collection?.products?.edges || [];
+
+    return { collection, products };
+  } catch (error) {
+    console.error('Error in getProductsByCollection:', error);
+    return { collection: null, products: [] };
+  }
+}
+
 export async function getProduct(handle: string) {
   const query = `
     {

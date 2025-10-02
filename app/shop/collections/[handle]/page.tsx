@@ -1,32 +1,112 @@
+import { getProductsByCollection } from '@/lib/shopify';
+import { Section } from '@/components/Section';
+import { Card, CardContent } from '@/components/ui/card';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Badge } from '@/components/ui/badge';
+
 interface CollectionPageProps {
-  params: {
+  params: Promise<{
     handle: string;
-  };
+  }>;
 }
 
-export default function CollectionPage({ params }: CollectionPageProps) {
-  return (
-    <div className="container mx-auto px-4 py-16">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold text-brand-navy mb-8">
-          Collection: {params.handle}
-        </h1>
-        <p className="text-muted-foreground mb-8">
-          Explore our curated collection of products.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
-            <div key={item} className="bg-card border rounded-lg p-4">
-              <div className="h-48 bg-muted rounded mb-4"></div>
-              <h3 className="text-lg font-semibold mb-2">Product {item}</h3>
-              <p className="text-muted-foreground mb-4">$99.99</p>
-              <a href={`/products/product-${item}`} className="text-brand-accent hover:underline">
-                View Details →
-              </a>
-            </div>
-          ))}
+export default async function CollectionPage({ params }: CollectionPageProps) {
+  const { handle } = await params;
+  const { collection, products } = await getProductsByCollection(handle);
+
+  if (!collection) {
+    return (
+      <Section className="py-5xl">
+        <div className="max-w-6xl mx-auto text-center">
+          <h1 className="text-4xl font-bold text-navy mb-lg">Collection Not Found</h1>
+          <p className="text-lg text-black">The collection you're looking for doesn't exist.</p>
+          <Link href="/shop" className="inline-block mt-xl bg-navy text-white px-2xl py-lg rounded font-semibold hover:opacity-90 transition-opacity">
+            Back to Shop
+          </Link>
         </div>
-      </div>
+      </Section>
+    );
+  }
+
+  return (
+    <div>
+      {/* Hero Section */}
+      <Section className="py-5xl" style={{ backgroundColor: '#FFFFFF' }}>
+        <div className="max-w-6xl mx-auto text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-navy mb-lg">
+            {collection.title}
+          </h1>
+          {collection.description && (
+            <p className="text-lg text-black leading-relaxed max-w-3xl mx-auto">
+              {collection.description}
+            </p>
+          )}
+        </div>
+      </Section>
+
+      {/* Products Grid */}
+      <Section className="py-5xl" style={{ backgroundColor: '#F7F7F7' }}>
+        <div className="max-w-6xl mx-auto">
+          {products.length === 0 ? (
+            <div className="text-center py-5xl">
+              <p className="text-xl text-black">No products found in this collection.</p>
+              <Link href="/shop" className="inline-block mt-xl bg-navy text-white px-2xl py-lg rounded font-semibold hover:opacity-90 transition-opacity">
+                Back to Shop
+              </Link>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {products.map(({ node: product }: any) => {
+                const image = product.images.edges[0]?.node;
+                const price = parseFloat(product.priceRange.minVariantPrice.amount);
+                const collectionName = product.collections.edges[0]?.node.title || '';
+                const isConcept = collectionName.toLowerCase().includes('concept');
+
+                return (
+                  <Link href={`/products/${product.handle}`} key={product.id}>
+                    <Card className="border-2 border-muted bg-white hover:border-accent transition-all hover:shadow-xl cursor-pointer h-full">
+                      <CardContent className="p-md">
+                        <div className="relative w-full aspect-square mb-md overflow-hidden rounded bg-muted">
+                          {image ? (
+                            <Image
+                              src={image.url}
+                              alt={image.altText || product.title}
+                              fill
+                              className="object-cover"
+                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                            />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center bg-muted">
+                              <span className="text-text/40">No Image</span>
+                            </div>
+                          )}
+                          {isConcept && (
+                            <div className="absolute top-2 right-2">
+                              <Badge variant="default" className="bg-accent text-navy font-semibold">
+                                Pre-Order Now
+                              </Badge>
+                            </div>
+                          )}
+                        </div>
+                        <h3 className="text-lg font-bold text-navy mb-sm line-clamp-2">
+                          {product.title}
+                        </h3>
+                        <p className="text-2xl font-bold text-navy mb-md">
+                          ${price.toFixed(2)}
+                        </p>
+                        <p className="font-semibold hover:underline" style={{ color: '#33BECC' }}>
+                          View Details →
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      </Section>
     </div>
   );
 }
