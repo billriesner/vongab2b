@@ -1,108 +1,52 @@
 import { Section } from "@/components/Section";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail } from "lucide-react";
+import { ContactForm } from "@/components/ContactForm";
 
 export default function ContactPage() {
   return (
     <div>
       {/* Hero Section */}
+      <section className="relative min-h-[60vh] flex items-center justify-center" style={{
+        backgroundImage: 'url(/hero-contact.svg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      }}>
+        <div className="absolute inset-0" style={{ backgroundColor: 'rgba(255, 255, 255, 0.75)' }}></div>
+        
+        <div className="max-w-7xl mx-auto px-4 py-5xl relative z-10 w-full">
+          <div className="text-center max-w-4xl mx-auto">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-xl">
+              <span className="text-navy">Contact Us</span>
+            </h1>
+            <p className="text-2xl md:text-3xl font-bold text-black" style={{ textShadow: '0 2px 8px rgba(255,255,255,0.9)' }}>
+              We'd love to hear from you
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Form Section */}
       <Section 
         className="py-5xl"
         style={{ backgroundColor: '#FFFFFF' }}
-        title="Contact Us"
-        description="We'd love to hear from you"
       >
-      </Section>
-
-      {/* Contact Form and Info Section */}
-      <Section 
-        className="py-4xl"
-        style={{ backgroundColor: '#F7F7F7' }}
-      >
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3xl max-w-6xl mx-auto">
-          {/* Contact Info */}
-          <div>
-            <h2 className="text-2xl font-bold text-navy mb-3xl">Get in Touch</h2>
-            <div className="space-y-xl">
-              <div className="flex items-start gap-md">
-                <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#33BECC' }}>
-                  <Mail className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-navy mb-sm">Email</h3>
-                  <p className="text-text/70">hello@vonga.io</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-md">
-                <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#303E55' }}>
-                  <Phone className="w-6 h-6 text-accent" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-navy mb-sm">Phone</h3>
-                  <p className="text-text/70">+1 (555) 123-4567</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-md">
-                <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#33BECC' }}>
-                  <MapPin className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-navy mb-sm">Address</h3>
-                  <p className="text-text/70">123 Innovation Street<br />Tech City, TC 12345</p>
-                </div>
-              </div>
+        <div className="max-w-3xl mx-auto text-center">
+          <div className="flex items-center justify-center" style={{ marginBottom: '32px' }}>
+            <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto shadow-lg" style={{ backgroundColor: '#33BECC' }}>
+              <Mail className="w-10 h-10 text-white" />
             </div>
           </div>
+          <h2 className="text-3xl md:text-4xl font-bold text-black" style={{ marginBottom: '32px' }}>Get in Touch</h2>
+          <h3 className="text-2xl md:text-3xl font-bold" style={{ color: '#33BECC', marginBottom: '32px' }}>Tell us what you're working on</h3>
+          
+          <p className="text-lg text-black leading-relaxed max-w-2xl mx-auto" style={{ marginBottom: '64px' }}>
+            Whether you're a business looking to activate your community or a customer with questions, we're here to help.
+          </p>
 
-          {/* Contact Form */}
-          <Card className="border-2 border-muted bg-white shadow-xl">
+          <Card className="border-2 border-navy" style={{ backgroundColor: '#303E55' }}>
             <CardContent className="p-3xl">
-              <form>
-                <div style={{ marginBottom: '24px' }}>
-                  <label htmlFor="name" className="block text-sm font-semibold text-navy mb-sm">Name</label>
-                  <input
-                    type="text"
-                    id="name"
-                    className="w-full px-lg py-md border-2 border-muted rounded focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-text bg-white"
-                    placeholder="Your name"
-                    required
-                  />
-                </div>
-                <div style={{ marginBottom: '24px' }}>
-                  <label htmlFor="email" className="block text-sm font-semibold text-navy mb-sm">Email</label>
-                  <input
-                    type="email"
-                    id="email"
-                    className="w-full px-lg py-md border-2 border-muted rounded focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-text bg-white"
-                    placeholder="your@email.com"
-                    required
-                  />
-                </div>
-                <div style={{ marginBottom: '24px' }}>
-                  <label htmlFor="subject" className="block text-sm font-semibold text-navy mb-sm">Subject</label>
-                  <input
-                    type="text"
-                    id="subject"
-                    className="w-full px-lg py-md border-2 border-muted rounded focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-text bg-white"
-                    placeholder="What's this about?"
-                    required
-                  />
-                </div>
-                <div style={{ marginBottom: '24px' }}>
-                  <label htmlFor="message" className="block text-sm font-semibold text-navy mb-sm">Message</label>
-                  <textarea
-                    id="message"
-                    rows={6}
-                    className="w-full px-lg py-md border-2 border-muted rounded focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-text bg-white"
-                    placeholder="Tell us what you're thinking..."
-                    required
-                  />
-                </div>
-                <Button type="submit" className="w-full bg-gray-200 hover:bg-gray-300 text-black font-semibold shadow-md" size="lg">
-                  Send Message
-                </Button>
-              </form>
+              <ContactForm />
             </CardContent>
           </Card>
         </div>
