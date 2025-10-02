@@ -8,9 +8,9 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Company */}
           <div>
-            <div className="flex items-center justify-start mb-4">
+            <Link href="/" className="flex items-center justify-start mb-4">
               <img src="/logo.svg" alt="Vonga" className="h-30 w-auto" style={{ filter: 'brightness(0) saturate(100%) invert(68%) sepia(66%) saturate(459%) hue-rotate(140deg) brightness(94%) contrast(87%)' }} />
-            </div>
+            </Link>
             <div className="flex space-x-4 mt-6">
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-accent transition-colors">
                 <Twitter className="w-5 h-5" />
