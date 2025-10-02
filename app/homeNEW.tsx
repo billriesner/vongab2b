@@ -148,7 +148,9 @@ export default function HomePage() {
       {/* CTA */}
       <section className="bg-[#303E55] py-16 text-center text-white">
         <h2 className="text-2xl font-bold">Ready to Outfit Your Audience?</h2>
-        <Button size="lg" variant="secondary" className="mt-6">Let's Talk</Button>
+        <Button size="lg" variant="secondary" className="mt-6" asChild>
+          <a href="/enterprise#talk">Let's Talk</a>
+        </Button>
       </section>
 
       {/* Footer */}

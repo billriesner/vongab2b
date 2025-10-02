@@ -175,7 +175,9 @@ export default function SolutionsPage() {
         {/* CTA Section */}
         <section className="py-16 text-center" style={{ backgroundColor: "#303E55" }} id="cta">
           <h2 className="text-3xl font-bold text-white">Ready to Outfit Your Audience?</h2>
-          <Button size="lg" variant="secondary" className="mt-6">Let's Talk</Button>
+          <Button size="lg" variant="secondary" className="mt-6" asChild>
+            <a href="/enterprise#talk">Let's Talk</a>
+          </Button>
         </section>
       </main>
 
