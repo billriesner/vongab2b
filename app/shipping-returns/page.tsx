@@ -28,26 +28,9 @@ export default function ShippingReturnsPage() {
       {/* Introduction */}
       <Section className="py-5xl" style={{ backgroundColor: '#FFFFFF' }}>
         <div className="max-w-4xl mx-auto text-center">
-          <p className="text-lg text-black leading-relaxed mb-3xl">
+          <p className="text-lg text-black leading-relaxed">
             At Vonga, we want every part of your experience, from ordering to delivery to returns, to be simple and transparent.
           </p>
-          <p className="text-lg text-black leading-relaxed">
-            Use the links below to jump directly to the section you need:
-          </p>
-          <div className="flex flex-wrap justify-center gap-md mt-xl">
-            <Link 
-              href="#shipping"
-              className="px-xl py-md bg-gray-200 hover:bg-gray-300 text-black font-semibold rounded transition-colors"
-            >
-              Shipping Policy
-            </Link>
-            <Link 
-              href="#returns"
-              className="px-xl py-md bg-gray-200 hover:bg-gray-300 text-black font-semibold rounded transition-colors"
-            >
-              Returns & Exchanges
-            </Link>
-          </div>
         </div>
       </Section>
 
