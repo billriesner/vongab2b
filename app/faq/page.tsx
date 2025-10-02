@@ -3,7 +3,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Card, CardContent } from "@/components/ui/card";
 import { HelpCircle } from "lucide-react";
 import Link from "next/link";
-import { ContactForm } from "@/components/ContactForm";
+import { FAQContactForm } from "@/components/FAQContactForm";
 
 export default function FAQPage() {
   return (
@@ -316,7 +316,7 @@ export default function FAQPage() {
 
           <Card className="border-2 border-navy" style={{ backgroundColor: '#303E55' }}>
             <CardContent className="p-3xl">
-              <ContactForm />
+              <FAQContactForm />
             </CardContent>
           </Card>
         </div>
