@@ -116,11 +116,9 @@ export default function PrivacyPage() {
       {/* Privacy Commitment Section */}
       <Section className="py-5xl" style={{ backgroundColor: '#FFFFFF' }}>
         <div className="max-w-4xl mx-auto text-center">
-          <div className="bg-accent/10 border-2 border-accent p-4xl rounded-lg max-w-3xl mx-auto">
-            <p className="text-2xl md:text-3xl font-bold text-black leading-relaxed">
-              Vonga does not sell personal information and will never share data with third parties for marketing without your prior consent.
-            </p>
-          </div>
+          <p className="text-xl md:text-2xl font-bold text-black leading-relaxed max-w-3xl mx-auto">
+            Vonga does not sell personal information and will never share data with third parties for marketing without your prior consent.
+          </p>
         </div>
       </Section>
 
