@@ -55,10 +55,8 @@ export default async function ShopPage() {
                 </p>
                 <Link 
                   href="/shop/collections/core-collection"
-                  className="inline-block px-xl py-md rounded font-semibold shadow-md transition-colors"
+                  className="inline-block px-xl py-md rounded font-semibold shadow-md transition-opacity hover:opacity-90"
                   style={{ backgroundColor: '#33BECC', color: '#303E55' }}
-                  onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
-                  onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
                 >
                   Shop Core Collection
                 </Link>
@@ -77,10 +75,8 @@ export default async function ShopPage() {
                 </p>
                 <Link 
                   href="/shop/collections/concept-collection"
-                  className="inline-block px-xl py-md rounded font-semibold shadow-md transition-colors"
+                  className="inline-block px-xl py-md rounded font-semibold shadow-md transition-opacity hover:opacity-90"
                   style={{ backgroundColor: '#303E55', color: '#33BECC' }}
-                  onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
-                  onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
                 >
                   Shop Concept Collection
                 </Link>
