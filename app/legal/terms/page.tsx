@@ -29,34 +29,18 @@ export default function TermsPage() {
 
       {/* Introduction */}
       <Section className="py-5xl" style={{ backgroundColor: '#FFFFFF' }}>
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-xl md:text-2xl font-bold text-black leading-relaxed max-w-3xl mx-auto" style={{ marginBottom: '48px' }}>
+        <div className="max-w-4xl mx-auto">
+          <p className="text-lg text-black leading-relaxed" style={{ marginBottom: '24px' }}>
             These Terms and Conditions govern your access to and use of Vonga's website, products, and services. By accessing our site, purchasing products, or engaging with our Services, you agree to these Terms. If you do not agree, you may not use our Services.
           </p>
-          
-          <div className="max-w-2xl mx-auto text-left" style={{ marginBottom: '32px' }}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <p className="text-sm font-semibold" style={{ color: '#33BECC', marginBottom: '8px' }}>
-                  Effective Date
-                </p>
-                <p className="text-base text-black">
-                  October 2, 2025
-                </p>
-              </div>
-              <div>
-                <p className="text-sm font-semibold" style={{ color: '#33BECC', marginBottom: '8px' }}>
-                  Governing Law
-                </p>
-                <p className="text-base text-black">
-                  State of Indiana, USA
-                </p>
-              </div>
-            </div>
-          </div>
-          
-          <p className="text-base text-black/80 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-lg text-black leading-relaxed" style={{ marginBottom: '24px' }}>
+            <strong>Effective Date:</strong> October 2, 2025
+          </p>
+          <p className="text-lg text-black leading-relaxed" style={{ marginBottom: '24px' }}>
             <strong>Entity:</strong> Vonga, LLC, incorporated in Indiana, United States
+          </p>
+          <p className="text-lg text-black leading-relaxed" style={{ marginBottom: '24px' }}>
+            <strong>Governing Law:</strong> State of Indiana, USA
           </p>
         </div>
       </Section>
