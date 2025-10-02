@@ -37,11 +37,11 @@ export default async function ShopPage() {
         <div className="max-w-7xl mx-auto">
           {products.length === 0 ? (
             <div className="text-center py-5xl">
-              <div className="w-20 h-20 bg-accent rounded-full flex items-center justify-center mx-auto mb-lg shadow-lg">
+              <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-lg shadow-lg" style={{ backgroundColor: '#33BECC' }}>
                 <ShoppingBag className="w-10 h-10 text-white" />
               </div>
               <h2 className="text-3xl font-bold text-navy mb-md">Coming Soon</h2>
-              <p className="text-lg text-black/70 mb-xl">
+              <p className="text-lg font-semibold mb-xl" style={{ color: '#33BECC' }}>
                 Our first collection launches soon. Join our mailing list to get notified.
               </p>
               <Link 
@@ -60,6 +60,7 @@ export default async function ShopPage() {
                 {products.map((item: any) => {
                   const product = item.node;
                   const image = product.images.edges[0]?.node;
+                  const collection = product.collections?.edges?.[0]?.node?.title || product.productType || 'Shop Vonga';
                   const price = parseFloat(product.priceRange.minVariantPrice.amount);
                   const formattedPrice = new Intl.NumberFormat('en-US', {
                     style: 'currency',
@@ -94,8 +95,8 @@ export default async function ShopPage() {
                           <h3 className="font-bold text-lg text-navy mb-2 group-hover:text-accent transition-colors">
                             {product.title}
                           </h3>
-                          <p className="text-sm text-black/60 mb-4 flex-1 line-clamp-2">
-                            {product.description || "Tap-ready NFC apparel"}
+                          <p className="text-sm font-semibold mb-4 flex-1 line-clamp-2" style={{ color: '#33BECC' }}>
+                            {collection}
                           </p>
                           <div className="flex items-center justify-between">
                             <span className="text-2xl font-bold text-black">
@@ -119,33 +120,24 @@ export default async function ShopPage() {
       {/* Trust Signals */}
       <Section className="py-4xl" style={{ backgroundColor: '#F7F7F7' }}>
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
             <div>
-              <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-md shadow-lg">
-                <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <h3 className="font-bold text-lg text-navy mb-2">Free Shipping</h3>
-              <p className="text-sm text-black/70">On orders over $100</p>
-            </div>
-            <div>
-              <div className="w-16 h-16 bg-navy rounded-full flex items-center justify-center mx-auto mb-md shadow-lg">
+              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-md shadow-lg" style={{ backgroundColor: '#303E55' }}>
                 <svg className="w-8 h-8 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               </div>
               <h3 className="font-bold text-lg text-navy mb-2">Secure Checkout</h3>
-              <p className="text-sm text-black/70">SSL encrypted transactions</p>
+              <p className="text-sm font-semibold" style={{ color: '#33BECC' }}>SSL encrypted transactions</p>
             </div>
             <div>
-              <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-md shadow-lg">
+              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-md shadow-lg" style={{ backgroundColor: '#33BECC' }}>
                 <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                 </svg>
               </div>
               <h3 className="font-bold text-lg text-navy mb-2">30-Day Returns</h3>
-              <p className="text-sm text-black/70">Hassle-free returns</p>
+              <p className="text-sm font-semibold" style={{ color: '#33BECC' }}>Hassle-free returns</p>
             </div>
           </div>
         </div>

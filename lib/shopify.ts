@@ -85,6 +85,14 @@ export async function getAllProducts() {
             title
             handle
             description
+            productType
+            collections(first: 1) {
+              edges {
+                node {
+                  title
+                }
+              }
+            }
             priceRange {
               minVariantPrice {
                 amount

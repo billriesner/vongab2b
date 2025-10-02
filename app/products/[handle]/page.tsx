@@ -252,30 +252,30 @@ export default function ProductPage({ params }: ProductPageProps) {
             {/* Trust Signals */}
             <div className="border-t-2 border-gray-200 pt-6 space-y-4">
               <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
-                  <Truck className="w-5 h-5 text-accent" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-navy">Free Shipping</h3>
-                  <p className="text-sm text-black/70">On orders over $100</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-full bg-navy/10 flex items-center justify-center flex-shrink-0">
-                  <RefreshCw className="w-5 h-5 text-navy" />
+                <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#33BECC' }}>
+                  <RefreshCw className="w-5 h-5 text-white" />
                 </div>
                 <div>
                   <h3 className="font-bold text-navy">30-Day Returns</h3>
-                  <p className="text-sm text-black/70">Hassle-free returns and exchanges</p>
+                  <p className="text-sm font-semibold" style={{ color: '#33BECC' }}>Hassle-free returns and exchanges</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#303E55' }}>
                   <Shield className="w-5 h-5 text-accent" />
                 </div>
                 <div>
                   <h3 className="font-bold text-navy">Secure Checkout</h3>
-                  <p className="text-sm text-black/70">SSL encrypted transactions</p>
+                  <p className="text-sm font-semibold" style={{ color: '#33BECC' }}>SSL encrypted transactions</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#33BECC' }}>
+                  <Truck className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-navy">Fast Shipping</h3>
+                  <p className="text-sm font-semibold" style={{ color: '#33BECC' }}>Ships within 2-3 business days</p>
                 </div>
               </div>
             </div>
