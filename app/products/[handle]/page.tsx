@@ -208,10 +208,18 @@ export default function ProductPage({ params }: ProductPageProps) {
             </div>
 
             <div 
-              className="prose prose-sm max-w-none mb-8 font-semibold"
-              style={{ color: '#33BECC' }}
-              dangerouslySetInnerHTML={{ __html: product.descriptionHtml || product.description }}
-            />
+              className="max-w-none mb-8"
+              style={{ color: '#000000' }}
+            >
+              <div 
+                dangerouslySetInnerHTML={{ __html: product.descriptionHtml || product.description }}
+                style={{
+                  fontSize: '1rem',
+                  lineHeight: '1.6'
+                }}
+                className="[&>p]:mb-6 [&>ul]:mb-6 [&>ol]:mb-6"
+              />
+            </div>
 
             {/* Size & Color Selection */}
             {product.variants.edges.length > 1 && (() => {
