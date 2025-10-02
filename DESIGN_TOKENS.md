@@ -20,6 +20,14 @@ This project uses a comprehensive design token system built on CSS variables and
 - **Body Text**: Small to base, regular weight, navy or gray
 - **Always use inline styles** for cyan text: `style={{ color: '#33BECC' }}` to ensure proper rendering
 
+### Writing Guidelines
+- **No em dashes (—)**: Always use periods or commas instead. Em dashes clutter copy and reduce readability.
+  - ❌ Bad: "No apps needed — just tap"
+  - ✅ Good: "No apps needed. Just tap"
+- **Short sentences**: Break long sentences into multiple shorter ones
+- **Active voice**: Use direct, active language
+- **No jargon**: Keep language approachable for non-technical users
+
 ## Token Categories
 
 ### Colors
