@@ -31,7 +31,7 @@ export default function PrivacyPage() {
       <Section className="py-5xl" style={{ backgroundColor: '#FFFFFF' }}>
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-xl md:text-2xl font-bold text-black leading-relaxed max-w-3xl mx-auto mb-xl">
-            Vonga makes NFC-enabled apparel that unlocks experiences with a simple tap—no app required. This Privacy Policy explains what we collect, how we use it, and the choices you have.
+            Vonga makes NFC-enabled apparel that unlocks experiences with a simple tap. No app required. This Privacy Policy explains what we collect, how we use it, and the choices you have.
           </p>
           <p className="text-sm text-black/60">
             Effective Date: October 2, 2025
