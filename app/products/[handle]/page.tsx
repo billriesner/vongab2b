@@ -1,3 +1,11 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { ShoppingBag, ArrowLeft, Check, Truck, Shield, RefreshCw } from 'lucide-react';
+
 interface ProductPageProps {
   params: {
     handle: string;
@@ -5,30 +13,285 @@ interface ProductPageProps {
 }
 
 export default function ProductPage({ params }: ProductPageProps) {
+  const [product, setProduct] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [selectedVariant, setSelectedVariant] = useState<any>(null);
+  const [selectedImage, setSelectedImage] = useState(0);
+  const [quantity, setQuantity] = useState(1);
+
+  useEffect(() => {
+    async function fetchProduct() {
+      try {
+        const res = await fetch(`/api/shopify/product?handle=${params.handle}`);
+        const data = await res.json();
+        setProduct(data);
+        if (data?.variants?.edges?.length > 0) {
+          setSelectedVariant(data.variants.edges[0].node);
+        }
+      } catch (error) {
+        console.error('Error fetching product:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchProduct();
+  }, [params.handle]);
+
+  const handleAddToCart = async () => {
+    if (!selectedVariant) return;
+
+    try {
+      const res = await fetch('/api/shopify/checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          variantId: selectedVariant.id,
+          quantity: quantity,
+        }),
+      });
+
+      const data = await res.json();
+      
+      if (data.webUrl) {
+        // Redirect to Shopify checkout
+        window.location.href = data.webUrl;
+      }
+    } catch (error) {
+      console.error('Error creating checkout:', error);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent"></div>
+      </div>
+    );
+  }
+
+  if (!product) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center px-4">
+        <ShoppingBag className="w-16 h-16 text-gray-300 mb-4" />
+        <h1 className="text-2xl font-bold text-navy mb-2">Product Not Found</h1>
+        <p className="text-black/70 mb-6">The product you're looking for doesn't exist.</p>
+        <Link href="/shop">
+          <Button className="bg-gray-200 hover:bg-gray-300 text-black">
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back to Shop
+          </Button>
+        </Link>
+      </div>
+    );
+  }
+
+  const images = product.images?.edges || [];
+  const currentImage = images[selectedImage]?.node;
+  const price = selectedVariant ? parseFloat(selectedVariant.priceV2.amount) : 0;
+  const formattedPrice = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: selectedVariant?.priceV2.currencyCode || 'USD',
+  }).format(price);
+
   return (
-    <div className="container mx-auto px-4 py-16">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div>
-            <div className="h-96 bg-muted rounded-lg mb-6"></div>
+    <div>
+      {/* Breadcrumb */}
+      <div className="bg-gray-50 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center text-sm">
+            <Link href="/" className="text-accent hover:text-navy">Home</Link>
+            <span className="mx-2 text-gray-400">/</span>
+            <Link href="/shop" className="text-accent hover:text-navy">Shop</Link>
+            <span className="mx-2 text-gray-400">/</span>
+            <span className="text-navy font-semibold">{product.title}</span>
           </div>
+        </div>
+      </div>
+
+      {/* Product Content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Images */}
           <div>
-            <h1 className="text-4xl font-bold text-brand-navy mb-4">
-              Product: {params.handle}
+            <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden mb-4 relative">
+              {currentImage ? (
+                <Image
+                  src={currentImage.url}
+                  alt={currentImage.altText || product.title}
+                  fill
+                  className="object-cover"
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center">
+                  <ShoppingBag className="w-24 h-24 text-gray-300" />
+                </div>
+              )}
+            </div>
+
+            {/* Thumbnail Gallery */}
+            {images.length > 1 && (
+              <div className="grid grid-cols-5 gap-2">
+                {images.map((item: any, index: number) => (
+                  <button
+                    key={index}
+                    onClick={() => setSelectedImage(index)}
+                    className={`aspect-square rounded-lg overflow-hidden border-2 transition-all ${
+                      index === selectedImage
+                        ? 'border-accent shadow-md'
+                        : 'border-gray-200 hover:border-gray-300'
+                    }`}
+                  >
+                    <div className="relative w-full h-full">
+                      <Image
+                        src={item.node.url}
+                        alt={item.node.altText || `${product.title} ${index + 1}`}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 1024px) 20vw, 10vw"
+                      />
+                    </div>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Product Details */}
+          <div>
+            <h1 className="text-4xl md:text-5xl font-bold text-navy mb-4">
+              {product.title}
             </h1>
-            <p className="text-2xl text-brand-accent mb-6">$99.99</p>
-            <p className="text-muted-foreground mb-8">
-              This is a detailed description of the product. It includes all the features, benefits, and specifications that customers need to know before making a purchase.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button className="bg-brand-accent text-white px-8 py-3 rounded-md hover:bg-brand-accent/90 transition-colors">
+            
+            <div className="flex items-center gap-4 mb-6">
+              <span className="text-4xl font-bold text-black">
+                {formattedPrice}
+              </span>
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-accent/10 text-accent">
+                <Check className="w-4 h-4 mr-1" />
+                In Stock
+              </span>
+            </div>
+
+            <div 
+              className="prose prose-sm max-w-none mb-8 text-black/70"
+              dangerouslySetInnerHTML={{ __html: product.descriptionHtml || product.description }}
+            />
+
+            {/* Variants */}
+            {product.variants.edges.length > 1 && (
+              <div className="mb-6">
+                <label className="block text-sm font-semibold text-navy mb-2">
+                  Select Variant
+                </label>
+                <div className="flex flex-wrap gap-2">
+                  {product.variants.edges.map((item: any) => {
+                    const variant = item.node;
+                    return (
+                      <button
+                        key={variant.id}
+                        onClick={() => setSelectedVariant(variant)}
+                        disabled={!variant.availableForSale}
+                        className={`px-4 py-2 rounded-lg border-2 font-semibold transition-all ${
+                          selectedVariant?.id === variant.id
+                            ? 'border-accent bg-accent text-white'
+                            : variant.availableForSale
+                            ? 'border-gray-300 hover:border-accent'
+                            : 'border-gray-200 text-gray-400 cursor-not-allowed'
+                        }`}
+                      >
+                        {variant.title}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* Quantity */}
+            <div className="mb-8">
+              <label className="block text-sm font-semibold text-navy mb-2">
+                Quantity
+              </label>
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                  className="w-10 h-10 rounded-lg border-2 border-gray-300 hover:border-accent font-bold"
+                >
+                  -
+                </button>
+                <span className="text-xl font-bold text-navy w-12 text-center">
+                  {quantity}
+                </span>
+                <button
+                  onClick={() => setQuantity(quantity + 1)}
+                  className="w-10 h-10 rounded-lg border-2 border-gray-300 hover:border-accent font-bold"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            {/* Add to Cart Button */}
+            <div className="flex flex-col sm:flex-row gap-4 mb-8">
+              <Button
+                onClick={handleAddToCart}
+                disabled={!selectedVariant?.availableForSale}
+                className="flex-1 bg-accent hover:bg-accent/90 text-white py-6 text-lg font-bold shadow-lg"
+                size="lg"
+              >
+                <ShoppingBag className="w-5 h-5 mr-2" />
                 Add to Cart
-              </button>
-              <button className="border border-brand-navy text-brand-navy px-8 py-3 rounded-md hover:bg-brand-navy hover:text-white transition-colors">
-                Add to Wishlist
-              </button>
+              </Button>
+            </div>
+
+            {/* Trust Signals */}
+            <div className="border-t-2 border-gray-200 pt-6 space-y-4">
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
+                  <Truck className="w-5 h-5 text-accent" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-navy">Free Shipping</h3>
+                  <p className="text-sm text-black/70">On orders over $100</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-full bg-navy/10 flex items-center justify-center flex-shrink-0">
+                  <RefreshCw className="w-5 h-5 text-navy" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-navy">30-Day Returns</h3>
+                  <p className="text-sm text-black/70">Hassle-free returns and exchanges</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
+                  <Shield className="w-5 h-5 text-accent" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-navy">Secure Checkout</h3>
+                  <p className="text-sm text-black/70">SSL encrypted transactions</p>
+                </div>
+              </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Back to Shop */}
+      <div className="bg-gray-50 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Link href="/shop">
+            <Button className="bg-gray-200 hover:bg-gray-300 text-black">
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Continue Shopping
+            </Button>
+          </Link>
         </div>
       </div>
     </div>

@@ -1,119 +1,153 @@
 import { Section } from "@/components/Section";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Shirt, Package } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { ShoppingBag } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
+import { getAllProducts } from "@/lib/shopify";
 
-export default function ShopPage() {
+export const revalidate = 60; // Revalidate every 60 seconds
+
+export default async function ShopPage() {
+  const products = await getAllProducts();
+
   return (
     <div>
       {/* Hero Section */}
-      <Section 
-        className="py-5xl"
-        style={{ backgroundColor: '#33BECC' }}
-        title="Shop Vonga"
-        description="Connected apparel for everyday wear"
+      <div 
+        className="relative min-h-[400px] flex items-center justify-center text-center"
+        style={{
+          backgroundImage: 'url(/hero-placeholder.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
       >
-        <div className="text-center max-w-3xl mx-auto">
-          <p className="text-lg text-navy mb-3xl font-semibold">
-            Sustainable athleisure with NFC built in. Every piece unlocks digital experiences and rewards.
+        <div className="absolute inset-0 bg-white/60" />
+        <div className="relative z-10 max-w-4xl mx-auto px-lg">
+          <h1 className="text-5xl md:text-6xl font-bold mb-lg" style={{ color: '#303E55', textShadow: '0 2px 8px rgba(255,255,255,0.9)' }}>
+            Shop Vonga
+          </h1>
+          <p className="text-xl md:text-2xl font-bold text-black" style={{ textShadow: '0 1px 4px rgba(255,255,255,0.8)' }}>
+            On-body tech that unlocks rewards and access
           </p>
         </div>
-      </Section>
+      </div>
 
-      {/* Collections Section */}
-      <Section 
-        className="py-4xl"
-        style={{ backgroundColor: '#F7F7F7' }}
-        title="Collections"
-      >
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3xl max-w-6xl mx-auto">
-          <Card className="hover:shadow-xl transition-shadow border-2 border-muted bg-white">
-            <CardContent className="p-0">
-              <div className="h-64 bg-muted flex items-center justify-center">
-                <Shirt className="w-16 h-16 text-text/30" />
+      {/* Products Grid */}
+      <Section className="py-5xl" style={{ backgroundColor: '#FFFFFF' }}>
+        <div className="max-w-7xl mx-auto">
+          {products.length === 0 ? (
+            <div className="text-center py-5xl">
+              <div className="w-20 h-20 bg-accent rounded-full flex items-center justify-center mx-auto mb-lg shadow-lg">
+                <ShoppingBag className="w-10 h-10 text-white" />
               </div>
-            </CardContent>
-            <CardHeader className="p-lg">
-              <CardTitle className="text-navy text-xl font-bold">Essentials</CardTitle>
-              <CardDescription className="text-sm" style={{ color: '#33BECC' }}>
-                Everyday staples with NFC
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="px-lg pb-lg">
+              <h2 className="text-3xl font-bold text-navy mb-md">Coming Soon</h2>
+              <p className="text-lg text-black/70 mb-xl">
+                Our first collection launches soon. Join our mailing list to get notified.
+              </p>
               <Link 
-                href="/shop/collections/essentials" 
-                className="text-sm text-accent hover:underline font-medium"
+                href="/#stay-connected"
+                className="inline-block bg-gray-200 hover:bg-gray-300 text-black px-xl py-md rounded font-semibold shadow-md transition-colors"
               >
-                View Collection →
+                Get Early Access
               </Link>
-            </CardContent>
-          </Card>
+            </div>
+          ) : (
+            <>
+              <h2 className="text-3xl md:text-4xl font-bold text-black text-center mb-5xl">
+                All Products
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                {products.map((item: any) => {
+                  const product = item.node;
+                  const image = product.images.edges[0]?.node;
+                  const price = parseFloat(product.priceRange.minVariantPrice.amount);
+                  const formattedPrice = new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: product.priceRange.minVariantPrice.currencyCode,
+                  }).format(price);
 
-          <Card className="hover:shadow-xl transition-shadow border-2 border-muted bg-white">
-            <CardContent className="p-0">
-              <div className="h-64 bg-muted flex items-center justify-center">
-                <Package className="w-16 h-16 text-text/30" />
+                  return (
+                    <Link 
+                      key={product.id} 
+                      href={`/products/${product.handle}`}
+                      className="group"
+                    >
+                      <Card className="border-2 border-muted hover:border-accent transition-all hover:shadow-xl bg-white h-full flex flex-col">
+                        <CardContent className="p-0">
+                          <div className="relative aspect-square bg-gray-100 overflow-hidden rounded-t-lg">
+                            {image ? (
+                              <Image
+                                src={image.url}
+                                alt={image.altText || product.title}
+                                fill
+                                className="object-cover group-hover:scale-105 transition-transform duration-300"
+                                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
+                              />
+                            ) : (
+                              <div className="w-full h-full flex items-center justify-center">
+                                <ShoppingBag className="w-16 h-16 text-gray-300" />
+                              </div>
+                            )}
+                          </div>
+                        </CardContent>
+                        <div className="p-4 flex flex-col flex-1">
+                          <h3 className="font-bold text-lg text-navy mb-2 group-hover:text-accent transition-colors">
+                            {product.title}
+                          </h3>
+                          <p className="text-sm text-black/60 mb-4 flex-1 line-clamp-2">
+                            {product.description || "Tap-ready NFC apparel"}
+                          </p>
+                          <div className="flex items-center justify-between">
+                            <span className="text-2xl font-bold text-black">
+                              {formattedPrice}
+                            </span>
+                            <span className="text-sm font-semibold text-accent">
+                              View Details →
+                            </span>
+                          </div>
+                        </div>
+                      </Card>
+                    </Link>
+                  );
+                })}
               </div>
-            </CardContent>
-            <CardHeader className="p-lg">
-              <CardTitle className="text-navy text-xl font-bold">Performance</CardTitle>
-              <CardDescription className="text-sm" style={{ color: '#33BECC' }}>
-                Built for the active life
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="px-lg pb-lg">
-              <Link 
-                href="/shop/collections/performance" 
-                className="text-sm text-accent hover:underline font-medium"
-              >
-                View Collection →
-              </Link>
-            </CardContent>
-          </Card>
-
-          <Card className="hover:shadow-xl transition-shadow border-2 border-muted bg-white">
-            <CardContent className="p-0">
-              <div className="h-64 bg-muted flex items-center justify-center">
-                <Shirt className="w-16 h-16 text-text/30" />
-              </div>
-            </CardContent>
-            <CardHeader className="p-lg">
-              <CardTitle className="text-navy text-xl font-bold">Limited Drops</CardTitle>
-              <CardDescription className="text-sm" style={{ color: '#33BECC' }}>
-                Exclusive releases
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="px-lg pb-lg">
-              <Link 
-                href="/shop/collections/limited" 
-                className="text-sm text-accent hover:underline font-medium"
-              >
-                View Collection →
-              </Link>
-            </CardContent>
-          </Card>
+            </>
+          )}
         </div>
       </Section>
 
-      {/* Coming Soon Message */}
-      <Section 
-        className="py-5xl"
-        style={{ backgroundColor: '#FFFFFF' }}
-      >
-        <div className="max-w-2xl mx-auto text-center">
-          <div className="w-20 h-20 bg-accent rounded-full flex items-center justify-center mx-auto mb-lg shadow-lg">
-            <Package className="w-10 h-10 text-white" />
+      {/* Trust Signals */}
+      <Section className="py-4xl" style={{ backgroundColor: '#F7F7F7' }}>
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div>
+              <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-md shadow-lg">
+                <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <h3 className="font-bold text-lg text-navy mb-2">Free Shipping</h3>
+              <p className="text-sm text-black/70">On orders over $100</p>
+            </div>
+            <div>
+              <div className="w-16 h-16 bg-navy rounded-full flex items-center justify-center mx-auto mb-md shadow-lg">
+                <svg className="w-8 h-8 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <h3 className="font-bold text-lg text-navy mb-2">Secure Checkout</h3>
+              <p className="text-sm text-black/70">SSL encrypted transactions</p>
+            </div>
+            <div>
+              <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-md shadow-lg">
+                <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+              </div>
+              <h3 className="font-bold text-lg text-navy mb-2">30-Day Returns</h3>
+              <p className="text-sm text-black/70">Hassle-free returns</p>
+            </div>
           </div>
-          <h2 className="text-3xl font-bold text-navy mb-md">Coming Soon</h2>
-          <p className="text-lg text-text/70 mb-xl">
-            Our first collection launches soon. Join our mailing list to get notified.
-          </p>
-          <Link 
-            href="/#stay-connected"
-            className="inline-block bg-gray-200 hover:bg-gray-300 text-black px-xl py-md rounded font-semibold shadow-md transition-colors"
-          >
-            Get Early Access
-          </Link>
         </div>
       </Section>
     </div>
