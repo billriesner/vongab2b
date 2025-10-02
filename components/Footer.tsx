@@ -100,11 +100,6 @@ export function Footer() {
                   Returns
                 </Link>
               </li>
-              <li>
-                <Link href="/size-guide" className="text-gray-300 hover:text-accent transition-colors">
-                  Size Guide
-                </Link>
-              </li>
             </ul>
           </div>
 
