@@ -5,7 +5,6 @@ async function ShopifyData(query: string) {
   const URL = `https://${domain}/api/2024-01/graphql.json`;
 
   const options = {
-    endpoint: URL,
     method: "POST",
     headers: {
       "X-Shopify-Storefront-Access-Token": storefrontAccessToken,
@@ -16,13 +15,25 @@ async function ShopifyData(query: string) {
   };
 
   try {
-    const data = await fetch(URL, options).then((response) => {
-      return response.json();
-    });
+    const response = await fetch(URL, options);
+    
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Shopify API Error:', response.status, errorText);
+      throw new Error(`Shopify API Error: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    
+    if (data.errors) {
+      console.error('Shopify GraphQL Errors:', data.errors);
+      throw new Error('Shopify GraphQL Error');
+    }
 
     return data;
   } catch (error) {
-    throw new Error("Products not fetched");
+    console.error("Error fetching from Shopify:", error);
+    throw error;
   }
 }
 
@@ -94,13 +105,16 @@ export async function getAllProducts() {
     }
   `;
 
-  const response = await ShopifyData(query);
+  try {
+    const response = await ShopifyData(query);
 
-  const allProducts = response.data.products.edges
-    ? response.data.products.edges
-    : [];
+    const allProducts = response?.data?.products?.edges || [];
 
-  return allProducts;
+    return allProducts;
+  } catch (error) {
+    console.error('Error in getAllProducts:', error);
+    return [];
+  }
 }
 
 export async function getProduct(handle: string) {
