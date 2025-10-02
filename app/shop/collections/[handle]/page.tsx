@@ -53,7 +53,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
                 Shop
               </Link>
               <span className="text-navy font-bold" style={{ textShadow: '0 1px 2px rgba(255,255,255,0.8)' }}>/</span>
-              <span className="text-navy font-bold" style={{ textShadow: '0 1px 2px rgba(255,255,255,0.8)' }}>{collection.title}</span>
+              <span className="font-bold" style={{ color: '#33BECC', textShadow: '0 1px 2px rgba(255,255,255,0.8)' }}>{collection.title}</span>
             </nav>
           </div>
 
