@@ -55,7 +55,7 @@ export default function ShippingReturnsPage() {
 
           {/* Retail Orders */}
           <div className="mb-4xl">
-            <h3 className="text-2xl font-bold mb-lg" style={{ color: '#33BECC' }}>
+            <h3 className="text-2xl font-bold mb-lg" style={{ color: '#33BECC', marginTop: '32px' }}>
               Retail Orders
             </h3>
             <ul className="space-y-md text-lg text-black leading-relaxed">
@@ -69,7 +69,7 @@ export default function ShippingReturnsPage() {
 
           {/* Shipping Costs */}
           <div className="mb-4xl">
-            <h3 className="text-2xl font-bold mb-lg" style={{ color: '#33BECC' }}>
+            <h3 className="text-2xl font-bold mb-lg" style={{ color: '#33BECC', marginTop: '32px' }}>
               Shipping Costs
             </h3>
             <ul className="space-y-md text-lg text-black leading-relaxed">
@@ -80,7 +80,7 @@ export default function ShippingReturnsPage() {
 
           {/* Club Vonga Orders */}
           <div className="mb-4xl">
-            <h3 className="text-2xl font-bold mb-lg" style={{ color: '#33BECC' }}>
+            <h3 className="text-2xl font-bold mb-lg" style={{ color: '#33BECC', marginTop: '32px' }}>
               Club Vonga Orders
             </h3>
             <ul className="space-y-md text-lg text-black leading-relaxed">
@@ -93,7 +93,7 @@ export default function ShippingReturnsPage() {
 
           {/* Enterprise Orders */}
           <div className="mb-4xl">
-            <h3 className="text-2xl font-bold mb-lg" style={{ color: '#33BECC' }}>
+            <h3 className="text-2xl font-bold mb-lg" style={{ color: '#33BECC', marginTop: '32px' }}>
               Enterprise Orders
             </h3>
             <ul className="space-y-md text-lg text-black leading-relaxed">
@@ -105,7 +105,7 @@ export default function ShippingReturnsPage() {
 
           {/* International Orders */}
           <div className="mb-4xl">
-            <h3 className="text-2xl font-bold mb-lg" style={{ color: '#33BECC' }}>
+            <h3 className="text-2xl font-bold mb-lg" style={{ color: '#33BECC', marginTop: '32px' }}>
               International Orders
             </h3>
             <ul className="space-y-md text-lg text-black leading-relaxed">
@@ -117,7 +117,7 @@ export default function ShippingReturnsPage() {
 
           {/* Delays & Issues */}
           <div>
-            <h3 className="text-2xl font-bold mb-lg" style={{ color: '#33BECC' }}>
+            <h3 className="text-2xl font-bold mb-lg" style={{ color: '#33BECC', marginTop: '32px' }}>
               Delays & Issues
             </h3>
             <ul className="space-y-md text-lg text-black leading-relaxed">
@@ -149,7 +149,7 @@ export default function ShippingReturnsPage() {
 
           {/* Eligibility */}
           <div className="mb-4xl">
-            <h3 className="text-2xl font-bold mb-lg" style={{ color: '#33BECC' }}>
+            <h3 className="text-2xl font-bold mb-lg" style={{ color: '#33BECC', marginTop: '32px' }}>
               Eligibility
             </h3>
             <ul className="space-y-md text-lg text-black leading-relaxed">
@@ -161,7 +161,7 @@ export default function ShippingReturnsPage() {
 
           {/* How to Start a Return */}
           <div className="mb-4xl">
-            <h3 className="text-2xl font-bold mb-lg" style={{ color: '#33BECC' }}>
+            <h3 className="text-2xl font-bold mb-lg" style={{ color: '#33BECC', marginTop: '32px' }}>
               How to Start a Return
             </h3>
             <ol className="list-decimal list-inside space-y-md text-lg text-black leading-relaxed">
@@ -173,7 +173,7 @@ export default function ShippingReturnsPage() {
 
           {/* Refunds */}
           <div className="mb-4xl">
-            <h3 className="text-2xl font-bold mb-lg" style={{ color: '#33BECC' }}>
+            <h3 className="text-2xl font-bold mb-lg" style={{ color: '#33BECC', marginTop: '32px' }}>
               Refunds
             </h3>
             <ul className="space-y-md text-lg text-black leading-relaxed">
@@ -185,7 +185,7 @@ export default function ShippingReturnsPage() {
 
           {/* Exchanges */}
           <div className="mb-4xl">
-            <h3 className="text-2xl font-bold mb-lg" style={{ color: '#33BECC' }}>
+            <h3 className="text-2xl font-bold mb-lg" style={{ color: '#33BECC', marginTop: '32px' }}>
               Exchanges
             </h3>
             <ul className="space-y-md text-lg text-black leading-relaxed">
@@ -196,7 +196,7 @@ export default function ShippingReturnsPage() {
 
           {/* Damaged or Defective Items */}
           <div className="mb-4xl">
-            <h3 className="text-2xl font-bold mb-lg" style={{ color: '#33BECC' }}>
+            <h3 className="text-2xl font-bold mb-lg" style={{ color: '#33BECC', marginTop: '32px' }}>
               Damaged or Defective Items
             </h3>
             <p className="text-lg text-black leading-relaxed">
@@ -206,7 +206,7 @@ export default function ShippingReturnsPage() {
 
           {/* International Returns */}
           <div className="mb-4xl">
-            <h3 className="text-2xl font-bold mb-lg" style={{ color: '#33BECC' }}>
+            <h3 className="text-2xl font-bold mb-lg" style={{ color: '#33BECC', marginTop: '32px' }}>
               International Returns
             </h3>
             <ul className="space-y-md text-lg text-black leading-relaxed">
@@ -217,7 +217,7 @@ export default function ShippingReturnsPage() {
 
           {/* Club Vonga & Enterprise */}
           <div>
-            <h3 className="text-2xl font-bold mb-lg" style={{ color: '#33BECC' }}>
+            <h3 className="text-2xl font-bold mb-lg" style={{ color: '#33BECC', marginTop: '32px' }}>
               Club Vonga & Enterprise
             </h3>
             <p className="text-lg text-black leading-relaxed">
