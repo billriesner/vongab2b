@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { ShoppingBag, Users, Building2, Shirt, Smartphone, Gift, TrendingUp, Heart, Lock, Leaf, CheckCircle2 } from "lucide-react";
 import Image from "next/image";
+import { QuickContactForm } from "@/components/QuickContactForm";
 
 export default function HomePage() {
   const structuredData = {
@@ -375,32 +376,7 @@ export default function HomePage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <form>
-                <input
-                  type="text"
-                  placeholder="Name"
-                  className="w-full px-lg py-md border-2 border-muted rounded focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-text bg-white placeholder:text-text/60"
-                  style={{ marginBottom: '24px' }}
-                  required
-                />
-                <input
-                  type="email"
-                  placeholder="Email"
-                  className="w-full px-lg py-md border-2 border-muted rounded focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-text bg-white placeholder:text-text/60"
-                  style={{ marginBottom: '24px' }}
-                  required
-                />
-                <input
-                  type="text"
-                  placeholder="Company"
-                  className="w-full px-lg py-md border-2 border-muted rounded focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-text bg-white placeholder:text-text/60"
-                  style={{ marginBottom: '24px' }}
-                  required
-                />
-                <Button type="submit" className="w-full bg-gray-200 hover:bg-gray-300 text-black font-semibold shadow-md">
-                  Schedule a Call
-                </Button>
-              </form>
+              <QuickContactForm />
             </CardContent>
           </Card>
         </div>
