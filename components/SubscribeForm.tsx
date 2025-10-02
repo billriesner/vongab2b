@@ -1,52 +1,85 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
 
-const ACCENT = "#33becc";
+interface SubscribeFormProps {
+  className?: string;
+}
 
-export function SubscribeForm() {
-  const [submitted, setSubmitted] = useState(false);
-  const [email, setEmail] = useState("");
+export function SubscribeForm({ className = '' }: SubscribeFormProps) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+    setErrorMessage('');
+
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      email: formData.get('email') as string,
+    };
 
     try {
-      await fetch(
-        "https://script.google.com/macros/s/AKfycby_tIS6fWQsTWsWuyvkhyKSKjlQNTbtEBhbdsOvFF4bxAP_EwqeX1O1DiFzOFjb_Y_vRA/exec",
-        {
-          method: "POST",
-          body: new URLSearchParams({ email }),
-          mode: "no-cors",
-        }
-      );
-      setSubmitted(true);
-    } catch (err) {
-      console.error("Submission error", err);
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        (e.target as HTMLFormElement).reset();
+      } else {
+        setSubmitStatus('error');
+        setErrorMessage(result.error || 'Failed to subscribe');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+      setErrorMessage('Network error. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <div>
-      {!submitted ? (
-        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 justify-center">
-          <input
-            type="email"
-            name="email"
-            required
-            placeholder="you@example.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="border border-gray-300 rounded-md px-4 py-2 w-full sm:w-auto"
-          />
-          <Button type="submit" style={{ backgroundColor: ACCENT, color: "white" }}>
-            Subscribe
-          </Button>
-        </form>
-      ) : (
-        <p className="text-green-600 font-medium mt-4">You’re subscribed! Thanks for joining us.</p>
+    <form onSubmit={handleSubmit} className={className}>
+      <input
+        type="email"
+        name="email"
+        placeholder="Enter your email"
+        className="w-full px-lg py-md border-2 border-muted rounded focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-text bg-white"
+        style={{ marginBottom: '24px' }}
+        required
+        disabled={isSubmitting}
+      />
+
+      {submitStatus === 'success' && (
+        <div className="mb-lg p-md rounded" style={{ backgroundColor: '#33BECC', color: '#FFFFFF', marginBottom: '24px' }}>
+          <p className="text-sm font-semibold">Thanks for subscribing!</p>
+        </div>
       )}
-    </div>
+
+      {submitStatus === 'error' && (
+        <div className="mb-lg p-md rounded" style={{ backgroundColor: '#EF4444', color: '#FFFFFF', marginBottom: '24px' }}>
+          <p className="text-sm font-semibold">{errorMessage}</p>
+        </div>
+      )}
+
+      <Button 
+        type="submit" 
+        className="w-full bg-gray-200 hover:bg-gray-300 text-black font-semibold shadow-md"
+        disabled={isSubmitting}
+      >
+        {isSubmitting ? 'Subscribing...' : 'Subscribe'}
+      </Button>
+    </form>
   );
 }

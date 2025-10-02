@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { ShoppingBag, Users, Building2, Shirt, Smartphone, Gift, TrendingUp, Heart, Lock, Leaf, CheckCircle2 } from "lucide-react";
 import Image from "next/image";
 import { QuickContactForm } from "@/components/QuickContactForm";
+import { SubscribeForm } from "@/components/SubscribeForm";
 
 export default function HomePage() {
   const structuredData = {
@@ -349,18 +350,7 @@ export default function HomePage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <form>
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="w-full px-lg py-md border-2 border-muted rounded focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-text bg-white"
-                  style={{ marginBottom: '24px' }}
-                  required
-                />
-                <Button type="submit" className="w-full bg-gray-200 hover:bg-gray-300 text-black font-semibold shadow-md">
-                  Subscribe
-                </Button>
-              </form>
+              <SubscribeForm />
             </CardContent>
           </Card>
 

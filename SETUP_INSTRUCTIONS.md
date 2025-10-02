@@ -15,11 +15,12 @@ This guide will help you set up the contact form to store submissions in Supabas
 2. Create a new project
 3. Wait for the database to finish setting up (~2 minutes)
 
-### 1.2 Create the Database Table
+### 1.2 Create the Database Tables
 1. In your Supabase dashboard, go to **SQL Editor**
-2. Run this SQL command:
+2. Run these SQL commands:
 
 ```sql
+-- Contact Form Submissions Table
 create table contact_submissions (
   id uuid default gen_random_uuid() primary key,
   name text not null,
@@ -29,12 +30,25 @@ create table contact_submissions (
   created_at timestamp with time zone default timezone('utc'::text, now()) not null
 );
 
--- Enable Row Level Security (RLS)
 alter table contact_submissions enable row level security;
 
--- Create a policy that allows inserting (for the API)
 create policy "Allow insert for service role"
   on contact_submissions
+  for insert
+  to service_role
+  with check (true);
+
+-- Newsletter Subscriptions Table
+create table newsletter_subscriptions (
+  id uuid default gen_random_uuid() primary key,
+  email text not null unique,
+  created_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+alter table newsletter_subscriptions enable row level security;
+
+create policy "Allow insert for service role"
+  on newsletter_subscriptions
   for insert
   to service_role
   with check (true);
