@@ -18,6 +18,8 @@ export default function ProductPage({ params }: ProductPageProps) {
   const [selectedVariant, setSelectedVariant] = useState<any>(null);
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const [selectedSize, setSelectedSize] = useState<string>('');
+  const [selectedColor, setSelectedColor] = useState<string>('');
 
   useEffect(() => {
     async function fetchProduct() {
@@ -26,7 +28,18 @@ export default function ProductPage({ params }: ProductPageProps) {
         const data = await res.json();
         setProduct(data);
         if (data?.variants?.edges?.length > 0) {
-          setSelectedVariant(data.variants.edges[0].node);
+          const firstVariant = data.variants.edges[0].node;
+          setSelectedVariant(firstVariant);
+          
+          // Parse first variant to set initial size and color
+          const title = firstVariant.title;
+          const parts = title.split(' / ');
+          if (parts.length >= 2) {
+            setSelectedSize(parts[0]);
+            setSelectedColor(parts[1]);
+          } else if (parts.length === 1) {
+            setSelectedSize(parts[0]);
+          }
         }
       } catch (error) {
         console.error('Error fetching product:', error);
@@ -37,6 +50,23 @@ export default function ProductPage({ params }: ProductPageProps) {
 
     fetchProduct();
   }, [params.handle]);
+
+  // Update selected variant when size or color changes
+  useEffect(() => {
+    if (!product || !selectedSize) return;
+
+    const targetTitle = selectedColor 
+      ? `${selectedSize} / ${selectedColor}`
+      : selectedSize;
+
+    const matchingVariant = product.variants.edges.find((item: any) => {
+      return item.node.title === targetTitle;
+    });
+
+    if (matchingVariant) {
+      setSelectedVariant(matchingVariant.node);
+    }
+  }, [selectedSize, selectedColor, product]);
 
   const handleAddToCart = async () => {
     if (!selectedVariant) return;
@@ -102,9 +132,9 @@ export default function ProductPage({ params }: ProductPageProps) {
       <div className="bg-gray-50 py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center text-sm">
-            <Link href="/" className="text-accent hover:text-navy">Home</Link>
+            <Link href="/" className="font-semibold hover:underline" style={{ color: '#33BECC' }}>Home</Link>
             <span className="mx-2 text-gray-400">/</span>
-            <Link href="/shop" className="text-accent hover:text-navy">Shop</Link>
+            <Link href="/shop" className="font-semibold hover:underline" style={{ color: '#33BECC' }}>Shop</Link>
             <span className="mx-2 text-gray-400">/</span>
             <span className="text-navy font-semibold">{product.title}</span>
           </div>
@@ -171,50 +201,91 @@ export default function ProductPage({ params }: ProductPageProps) {
               <span className="text-4xl font-bold text-black">
                 {formattedPrice}
               </span>
-              <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-accent/10 text-accent">
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold text-white" style={{ backgroundColor: '#33BECC' }}>
                 <Check className="w-4 h-4 mr-1" />
                 In Stock
               </span>
             </div>
 
             <div 
-              className="prose prose-sm max-w-none mb-8 text-black/70"
+              className="prose prose-sm max-w-none mb-8 font-semibold"
+              style={{ color: '#33BECC' }}
               dangerouslySetInnerHTML={{ __html: product.descriptionHtml || product.description }}
             />
 
-            {/* Variants */}
-            {product.variants.edges.length > 1 && (
-              <div className="mb-6">
-                <label className="block text-sm font-semibold text-navy mb-2">
-                  Select Variant
-                </label>
-                <div className="flex flex-wrap gap-2">
-                  {product.variants.edges.map((item: any) => {
-                    const variant = item.node;
-                    return (
-                      <button
-                        key={variant.id}
-                        onClick={() => setSelectedVariant(variant)}
-                        disabled={!variant.availableForSale}
-                        className={`px-4 py-2 rounded-lg border-2 font-semibold transition-all ${
-                          selectedVariant?.id === variant.id
-                            ? 'border-accent bg-accent text-white'
-                            : variant.availableForSale
-                            ? 'border-gray-300 hover:border-accent'
-                            : 'border-gray-200 text-gray-400 cursor-not-allowed'
-                        }`}
-                      >
-                        {variant.title}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
+            {/* Size & Color Selection */}
+            {product.variants.edges.length > 1 && (() => {
+              // Extract unique sizes and colors
+              const sizes = new Set<string>();
+              const colors = new Set<string>();
+              
+              product.variants.edges.forEach((item: any) => {
+                const parts = item.node.title.split(' / ');
+                if (parts.length >= 1) sizes.add(parts[0]);
+                if (parts.length >= 2) colors.add(parts[1]);
+              });
+
+              const uniqueSizes = Array.from(sizes);
+              const uniqueColors = Array.from(colors);
+
+              return (
+                <>
+                  {/* Size Selector */}
+                  {uniqueSizes.length > 1 && (
+                    <div className="mb-6">
+                      <label className="block text-sm font-semibold text-navy mb-3">
+                        Size
+                      </label>
+                      <div className="flex flex-wrap gap-3">
+                        {uniqueSizes.map((size) => (
+                          <button
+                            key={size}
+                            onClick={() => setSelectedSize(size)}
+                            className={`px-6 py-3 rounded-lg border-2 font-semibold transition-all ${
+                              selectedSize === size
+                                ? 'text-white shadow-md'
+                                : 'border-gray-300 hover:border-accent text-navy'
+                            }`}
+                            style={selectedSize === size ? { backgroundColor: '#33BECC', borderColor: '#33BECC' } : {}}
+                          >
+                            {size}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Color Selector */}
+                  {uniqueColors.length > 1 && (
+                    <div className="mb-6">
+                      <label className="block text-sm font-semibold text-navy mb-3">
+                        Color
+                      </label>
+                      <div className="flex flex-wrap gap-3">
+                        {uniqueColors.map((color) => (
+                          <button
+                            key={color}
+                            onClick={() => setSelectedColor(color)}
+                            className={`px-6 py-3 rounded-lg border-2 font-semibold transition-all ${
+                              selectedColor === color
+                                ? 'text-white shadow-md'
+                                : 'border-gray-300 hover:border-accent text-navy'
+                            }`}
+                            style={selectedColor === color ? { backgroundColor: '#303E55', borderColor: '#303E55' } : {}}
+                          >
+                            {color}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </>
+              );
+            })()}
 
             {/* Quantity */}
             <div className="mb-8">
-              <label className="block text-sm font-semibold text-navy mb-2">
+              <label className="block text-sm font-semibold text-navy mb-3">
                 Quantity
               </label>
               <div className="flex items-center gap-3">
@@ -241,7 +312,8 @@ export default function ProductPage({ params }: ProductPageProps) {
               <Button
                 onClick={handleAddToCart}
                 disabled={!selectedVariant?.availableForSale}
-                className="flex-1 bg-accent hover:bg-accent/90 text-white py-6 text-lg font-bold shadow-lg"
+                className="flex-1 text-white py-6 text-lg font-bold shadow-lg hover:opacity-90 transition-opacity"
+                style={{ backgroundColor: '#33BECC' }}
                 size="lg"
               >
                 <ShoppingBag className="w-5 h-5 mr-2" />
