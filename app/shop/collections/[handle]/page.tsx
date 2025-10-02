@@ -33,15 +33,33 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
     <div>
       {/* Hero Section */}
       <Section className="py-5xl" style={{ backgroundColor: '#FFFFFF' }}>
-        <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-navy mb-lg">
-            {collection.title}
-          </h1>
-          {collection.description && (
-            <p className="text-lg text-black leading-relaxed max-w-3xl mx-auto">
-              {collection.description}
-            </p>
-          )}
+        <div className="max-w-6xl mx-auto">
+          {/* Breadcrumb Navigation */}
+          <div className="mb-xl">
+            <nav className="flex items-center gap-2 text-sm">
+              <Link href="/" className="hover:underline" style={{ color: '#33BECC' }}>
+                Home
+              </Link>
+              <span className="text-black">/</span>
+              <Link href="/shop" className="hover:underline" style={{ color: '#33BECC' }}>
+                Shop
+              </Link>
+              <span className="text-black">/</span>
+              <span className="text-navy font-semibold">{collection.title}</span>
+            </nav>
+          </div>
+
+          {/* Collection Title & Description */}
+          <div className="text-center">
+            <h1 className="text-4xl md:text-5xl font-bold text-navy mb-lg">
+              {collection.title}
+            </h1>
+            {collection.description && (
+              <p className="text-lg text-black leading-relaxed max-w-3xl mx-auto">
+                {collection.description}
+              </p>
+            )}
+          </div>
         </div>
       </Section>
 
