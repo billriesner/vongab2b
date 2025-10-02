@@ -34,7 +34,7 @@ const SeoHead = () => (
   <>
     <title>Vonga | Merch-Driven Loyalty Platform & Customer Engagement Apparel</title>
     <meta name="description" content="Vonga blends premium NFC-enabled apparel with a white-label loyalty app—ideal for gyms, events and creators seeking next-level engagement." />
-    <meta name="keywords" content="merch provider, loyalty platform, customer engagement, NFC apparel, interactive merchandise" />
+    <meta name="keywords" content="merch provider, loyalty platform, customer engagement, NFC apparel, interactive apparel" />
     <meta property="og:title" content="Vonga | Merch-Driven Loyalty Platform" />
     <meta property="og:description" content="Turn every hoodie, tee or wristband into a one-tap gateway to perks, content and analytics—no extra hardware." />
     <meta property="og:type" content="website" />

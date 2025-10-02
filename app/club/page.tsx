@@ -109,7 +109,7 @@ export default function ClubPage() {
               <CheckCircle2 className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
               <div>
                 <h3 className="text-lg font-semibold text-navy mb-sm">Custom Apparel Design</h3>
-                <p className="text-sm text-text/70">We design and produce your branded merchandise with NFC built in</p>
+                <p className="text-sm text-text/70">We design and produce your branded apparel with NFC built in</p>
               </div>
             </div>
             <div className="flex items-start gap-md">

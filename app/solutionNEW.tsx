@@ -25,7 +25,7 @@ const SeoHead = () => (
     <title>Vonga | NFC Apparel Loyalty Solutions</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Discover Vonga's NFC-enabled apparel solutions for gyms, events, and creators to drive loyalty and engagement." />
-    <meta name="keywords" content="merch provider, loyalty platform, customer engagement, NFC apparel, interactive merchandise" />
+    <meta name="keywords" content="merch provider, loyalty platform, customer engagement, NFC apparel, interactive apparel" />
     <meta name="robots" content="index,follow" />
     <link rel="canonical" href="https://vonga.io/solutions" />
     <meta property="og:title" content="Vonga | NFC Apparel Loyalty Solutions" />

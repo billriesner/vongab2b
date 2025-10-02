@@ -8,18 +8,18 @@ export default function EnterprisePage() {
     <div>
       {/* Hero Section */}
       <section className="relative min-h-[60vh] flex items-center justify-center" style={{
-        backgroundImage: 'url(/enterprise-hero.svg)',
+        backgroundImage: 'url(/hero-enterprise.svg)',
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }}>
-        <div className="absolute inset-0" style={{ backgroundColor: 'rgba(255, 255, 255, 0.6)' }}></div>
+        <div className="absolute inset-0" style={{ backgroundColor: 'rgba(255, 255, 255, 0.75)' }}></div>
         
         <div className="max-w-7xl mx-auto px-4 py-5xl relative z-10 w-full">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-xl">
-              <span className="text-navy">Enterprise Solutions</span>
+              <span style={{ color: '#33BECC', textShadow: '0 2px 8px rgba(255,255,255,0.9)' }}>Enterprise Solutions</span>
             </h1>
-            <p className="text-2xl md:text-3xl font-bold text-black" style={{ textShadow: '0 2px 4px rgba(255,255,255,0.8)', marginBottom: '32px' }}>
+            <p className="text-2xl md:text-3xl font-bold text-black" style={{ textShadow: '0 2px 8px rgba(255,255,255,0.9)', marginBottom: '32px' }}>
               Season-scale activations for teams and universities. Create custom apparel and digital rewards.
             </p>
             <Button 
@@ -48,7 +48,7 @@ export default function EnterprisePage() {
           <h3 className="text-2xl md:text-3xl font-bold" style={{ color: '#33BECC', marginBottom: '32px' }}>Everything you need to activate your community</h3>
           
           <p className="text-lg text-black leading-relaxed max-w-3xl mx-auto" style={{ marginBottom: '64px' }}>
-            From custom merchandise to real-time analytics, we provide the full stack for enterprise activations.
+            From custom apparel to real-time analytics, we provide the full stack for enterprise activations.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3xl">
@@ -64,7 +64,7 @@ export default function EnterprisePage() {
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-navy" style={{ marginBottom: '48px' }}>
-                  Design custom merchandise for your team, university, or event. We handle production and embed NFC technology in every piece.
+                  Design custom apparel for your team, university, or event. We handle production and embed NFC technology in every piece.
                 </p>
               </CardContent>
             </Card>
