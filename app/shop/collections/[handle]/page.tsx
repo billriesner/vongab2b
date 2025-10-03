@@ -32,6 +32,20 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
 
   return (
     <div>
+      {/* Breadcrumb Section */}
+      <section className="bg-white py-4">
+        <div className="max-w-7xl mx-auto px-4">
+          <Breadcrumb 
+            items={[
+              { label: 'Home', href: '/' },
+              { label: 'Shop', href: '/shop' },
+              { label: collection.title }
+            ]}
+            light={false}
+          />
+        </div>
+      </section>
+
       {/* Hero Section */}
       <div
         className="relative bg-cover bg-center py-5xl text-white flex items-center justify-center"
@@ -43,17 +57,6 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
       >
         <div className="absolute inset-0 bg-white/60"></div>
         <div className="relative z-10 max-w-6xl mx-auto px-md w-full">
-          {/* Breadcrumb Navigation */}
-          <Breadcrumb 
-            items={[
-              { label: 'Home', href: '/' },
-              { label: 'Shop', href: '/shop' },
-              { label: collection.title }
-            ]}
-            className="mb-xl"
-            light={false}
-          />
-
           {/* Collection Title & Description */}
           <div className="text-center">
             <h1 className="text-5xl md:text-6xl font-bold mb-lg" style={{ color: '#33BECC', textShadow: '0 2px 8px rgba(255,255,255,0.9)', marginBottom: '48px' }}>

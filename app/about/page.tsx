@@ -6,6 +6,19 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 export default function AboutPage() {
   return (
     <div>
+      {/* Breadcrumb Section */}
+      <section className="bg-white py-4">
+        <div className="max-w-7xl mx-auto px-4">
+          <Breadcrumb 
+            items={[
+              { label: 'Home', href: '/' },
+              { label: 'About' }
+            ]}
+            light={false}
+          />
+        </div>
+      </section>
+
       {/* Hero Section */}
       <section className="relative overflow-hidden min-h-[500px] flex items-center">
         <div 
@@ -14,14 +27,6 @@ export default function AboutPage() {
         ></div>
         <div className="absolute inset-0 bg-white/60"></div>
         <div className="max-w-7xl mx-auto px-4 py-5xl relative z-10 w-full">
-          <Breadcrumb 
-            items={[
-              { label: 'Home', href: '/' },
-              { label: 'About' }
-            ]}
-            className="mb-xl"
-            light={false}
-          />
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-xl">
               <span className="text-navy">About Vonga</span>

@@ -152,9 +152,9 @@ export default function ProductPage({ params }: ProductPageProps) {
 
   return (
     <div>
-      {/* Breadcrumb */}
-      <div className="bg-gray-50 py-4">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Breadcrumb Section */}
+      <section className="bg-white py-4">
+        <div className="max-w-7xl mx-auto px-4">
           <Breadcrumb 
             items={[
               { label: 'Home', href: '/' },
@@ -164,7 +164,7 @@ export default function ProductPage({ params }: ProductPageProps) {
             light={false}
           />
         </div>
-      </div>
+      </section>
 
       {/* Product Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

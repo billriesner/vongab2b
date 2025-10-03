@@ -8,6 +8,20 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 export default function TermsPage() {
   return (
     <div>
+      {/* Breadcrumb Section */}
+      <section className="bg-white py-4">
+        <div className="max-w-7xl mx-auto px-4">
+          <Breadcrumb 
+            items={[
+              { label: 'Home', href: '/' },
+              { label: 'Legal', href: '/legal/terms' },
+              { label: 'Terms & Conditions' }
+            ]}
+            light={false}
+          />
+        </div>
+      </section>
+
       {/* Hero Section */}
       <div 
         className="relative min-h-[400px] flex items-center justify-center text-center"
@@ -19,15 +33,6 @@ export default function TermsPage() {
       >
         <div className="absolute inset-0 bg-white/60" />
         <div className="relative z-10 w-full px-lg max-w-7xl mx-auto">
-          <Breadcrumb 
-            items={[
-              { label: 'Home', href: '/' },
-              { label: 'Legal', href: '/legal/terms' },
-              { label: 'Terms & Conditions' }
-            ]}
-            className="mb-xl"
-            light={false}
-          />
           <div className="text-center">
             <h1 className="text-5xl md:text-6xl font-bold mb-lg" style={{ color: '#303E55', textShadow: '0 2px 8px rgba(255,255,255,0.9)' }}>
               Terms & Conditions
