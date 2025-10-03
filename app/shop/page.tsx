@@ -71,8 +71,7 @@ export default async function ShopPage() {
                 </p>
                 <Link 
                   href="/shop/collections/core-collection"
-                  className="inline-block hover:opacity-90 text-white px-3xl py-lg rounded font-semibold text-lg shadow-md transition-opacity"
-                  style={{ backgroundColor: '#33BECC' }}
+                  className="inline-block bg-gray-200 hover:bg-gray-300 text-black px-3xl py-lg rounded font-semibold text-lg shadow-md transition-colors"
                 >
                   Shop Core Collection
                 </Link>
@@ -91,8 +90,7 @@ export default async function ShopPage() {
                 </p>
                 <Link 
                   href="/shop/collections/concept-collection"
-                  className="inline-block hover:opacity-90 text-white px-3xl py-lg rounded font-semibold text-lg shadow-md transition-opacity"
-                  style={{ backgroundColor: '#303E55' }}
+                  className="inline-block bg-gray-200 hover:bg-gray-300 text-black px-3xl py-lg rounded font-semibold text-lg shadow-md transition-colors"
                 >
                   Shop Concept Collection
                 </Link>
