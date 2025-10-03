@@ -3,6 +3,7 @@ import { FileText, Users, ShoppingCart, Shield, Scale, AlertCircle, HelpCircle }
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { TermsContactForm } from "@/components/TermsContactForm";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 export default function TermsPage() {
   return (
@@ -17,13 +18,24 @@ export default function TermsPage() {
         }}
       >
         <div className="absolute inset-0 bg-white/60" />
-        <div className="relative z-10 max-w-4xl mx-auto px-lg">
-          <h1 className="text-5xl md:text-6xl font-bold mb-lg" style={{ color: '#303E55', textShadow: '0 2px 8px rgba(255,255,255,0.9)' }}>
-            Terms & Conditions
-          </h1>
-          <p className="text-xl md:text-2xl font-bold text-black" style={{ textShadow: '0 1px 4px rgba(255,255,255,0.8)' }}>
-            Agreement for using Vonga products and services
-          </p>
+        <div className="relative z-10 w-full px-lg max-w-7xl mx-auto">
+          <Breadcrumb 
+            items={[
+              { label: 'Home', href: '/' },
+              { label: 'Legal', href: '/legal/terms' },
+              { label: 'Terms & Conditions' }
+            ]}
+            className="mb-xl"
+            light={false}
+          />
+          <div className="text-center">
+            <h1 className="text-5xl md:text-6xl font-bold mb-lg" style={{ color: '#303E55', textShadow: '0 2px 8px rgba(255,255,255,0.9)' }}>
+              Terms & Conditions
+            </h1>
+            <p className="text-xl md:text-2xl font-bold text-black" style={{ textShadow: '0 1px 4px rgba(255,255,255,0.8)' }}>
+              Agreement for using Vonga products and services
+            </p>
+          </div>
         </div>
       </div>
 
@@ -95,7 +107,7 @@ export default function TermsPage() {
 
       {/* Products & Services Section */}
       <Section className="py-5xl" style={{ backgroundColor: '#FFFFFF' }}>
-        <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto">
           <div className="flex items-center justify-center" style={{ marginBottom: '32px' }}>
             <div className="w-20 h-20 rounded-full flex items-center justify-center shadow-lg" style={{ backgroundColor: '#303E55' }}>
               <ShoppingCart className="w-10 h-10 text-accent" />
@@ -419,7 +431,7 @@ export default function TermsPage() {
               <TermsContactForm />
             </CardContent>
           </Card>
-        </div>
+      </div>
       </Section>
     </div>
   );

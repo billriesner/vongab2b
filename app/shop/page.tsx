@@ -4,6 +4,7 @@ import { ShoppingBag } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { getAllProducts } from "@/lib/shopify";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 export const revalidate = 60; // Revalidate every 60 seconds
 
@@ -22,13 +23,23 @@ export default async function ShopPage() {
         }}
       >
         <div className="absolute inset-0 bg-white/60" />
-        <div className="relative z-10 max-w-4xl mx-auto px-lg">
-          <h1 className="text-5xl md:text-6xl font-bold mb-lg" style={{ color: '#303E55', textShadow: '0 2px 8px rgba(255,255,255,0.9)' }}>
-            Shop Vonga
-          </h1>
-          <p className="text-xl md:text-2xl font-bold text-black" style={{ textShadow: '0 1px 4px rgba(255,255,255,0.8)' }}>
-            On-body tech that unlocks rewards and access
-          </p>
+        <div className="relative z-10 w-full px-lg max-w-7xl mx-auto">
+          <Breadcrumb 
+            items={[
+              { label: 'Home', href: '/' },
+              { label: 'Shop' }
+            ]}
+            className="mb-xl"
+            light={false}
+          />
+          <div className="text-center">
+            <h1 className="text-5xl md:text-6xl font-bold mb-lg" style={{ color: '#303E55', textShadow: '0 2px 8px rgba(255,255,255,0.9)' }}>
+              Shop Vonga
+            </h1>
+            <p className="text-xl md:text-2xl font-bold text-black" style={{ textShadow: '0 1px 4px rgba(255,255,255,0.8)' }}>
+              On-body tech that unlocks rewards and access
+            </p>
+          </div>
         </div>
       </div>
 

@@ -1,6 +1,7 @@
 import { Section } from "@/components/Section";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Target, Eye, BookOpen, Lock, Users, Award } from "lucide-react";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 export default function AboutPage() {
   return (
@@ -13,6 +14,14 @@ export default function AboutPage() {
         ></div>
         <div className="absolute inset-0 bg-white/60"></div>
         <div className="max-w-7xl mx-auto px-4 py-5xl relative z-10 w-full">
+          <Breadcrumb 
+            items={[
+              { label: 'Home', href: '/' },
+              { label: 'About' }
+            ]}
+            className="mb-xl"
+            light={false}
+          />
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-xl">
               <span className="text-navy">About Vonga</span>

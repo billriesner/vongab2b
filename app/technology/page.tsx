@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Smartphone, Shirt, Lock, Zap, CheckCircle2, Shield, Code, BarChart3, Sparkles, Gift, Trophy, TrendingUp } from "lucide-react";
 import Link from "next/link";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 export default function TechnologyPage() {
   return (
@@ -15,6 +16,14 @@ export default function TechnologyPage() {
         ></div>
         <div className="absolute inset-0 bg-white/60"></div>
         <div className="max-w-7xl mx-auto px-4 py-5xl relative z-10 w-full">
+          <Breadcrumb 
+            items={[
+              { label: 'Home', href: '/' },
+              { label: 'Technology' }
+            ]}
+            className="mb-xl"
+            light={false}
+          />
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-xl">
               <span className="text-navy">Technology That Connects</span>

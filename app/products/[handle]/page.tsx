@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ShoppingBag, ArrowLeft, Check, Truck, Shield, RefreshCw } from 'lucide-react';
+import { Breadcrumb } from '@/components/Breadcrumb';
 
 interface ProductPageProps {
   params: Promise<{
@@ -154,13 +155,14 @@ export default function ProductPage({ params }: ProductPageProps) {
       {/* Breadcrumb */}
       <div className="bg-gray-50 py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center text-sm">
-            <Link href="/" className="font-semibold hover:underline" style={{ color: '#33BECC' }}>Home</Link>
-            <span className="mx-2 text-gray-400">/</span>
-            <Link href="/shop" className="font-semibold hover:underline" style={{ color: '#33BECC' }}>Shop</Link>
-            <span className="mx-2 text-gray-400">/</span>
-            <span className="text-navy font-semibold">{product.title}</span>
-          </div>
+          <Breadcrumb 
+            items={[
+              { label: 'Home', href: '/' },
+              { label: 'Shop', href: '/shop' },
+              { label: product.title }
+            ]}
+            light={false}
+          />
         </div>
       </div>
 

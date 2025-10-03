@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { ReturnForm } from "@/components/ReturnForm";
 import { FAQContactForm } from "@/components/FAQContactForm";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 export default function ShippingReturnsPage() {
   return (
@@ -18,13 +19,23 @@ export default function ShippingReturnsPage() {
         }}
       >
         <div className="absolute inset-0 bg-white/60" />
-        <div className="relative z-10 max-w-4xl mx-auto px-lg">
-          <h1 className="text-5xl md:text-6xl font-bold mb-lg" style={{ color: '#303E55', textShadow: '0 2px 8px rgba(255,255,255,0.9)' }}>
-            Shipping & Returns
-          </h1>
-          <p className="text-xl md:text-2xl font-bold text-black" style={{ textShadow: '0 1px 4px rgba(255,255,255,0.8)' }}>
-            Everything you need to know
-          </p>
+        <div className="relative z-10 w-full px-lg max-w-7xl mx-auto">
+          <Breadcrumb 
+            items={[
+              { label: 'Home', href: '/' },
+              { label: 'Shipping & Returns' }
+            ]}
+            className="mb-xl"
+            light={false}
+          />
+          <div className="text-center">
+            <h1 className="text-5xl md:text-6xl font-bold mb-lg" style={{ color: '#303E55', textShadow: '0 2px 8px rgba(255,255,255,0.9)' }}>
+              Shipping & Returns
+            </h1>
+            <p className="text-xl md:text-2xl font-bold text-black" style={{ textShadow: '0 1px 4px rgba(255,255,255,0.8)' }}>
+              Everything you need to know
+            </p>
+          </div>
         </div>
       </div>
 

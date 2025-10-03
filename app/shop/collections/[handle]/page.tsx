@@ -4,6 +4,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
+import { Breadcrumb } from '@/components/Breadcrumb';
 
 interface CollectionPageProps {
   params: Promise<{
@@ -43,19 +44,15 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
         <div className="absolute inset-0 bg-white/60"></div>
         <div className="relative z-10 max-w-6xl mx-auto px-md w-full">
           {/* Breadcrumb Navigation */}
-          <div className="mb-xl">
-            <nav className="flex items-center gap-2 text-sm">
-              <Link href="/" className="hover:underline font-semibold" style={{ color: '#303E55', textShadow: '0 1px 2px rgba(255,255,255,0.8)' }}>
-                Home
-              </Link>
-              <span className="text-navy font-bold" style={{ textShadow: '0 1px 2px rgba(255,255,255,0.8)' }}>/</span>
-              <Link href="/shop" className="hover:underline font-semibold" style={{ color: '#303E55', textShadow: '0 1px 2px rgba(255,255,255,0.8)' }}>
-                Shop
-              </Link>
-              <span className="text-navy font-bold" style={{ textShadow: '0 1px 2px rgba(255,255,255,0.8)' }}>/</span>
-              <span className="font-bold" style={{ color: '#33BECC', textShadow: '0 1px 2px rgba(255,255,255,0.8)' }}>{collection.title}</span>
-            </nav>
-          </div>
+          <Breadcrumb 
+            items={[
+              { label: 'Home', href: '/' },
+              { label: 'Shop', href: '/shop' },
+              { label: collection.title }
+            ]}
+            className="mb-xl"
+            light={false}
+          />
 
           {/* Collection Title & Description */}
           <div className="text-center">

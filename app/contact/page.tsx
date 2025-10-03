@@ -2,6 +2,7 @@ import { Section } from "@/components/Section";
 import { Card, CardContent } from "@/components/ui/card";
 import { Mail } from "lucide-react";
 import { ContactForm } from "@/components/ContactForm";
+import { Breadcrumb } from "@/components/Breadcrumb";
 
 export default function ContactPage() {
   return (
@@ -15,6 +16,14 @@ export default function ContactPage() {
         <div className="absolute inset-0" style={{ backgroundColor: 'rgba(255, 255, 255, 0.75)' }}></div>
         
         <div className="max-w-7xl mx-auto px-4 py-5xl relative z-10 w-full">
+          <Breadcrumb 
+            items={[
+              { label: 'Home', href: '/' },
+              { label: 'Contact' }
+            ]}
+            className="mb-xl"
+            light={false}
+          />
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-xl">
               <span style={{ color: '#33BECC', textShadow: '0 2px 8px rgba(255,255,255,0.9)' }}>Contact Us</span>
