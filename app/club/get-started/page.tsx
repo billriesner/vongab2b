@@ -235,6 +235,8 @@ export default function GetStartedPage() {
           cartItems,
           starterKit,
           depositAmount: pricing.deposit,
+          subtotal: pricing.subtotal,
+          memberCount: watchedValues.memberCount,
           organizationName: watchedValues.organizationName,
           email: watchedValues.email,
         }),

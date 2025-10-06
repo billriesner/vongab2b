@@ -9,7 +9,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { cartItems, starterKit, depositAmount, organizationName, email } = body;
+    const { cartItems, starterKit, depositAmount, organizationName, email, subtotal, memberCount } = body;
 
     if (!process.env.STRIPE_SECRET_KEY) {
       return NextResponse.json(
@@ -17,6 +17,18 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       );
     }
+
+    // Calculate total units across all cart items
+    const totalUnits = cartItems.reduce((total: number, item: any) => {
+      const itemQty = Object.values(item.sizeRun).reduce((sum: number, qty: any) => sum + qty, 0);
+      return total + itemQty;
+    }, 0);
+
+    // Create summary of product types and quantities
+    const productSummary = cartItems.map((item: any) => {
+      const itemQty = Object.values(item.sizeRun).reduce((sum: number, qty: any) => sum + qty, 0);
+      return `${item.gearType}:${itemQty}`;
+    }).join(', ');
 
     // Create line items from cart
     const lineItems = cartItems.map((item: any) => {
@@ -53,10 +65,29 @@ export async function POST(request: NextRequest) {
       // Automatically show Apple Pay and Google Pay when available
       ui_mode: 'hosted',
       metadata: {
+        // Organization info
         organizationName,
-        starterKit,
-        depositAmount: depositAmount.toString(),
+        customerEmail: email,
+        
+        // Order classification
         type: 'club_deposit',
+        kitType: starterKit, // 'core' or 'pro'
+        
+        // Quantities
+        totalUnits: totalUnits.toString(),
+        memberCount: memberCount?.toString() || '0',
+        itemCount: cartItems.length.toString(),
+        
+        // Pricing breakdown
+        depositAmount: depositAmount.toString(),
+        subtotalAmount: subtotal?.toString() || (depositAmount * 2).toString(),
+        remainingBalance: subtotal ? (subtotal - depositAmount).toString() : depositAmount.toString(),
+        
+        // Product details
+        products: productSummary, // e.g. "tshirt:100, hoodie:50"
+        
+        // Additional data (JSON for detailed analysis)
+        cartItemsJson: JSON.stringify(cartItems).substring(0, 490), // Stripe max 500 chars
       },
     });
 
