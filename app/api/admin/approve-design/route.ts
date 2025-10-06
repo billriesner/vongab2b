@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { createSupabaseAdminClient } from '@/lib/supabase';
+import { supabaseAdmin } from '@/lib/supabase';
 
 export async function POST(request: NextRequest) {
   try {
@@ -15,8 +15,8 @@ export async function POST(request: NextRequest) {
     }
 
     // Get order from database
-    const supabaseAdmin = createSupabaseAdminClient();
-    const { data: order, error: orderError } = await supabaseAdmin
+    const supabaseAdmin = supabaseAdmin();
+    const { data: order, error: orderError } = await supabaseAdminClient
       .from('club_orders')
       .select('*')
       .eq('id', orderId)
@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Update order status
-    const { error: updateError } = await supabaseAdmin
+    const { error: updateError } = await supabaseAdminClient
       .from('club_orders')
       .update({
         order_status: 'design_approved',

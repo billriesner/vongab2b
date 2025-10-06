@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { createSupabaseAdminClient, type ClubOrder } from '@/lib/supabase';
+import { supabaseAdmin, type ClubOrder } from '@/lib/supabase';
 
 export async function POST(request: NextRequest) {
   try {
@@ -60,8 +60,8 @@ export async function POST(request: NextRequest) {
     };
 
     // Insert order into database
-    const supabaseAdmin = createSupabaseAdminClient();
-    const { data, error } = await supabaseAdmin
+    const supabaseAdmin = supabaseAdmin();
+    const { data, error } = await supabaseAdminClient
       .from('club_orders')
       .insert([orderData])
       .select()
@@ -186,8 +186,8 @@ export async function GET(request: NextRequest) {
 
     if (orderId) {
       // Get specific order
-      const supabaseAdmin = createSupabaseAdminClient();
-      const { data, error } = await supabaseAdmin
+      const supabaseAdmin = supabaseAdmin();
+      const { data, error } = await supabaseAdminClient
         .from('club_orders')
         .select('*')
         .eq('id', orderId)
@@ -205,8 +205,8 @@ export async function GET(request: NextRequest) {
 
     if (email) {
       // Get orders for specific email
-      const supabaseAdmin = createSupabaseAdminClient();
-      const { data, error } = await supabaseAdmin
+      const supabaseAdmin = supabaseAdmin();
+      const { data, error } = await supabaseAdminClient
         .from('club_orders')
         .select('*')
         .eq('email', email)
@@ -223,8 +223,8 @@ export async function GET(request: NextRequest) {
     }
 
     // Get all orders (admin only)
-    const supabaseAdmin = createSupabaseAdminClient();
-    const { data, error } = await supabaseAdmin
+    const supabaseAdmin = supabaseAdmin();
+    const { data, error } = await supabaseAdminClient
       .from('club_orders')
       .select('*')
       .order('created_at', { ascending: false });

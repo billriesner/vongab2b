@@ -38,15 +38,9 @@ export const createSupabaseAdminClient = () => {
   })
 }
 
-// Client-side Supabase client (for browser usage) - only create if env vars exist
-export const supabase = typeof window !== 'undefined' && process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-  ? createSupabaseClient()
-  : null
-
-// Server-side Supabase client (for API routes with full access) - only create if env vars exist
-export const supabaseAdmin = process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY
-  ? createSupabaseAdminClient()
-  : null
+// Export only the factory functions - no module-level client creation
+export const supabase = createSupabaseClient
+export const supabaseAdmin = createSupabaseAdminClient
 
 // Types for our Club Orders
 export interface ClubOrder {

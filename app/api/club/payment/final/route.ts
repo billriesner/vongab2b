@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import Stripe from 'stripe';
-import { createSupabaseAdminClient } from '@/lib/supabase';
+import { supabaseAdmin } from '@/lib/supabase';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2025-09-30.clover',
@@ -20,8 +20,8 @@ export async function POST(request: NextRequest) {
     }
 
     // Get order from database
-    const supabaseAdmin = createSupabaseAdminClient();
-    const { data: order, error: orderError } = await supabaseAdmin
+    const supabaseAdmin = supabaseAdmin();
+    const { data: order, error: orderError } = await supabaseAdminClient
       .from('club_orders')
       .select('*')
       .eq('id', orderId)
@@ -81,7 +81,7 @@ export async function POST(request: NextRequest) {
     });
 
     // Update order with payment intent ID
-    await supabaseAdmin
+    await supabaseAdminClient
       .from('club_orders')
       .update({ final_payment_intent_id: session.id })
       .eq('id', orderId);
