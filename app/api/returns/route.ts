@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
 
     // Send Slack notification
     if (process.env.SLACK_WEBHOOK_URL) {
-      const slackMessage = {
+      const slackMessage: any = {
         text: '🔄 New Return Request',
         blocks: [
           {
