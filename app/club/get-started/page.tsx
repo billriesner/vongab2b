@@ -225,7 +225,35 @@ export default function GetStartedPage() {
   };
 
   const handlePayDeposit = async () => {
-    alert('Stripe payment integration would go here. Redirecting to payment...');
+    setIsSubmitting(true);
+    
+    try {
+      const response = await fetch('/api/club/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          cartItems,
+          starterKit,
+          depositAmount: pricing.deposit,
+          organizationName: watchedValues.organizationName,
+          email: watchedValues.email,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.url) {
+        // Redirect to Stripe Checkout
+        window.location.href = data.url;
+      } else {
+        alert(data.error || 'Failed to create payment session. Please try requesting an invoice instead.');
+      }
+    } catch (error) {
+      console.error('Error initiating payment:', error);
+      alert('Payment error. Please try requesting an invoice or contact us directly.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleRequestInvoice = async () => {
@@ -827,15 +855,17 @@ export default function GetStartedPage() {
                     </div>
                   )}
 
-                  {!pricing.isCustom && (
+                  {!pricing.isCustom && pricing.itemizedCosts && pricing.itemizedCosts.length > 0 && (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-md">
                       <Button
                         type="button"
                         onClick={handlePayDeposit}
-                        className="w-full bg-accent hover:bg-accent/90 text-navy font-semibold shadow-md py-xl text-lg"
+                        className="w-full text-navy font-semibold shadow-md py-xl text-lg"
+                        style={{ backgroundColor: '#33BECC' }}
                         size="lg"
+                        disabled={isSubmitting}
                       >
-                        Pay ${pricing.deposit.toLocaleString()} Deposit
+                        {isSubmitting ? 'Redirecting to Payment...' : `Pay $${pricing.deposit.toLocaleString()} Deposit`}
                       </Button>
 
                       <Button
