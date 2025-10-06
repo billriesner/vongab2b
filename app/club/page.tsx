@@ -210,55 +210,61 @@ export default function ClubPage() {
         style={{ backgroundColor: '#F7F7F7' }}
       >
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-navy text-center mb-xl">How It Works</h2>
-          <h3 className="text-xl md:text-2xl font-semibold text-center mb-4xl" style={{ color: '#33BECC' }}>Three simple steps to connected community</h3>
+          <h2 className="text-3xl md:text-4xl font-bold text-navy text-center" style={{ marginBottom: '24px' }}>How It Works</h2>
+          <h3 className="text-2xl md:text-3xl font-bold text-center" style={{ color: '#33BECC', marginBottom: '48px' }}>Three simple steps to connected community</h3>
           
           <div className="relative">
             {/* Connection Line */}
             <div className="hidden md:block absolute top-10 left-0 right-0 h-1 bg-accent/30" style={{ zIndex: 0 }}></div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-xl relative" style={{ zIndex: 1 }}>
-              <div className="text-center">
-                <div className="w-20 h-20 rounded-full flex items-center justify-center mb-lg mx-auto shadow-lg" style={{ backgroundColor: '#33BECC' }}>
+              <div className="text-center flex flex-col">
+                <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto shadow-lg" style={{ backgroundColor: '#33BECC', marginBottom: '32px' }}>
                   <Shirt className="w-10 h-10 text-white" />
                 </div>
-                <div className="bg-white rounded-lg p-lg border-2 border-muted">
-                  <h3 className="text-2xl font-bold text-navy mb-sm">1. Get Your Gear</h3>
-                  <p className="text-sm font-semibold mb-md" style={{ color: '#33BECC' }}>
+                <div className="bg-white rounded-lg p-lg border-2 border-muted flex-1 flex flex-col">
+                  <h3 className="text-2xl font-bold text-navy" style={{ marginBottom: '16px' }}>1. Get Your Gear</h3>
+                  <p className="text-sm font-semibold" style={{ color: '#33BECC', marginBottom: '24px' }}>
                     Custom branded apparel with NFC
                   </p>
-                  <p className="text-sm text-text/70">
-                    Choose from our starter kits. We design and produce branded apparel with invisible NFC technology embedded inside.
+                  <p className="text-sm text-text/70 leading-relaxed">
+                    Choose from our starter kits.
+                    <br /><br />
+                    We design and produce branded apparel with invisible NFC technology embedded inside.
                   </p>
                 </div>
               </div>
 
-              <div className="text-center">
-                <div className="w-20 h-20 rounded-full flex items-center justify-center mb-lg mx-auto shadow-lg" style={{ backgroundColor: '#303E55' }}>
+              <div className="text-center flex flex-col">
+                <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto shadow-lg" style={{ backgroundColor: '#303E55', marginBottom: '32px' }}>
                   <Target className="w-10 h-10 text-accent" />
                 </div>
-                <div className="bg-white rounded-lg p-lg border-2 border-muted">
-                  <h3 className="text-2xl font-bold text-navy mb-sm">2. Set Rewards</h3>
-                  <p className="text-sm font-semibold mb-md" style={{ color: '#33BECC' }}>
+                <div className="bg-white rounded-lg p-lg border-2 border-muted flex-1 flex flex-col">
+                  <h3 className="text-2xl font-bold text-navy" style={{ marginBottom: '16px' }}>2. Set Rewards</h3>
+                  <p className="text-sm font-semibold" style={{ color: '#33BECC', marginBottom: '24px' }}>
                     Build your rewards program
                   </p>
-                  <p className="text-sm text-text/70">
-                    Use our dashboard to create rewards that matter to your community. Free classes, exclusive events, discounts, and more.
+                  <p className="text-sm text-text/70 leading-relaxed">
+                    Use our dashboard to create rewards that matter to your community.
+                    <br /><br />
+                    Free classes, exclusive events, discounts, and more.
                   </p>
                 </div>
               </div>
 
-              <div className="text-center">
-                <div className="w-20 h-20 rounded-full flex items-center justify-center mb-lg mx-auto shadow-lg" style={{ backgroundColor: '#33BECC' }}>
+              <div className="text-center flex flex-col">
+                <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto shadow-lg" style={{ backgroundColor: '#33BECC', marginBottom: '32px' }}>
                   <Zap className="w-10 h-10 text-white" />
                 </div>
-                <div className="bg-white rounded-lg p-lg border-2 border-muted">
-                  <h3 className="text-2xl font-bold text-navy mb-sm">3. Launch</h3>
-                  <p className="text-sm font-semibold mb-md" style={{ color: '#33BECC' }}>
-                    Go live in weeks, not months
+                <div className="bg-white rounded-lg p-lg border-2 border-muted flex-1 flex flex-col">
+                  <h3 className="text-2xl font-bold text-navy" style={{ marginBottom: '16px' }}>3. Launch</h3>
+                  <p className="text-sm font-semibold" style={{ color: '#33BECC', marginBottom: '24px' }}>
+                    Streamlined launch process
                   </p>
-                  <p className="text-sm text-text/70">
-                    We handle the technology setup. You focus on your community. Launch your connected experience fast.
+                  <p className="text-sm text-text/70 leading-relaxed">
+                    We handle the technology setup. You focus on your community.
+                    <br /><br />
+                    Launch your connected experience efficiently.
                   </p>
                 </div>
               </div>
