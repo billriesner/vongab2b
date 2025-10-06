@@ -312,36 +312,37 @@ export default function ClubPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="mb-xl">
+                <div style={{ marginBottom: '24px' }}>
                   <p className="text-4xl font-bold text-navy mb-sm">$15-45*</p>
                   <p className="text-sm text-text/70">estimated per unit (volume pricing)</p>
                 </div>
-                <ul className="space-y-md mb-xl">
-                  <li className="flex items-start gap-sm">
-                    <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-navy">100+ units minimum</span>
-                  </li>
-                  <li className="flex items-start gap-sm">
-                    <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-navy">Choice of t-shirts, tanks, hoodies, or hats</span>
-                  </li>
-                  <li className="flex items-start gap-sm">
-                    <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-navy">Custom branded design with your logo</span>
-                  </li>
-                  <li className="flex items-start gap-sm">
-                    <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-navy">NFC technology embedded</span>
-                  </li>
-                  <li className="flex items-start gap-sm">
-                    <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-navy">Basic rewards dashboard</span>
-                  </li>
-                  <li className="flex items-start gap-sm">
-                    <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-navy">Email support</span>
-                  </li>
-                </ul>
+              <ul className="mb-xl" style={{ paddingLeft: '0' }}>
+                <li className="text-sm text-navy" style={{ marginBottom: '8px', paddingLeft: '24px', position: 'relative' }}>
+                  <span style={{ position: 'absolute', left: '0', top: '0', color: '#33BECC', fontWeight: 'bold' }}>• </span>
+                  100+ units minimum
+                </li>
+                <li className="text-sm text-navy" style={{ marginBottom: '8px', paddingLeft: '24px', position: 'relative' }}>
+                  <span style={{ position: 'absolute', left: '0', top: '0', color: '#33BECC', fontWeight: 'bold' }}>• </span>
+                  Choice of t-shirts, tanks, hoodies, or hats
+                </li>
+                <li className="text-sm text-navy" style={{ marginBottom: '8px', paddingLeft: '24px', position: 'relative' }}>
+                  <span style={{ position: 'absolute', left: '0', top: '0', color: '#33BECC', fontWeight: 'bold' }}>• </span>
+                  Custom branded design with your logo
+                </li>
+                <li className="text-sm text-navy" style={{ marginBottom: '8px', paddingLeft: '24px', position: 'relative' }}>
+                  <span style={{ position: 'absolute', left: '0', top: '0', color: '#33BECC', fontWeight: 'bold' }}>• </span>
+                  NFC technology embedded
+                </li>
+                <li className="text-sm text-navy" style={{ marginBottom: '8px', paddingLeft: '24px', position: 'relative' }}>
+                  <span style={{ position: 'absolute', left: '0', top: '0', color: '#33BECC', fontWeight: 'bold' }}>• </span>
+                  Basic rewards dashboard
+                </li>
+                <li className="text-sm text-navy" style={{ marginBottom: '8px', paddingLeft: '24px', position: 'relative' }}>
+                  <span style={{ position: 'absolute', left: '0', top: '0', color: '#33BECC', fontWeight: 'bold' }}>• </span>
+                  Email support
+                </li>
+              </ul>
+                <p className="text-sm text-navy mb-md text-center font-semibold" style={{ marginTop: '24px' }}>Start building your community kit today</p>
                 <Button 
                   className="w-full bg-gray-200 hover:bg-gray-300 text-black font-semibold shadow-md"
                   asChild
@@ -363,36 +364,37 @@ export default function ClubPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="mb-xl">
+                <div style={{ marginBottom: '24px' }}>
                   <p className="text-4xl font-bold text-accent mb-sm">$25-50*</p>
                   <p className="text-sm text-white/70">estimated per unit (volume pricing)</p>
                 </div>
-                <ul className="space-y-md mb-xl">
-                  <li className="flex items-start gap-sm">
-                    <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-white">500+ units minimum</span>
-                  </li>
-                  <li className="flex items-start gap-sm">
-                    <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-white">Premium fabrics and styles</span>
-                  </li>
-                  <li className="flex items-start gap-sm">
-                    <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-white">Custom design consultation</span>
-                  </li>
-                  <li className="flex items-start gap-sm">
-                    <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-white">NFC technology embedded</span>
-                  </li>
-                  <li className="flex items-start gap-sm">
-                    <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-white">Advanced rewards dashboard + analytics</span>
-                  </li>
-                  <li className="flex items-start gap-sm">
-                    <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-white">Dedicated account support</span>
-                  </li>
-                </ul>
+              <ul className="mb-xl" style={{ paddingLeft: '0' }}>
+                <li className="text-sm text-white" style={{ marginBottom: '8px', paddingLeft: '24px', position: 'relative' }}>
+                  <span style={{ position: 'absolute', left: '0', top: '0', color: '#33BECC', fontWeight: 'bold' }}>• </span>
+                  500+ units minimum
+                </li>
+                <li className="text-sm text-white" style={{ marginBottom: '8px', paddingLeft: '24px', position: 'relative' }}>
+                  <span style={{ position: 'absolute', left: '0', top: '0', color: '#33BECC', fontWeight: 'bold' }}>• </span>
+                  Premium fabrics and styles
+                </li>
+                <li className="text-sm text-white" style={{ marginBottom: '8px', paddingLeft: '24px', position: 'relative' }}>
+                  <span style={{ position: 'absolute', left: '0', top: '0', color: '#33BECC', fontWeight: 'bold' }}>• </span>
+                  Custom design consultation
+                </li>
+                <li className="text-sm text-white" style={{ marginBottom: '8px', paddingLeft: '24px', position: 'relative' }}>
+                  <span style={{ position: 'absolute', left: '0', top: '0', color: '#33BECC', fontWeight: 'bold' }}>• </span>
+                  NFC technology embedded
+                </li>
+                <li className="text-sm text-white" style={{ marginBottom: '8px', paddingLeft: '24px', position: 'relative' }}>
+                  <span style={{ position: 'absolute', left: '0', top: '0', color: '#33BECC', fontWeight: 'bold' }}>• </span>
+                  Advanced rewards dashboard + analytics
+                </li>
+                <li className="text-sm text-white" style={{ marginBottom: '8px', paddingLeft: '24px', position: 'relative' }}>
+                  <span style={{ position: 'absolute', left: '0', top: '0', color: '#33BECC', fontWeight: 'bold' }}>• </span>
+                  Dedicated account support
+                </li>
+              </ul>
+                <p className="text-sm text-white mb-md text-center font-semibold" style={{ marginTop: '24px' }}>Elevate your community experience</p>
                 <Button 
                   className="w-full bg-accent hover:bg-accent/90 text-navy font-semibold shadow-md"
                   asChild
@@ -403,9 +405,9 @@ export default function ClubPage() {
             </Card>
           </div>
 
-          <div className="text-center mt-lg">
-            <p className="text-sm text-text/70 italic">*Final price available at time of order</p>
-          </div>
+        <div className="text-center mt-lg" style={{ marginBottom: '24px' }}>
+          <p className="text-sm text-text/70 italic">*Final price available at time of order</p>
+        </div>
 
           {/* Enterprise Call-Out */}
           <Card className="border-2 border-navy shadow-xl mt-5xl max-w-3xl mx-auto" style={{ backgroundColor: '#303E55' }}>
@@ -413,7 +415,7 @@ export default function ClubPage() {
               <h3 className="text-2xl md:text-3xl font-bold text-accent mb-md">
                 Need 1000+ Units?
               </h3>
-              <p className="text-base text-white mb-lg">
+              <p className="text-base text-white" style={{ marginBottom: '32px' }}>
                 Schedule a call to explore custom pricing and enterprise solutions tailored to your needs.
               </p>
               <Button 
