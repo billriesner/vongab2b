@@ -526,7 +526,7 @@ export default function ClubPage() {
           <h2 className="text-4xl md:text-5xl font-bold text-accent mb-xl">
             Ready to Get Started?
           </h2>
-          <p className="text-lg text-white mb-3xl font-semibold">
+          <p className="text-lg text-white font-semibold" style={{ marginBottom: '64px' }}>
             Launch your community's connected experience. Start with our simple onboarding flow.
           </p>
           <div className="flex flex-col sm:flex-row gap-md justify-center items-center">
