@@ -39,8 +39,7 @@ export const createSupabaseAdminClient = () => {
 }
 
 // Export only the factory functions - no module-level client creation
-export const supabase = createSupabaseClient
-export const supabaseAdmin = createSupabaseAdminClient
+export { createSupabaseClient as supabase, createSupabaseAdminClient as supabaseAdmin }
 
 // Types for our Club Orders
 export interface ClubOrder {
