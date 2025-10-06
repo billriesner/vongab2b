@@ -283,7 +283,7 @@ export default function GetStartedPage() {
             <form onSubmit={handleSubmit(onSubmit)}>
               {/* Step 1: Organization Info */}
               {currentStep === 1 && (
-                <div className="space-y-lg">
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
                   <div>
                     <label className="block text-sm font-semibold mb-sm text-navy">
                       Organization Name *
@@ -386,7 +386,7 @@ export default function GetStartedPage() {
 
               {/* Step 2: Gear Selection */}
               {currentStep === 2 && (
-                <div className="space-y-lg">
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
                   <div>
                     <label className="block text-sm font-semibold mb-sm text-navy">
                       Starter Kit *
@@ -471,7 +471,7 @@ export default function GetStartedPage() {
 
               {/* Step 3: Branding */}
               {currentStep === 3 && (
-                <div className="space-y-lg">
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
                   <div>
                     <label className="block text-sm font-semibold mb-sm text-navy">
                       Upload Logo
@@ -530,7 +530,7 @@ export default function GetStartedPage() {
 
               {/* Step 4: Rewards */}
               {currentStep === 4 && (
-                <div className="space-y-lg">
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
                   <p className="text-sm text-text/70 mb-lg">
                     Select which rewards you'd like to enable for your members. You can customize these later in the dashboard.
                   </p>
@@ -601,7 +601,7 @@ export default function GetStartedPage() {
 
               {/* Step 5: Pricing & Payment */}
               {currentStep === 5 && (
-                <div className="space-y-xl">
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
                   <div className="bg-gray-100 rounded-lg p-xl">
                     <h3 className="text-xl font-bold text-navy mb-lg">Order Summary</h3>
                     
