@@ -242,7 +242,7 @@ export default function ClubPage() {
             </CardHeader>
             <CardContent>
               <div className="mb-xl">
-                <p className="text-4xl font-bold text-navy mb-sm">$25-35</p>
+                <p className="text-4xl font-bold text-navy mb-sm">$15-45</p>
                 <p className="text-sm text-text/70">per unit (volume pricing)</p>
               </div>
               <ul className="space-y-md mb-xl">
@@ -252,7 +252,7 @@ export default function ClubPage() {
                 </li>
                 <li className="flex items-start gap-sm">
                   <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                  <span className="text-sm text-navy">Choice of t-shirts, tanks, or hoodies</span>
+                  <span className="text-sm text-navy">Choice of t-shirts, tanks, hoodies, or hats</span>
                 </li>
                 <li className="flex items-start gap-sm">
                   <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
@@ -299,7 +299,7 @@ export default function ClubPage() {
               <ul className="space-y-md mb-xl">
                 <li className="flex items-start gap-sm">
                   <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                  <span className="text-sm text-white">100+ units minimum</span>
+                  <span className="text-sm text-white">500+ units minimum</span>
                 </li>
                 <li className="flex items-start gap-sm">
                   <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
@@ -319,11 +319,7 @@ export default function ClubPage() {
                 </li>
                 <li className="flex items-start gap-sm">
                   <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                  <span className="text-sm text-white">Dedicated account manager</span>
-                </li>
-                <li className="flex items-start gap-sm">
-                  <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                  <span className="text-sm text-white">Priority support</span>
+                  <span className="text-sm text-white">Dedicated account support</span>
                 </li>
               </ul>
               <Button 
