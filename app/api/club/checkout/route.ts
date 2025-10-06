@@ -44,6 +44,14 @@ export async function POST(request: NextRequest) {
       success_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/club/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/club/get-started`,
       customer_email: email,
+      payment_method_options: {
+        // Enable Apple Pay and Google Pay
+        card: {
+          request_three_d_secure: 'automatic',
+        },
+      },
+      // Automatically show Apple Pay and Google Pay when available
+      ui_mode: 'hosted',
       metadata: {
         organizationName,
         starterKit,
