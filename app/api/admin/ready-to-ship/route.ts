@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { supabaseAdmin } from '@/lib/supabase';
+import { createSupabaseAdminClient } from '@/lib/supabase';
 
 export async function POST(request: NextRequest) {
   try {
@@ -15,6 +15,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Get order from database
+    const supabaseAdmin = createSupabaseAdminClient();
     const { data: order, error: orderError } = await supabaseAdmin
       .from('club_orders')
       .select('*')
