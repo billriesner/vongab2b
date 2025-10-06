@@ -228,9 +228,9 @@ export default function ClubPage() {
                     Custom branded apparel with NFC
                   </p>
                   <p className="text-sm text-text/70 leading-relaxed">
-                    Choose from our starter kits.
+                    Choose from our starter kits. 10% deposit secures your order.
                     <br /><br />
-                    We design and produce branded apparel with invisible NFC technology embedded inside.
+                    We design and produce branded apparel with invisible NFC technology embedded inside. 48-hour order confirmation turnaround.
                   </p>
                 </div>
               </div>

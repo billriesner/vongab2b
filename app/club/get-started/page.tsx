@@ -153,7 +153,7 @@ export default function GetStartedPage() {
     });
 
     const subtotal = itemizedCosts.reduce((sum, item) => sum + item.total, 0);
-    const deposit = subtotal * 0.5;
+    const deposit = subtotal * 0.1; // 10% deposit due upfront
 
     return { itemizedCosts, subtotal, deposit, isCustom: false };
   };
@@ -815,11 +815,31 @@ export default function GetStartedPage() {
                         </div>
                         
                         <div className="flex justify-between text-base font-bold pt-md border-t-2 border-gray-300">
-                          <span className="text-navy">Subtotal:</span>
+                          <span className="text-navy">Order Total:</span>
                           <span className="text-navy">${pricing.subtotal.toLocaleString()}</span>
                         </div>
-                        <div className="flex justify-between text-lg font-bold" style={{ color: '#33BECC' }}>
-                          <span>50% Deposit:</span>
+
+                        {/* Payment Schedule */}
+                        <div className="bg-white rounded-lg p-md mt-md border-2 border-muted">
+                          <h4 className="font-bold text-navy mb-sm text-sm">Payment Schedule:</h4>
+                          <div className="space-y-xs text-sm">
+                            <div className="flex justify-between">
+                              <span className="text-text/70">1. Initial Deposit (Due Now):</span>
+                              <span className="font-bold" style={{ color: '#33BECC' }}>${pricing.deposit.toLocaleString()} (10%)</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-text/70">2. Design Approval:</span>
+                              <span className="font-semibold text-navy">${(pricing.subtotal * 0.4).toLocaleString()} (40%)</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-text/70">3. Before Shipment:</span>
+                              <span className="font-semibold text-navy">${(pricing.subtotal * 0.5).toLocaleString()} (50%)</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="flex justify-between text-2xl font-bold pt-md" style={{ color: '#33BECC' }}>
+                          <span>Due Today:</span>
                           <span>${pricing.deposit.toLocaleString()}</span>
                         </div>
                       </div>

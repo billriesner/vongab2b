@@ -78,10 +78,12 @@ export async function POST(request: NextRequest) {
         memberCount: memberCount?.toString() || '0',
         itemCount: cartItems.length.toString(),
         
-        // Pricing breakdown
+        // Pricing breakdown (10% / 40% / 50% payment structure)
         depositAmount: depositAmount.toString(),
-        subtotalAmount: subtotal?.toString() || (depositAmount * 2).toString(),
-        remainingBalance: subtotal ? (subtotal - depositAmount).toString() : depositAmount.toString(),
+        depositPercentage: '10',
+        subtotalAmount: subtotal?.toString() || (depositAmount * 10).toString(),
+        secondPayment: subtotal ? (subtotal * 0.4).toFixed(2) : (depositAmount * 4).toFixed(2),
+        finalPayment: subtotal ? (subtotal * 0.5).toFixed(2) : (depositAmount * 5).toFixed(2),
         
         // Product details
         products: productSummary, // e.g. "tshirt:100, hoodie:50"
