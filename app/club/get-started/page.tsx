@@ -232,11 +232,12 @@ export default function GetStartedPage() {
                 <div
                   className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ${
                     step === currentStep
-                      ? 'bg-accent text-navy'
+                      ? 'text-navy'
                       : step < currentStep
                       ? 'bg-navy text-white'
                       : 'bg-gray-300 text-gray-600'
                   }`}
+                  style={step === currentStep ? { backgroundColor: '#33BECC' } : {}}
                 >
                   {step < currentStep ? <CheckCircle2 className="w-6 h-6" /> : step}
                 </div>
