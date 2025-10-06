@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { CheckCircle2, ChevronLeft, ChevronRight, Upload, AlertCircle } from 'lucide-react';
+import { CheckCircle2, ChevronLeft, ChevronRight, Upload, AlertCircle, Plus, Minus, X } from 'lucide-react';
 import Link from 'next/link';
 
 // Define the schema for form validation
@@ -19,19 +19,18 @@ const formSchema = z.object({
   organizationType: z.enum(['gym', 'golf', 'club', 'other']),
   memberCount: z.number().min(100, 'Minimum 100 units required'),
   
-  // Step 2: Gear Selection
-  gearType: z.enum(['tshirt', 'tank', 'hoodie', 'polo', 'mixed']),
-  sizeRun: z.object({
-    xs: z.number().min(0),
-    s: z.number().min(0),
-    m: z.number().min(0),
-    l: z.number().min(0),
-    xl: z.number().min(0),
-    xxl: z.number().min(0),
-  }).refine((sizes) => {
-    const total = Object.values(sizes).reduce((a, b) => a + b, 0);
-    return total >= 100;
-  }, 'Total units must be at least 100'),
+  // Step 2: Gear Selection (cart items)
+  cartItems: z.array(z.object({
+    gearType: z.string(),
+    sizeRun: z.object({
+      xs: z.number().min(0),
+      s: z.number().min(0),
+      m: z.number().min(0),
+      l: z.number().min(0),
+      xl: z.number().min(0),
+      xxl: z.number().min(0),
+    }),
+  })).min(1, 'Add at least one item to your cart'),
   starterKit: z.enum(['core', 'pro']),
   
   // Step 3: Branding
@@ -73,6 +72,7 @@ export default function GetStartedPage() {
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
+  const [cartItems, setCartItems] = useState<Array<{ gearType: string; sizeRun: { xs: number; s: number; m: number; l: number; xl: number; xxl: number } }>>([]);
 
   const {
     register,
@@ -85,7 +85,7 @@ export default function GetStartedPage() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       memberCount: 100,
-      sizeRun: { xs: 0, s: 20, m: 30, l: 30, xl: 15, xxl: 5 },
+      cartItems: [],
       starterKit: 'core',
       rewardCheckIn: false,
       rewardMilestone: false,
@@ -97,7 +97,12 @@ export default function GetStartedPage() {
   const watchedValues = watch();
   const totalUnits = watchedValues.memberCount || 0;
   const starterKit = watchedValues.starterKit || 'core';
-  const sizeRun = watchedValues.sizeRun || { xs: 0, s: 0, m: 0, l: 0, xl: 0, xxl: 0 };
+  
+  // Calculate total units from cart
+  const cartTotalUnits = cartItems.reduce((total, item) => {
+    const itemTotal = Object.values(item.sizeRun).reduce((sum, qty) => sum + qty, 0);
+    return total + itemTotal;
+  }, 0);
 
   const calculatePricing = () => {
     const tier = PRICING_TIERS[starterKit].find(
@@ -125,7 +130,16 @@ export default function GetStartedPage() {
         fieldsToValidate = ['organizationName', 'contactName', 'email', 'phone', 'organizationType', 'memberCount'];
         break;
       case 2:
-        fieldsToValidate = ['gearType', 'sizeRun', 'starterKit'];
+        // Validate cart items and starter kit
+        if (cartItems.length === 0) {
+          alert('Please add at least one item to your cart');
+          return;
+        }
+        if (cartTotalUnits < 100) {
+          alert('Cart must contain at least 100 total units');
+          return;
+        }
+        fieldsToValidate = ['starterKit'];
         break;
       case 3:
         fieldsToValidate = ['brandColors', 'designNotes'];
@@ -137,6 +151,10 @@ export default function GetStartedPage() {
 
     const isValid = await trigger(fieldsToValidate);
     if (isValid) {
+      // Update form value with cart items before proceeding
+      if (currentStep === 2) {
+        setValue('cartItems', cartItems);
+      }
       setCurrentStep((prev) => Math.min(prev + 1, 5));
     }
   };
@@ -217,6 +235,33 @@ export default function GetStartedPage() {
       reader.readAsDataURL(file);
     }
   };
+
+  // Cart management functions
+  const addToCart = (gearType: string) => {
+    const newItem = {
+      gearType,
+      sizeRun: { xs: 0, s: 20, m: 30, l: 30, xl: 15, xxl: 5 },
+    };
+    setCartItems([...cartItems, newItem]);
+  };
+
+  const removeFromCart = (index: number) => {
+    setCartItems(cartItems.filter((_, i) => i !== index));
+  };
+
+  const updateCartItemSize = (index: number, size: string, value: number) => {
+    const updated = [...cartItems];
+    updated[index].sizeRun[size as keyof typeof updated[number]['sizeRun']] = value;
+    setCartItems(updated);
+  };
+
+  const GEAR_OPTIONS = [
+    { value: 'tshirt', label: 'T-Shirt' },
+    { value: 'tank', label: 'Tank Top' },
+    { value: 'hoodie', label: 'Hoodie' },
+    { value: 'polo', label: 'Polo' },
+    { value: 'hat', label: 'Hat' },
+  ];
 
   return (
     <div className="min-h-screen py-4xl" style={{ backgroundColor: '#F7F7F7' }}>
@@ -386,9 +431,10 @@ export default function GetStartedPage() {
                 </div>
               )}
 
-              {/* Step 2: Gear Selection */}
+              {/* Step 2: Gear Selection with Cart */}
               {currentStep === 2 && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+                  {/* Starter Kit Selection */}
                   <div>
                     <label className="block text-sm font-semibold mb-sm text-navy">
                       Starter Kit *
@@ -404,8 +450,8 @@ export default function GetStartedPage() {
                         }`}
                       >
                         <h3 className="font-bold text-lg text-navy mb-sm">Core Kit</h3>
-                        <p className="text-sm text-text/70 mb-sm">Perfect for gyms and local clubs</p>
-                        <p className="text-2xl font-bold text-navy">$25-35/unit</p>
+                        <p className="text-sm text-text/70 mb-sm">For gyms and smaller communities</p>
+                        <p className="text-2xl font-bold text-navy">$15-45/unit*</p>
                       </button>
 
                       <button
@@ -418,54 +464,103 @@ export default function GetStartedPage() {
                         }`}
                       >
                         <h3 className="font-bold text-lg text-navy mb-sm">Pro Kit</h3>
-                        <p className="text-sm text-text/70 mb-sm">Premium for golf courses</p>
-                        <p className="text-2xl font-bold text-navy">$35-50/unit</p>
+                        <p className="text-sm text-text/70 mb-sm">For golf courses and premium clubs</p>
+                        <p className="text-2xl font-bold text-navy">$25-50/unit*</p>
                       </button>
                     </div>
                   </div>
 
+                  {/* Add to Cart */}
                   <div>
                     <label className="block text-sm font-semibold mb-sm text-navy">
-                      Gear Type *
+                      Add Gear to Your Order
                     </label>
-                    <select
-                      {...register('gearType')}
-                      className="w-full px-lg py-md border-2 border-muted rounded focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-navy bg-white"
-                    >
-                      <option value="">Select gear type</option>
-                      <option value="tshirt">T-Shirt</option>
-                      <option value="tank">Tank Top</option>
-                      <option value="hoodie">Hoodie</option>
-                      <option value="polo">Polo</option>
-                      <option value="mixed">Mixed (contact us)</option>
-                    </select>
-                    {errors.gearType && (
-                      <p className="text-sm text-red-600 mt-sm">{errors.gearType.message}</p>
-                    )}
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-semibold mb-md text-navy">
-                      Size Distribution * (Total: {Object.values(sizeRun).reduce((a, b) => a + b, 0)} units)
-                    </label>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-md">
-                      {['xs', 's', 'm', 'l', 'xl', 'xxl'].map((size) => (
-                        <div key={size}>
-                          <label className="block text-xs font-semibold mb-xs text-navy uppercase">
-                            {size}
-                          </label>
-                          <input
-                            {...register(`sizeRun.${size as keyof typeof sizeRun}`, { valueAsNumber: true })}
-                            type="number"
-                            min="0"
-                            className="w-full px-md py-sm border-2 border-muted rounded focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-navy bg-white"
-                            placeholder="0"
-                          />
-                        </div>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-sm">
+                      {GEAR_OPTIONS.map((option) => (
+                        <button
+                          key={option.value}
+                          type="button"
+                          onClick={() => addToCart(option.value)}
+                          className="p-md border-2 border-muted rounded hover:border-accent transition-colors text-sm font-semibold text-navy bg-white"
+                        >
+                          <Plus className="w-4 h-4 inline mr-xs" />
+                          {option.label}
+                        </button>
                       ))}
                     </div>
-                    {errors.sizeRun && (
-                      <p className="text-sm text-red-600 mt-sm">{errors.sizeRun.message}</p>
+                  </div>
+
+                  {/* Cart Summary */}
+                  <div className="bg-gray-100 rounded-lg p-lg border-2 border-muted">
+                    <div className="flex items-center justify-between mb-md">
+                      <h3 className="text-lg font-bold text-navy">Your Order</h3>
+                      <div className="text-sm font-semibold" style={{ color: '#33BECC' }}>
+                        Total: {cartTotalUnits} units
+                      </div>
+                    </div>
+
+                    {cartItems.length === 0 ? (
+                      <p className="text-sm text-text/70 text-center py-lg">
+                        Click the buttons above to add items to your order
+                      </p>
+                    ) : (
+                      <div className="space-y-md">
+                        {cartItems.map((item, index) => {
+                          const itemTotal = Object.values(item.sizeRun).reduce((sum, qty) => sum + qty, 0);
+                          return (
+                            <div key={index} className="bg-white rounded p-md border-2 border-muted">
+                              <div className="flex items-center justify-between mb-sm">
+                                <h4 className="font-semibold text-navy">
+                                  {GEAR_OPTIONS.find(g => g.value === item.gearType)?.label}
+                                </h4>
+                                <div className="flex items-center gap-md">
+                                  <span className="text-sm font-semibold text-navy">{itemTotal} units</span>
+                                  <button
+                                    type="button"
+                                    onClick={() => removeFromCart(index)}
+                                    className="text-red-600 hover:text-red-800"
+                                  >
+                                    <X className="w-4 h-4" />
+                                  </button>
+                                </div>
+                              </div>
+                              
+                              <div className="grid grid-cols-3 md:grid-cols-6 gap-xs mt-sm">
+                                {['xs', 's', 'm', 'l', 'xl', 'xxl'].map((size) => (
+                                  <div key={size}>
+                                    <label className="block text-xs font-semibold mb-xs text-navy uppercase text-center">
+                                      {size}
+                                    </label>
+                                    <input
+                                      type="number"
+                                      min="0"
+                                      value={item.sizeRun[size as keyof typeof item.sizeRun]}
+                                      onChange={(e) => updateCartItemSize(index, size, parseInt(e.target.value) || 0)}
+                                      className="w-full px-sm py-xs border-2 border-muted rounded focus:outline-none focus:ring-2 focus:ring-accent text-navy bg-white text-center"
+                                    />
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+
+                    {cartTotalUnits > 0 && cartTotalUnits < 100 && (
+                      <div className="mt-md p-md bg-red-50 border-2 border-red-300 rounded">
+                        <p className="text-sm font-semibold text-red-600 text-center">
+                          ⚠️ You need {100 - cartTotalUnits} more units to meet the 100 unit minimum
+                        </p>
+                      </div>
+                    )}
+
+                    {cartTotalUnits >= 100 && (
+                      <div className="mt-md p-md bg-green-50 border-2 border-green-300 rounded">
+                        <p className="text-sm font-semibold text-green-600 text-center">
+                          ✓ Minimum requirement met!
+                        </p>
+                      </div>
                     )}
                   </div>
                 </div>
