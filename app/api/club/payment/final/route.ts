@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Get order from database
-    const supabaseAdmin = supabaseAdmin();
+    const supabaseAdminClient = supabaseAdmin();
     const { data: order, error: orderError } = await supabaseAdminClient
       .from('club_orders')
       .select('*')

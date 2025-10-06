@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
     };
 
     // Insert order into database
-    const supabaseAdmin = supabaseAdmin();
+    const supabaseAdminClient = supabaseAdmin();
     const { data, error } = await supabaseAdminClient
       .from('club_orders')
       .insert([orderData])
@@ -186,7 +186,7 @@ export async function GET(request: NextRequest) {
 
     if (orderId) {
       // Get specific order
-      const supabaseAdmin = supabaseAdmin();
+      const supabaseAdminClient = supabaseAdmin();
       const { data, error } = await supabaseAdminClient
         .from('club_orders')
         .select('*')
@@ -205,7 +205,7 @@ export async function GET(request: NextRequest) {
 
     if (email) {
       // Get orders for specific email
-      const supabaseAdmin = supabaseAdmin();
+      const supabaseAdminClient = supabaseAdmin();
       const { data, error } = await supabaseAdminClient
         .from('club_orders')
         .select('*')
@@ -223,7 +223,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Get all orders (admin only)
-    const supabaseAdmin = supabaseAdmin();
+    const supabaseAdminClient = supabaseAdmin();
     const { data, error } = await supabaseAdminClient
       .from('club_orders')
       .select('*')
