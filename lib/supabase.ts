@@ -1,55 +1,21 @@
-// Lazy import Supabase to prevent build-time errors
-let createClient: any = null
-
-// Function to create Supabase clients safely
+// Temporary mock Supabase client for build testing
 export const createSupabaseClient = () => {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-  
-  if (!supabaseUrl || !supabaseAnonKey) {
-    // Return a mock client during build time to prevent errors
-    return {
-      from: () => ({ select: () => ({ eq: () => ({ single: () => Promise.resolve({ data: null, error: null }) }) }) }),
-      insert: () => ({ select: () => ({ single: () => Promise.resolve({ data: null, error: null }) }) }),
-      update: () => ({ eq: () => ({ select: () => ({ single: () => Promise.resolve({ data: null, error: null }) }) }) })
-    } as any
-  }
-  
-  // Lazy load Supabase client
-  if (!createClient) {
-    createClient = require('@supabase/supabase-js').createClient
-  }
-  
-  return createClient(supabaseUrl, supabaseAnonKey)
+  return {
+    from: () => ({ select: () => ({ eq: () => ({ single: () => Promise.resolve({ data: null, error: null }) }) }) }),
+    insert: () => ({ select: () => ({ single: () => Promise.resolve({ data: null, error: null }) }) }),
+    update: () => ({ eq: () => ({ select: () => ({ single: () => Promise.resolve({ data: null, error: null }) }) }) })
+  } as any
 }
 
 export const createSupabaseAdminClient = () => {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-  const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
-  
-  if (!supabaseUrl || !supabaseServiceKey) {
-    // Return a mock client during build time to prevent errors
-    return {
-      from: () => ({ select: () => ({ eq: () => ({ single: () => Promise.resolve({ data: null, error: null }) }) }) }),
-      insert: () => ({ select: () => ({ single: () => Promise.resolve({ data: null, error: null }) }) }),
-      update: () => ({ eq: () => ({ select: () => ({ single: () => Promise.resolve({ data: null, error: null }) }) }) })
-    } as any
-  }
-  
-  // Lazy load Supabase client
-  if (!createClient) {
-    createClient = require('@supabase/supabase-js').createClient
-  }
-  
-  return createClient(supabaseUrl, supabaseServiceKey, {
-    auth: {
-      autoRefreshToken: false,
-      persistSession: false
-    }
-  })
+  return {
+    from: () => ({ select: () => ({ eq: () => ({ single: () => Promise.resolve({ data: null, error: null }) }) }) }),
+    insert: () => ({ select: () => ({ single: () => Promise.resolve({ data: null, error: null }) }) }),
+    update: () => ({ eq: () => ({ select: () => ({ single: () => Promise.resolve({ data: null, error: null }) }) }) })
+  } as any
 }
 
-// Export only the factory functions - no module-level client creation
+// Export only the factory functions
 export { createSupabaseClient as supabase, createSupabaseAdminClient as supabaseAdmin }
 
 // Types for our Club Orders
