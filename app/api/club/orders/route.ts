@@ -54,9 +54,9 @@ export async function POST(request: NextRequest) {
       final_payment_amount: finalPaymentAmount,
       order_status: 'deposit_paid',
       payment_status: 'deposit_paid',
-      deposit_payment_intent_id: depositPaymentIntentId || null,
-      second_payment_intent_id: null,
-      final_payment_intent_id: null
+      deposit_payment_intent_id: depositPaymentIntentId || undefined,
+      second_payment_intent_id: undefined,
+      final_payment_intent_id: undefined
     };
 
     // Insert order into database

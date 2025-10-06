@@ -58,8 +58,8 @@ export async function POST(request: NextRequest) {
         organization_name: organizationName,
         contact_name: session.customer_details?.name || 'Unknown',
         email: customerEmail,
-        phone: session.customer_details?.phone || null,
-        organization_type: null, // Not stored in metadata
+        phone: session.customer_details?.phone || undefined,
+        organization_type: undefined, // Not stored in metadata
         member_count: parseInt(memberCount || '0'),
         starter_kit: kitType,
         cart_items: cartItems,
@@ -70,7 +70,9 @@ export async function POST(request: NextRequest) {
         final_payment_amount: parseFloat(finalPayment || '0'),
         order_status: 'deposit_paid',
         payment_status: 'deposit_paid',
-        deposit_payment_intent_id: session.payment_intent as string
+        deposit_payment_intent_id: session.payment_intent as string,
+        second_payment_intent_id: undefined,
+        final_payment_intent_id: undefined
       };
 
       const { data, error } = await supabaseAdmin
