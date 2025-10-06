@@ -1,4 +1,5 @@
-import { createClient } from '@supabase/supabase-js'
+// Lazy import Supabase to prevent build-time errors
+let createClient: any = null
 
 // Function to create Supabase clients safely
 export const createSupabaseClient = () => {
@@ -12,6 +13,11 @@ export const createSupabaseClient = () => {
       insert: () => ({ select: () => ({ single: () => Promise.resolve({ data: null, error: null }) }) }),
       update: () => ({ eq: () => ({ select: () => ({ single: () => Promise.resolve({ data: null, error: null }) }) }) })
     } as any
+  }
+  
+  // Lazy load Supabase client
+  if (!createClient) {
+    createClient = require('@supabase/supabase-js').createClient
   }
   
   return createClient(supabaseUrl, supabaseAnonKey)
@@ -28,6 +34,11 @@ export const createSupabaseAdminClient = () => {
       insert: () => ({ select: () => ({ single: () => Promise.resolve({ data: null, error: null }) }) }),
       update: () => ({ eq: () => ({ select: () => ({ single: () => Promise.resolve({ data: null, error: null }) }) }) })
     } as any
+  }
+  
+  // Lazy load Supabase client
+  if (!createClient) {
+    createClient = require('@supabase/supabase-js').createClient
   }
   
   return createClient(supabaseUrl, supabaseServiceKey, {
