@@ -44,12 +44,8 @@ const formSchema = z.object({
   rewardReferral: z.boolean(),
   rewardEvents: z.boolean(),
   rewardCustom: z.string().optional(),
-}).refine((data) => {
-  return data.memberCount >= 100;
-}, {
-  message: "Minimum 100 units required",
-  path: ["memberCount"],
 });
+// TEMP: Removed 100 unit minimum validation for testing
 
 type FormData = z.infer<typeof formSchema>;
 
@@ -497,9 +493,9 @@ export default function GetStartedPage() {
                     <input
                       {...register('memberCount', { valueAsNumber: true })}
                       type="number"
-                      min="100"
+                      min="1"
                       className="w-full px-lg py-md border-2 border-muted rounded focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-navy bg-white"
-                      placeholder="100"
+                      placeholder="10"
                     />
                     <p className="text-sm font-semibold mt-sm" style={{ color: '#33BECC' }}>
                       ⚠️ Minimum 1 unit required (TESTING MODE - normally 100)
