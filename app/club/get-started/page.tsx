@@ -72,6 +72,7 @@ export default function GetStartedPage() {
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
+  const [logoFileName, setLogoFileName] = useState<string | null>(null);
   const [cartItems, setCartItems] = useState<Array<{ gearType: string; sizeRun: { xs: number; s: number; m: number; l: number; xl: number; xxl: number } }>>([]);
 
   const {
@@ -228,11 +229,19 @@ export default function GetStartedPage() {
     const file = e.target.files?.[0];
     if (file) {
       setValue('logoFile', file);
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setLogoPreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+      setLogoFileName(file.name);
+      
+      // Only preview SVG files (other vector formats won't render in browser)
+      if (file.type === 'image/svg+xml' || file.name.endsWith('.svg')) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setLogoPreview(reader.result as string);
+        };
+        reader.readAsDataURL(file);
+      } else {
+        // For AI, PSD, EPS files - just show filename
+        setLogoPreview(null);
+      }
     }
   };
 
@@ -587,9 +596,16 @@ export default function GetStartedPage() {
                         id="logo-upload"
                       />
                       <label htmlFor="logo-upload" className="cursor-pointer">
-                        {logoPreview ? (
+                        {logoFileName ? (
                           <div className="space-y-md">
-                            <img src={logoPreview} alt="Logo preview" className="max-h-32 mx-auto" />
+                            {logoPreview ? (
+                              <img src={logoPreview} alt="Logo preview" className="max-h-32 mx-auto" />
+                            ) : (
+                              <div className="bg-accent/10 rounded-lg p-lg border-2 border-accent">
+                                <Upload className="w-12 h-12 mx-auto text-accent mb-sm" />
+                                <p className="text-sm font-semibold text-navy">{logoFileName}</p>
+                              </div>
+                            )}
                             <p className="text-sm text-accent font-semibold">Click to change</p>
                           </div>
                         ) : (
