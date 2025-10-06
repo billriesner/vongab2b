@@ -237,13 +237,13 @@ export default function ClubPage() {
                 <Badge className="bg-accent text-navy font-semibold">Most Popular</Badge>
               </div>
               <CardDescription className="text-lg font-semibold" style={{ color: '#33BECC' }}>
-                Perfect for gyms and local clubs
+                Perfect for gyms, local clubs and smaller communities
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="mb-xl">
                 <p className="text-4xl font-bold text-navy mb-sm">$15-45</p>
-                <p className="text-sm text-text/70">per unit (volume pricing)</p>
+                <p className="text-sm text-text/70">estimated per unit (volume pricing)</p>
               </div>
               <ul className="space-y-md mb-xl">
                 <li className="flex items-start gap-sm">
@@ -288,13 +288,13 @@ export default function ClubPage() {
                 <Badge style={{ backgroundColor: '#33BECC', color: '#303E55' }} className="font-semibold">Premium</Badge>
               </div>
               <CardDescription className="text-lg font-semibold" style={{ color: '#33BECC' }}>
-                For golf courses and premium clubs
+                Perfect for golf courses, premium clubs and larger communities
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="mb-xl">
-                <p className="text-4xl font-bold text-accent mb-sm">$35-50</p>
-                <p className="text-sm text-white/70">per unit (volume pricing)</p>
+                <p className="text-4xl font-bold text-accent mb-sm">$25-50</p>
+                <p className="text-sm text-white/70">estimated per unit (volume pricing)</p>
               </div>
               <ul className="space-y-md mb-xl">
                 <li className="flex items-start gap-sm">
@@ -330,6 +330,10 @@ export default function ClubPage() {
               </Button>
             </CardContent>
           </Card>
+        </div>
+
+        <div className="text-center mt-lg mb-xl">
+          <p className="text-sm text-text/70 italic">Final price available at time of order</p>
         </div>
 
         <div className="text-center mt-3xl">
