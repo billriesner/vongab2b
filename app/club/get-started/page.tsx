@@ -141,13 +141,19 @@ export default function GetStartedPage() {
         (t) => cartTotalUnits >= t.min && cartTotalUnits <= t.max
       );
       
-      const unitPrice = tier?.price || 0;
-      const total = itemQty * unitPrice;
+      let basePrice = tier?.price || 0;
+      
+      // Add $10 to each item for Pro Kit
+      if (starterKit === 'pro') {
+        basePrice += 10;
+      }
+      
+      const total = itemQty * basePrice;
 
       return {
         gearType: item.gearType,
         quantity: itemQty,
-        unitPrice,
+        unitPrice: basePrice,
         total,
       };
     });
