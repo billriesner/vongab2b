@@ -721,13 +721,13 @@ export default function GetStartedPage() {
 
               {/* Step 4: Rewards */}
               {currentStep === 4 && (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-                  <p className="text-sm text-text/70 mb-lg">
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
+                  <p className="text-sm text-text/70 mb-xl">
                     Select which rewards you'd like to enable for your members. You can customize these later in the dashboard.
                   </p>
 
-                  <div className="space-y-md">
-                    <label className="flex items-start gap-md p-md border-2 border-muted rounded hover:border-accent transition-colors cursor-pointer">
+                  <div className="space-y-xl">
+                    <label className="flex items-start border-2 border-muted rounded hover:border-accent transition-colors cursor-pointer" style={{ gap: '32px', padding: '24px' }}>
                       <input
                         {...register('rewardCheckIn')}
                         type="checkbox"
@@ -739,7 +739,7 @@ export default function GetStartedPage() {
                       </div>
                     </label>
 
-                    <label className="flex items-start gap-md p-md border-2 border-muted rounded hover:border-accent transition-colors cursor-pointer">
+                    <label className="flex items-start border-2 border-muted rounded hover:border-accent transition-colors cursor-pointer" style={{ gap: '32px', padding: '24px' }}>
                       <input
                         {...register('rewardMilestone')}
                         type="checkbox"
@@ -751,7 +751,7 @@ export default function GetStartedPage() {
                       </div>
                     </label>
 
-                    <label className="flex items-start gap-md p-md border-2 border-muted rounded hover:border-accent transition-colors cursor-pointer">
+                    <label className="flex items-start border-2 border-muted rounded hover:border-accent transition-colors cursor-pointer" style={{ gap: '32px', padding: '24px' }}>
                       <input
                         {...register('rewardReferral')}
                         type="checkbox"
@@ -763,7 +763,7 @@ export default function GetStartedPage() {
                       </div>
                     </label>
 
-                    <label className="flex items-start gap-md p-md border-2 border-muted rounded hover:border-accent transition-colors cursor-pointer">
+                    <label className="flex items-start border-2 border-muted rounded hover:border-accent transition-colors cursor-pointer" style={{ gap: '32px', padding: '24px' }}>
                       <input
                         {...register('rewardEvents')}
                         type="checkbox"
