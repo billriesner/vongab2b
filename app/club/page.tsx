@@ -237,7 +237,7 @@ export default function ClubPage() {
                 <Badge className="bg-accent text-navy font-semibold">Most Popular</Badge>
               </div>
               <CardDescription className="text-lg font-semibold" style={{ color: '#33BECC' }}>
-                Perfect for gyms, local clubs and smaller communities
+                For gyms and smaller communities
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -288,7 +288,7 @@ export default function ClubPage() {
                 <Badge style={{ backgroundColor: '#33BECC', color: '#303E55' }} className="font-semibold">Premium</Badge>
               </div>
               <CardDescription className="text-lg font-semibold" style={{ color: '#33BECC' }}>
-                Perfect for golf courses, premium clubs and larger communities
+                For golf courses and premium clubs
               </CardDescription>
             </CardHeader>
             <CardContent>
