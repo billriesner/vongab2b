@@ -242,7 +242,7 @@ export default function ClubPage() {
             </CardHeader>
             <CardContent>
               <div className="mb-xl">
-                <p className="text-4xl font-bold text-navy mb-sm">$15-45</p>
+                <p className="text-4xl font-bold text-navy mb-sm">$15-45*</p>
                 <p className="text-sm text-text/70">estimated per unit (volume pricing)</p>
               </div>
               <ul className="space-y-md mb-xl">
@@ -293,7 +293,7 @@ export default function ClubPage() {
             </CardHeader>
             <CardContent>
               <div className="mb-xl">
-                <p className="text-4xl font-bold text-accent mb-sm">$25-50</p>
+                <p className="text-4xl font-bold text-accent mb-sm">$25-50*</p>
                 <p className="text-sm text-white/70">estimated per unit (volume pricing)</p>
               </div>
               <ul className="space-y-md mb-xl">
@@ -333,7 +333,7 @@ export default function ClubPage() {
         </div>
 
         <div className="text-center mt-lg mb-xl">
-          <p className="text-sm text-text/70 italic">Final price available at time of order</p>
+          <p className="text-sm text-text/70 italic">*Final price available at time of order</p>
         </div>
 
         <div className="text-center mt-3xl">
