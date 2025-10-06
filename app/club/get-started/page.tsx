@@ -376,9 +376,11 @@ export default function GetStartedPage() {
                       className="w-full px-lg py-md border-2 border-muted rounded focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-navy bg-white"
                       placeholder="100"
                     />
-                    <p className="text-xs text-text/70 mt-sm">Minimum 100 units required</p>
+                    <p className="text-sm font-semibold mt-sm" style={{ color: '#33BECC' }}>
+                      ⚠️ Minimum 100 units required
+                    </p>
                     {errors.memberCount && (
-                      <p className="text-sm text-red-600 mt-sm">{errors.memberCount.message}</p>
+                      <p className="text-sm text-red-600 mt-sm font-semibold">{errors.memberCount.message}</p>
                     )}
                   </div>
                 </div>
@@ -723,7 +725,8 @@ export default function GetStartedPage() {
                   <Button
                     type="button"
                     onClick={handleNext}
-                    className="bg-navy hover:bg-navy/90 text-white"
+                    className="text-navy font-semibold shadow-lg"
+                    style={{ backgroundColor: '#33BECC' }}
                   >
                     Next
                     <ChevronRight className="w-5 h-5 ml-sm" />
