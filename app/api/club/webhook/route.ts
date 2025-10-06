@@ -76,7 +76,7 @@ export async function POST(request: NextRequest) {
       };
 
       const supabaseAdminClient = supabaseAdmin();
-      const { data, error } = await supabaseAdminClientClient
+      const { data, error } = await supabaseAdminClient
         .from('club_orders')
         .insert([orderData])
         .select()
