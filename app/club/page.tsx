@@ -520,19 +520,20 @@ export default function ClubPage() {
       {/* Final CTA */}
       <Section 
         className="py-5xl"
-        style={{ backgroundColor: '#33BECC' }}
+        style={{ backgroundColor: '#303E55' }}
       >
         <div className="text-center max-w-3xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-navy mb-xl">
+          <h2 className="text-4xl md:text-5xl font-bold text-accent mb-xl">
             Ready to Get Started?
           </h2>
-          <p className="text-lg text-navy mb-3xl font-semibold">
-            Launch your community's connected experience in weeks. Start with our simple onboarding flow.
+          <p className="text-lg text-white mb-3xl font-semibold">
+            Launch your community's connected experience. Start with our simple onboarding flow.
           </p>
           <div className="flex flex-col sm:flex-row gap-md justify-center items-center">
             <Button 
               size="lg" 
-              className="min-w-[200px] bg-navy hover:bg-navy/90 text-white shadow-lg"
+              className="min-w-[200px] text-navy font-semibold shadow-lg"
+              style={{ backgroundColor: '#33BECC' }}
               asChild
             >
               <Link href="/club/get-started">Build Your Kit</Link>
@@ -540,7 +541,7 @@ export default function ClubPage() {
             <Button 
               size="lg" 
               variant="outline"
-              className="min-w-[200px] border-2 border-navy bg-white text-navy hover:bg-navy hover:text-white shadow-lg"
+              className="min-w-[200px] border-2 border-white bg-transparent text-white hover:bg-white hover:text-navy shadow-lg font-semibold"
               asChild
             >
               <Link href="/contact">Contact Us</Link>
@@ -548,6 +549,13 @@ export default function ClubPage() {
           </div>
         </div>
       </Section>
+
+      {/* Visual Divider */}
+      <section style={{ backgroundColor: '#303E55', paddingTop: '64px', paddingBottom: '64px' }}>
+        <div className="max-w-4xl mx-auto px-4">
+          <div style={{ height: '2px', backgroundColor: '#33BECC', opacity: 0.5 }}></div>
+        </div>
+      </section>
     </div>
   );
 }
