@@ -43,7 +43,6 @@ const formSchema = z.object({
   rewardMilestone: z.boolean(),
   rewardReferral: z.boolean(),
   rewardEvents: z.boolean(),
-  rewardCustom: z.string().optional(),
 }).refine((data) => {
   return data.memberCount >= 100;
 }, {
@@ -714,7 +713,7 @@ export default function GetStartedPage() {
                       {...register('designNotes')}
                       rows={4}
                       className="w-full px-lg py-md border-2 border-muted rounded focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-navy bg-white"
-                      placeholder="Any specific design preferences or requirements?"
+                      placeholder="e.g., Logo should be on left chest of shirts, keep branding minimal and clean, prefer navy blue accents, company name on back..."
                     />
                   </div>
                 </div>
@@ -777,17 +776,6 @@ export default function GetStartedPage() {
                     </label>
                   </div>
 
-                  <div>
-                    <label className="block text-sm font-semibold mb-sm text-navy">
-                      Custom Reward Ideas
-                    </label>
-                    <textarea
-                      {...register('rewardCustom')}
-                      rows={3}
-                      className="w-full px-lg py-md border-2 border-muted rounded focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-navy bg-white"
-                      placeholder="Any custom rewards you'd like to offer?"
-                    />
-                  </div>
                 </div>
               )}
 
@@ -973,10 +961,12 @@ export default function GetStartedPage() {
         </Card>
 
         <div className="mt-xl text-center">
-          <p className="text-sm text-text/70 mb-sm">Questions? Need help?</p>
-          <Link href="/contact" className="text-accent font-semibold hover:underline">
-            Contact our team
-          </Link>
+          <p className="text-sm text-text/70 mb-sm">
+            Questions? Need help?{' '}
+            <Link href="/contact" className="text-navy font-semibold hover:underline">
+              Contact our team
+            </Link>
+          </p>
         </div>
       </div>
     </div>
