@@ -78,13 +78,6 @@ export function Header() {
                       About
                     </Link>
                     <Link
-                      href="/blog"
-                      className="text-lg font-medium text-foreground hover:text-accent transition-colors text-center"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      Blog
-                    </Link>
-                    <Link
                       href="/contact"
                       className="text-lg font-medium text-foreground hover:text-accent transition-colors text-center"
                       onClick={() => setIsOpen(false)}
