@@ -69,7 +69,7 @@ export default function ClubPage() {
               </div>
               <h3 className="text-2xl font-bold text-navy" style={{ marginBottom: '12px' }}>Tap to Check In</h3>
               <p className="text-base font-semibold" style={{ color: '#33BECC', marginBottom: '16px' }}>
-                Seamless attendance tracking
+                Seamless rewards tracking
               </p>
               <p className="text-sm text-text/70 leading-relaxed">
                 Members tap their apparel to check in. No apps, no fumbling with phones. Just tap and go.
