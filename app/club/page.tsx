@@ -147,7 +147,7 @@ export default function ClubPage() {
             </div>
           </div>
           <h2 className="text-3xl md:text-4xl font-bold text-navy text-center" style={{ marginBottom: '24px' }}>What's Possible with Vonga Tech</h2>
-          <h3 className="text-2xl md:text-3xl font-bold text-center" style={{ color: '#33BECC', marginBottom: '80px' }}>Go beyond basic check-ins</h3>
+          <h3 className="text-2xl md:text-3xl font-bold text-center" style={{ color: '#33BECC', marginBottom: '48px' }}>Go beyond basic check-ins</h3>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3xl">
             <Card className="text-center hover:shadow-xl transition-shadow border-2 border-muted" style={{ backgroundColor: '#FFFFFF' }}>
