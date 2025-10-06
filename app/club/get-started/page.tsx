@@ -17,7 +17,7 @@ const formSchema = z.object({
   email: z.string().email('Valid email is required'),
   phone: z.string().min(10, 'Valid phone number is required'),
   organizationType: z.enum(['gym', 'golf', 'club', 'other']),
-  memberCount: z.number().min(100, 'Minimum 100 units required'),
+  memberCount: z.number().min(1, 'At least 1 unit required'), // TEMP: Changed from 100 for testing
   
   // Step 2: Gear Selection (cart items)
   cartItems: z.array(z.object({
@@ -98,7 +98,7 @@ export default function GetStartedPage() {
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      memberCount: 100,
+      memberCount: 10, // TEMP: Changed from 100 for testing
       cartItems: [],
       starterKit: 'core',
       rewardCheckIn: false,
@@ -174,8 +174,8 @@ export default function GetStartedPage() {
           alert('Please add at least one item to your cart');
           return;
         }
-        if (cartTotalUnits < 100) {
-          alert('Cart must contain at least 100 total units');
+        if (cartTotalUnits < 1) { // TEMP: Changed from 100 for testing
+          alert('Cart must contain at least 1 total unit');
           return;
         }
         fieldsToValidate = ['starterKit'];
@@ -315,7 +315,7 @@ export default function GetStartedPage() {
   const addToCart = (gearType: string) => {
     const newItem = {
       gearType,
-      sizeRun: { xs: 0, s: 20, m: 30, l: 30, xl: 15, xxl: 5 },
+      sizeRun: { xs: 0, s: 2, m: 3, l: 3, xl: 2, xxl: 0 }, // TEMP: Smaller default for testing
     };
     setCartItems([...cartItems, newItem]);
   };
@@ -502,7 +502,7 @@ export default function GetStartedPage() {
                       placeholder="100"
                     />
                     <p className="text-sm font-semibold mt-sm" style={{ color: '#33BECC' }}>
-                      ⚠️ Minimum 100 units required
+                      ⚠️ Minimum 1 unit required (TESTING MODE - normally 100)
                     </p>
                     {errors.memberCount && (
                       <p className="text-sm text-red-600 mt-sm font-semibold">{errors.memberCount.message}</p>
@@ -627,18 +627,18 @@ export default function GetStartedPage() {
                       </div>
                     )}
 
-                    {cartTotalUnits > 0 && cartTotalUnits < 100 && (
+                    {cartTotalUnits > 0 && cartTotalUnits < 1 && (
                       <div className="mt-md p-md bg-red-50 border-2 border-red-300 rounded">
                         <p className="text-sm font-semibold text-red-600 text-center">
-                          ⚠️ You need {100 - cartTotalUnits} more units to meet the 100 unit minimum
+                          ⚠️ TESTING MODE - You need {1 - cartTotalUnits} more units (normally 100 minimum)
                         </p>
                       </div>
                     )}
 
-                    {cartTotalUnits >= 100 && (
+                    {cartTotalUnits >= 1 && (
                       <div className="mt-md p-md bg-green-50 border-2 border-green-300 rounded">
                         <p className="text-sm font-semibold text-green-600 text-center">
-                          ✓ Minimum requirement met!
+                          ✓ Testing mode active - minimum met! (Normally requires 100 units)
                         </p>
                       </div>
                     )}
