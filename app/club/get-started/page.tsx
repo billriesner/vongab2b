@@ -53,18 +53,31 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>;
 
-const PRICING_TIERS = {
-  core: [
-    { min: 100, max: 249, price: 35 },
-    { min: 250, max: 499, price: 32 },
-    { min: 500, max: 999, price: 28 },
-    { min: 1000, max: Infinity, price: 0 },
+const GEAR_PRICING = {
+  hat: [
+    { min: 100, max: 499, price: 25 },
+    { min: 500, max: 999, price: 20 },
+    { min: 1000, max: Infinity, price: 0 }, // Custom pricing
   ],
-  pro: [
-    { min: 100, max: 249, price: 50 },
-    { min: 250, max: 499, price: 45 },
-    { min: 500, max: 999, price: 40 },
-    { min: 1000, max: Infinity, price: 0 },
+  tshirt: [
+    { min: 100, max: 499, price: 20 },
+    { min: 500, max: 999, price: 15 },
+    { min: 1000, max: Infinity, price: 0 }, // Custom pricing
+  ],
+  tank: [
+    { min: 100, max: 499, price: 20 },
+    { min: 500, max: 999, price: 15 },
+    { min: 1000, max: Infinity, price: 0 }, // Custom pricing
+  ],
+  polo: [
+    { min: 100, max: 499, price: 25 },
+    { min: 500, max: 999, price: 20 },
+    { min: 1000, max: Infinity, price: 0 }, // Custom pricing
+  ],
+  hoodie: [
+    { min: 100, max: 499, price: 35 },
+    { min: 500, max: 999, price: 30 },
+    { min: 1000, max: Infinity, price: 0 }, // Custom pricing
   ],
 };
 
@@ -106,22 +119,47 @@ export default function GetStartedPage() {
   }, 0);
 
   const calculatePricing = () => {
-    const tier = PRICING_TIERS[starterKit].find(
-      (t) => totalUnits >= t.min && totalUnits <= t.max
-    );
+    // Check if any item requires custom pricing (1000+ units)
+    const hasCustomPricing = cartTotalUnits >= 1000;
     
-    if (!tier || tier.price === 0) {
-      return { unitPrice: 0, subtotal: 0, deposit: 0, isCustom: true };
+    if (hasCustomPricing) {
+      return { itemizedCosts: [], subtotal: 0, deposit: 0, isCustom: true };
     }
 
-    const subtotal = totalUnits * tier.price;
+    // Calculate cost for each cart item based on total order volume
+    const itemizedCosts = cartItems.map((item) => {
+      const itemQty = Object.values(item.sizeRun).reduce((sum, qty) => sum + qty, 0);
+      const gearType = item.gearType as keyof typeof GEAR_PRICING;
+      const pricingTiers = GEAR_PRICING[gearType];
+      
+      if (!pricingTiers) {
+        return { gearType: item.gearType, quantity: itemQty, unitPrice: 0, total: 0 };
+      }
+
+      // Find price tier based on TOTAL order volume (not individual item)
+      const tier = pricingTiers.find(
+        (t) => cartTotalUnits >= t.min && cartTotalUnits <= t.max
+      );
+      
+      const unitPrice = tier?.price || 0;
+      const total = itemQty * unitPrice;
+
+      return {
+        gearType: item.gearType,
+        quantity: itemQty,
+        unitPrice,
+        total,
+      };
+    });
+
+    const subtotal = itemizedCosts.reduce((sum, item) => sum + item.total, 0);
     const deposit = subtotal * 0.5;
 
-    return { unitPrice: tier.price, subtotal, deposit, isCustom: false };
+    return { itemizedCosts, subtotal, deposit, isCustom: false };
   };
 
   const pricing = calculatePricing();
-  const shouldShowDemo = totalUnits >= 500 || pricing.subtotal >= 10000;
+  const shouldShowDemo = cartTotalUnits >= 500 || pricing.subtotal >= 10000;
 
   const handleNext = async () => {
     let fieldsToValidate: (keyof FormData)[] = [];
@@ -723,34 +761,39 @@ export default function GetStartedPage() {
                   <div className="bg-gray-100 rounded-lg p-xl">
                     <h3 className="text-xl font-bold text-navy mb-lg">Order Summary</h3>
                     
-                    <div className="space-y-md mb-lg">
-                      <div className="flex justify-between text-sm">
-                        <span className="text-text/70">Starter Kit:</span>
-                        <span className="font-semibold text-navy">{starterKit === 'core' ? 'Core' : 'Pro'}</span>
+                    {!pricing.isCustom && pricing.itemizedCosts && pricing.itemizedCosts.length > 0 ? (
+                      <div className="space-y-md mb-lg">
+                        {/* Itemized Costs */}
+                        {pricing.itemizedCosts.map((item, index) => (
+                          <div key={index} className="pb-sm border-b border-gray-300">
+                            <div className="flex justify-between text-sm mb-xs">
+                              <span className="font-semibold text-navy">
+                                {GEAR_OPTIONS.find(g => g.value === item.gearType)?.label}
+                              </span>
+                              <span className="text-text/70">{item.quantity} units</span>
+                            </div>
+                            <div className="flex justify-between text-xs">
+                              <span className="text-text/70">@ ${item.unitPrice}/unit</span>
+                              <span className="font-semibold text-navy">${item.total.toLocaleString()}</span>
+                            </div>
+                          </div>
+                        ))}
+                        
+                        <div className="flex justify-between text-sm pt-md">
+                          <span className="text-text/70">Total Units:</span>
+                          <span className="font-semibold text-navy">{cartTotalUnits}</span>
+                        </div>
+                        
+                        <div className="flex justify-between text-base font-bold pt-md border-t-2 border-gray-300">
+                          <span className="text-navy">Subtotal:</span>
+                          <span className="text-navy">${pricing.subtotal.toLocaleString()}</span>
+                        </div>
+                        <div className="flex justify-between text-lg font-bold" style={{ color: '#33BECC' }}>
+                          <span>50% Deposit:</span>
+                          <span>${pricing.deposit.toLocaleString()}</span>
+                        </div>
                       </div>
-                      <div className="flex justify-between text-sm">
-                        <span className="text-text/70">Total Units:</span>
-                        <span className="font-semibold text-navy">{totalUnits}</span>
-                      </div>
-                      {!pricing.isCustom && (
-                        <>
-                          <div className="flex justify-between text-sm">
-                            <span className="text-text/70">Price per Unit:</span>
-                            <span className="font-semibold text-navy">${pricing.unitPrice}</span>
-                          </div>
-                          <div className="flex justify-between text-base font-bold pt-md border-t-2 border-gray-300">
-                            <span className="text-navy">Subtotal:</span>
-                            <span className="text-navy">${pricing.subtotal.toLocaleString()}</span>
-                          </div>
-                          <div className="flex justify-between text-lg font-bold" style={{ color: '#33BECC' }}>
-                            <span>50% Deposit:</span>
-                            <span>${pricing.deposit.toLocaleString()}</span>
-                          </div>
-                        </>
-                      )}
-                    </div>
-
-                    {pricing.isCustom && (
+                    ) : pricing.isCustom ? (
                       <div className="bg-accent/10 border-2 border-accent rounded p-md">
                         <div className="flex items-start gap-sm">
                           <AlertCircle className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
@@ -760,6 +803,10 @@ export default function GetStartedPage() {
                           </div>
                         </div>
                       </div>
+                    ) : (
+                      <p className="text-sm text-text/70 text-center py-lg">
+                        Add items to your cart in Step 2 to see pricing
+                      </p>
                     )}
                   </div>
 
