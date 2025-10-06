@@ -12,10 +12,10 @@ import {
 } from "lucide-react";
 
 // Utility for conditional class names
-const cx = (...classes) => classes.filter(Boolean).join(" ");
+const cx = (...classes: (string | false | null | undefined)[]): string => classes.filter(Boolean).join(" ");
 
 // Reusable Button component
-const Button = ({ size = "md", variant = "primary", className = "", children, ...props }) => {
+const Button = ({ size = "md", variant = "primary", className = "", children, ...props }: any) => {
   const base = "inline-flex items-center justify-center rounded-lg font-medium transition focus:outline-none shadow";
   const sizes = { sm: "px-3 py-1.5 text-sm", md: "px-4 py-2 text-base", lg: "px-6 py-3 text-lg" };
   const variants = {
