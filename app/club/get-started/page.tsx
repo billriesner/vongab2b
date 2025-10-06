@@ -51,28 +51,28 @@ type FormData = z.infer<typeof formSchema>;
 
 const GEAR_PRICING = {
   hat: [
-    { min: 1, max: 499, price: 1 }, // TEMP: $1 for testing
-    { min: 500, max: 999, price: 1 }, // TEMP: $1 for testing
+    { min: 100, max: 499, price: 25 },
+    { min: 500, max: 999, price: 20 },
     { min: 1000, max: Infinity, price: 0 }, // Custom pricing
   ],
   tshirt: [
-    { min: 1, max: 499, price: 1 }, // TEMP: $1 for testing
-    { min: 500, max: 999, price: 1 }, // TEMP: $1 for testing
+    { min: 100, max: 499, price: 20 },
+    { min: 500, max: 999, price: 15 },
     { min: 1000, max: Infinity, price: 0 }, // Custom pricing
   ],
   tank: [
-    { min: 1, max: 499, price: 1 }, // TEMP: $1 for testing
-    { min: 500, max: 999, price: 1 }, // TEMP: $1 for testing
+    { min: 100, max: 499, price: 20 },
+    { min: 500, max: 999, price: 15 },
     { min: 1000, max: Infinity, price: 0 }, // Custom pricing
   ],
   polo: [
-    { min: 1, max: 499, price: 1 }, // TEMP: $1 for testing
-    { min: 500, max: 999, price: 1 }, // TEMP: $1 for testing
+    { min: 100, max: 499, price: 25 },
+    { min: 500, max: 999, price: 20 },
     { min: 1000, max: Infinity, price: 0 }, // Custom pricing
   ],
   hoodie: [
-    { min: 1, max: 499, price: 1 }, // TEMP: $1 for testing
-    { min: 500, max: 999, price: 1 }, // TEMP: $1 for testing
+    { min: 100, max: 499, price: 35 },
+    { min: 500, max: 999, price: 30 },
     { min: 1000, max: Infinity, price: 0 }, // Custom pricing
   ],
 };
