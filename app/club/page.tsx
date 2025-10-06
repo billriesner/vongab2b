@@ -447,89 +447,71 @@ export default function ClubPage() {
         </div>
       </section>
 
-      {/* Proven Results - List Format */}
+      {/* Proven Results - Centered Icons Format */}
       <Section 
         className="py-5xl"
         style={{ backgroundColor: '#F7F7F7' }}
       >
         <div className="max-w-6xl mx-auto">
-          <div className="flex items-center justify-center mb-3xl">
+          <div className="flex items-center justify-center" style={{ marginBottom: '48px' }}>
             <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto shadow-lg" style={{ backgroundColor: '#33BECC' }}>
               <BarChart3 className="w-10 h-10 text-navy" />
             </div>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-navy text-center mb-xl">Proven Results</h2>
-          <h3 className="text-2xl md:text-3xl font-bold text-center mb-4xl" style={{ color: '#33BECC' }}>What partners see and members feel</h3>
+          <h2 className="text-3xl md:text-4xl font-bold text-navy text-center" style={{ marginBottom: '24px' }}>Proven Results</h2>
+          <h3 className="text-2xl md:text-3xl font-bold text-center" style={{ color: '#33BECC', marginBottom: '64px' }}>What partners see and members feel</h3>
           
-          <div className="max-w-4xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3xl">
-              <div className="bg-white rounded-lg p-xl border-2 border-muted shadow-lg">
-                <div className="flex items-start gap-lg">
-                  <div className="w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#33BECC' }}>
-                    <BarChart3 className="w-8 h-8 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-navy mb-sm">Higher Engagement</h3>
-                    <p className="text-sm font-semibold mb-md" style={{ color: '#33BECC' }}>
-                      More check-ins, more visits
-                    </p>
-                    <p className="text-sm text-text/70">
-                      Members tap in more often, creating consistent touchpoints that drive loyalty and repeat visits to your facility.
-                    </p>
-                  </div>
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 max-w-6xl mx-auto" style={{ gap: '96px' }}>
+            <div className="text-center" style={{ marginBottom: '48px' }}>
+              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto shadow-lg" style={{ backgroundColor: '#33BECC', marginBottom: '24px' }}>
+                <BarChart3 className="w-8 h-8 text-white" />
               </div>
+              <h3 className="text-2xl font-bold text-navy" style={{ marginBottom: '12px' }}>Higher Engagement</h3>
+              <p className="text-base font-semibold" style={{ color: '#33BECC', marginBottom: '16px' }}>
+                More check-ins, more visits
+              </p>
+              <p className="text-sm text-text/70 leading-relaxed">
+                Members tap in more often, creating consistent touchpoints that drive loyalty and repeat visits to your facility.
+              </p>
+            </div>
 
-              <div className="bg-white rounded-lg p-xl border-2 border-muted shadow-lg">
-                <div className="flex items-start gap-lg">
-                  <div className="w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#303E55' }}>
-                    <Heart className="w-8 h-8 text-accent" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-navy mb-sm">Stronger Loyalty</h3>
-                    <p className="text-sm font-semibold mb-md" style={{ color: '#33BECC' }}>
-                      Real rewards, real connections
-                    </p>
-                    <p className="text-sm text-text/70">
-                      Tangible rewards that members actually want, delivered instantly through their connected apparel. No more forgotten cards.
-                    </p>
-                  </div>
-                </div>
+            <div className="text-center" style={{ marginBottom: '48px' }}>
+              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto shadow-lg" style={{ backgroundColor: '#303E55', marginBottom: '24px' }}>
+                <Heart className="w-8 h-8 text-accent" />
               </div>
+              <h3 className="text-2xl font-bold text-navy" style={{ marginBottom: '12px' }}>Stronger Loyalty</h3>
+              <p className="text-base font-semibold" style={{ color: '#33BECC', marginBottom: '16px' }}>
+                Real rewards, real connections
+              </p>
+              <p className="text-sm text-text/70 leading-relaxed">
+                Tangible rewards that members actually want, delivered instantly through their connected apparel. No more forgotten cards.
+              </p>
+            </div>
 
-              <div className="bg-white rounded-lg p-xl border-2 border-muted shadow-lg">
-                <div className="flex items-start gap-lg">
-                  <div className="w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#33BECC' }}>
-                    <Clock className="w-8 h-8 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-navy mb-sm">Faster Setup</h3>
-                    <p className="text-sm font-semibold mb-md" style={{ color: '#33BECC' }}>
-                      Launch in weeks, not months
-                    </p>
-                    <p className="text-sm text-text/70">
-                      We handle the technology and production. You focus on your community. Get up and running fast with minimal hassle.
-                    </p>
-                  </div>
-                </div>
+            <div className="text-center" style={{ marginBottom: '48px' }}>
+              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto shadow-lg" style={{ backgroundColor: '#33BECC', marginBottom: '24px' }}>
+                <Clock className="w-8 h-8 text-white" />
               </div>
+              <h3 className="text-2xl font-bold text-navy" style={{ marginBottom: '12px' }}>Streamlined Setup</h3>
+              <p className="text-base font-semibold" style={{ color: '#33BECC', marginBottom: '16px' }}>
+                Efficient implementation process
+              </p>
+              <p className="text-sm text-text/70 leading-relaxed">
+                We handle the technology and production. You focus on your community. Get up and running efficiently with minimal hassle.
+              </p>
+            </div>
 
-              <div className="bg-white rounded-lg p-xl border-2 border-muted shadow-lg">
-                <div className="flex items-start gap-lg">
-                  <div className="w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#303E55' }}>
-                    <CheckCircle2 className="w-8 h-8 text-accent" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-navy mb-sm">Easy Management</h3>
-                    <p className="text-sm font-semibold mb-md" style={{ color: '#33BECC' }}>
-                      Simple dashboard, powerful features
-                    </p>
-                    <p className="text-sm text-text/70">
-                      Track engagement, manage rewards, and see what's working with our intuitive platform. No technical expertise required.
-                    </p>
-                  </div>
-                </div>
+            <div className="text-center" style={{ marginBottom: '48px' }}>
+              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto shadow-lg" style={{ backgroundColor: '#303E55', marginBottom: '24px' }}>
+                <CheckCircle2 className="w-8 h-8 text-accent" />
               </div>
+              <h3 className="text-2xl font-bold text-navy" style={{ marginBottom: '12px' }}>Easy Management</h3>
+              <p className="text-base font-semibold" style={{ color: '#33BECC', marginBottom: '16px' }}>
+                Simple dashboard, powerful features
+              </p>
+              <p className="text-sm text-text/70 leading-relaxed">
+                Track engagement, manage rewards, and see what's working with our intuitive platform. No technical expertise required.
+              </p>
             </div>
           </div>
         </div>
