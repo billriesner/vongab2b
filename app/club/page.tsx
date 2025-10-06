@@ -13,7 +13,7 @@ export default function ClubPage() {
       <section className="relative overflow-hidden min-h-[600px] flex items-center">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: 'url(/images/pillars/club-community.jpg)' }}
+          style={{ backgroundImage: 'url(/hero-placeholder.jpg)' }}
         ></div>
         <div className="absolute inset-0 bg-white/60"></div>
         <div className="max-w-7xl mx-auto px-4 py-5xl md:py-[120px] relative z-10 w-full">
