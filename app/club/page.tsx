@@ -336,17 +336,24 @@ export default function ClubPage() {
           <p className="text-sm text-text/70 italic">*Final price available at time of order</p>
         </div>
 
-        <div className="text-center mt-3xl">
-          <p className="text-sm text-text/70 mb-md">Need 1000+ units or custom solutions?</p>
-          <Button 
-            size="lg"
-            variant="outline"
-            className="border-2 border-navy text-navy hover:bg-navy hover:text-white"
-            asChild
-          >
-            <Link href="/enterprise#demo">Book Enterprise Demo</Link>
-          </Button>
-        </div>
+        {/* Enterprise Call-Out */}
+        <Card className="border-2 border-navy shadow-xl mt-3xl max-w-3xl mx-auto" style={{ backgroundColor: '#303E55' }}>
+          <CardContent className="p-xl text-center">
+            <h3 className="text-2xl md:text-3xl font-bold text-accent mb-md">
+              Need 1000+ Units?
+            </h3>
+            <p className="text-base text-white mb-lg">
+              Schedule a call to explore custom pricing and enterprise solutions tailored to your needs.
+            </p>
+            <Button 
+              size="lg"
+              className="bg-accent hover:bg-accent/90 text-navy font-semibold shadow-md"
+              asChild
+            >
+              <Link href="/enterprise#talk">Let's Talk</Link>
+            </Button>
+          </CardContent>
+        </Card>
       </Section>
 
       {/* Proof & Outcomes */}
