@@ -54,70 +54,70 @@ export default function ClubPage() {
         style={{ backgroundColor: '#FFFFFF' }}
       >
         <div className="max-w-6xl mx-auto">
-          <div className="flex items-center justify-center mb-3xl">
+          <div className="flex items-center justify-center" style={{ marginBottom: '48px' }}>
             <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto shadow-lg" style={{ backgroundColor: '#33BECC' }}>
               <Sparkles className="w-10 h-10 text-navy" />
             </div>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-navy text-center mb-xl">Why Club Vonga?</h2>
-          <h3 className="text-2xl md:text-3xl font-bold text-center mb-3xl" style={{ color: '#33BECC' }}>What your members get</h3>
+          <h2 className="text-3xl md:text-4xl font-bold text-navy text-center" style={{ marginBottom: '24px' }}>Why Club Vonga?</h2>
+          <h3 className="text-2xl md:text-3xl font-bold text-center" style={{ color: '#33BECC', marginBottom: '64px' }}>What your members get</h3>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3xl max-w-5xl mx-auto">
-            <div className="flex items-start gap-lg">
-              <div className="w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#33BECC' }}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4xl max-w-5xl mx-auto">
+            <div className="flex items-start gap-lg" style={{ marginBottom: '32px' }}>
+              <div className="w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg" style={{ backgroundColor: '#33BECC' }}>
                 <Smartphone className="w-8 h-8 text-white" />
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-navy mb-sm">Tap to Check In</h3>
-                <p className="text-base font-semibold mb-md" style={{ color: '#33BECC' }}>
+                <h3 className="text-2xl font-bold text-navy" style={{ marginBottom: '12px' }}>Tap to Check In</h3>
+                <p className="text-base font-semibold" style={{ color: '#33BECC', marginBottom: '16px' }}>
                   Seamless attendance tracking
                 </p>
-                <p className="text-sm text-text/70">
+                <p className="text-sm text-text/70 leading-relaxed">
                   Members tap their apparel to check in. No apps, no fumbling with phones. Just tap and go.
                 </p>
               </div>
             </div>
 
-            <div className="flex items-start gap-lg">
-              <div className="w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#33BECC' }}>
+            <div className="flex items-start gap-lg" style={{ marginBottom: '32px' }}>
+              <div className="w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg" style={{ backgroundColor: '#33BECC' }}>
                 <Gift className="w-8 h-8 text-white" />
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-navy mb-sm">Earn Rewards</h3>
-                <p className="text-base font-semibold mb-md" style={{ color: '#33BECC' }}>
+                <h3 className="text-2xl font-bold text-navy" style={{ marginBottom: '12px' }}>Earn Rewards</h3>
+                <p className="text-base font-semibold" style={{ color: '#33BECC', marginBottom: '16px' }}>
                   Real perks, not just points
                 </p>
-                <p className="text-sm text-text/70">
+                <p className="text-sm text-text/70 leading-relaxed">
                   Unlock discounts, free classes, exclusive events, and more. You set the rewards that make sense for your community.
                 </p>
               </div>
             </div>
 
-            <div className="flex items-start gap-lg">
-              <div className="w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#303E55' }}>
+            <div className="flex items-start gap-lg" style={{ marginBottom: '32px' }}>
+              <div className="w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg" style={{ backgroundColor: '#303E55' }}>
                 <Sparkles className="w-8 h-8 text-accent" />
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-navy mb-sm">Feel Recognized</h3>
-                <p className="text-base font-semibold mb-md" style={{ color: '#33BECC' }}>
+                <h3 className="text-2xl font-bold text-navy" style={{ marginBottom: '12px' }}>Feel Recognized</h3>
+                <p className="text-base font-semibold" style={{ color: '#33BECC', marginBottom: '16px' }}>
                   Build stronger connections
                 </p>
-                <p className="text-sm text-text/70">
+                <p className="text-sm text-text/70 leading-relaxed">
                   Every tap shows your members they're seen and valued. Simple interactions that build lasting community loyalty.
                 </p>
               </div>
             </div>
 
-            <div className="flex items-start gap-lg">
-              <div className="w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#303E55' }}>
+            <div className="flex items-start gap-lg" style={{ marginBottom: '32px' }}>
+              <div className="w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg" style={{ backgroundColor: '#303E55' }}>
                 <Heart className="w-8 h-8 text-accent" />
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-navy mb-sm">No Forgotten Cards</h3>
-                <p className="text-base font-semibold mb-md" style={{ color: '#33BECC' }}>
+                <h3 className="text-2xl font-bold text-navy" style={{ marginBottom: '12px' }}>No Forgotten Cards</h3>
+                <p className="text-base font-semibold" style={{ color: '#33BECC', marginBottom: '16px' }}>
                   Always wearing your membership
                 </p>
-                <p className="text-sm text-text/70">
+                <p className="text-sm text-text/70 leading-relaxed">
                   Members never forget their rewards card again. Their connected apparel is always with them.
                 </p>
               </div>
