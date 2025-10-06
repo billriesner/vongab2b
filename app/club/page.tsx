@@ -30,15 +30,15 @@ export default function ClubPage() {
             <div className="flex flex-col sm:flex-row gap-md justify-center items-center">
               <Button 
                 size="lg" 
-                className="min-w-[160px] bg-navy hover:bg-navy/90 text-white shadow-lg"
+                className="min-w-[160px] text-white shadow-lg font-semibold"
+                style={{ backgroundColor: '#33BECC' }}
                 asChild
               >
                 <Link href="/club/get-started">Get Started</Link>
               </Button>
               <Button 
                 size="lg" 
-                variant="outline"
-                className="min-w-[160px] border-2 border-navy bg-white text-navy hover:bg-navy hover:text-white shadow-lg"
+                className="min-w-[160px] border-2 border-navy bg-white text-navy hover:bg-navy hover:text-white shadow-lg font-semibold"
                 asChild
               >
                 <Link href="/enterprise#talk">Book a Call</Link>
