@@ -605,15 +605,15 @@ export default function GetStartedPage() {
 
                   <div>
                     <label className="block text-sm font-semibold mb-sm text-navy">
-                      Brand Colors
+                      Brand Colors (Hex Codes or Pantone)
                     </label>
                     <input
                       {...register('brandColors')}
                       type="text"
                       className="w-full px-lg py-md border-2 border-muted rounded focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-navy bg-white"
-                      placeholder="e.g., Navy blue and orange"
+                      placeholder="e.g., #1A4D8F, Pantone 2945 C"
                     />
-                    <p className="text-xs text-text/70 mt-sm">Tell us your primary brand colors</p>
+                    <p className="text-xs text-text/70 mt-sm">Provide hex codes (e.g., #1A4D8F) or Pantone numbers (e.g., Pantone 2945 C) for accurate color matching</p>
                   </div>
 
                   <div>
