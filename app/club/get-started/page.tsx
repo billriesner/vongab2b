@@ -279,18 +279,23 @@ export default function GetStartedPage() {
                     step === currentStep
                       ? 'text-navy'
                       : step < currentStep
-                      ? 'bg-navy text-white'
+                      ? 'text-white'
                       : 'bg-gray-300 text-gray-600'
                   }`}
-                  style={step === currentStep ? { backgroundColor: '#33BECC' } : {}}
+                  style={
+                    step === currentStep 
+                      ? { backgroundColor: '#33BECC' } 
+                      : step < currentStep
+                      ? { backgroundColor: '#303E55' }
+                      : {}
+                  }
                 >
                   {step < currentStep ? <CheckCircle2 className="w-6 h-6" /> : step}
                 </div>
                 {step < 5 && (
                   <div
-                    className={`h-1 flex-1 mx-2 ${
-                      step < currentStep ? 'bg-navy' : 'bg-gray-300'
-                    }`}
+                    className="h-1 flex-1 mx-2"
+                    style={{ backgroundColor: step < currentStep ? '#303E55' : '#D1D5DB' }}
                   />
                 )}
               </div>
@@ -576,7 +581,7 @@ export default function GetStartedPage() {
                     <div className="border-2 border-dashed border-muted rounded-lg p-xl text-center hover:border-accent transition-colors cursor-pointer">
                       <input
                         type="file"
-                        accept="image/*"
+                        accept=".svg,.ai,.psd,.eps"
                         onChange={handleLogoUpload}
                         className="hidden"
                         id="logo-upload"
@@ -591,7 +596,7 @@ export default function GetStartedPage() {
                           <div className="space-y-md">
                             <Upload className="w-12 h-12 mx-auto text-accent" />
                             <p className="text-sm text-navy font-semibold">Click to upload logo</p>
-                            <p className="text-xs text-text/70">PNG, JPG, SVG up to 10MB</p>
+                            <p className="text-xs text-text/70">Vector files only: SVG, AI, PSD, EPS (up to 10MB)</p>
                           </div>
                         )}
                       </label>
