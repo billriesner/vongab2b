@@ -25,8 +25,8 @@ const mockClient = {
 
 // Function to create Supabase clients safely
 export const createSupabaseClient = () => {
-  // During build time or if env vars are missing, return mock client
-  if (typeof window === 'undefined' && process.env.NODE_ENV === 'production' && !process.env.NEXT_PUBLIC_SUPABASE_URL) {
+  // Always return mock client during build time
+  if (typeof window === 'undefined' && process.env.NODE_ENV === 'production') {
     return mockClient
   }
   
@@ -48,8 +48,8 @@ export const createSupabaseClient = () => {
 }
 
 export const createSupabaseAdminClient = () => {
-  // During build time or if env vars are missing, return mock client
-  if (typeof window === 'undefined' && process.env.NODE_ENV === 'production' && !process.env.NEXT_PUBLIC_SUPABASE_URL) {
+  // Always return mock client during build time
+  if (typeof window === 'undefined' && process.env.NODE_ENV === 'production') {
     return mockClient
   }
   
