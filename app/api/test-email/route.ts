@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
     const result = await sendOrderConfirmationEmail({
       organizationName: 'Test Organization',
       contactName: 'Test User',
-      email: 'bill@riesner.com', // Change this to your email
+      email: 'bill.riesner@gmail.com',
       orderId: 'TEST-123',
       totalUnits: 100,
       subtotal: 2500,
