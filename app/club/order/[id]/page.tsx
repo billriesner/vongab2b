@@ -117,9 +117,12 @@ export default function OrderStatusPage() {
   };
 
   const getOrderItems = (cartItems: any[]) => {
+    if (!cartItems || !Array.isArray(cartItems) || cartItems.length === 0) {
+      return 'No items';
+    }
     return cartItems.map((item: any) => {
-      const itemQty = Object.values(item.sizeRun).reduce((sum: number, qty: any) => sum + qty, 0);
-      return `${item.gearType}: ${itemQty} units`;
+      const itemQty = Object.values(item.sizeRun || {}).reduce((sum: number, qty: any) => sum + (qty || 0), 0);
+      return `${item.gearType || 'Item'}: ${itemQty} units`;
     }).join(', ');
   };
 
@@ -180,7 +183,13 @@ export default function OrderStatusPage() {
                   <p><strong>Contact:</strong> {order['Contact Name']}</p>
                   <p><strong>Email:</strong> {order['Email']}</p>
                   <p><strong>Total Units:</strong> {order['Total Units']}</p>
-                  <p><strong>Items:</strong> {getOrderItems(JSON.parse(order['Cart Items'] || '[]'))}</p>
+                  <p><strong>Items:</strong> {getOrderItems((() => {
+                    try {
+                      return JSON.parse(order['Cart Items'] || '[]');
+                    } catch {
+                      return [];
+                    }
+                  })())}</p>
                   <p><strong>Order Date:</strong> {new Date(order['Created At']).toLocaleDateString()}</p>
                 </div>
               </div>
