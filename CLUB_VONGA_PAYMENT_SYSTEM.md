@@ -1,5 +1,10 @@
 # Club Vonga Automated Payment System
 
+⚠️ **DEPRECATED: This documentation is for the Supabase version which has been replaced with Airtable.**  
+**Club Vonga functionality is currently disabled pending rebuild with Airtable integration.**
+
+---
+
 ## Overview
 
 The Club Vonga system now includes an automated 3-stage payment workflow:
