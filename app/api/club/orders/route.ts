@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { supabaseAdmin, type ClubOrder } from '@/lib/supabase';
+import type { ClubOrder } from '@/lib/supabase';
 
 export async function POST(request: NextRequest) {
   try {
@@ -60,6 +60,8 @@ export async function POST(request: NextRequest) {
     };
 
     // Insert order into database
+    // Import Supabase inside the function to avoid build-time initialization
+    const { supabaseAdmin } = await import('@/lib/supabase');
     const supabaseAdminClient = supabaseAdmin();
     const { data, error } = await supabaseAdminClient
       .from('club_orders')
@@ -186,6 +188,8 @@ export async function GET(request: NextRequest) {
 
     if (orderId) {
       // Get specific order
+      // Import Supabase inside the function to avoid build-time initialization
+      const { supabaseAdmin } = await import('@/lib/supabase');
       const supabaseAdminClient = supabaseAdmin();
       const { data, error } = await supabaseAdminClient
         .from('club_orders')
@@ -205,6 +209,8 @@ export async function GET(request: NextRequest) {
 
     if (email) {
       // Get orders for specific email
+      // Import Supabase inside the function to avoid build-time initialization
+      const { supabaseAdmin } = await import('@/lib/supabase');
       const supabaseAdminClient = supabaseAdmin();
       const { data, error } = await supabaseAdminClient
         .from('club_orders')
@@ -223,6 +229,8 @@ export async function GET(request: NextRequest) {
     }
 
     // Get all orders (admin only)
+    // Import Supabase inside the function to avoid build-time initialization
+    const { supabaseAdmin } = await import('@/lib/supabase');
     const supabaseAdminClient = supabaseAdmin();
     const { data, error } = await supabaseAdminClient
       .from('club_orders')

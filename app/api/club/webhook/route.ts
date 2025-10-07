@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import Stripe from 'stripe';
-import { supabaseAdmin } from '@/lib/supabase';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2025-09-30.clover',
@@ -75,6 +74,8 @@ export async function POST(request: NextRequest) {
         final_payment_intent_id: undefined
       };
 
+      // Import Supabase inside the function to avoid build-time initialization
+      const { supabaseAdmin } = await import('@/lib/supabase');
       const supabaseAdminClient = supabaseAdmin();
       const { data, error } = await supabaseAdminClient
         .from('club_orders')

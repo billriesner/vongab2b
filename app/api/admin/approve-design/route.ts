@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { supabaseAdmin } from '@/lib/supabase';
 
 export async function POST(request: NextRequest) {
   try {
@@ -15,6 +14,8 @@ export async function POST(request: NextRequest) {
     }
 
     // Get order from database
+    // Import Supabase inside the function to avoid build-time initialization
+    const { supabaseAdmin } = await import('@/lib/supabase');
     const supabaseAdminClient = supabaseAdmin();
     const { data: order, error: orderError } = await supabaseAdminClient
       .from('club_orders')
