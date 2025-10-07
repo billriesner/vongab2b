@@ -174,10 +174,7 @@ export default function GetStartedPage() {
           alert('Please add at least one item to your cart');
           return;
         }
-        if (cartTotalUnits < 100) {
-          alert('Cart must contain at least 100 total units');
-          return;
-        }
+        // Removed 100 unit minimum for testing
         fieldsToValidate = ['starterKit'];
         break;
       case 3:
@@ -629,18 +626,10 @@ export default function GetStartedPage() {
                       </div>
                     )}
 
-                    {cartTotalUnits > 0 && cartTotalUnits < 100 && (
-                      <div className="mt-md p-md bg-red-50 border-2 border-red-300 rounded">
-                        <p className="text-sm font-semibold text-red-600 text-center">
-                          ⚠️ You need {100 - cartTotalUnits} more units to meet the 100 unit minimum
-                        </p>
-                      </div>
-                    )}
-
-                    {cartTotalUnits >= 100 && (
+                    {cartTotalUnits > 0 && (
                       <div className="mt-md p-md bg-green-50 border-2 border-green-300 rounded">
                         <p className="text-sm font-semibold text-green-600 text-center">
-                          ✓ Minimum requirement met!
+                          ✓ {cartTotalUnits} unit{cartTotalUnits !== 1 ? 's' : ''} in cart
                         </p>
                       </div>
                     )}
