@@ -11,8 +11,11 @@ export const getAirtableBase = () => {
   return airtable.base(process.env.AIRTABLE_BASE_ID!);
 };
 
-// Table name
-export const ORDERS_TABLE = process.env.AIRTABLE_TABLE_ID || 'tbl5hxH53WPrguBAG';
+// Table IDs
+export const ORDERS_TABLE = process.env.AIRTABLE_ORDERS_TABLE_ID || 'tbl5hxH53WPrguBAG';
+export const CONTACT_TABLE = process.env.AIRTABLE_CONTACT_TABLE_ID || '';
+export const RETURNS_TABLE = process.env.AIRTABLE_RETURNS_TABLE_ID || '';
+export const NEWSLETTER_TABLE = process.env.AIRTABLE_NEWSLETTER_TABLE_ID || '';
 
 // Type definitions for Club Orders
 export interface ClubOrder {
@@ -185,6 +188,81 @@ export const getOrderByStripeSessionId = async (sessionId: string) => {
     };
   } catch (error) {
     console.error('Error fetching order by session ID from Airtable:', error);
+    throw error;
+  }
+};
+
+// ===== CONTACT FORM FUNCTIONS =====
+
+export interface ContactSubmission {
+  'Name': string;
+  'Email': string;
+  'Company'?: string;
+  'Message': string;
+  'Submitted At': string;
+}
+
+export const createContactSubmission = async (data: ContactSubmission) => {
+  const base = getAirtableBase();
+  if (!base || !CONTACT_TABLE) {
+    console.warn('Airtable contact table not configured');
+    return null;
+  }
+
+  try {
+    const records = await base(CONTACT_TABLE).create([{ fields: data as any }]);
+    return { id: records[0].id, ...records[0].fields };
+  } catch (error) {
+    console.error('Error creating contact submission:', error);
+    throw error;
+  }
+};
+
+// ===== RETURN REQUEST FUNCTIONS =====
+
+export interface ReturnRequest {
+  'Order Number': string;
+  'Email': string;
+  'Name': string;
+  'Reason': string;
+  'Submitted At': string;
+}
+
+export const createReturnRequest = async (data: ReturnRequest) => {
+  const base = getAirtableBase();
+  if (!base || !RETURNS_TABLE) {
+    console.warn('Airtable returns table not configured');
+    return null;
+  }
+
+  try {
+    const records = await base(RETURNS_TABLE).create([{ fields: data as any }]);
+    return { id: records[0].id, ...records[0].fields };
+  } catch (error) {
+    console.error('Error creating return request:', error);
+    throw error;
+  }
+};
+
+// ===== NEWSLETTER FUNCTIONS =====
+
+export interface NewsletterSubscription {
+  'Email': string;
+  'Subscribed At': string;
+}
+
+export const createNewsletterSubscription = async (data: NewsletterSubscription) => {
+  const base = getAirtableBase();
+  if (!base || !NEWSLETTER_TABLE) {
+    console.warn('Airtable newsletter table not configured');
+    return null;
+  }
+
+  try {
+    const records = await base(NEWSLETTER_TABLE).create([{ fields: data as any }]);
+    return { id: records[0].id, ...records[0].fields };
+  } catch (error) {
+    console.error('Error creating newsletter subscription:', error);
     throw error;
   }
 };

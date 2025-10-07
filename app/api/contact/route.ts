@@ -23,31 +23,19 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Store in Supabase
-    if (typeof window === "undefined" && process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_KEY) {
-      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-      const supabaseKey = process.env.SUPABASE_SERVICE_KEY;
-
-      const response = await fetch(`${supabaseUrl}/rest/v1/contact_submissions`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'apikey': supabaseKey,
-          'Authorization': `Bearer ${supabaseKey}`,
-          'Prefer': 'return=minimal'
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          company,
-          message,
-          created_at: new Date().toISOString()
-        })
+    // Store in Airtable
+    try {
+      const { createContactSubmission } = await import('@/lib/airtable');
+      await createContactSubmission({
+        'Name': name,
+        'Email': email,
+        'Company': company,
+        'Message': message,
+        'Submitted At': new Date().toISOString()
       });
-
-      if (!response.ok) {
-        console.error('Supabase error:', await response.text());
-      }
+    } catch (airtableError) {
+      console.error('Airtable error:', airtableError);
+      // Continue even if Airtable fails - Slack notification is primary
     }
 
     // Send Slack notification
