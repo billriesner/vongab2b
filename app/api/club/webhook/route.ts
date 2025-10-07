@@ -55,44 +55,38 @@ export async function POST(request: NextRequest) {
       // Parse cart items
       const cartItems = JSON.parse(cartItemsJson || '[]');
 
-      // Save order to database
+      // Save order to Airtable
+      const { createOrder } = await import('@/lib/airtable');
+      
       const orderData = {
-        stripe_session_id: session.id,
-        organization_name: organizationName,
-        contact_name: session.customer_details?.name || 'Unknown',
-        email: customerEmail,
-        phone: session.customer_details?.phone || undefined,
-        organization_type: undefined, // Not stored in metadata
-        member_count: parseInt(memberCount || '0'),
-        starter_kit: kitType,
-        cart_items: cartItems,
-        total_units: parseInt(totalUnits || '0'),
-        subtotal: parseFloat(subtotalAmount || '0'),
-        deposit_amount: parseFloat(depositAmount || '0'),
-        second_payment_amount: parseFloat(secondPayment || '0'),
-        final_payment_amount: parseFloat(finalPayment || '0'),
-        order_status: 'deposit_paid',
-        payment_status: 'deposit_paid',
-        deposit_payment_intent_id: session.payment_intent as string,
-        second_payment_intent_id: undefined,
-        final_payment_intent_id: undefined
+        'Order ID': `ORD-${Date.now()}`,
+        'Stripe Session ID': session.id,
+        'Organization Name': organizationName,
+        'Contact Name': session.customer_details?.name || 'Unknown',
+        'Email': customerEmail,
+        'Phone': session.customer_details?.phone || undefined,
+        'Member Count': parseInt(memberCount || '0'),
+        'Starter Kit': (kitType === 'core' ? 'Core' : 'Pro') as 'Core' | 'Pro',
+        'Cart Items': JSON.stringify(cartItems),
+        'Total Units': parseInt(totalUnits || '0'),
+        'Subtotal': parseFloat(subtotalAmount || '0'),
+        'Deposit Amount': parseFloat(depositAmount || '0'),
+        'Second Payment Amount': parseFloat(secondPayment || '0'),
+        'Final Payment Amount': parseFloat(finalPayment || '0'),
+        'Order Status': 'Deposit Paid' as const,
+        'Payment Status': 'Deposit Paid' as const,
+        'Created At': new Date().toISOString(),
+        'Deposit Payment Intent ID': session.payment_intent as string,
       };
 
-      // Import Supabase inside the function to avoid build-time initialization
-      const { supabaseAdmin } = await import('@/lib/supabase');
-      const supabaseAdminClient = supabaseAdmin();
-      const { data, error } = await supabaseAdminClient
-        .from('club_orders')
-        .insert([orderData])
-        .select()
-        .single();
+      const savedOrder = await createOrder(orderData);
 
-      if (error) {
-        console.error('Failed to save order:', error);
+      if (!savedOrder) {
+        console.error('Failed to save order to Airtable');
         return NextResponse.json({ error: 'Failed to save order' }, { status: 500 });
       }
 
-      console.log('Order saved successfully:', data.id);
+      console.log('Order saved successfully to Airtable:', savedOrder.id);
 
       // Send Slack notification about new order
       if (process.env.SLACK_WEBHOOK_URL) {

@@ -17,17 +17,12 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Get order from database
-    // Import Supabase inside the function to avoid build-time initialization
-    const { supabaseAdmin } = await import('@/lib/supabase');
-    const supabaseAdminClient = supabaseAdmin();
-    const { data: order, error: orderError } = await supabaseAdminClient
-      .from('club_orders')
-      .select('*')
-      .eq('id', orderId)
-      .single();
+    // Get order from Airtable
+    const { getOrderById, updateOrder } = await import('@/lib/airtable');
+    
+    const order = await getOrderById(orderId);
 
-    if (orderError || !order) {
+    if (!order) {
       return NextResponse.json(
         { error: 'Order not found' },
         { status: 404 }
@@ -35,7 +30,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if order is ready for design approval
-    if (order.order_status !== 'deposit_paid' || order.payment_status !== 'deposit_paid') {
+    if (order['Order Status'] !== 'Deposit Paid' || order['Payment Status'] !== 'Deposit Paid') {
       return NextResponse.json(
         { error: 'Order is not ready for design approval' },
         { status: 400 }
@@ -43,17 +38,14 @@ export async function POST(request: NextRequest) {
     }
 
     // Update order status
-    const { error: updateError } = await supabaseAdminClient
-      .from('club_orders')
-      .update({
-        order_status: 'design_approved',
-        payment_status: 'second_payment_due',
-        design_approved_at: new Date().toISOString()
-      })
-      .eq('id', orderId);
-
-    if (updateError) {
-      console.error('Database update error:', updateError);
+    try {
+      await updateOrder(orderId, {
+        'Order Status': 'Design Approved',
+        'Payment Status': 'Second Payment Due',
+        'Design Approved At': new Date().toISOString()
+      });
+    } catch (updateError) {
+      console.error('Airtable update error:', updateError);
       return NextResponse.json(
         { error: 'Failed to update order status' },
         { status: 500 }
@@ -62,8 +54,8 @@ export async function POST(request: NextRequest) {
 
     // Send email notification (placeholder - you'll need to implement email service)
     // For now, we'll just log it
-    console.log(`Design approved for order ${orderId}. Customer: ${order.email}`);
-    console.log(`Second payment amount: $${order.second_payment_amount}`);
+    console.log(`Design approved for order ${orderId}. Customer: ${order['Email']}`);
+    console.log(`Second payment amount: $${order['Second Payment Amount']}`);
 
     // Send Slack notification
     if (process.env.SLACK_WEBHOOK_URL) {
@@ -83,7 +75,7 @@ export async function POST(request: NextRequest) {
               fields: [
                 {
                   type: "mrkdwn",
-                  text: `*Organization:*\n${order.organization_name}`
+                  text: `*Organization:*\n${order['Organization Name']}`
                 },
                 {
                   type: "mrkdwn",
@@ -91,11 +83,11 @@ export async function POST(request: NextRequest) {
                 },
                 {
                   type: "mrkdwn",
-                  text: `*Customer Email:*\n${order.email}`
+                  text: `*Customer Email:*\n${order['Email']}`
                 },
                 {
                   type: "mrkdwn",
-                  text: `*Second Payment Due:*\n$${order.second_payment_amount.toLocaleString()}`
+                  text: `*Second Payment Due:*\n$${order['Second Payment Amount'].toLocaleString()}`
                 }
               ]
             },
@@ -103,7 +95,7 @@ export async function POST(request: NextRequest) {
               type: "section",
               text: {
                 type: "mrkdwn",
-                text: `*Next Steps:*\n• Customer will receive email with payment link\n• 40% payment due before production begins\n• Payment link: ${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/club/payment/second?orderId=${orderId}&email=${order.email}`
+                text: `*Next Steps:*\n• Customer will receive email with payment link\n• 40% payment due before production begins\n• Payment link: ${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/club/payment/second?orderId=${orderId}&email=${order['Email']}`
               }
             }
           ]
@@ -122,7 +114,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       message: 'Design approved successfully',
-      paymentLink: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/club/payment/second?orderId=${orderId}&email=${order.email}`
+      paymentLink: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/club/payment/second?orderId=${orderId}&email=${order['Email']}`
     });
 
   } catch (error) {
