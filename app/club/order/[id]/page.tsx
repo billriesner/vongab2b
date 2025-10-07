@@ -155,6 +155,17 @@ export default function OrderStatusPage() {
     );
   }
 
+  // Safety check - don't render if no order
+  if (!order) {
+    return (
+      <div className="min-h-screen py-8" style={{ backgroundColor: '#F7F7F7' }}>
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <p className="text-lg text-text/70">Order not found or loading...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen py-8" style={{ backgroundColor: '#F7F7F7' }}>
       <div className="max-w-4xl mx-auto px-4">
