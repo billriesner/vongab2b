@@ -114,22 +114,17 @@ export default function TechnologyPage() {
         </div>
       </Section>
 
-      {/* Video Placeholder */}
+      {/* Digital Twin Explainer Video */}
       <section id="video" className="py-5xl" style={{ backgroundColor: '#000000' }}>
-        <div className="w-full">
-          <div className="relative bg-navy overflow-hidden" style={{ paddingBottom: '56.25%' }}>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center">
-                <div className="w-24 h-24 bg-accent rounded-full flex items-center justify-center mx-auto mb-md shadow-lg">
-                  <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </div>
-                <p className="text-accent text-xl font-semibold">Video: Digital Twin Explainer</p>
-                <p className="text-white/70 text-sm mt-sm">See how your Vonga product connects to experiences</p>
-              </div>
-            </div>
-          </div>
+        <div className="w-full max-w-7xl mx-auto px-4">
+          <video 
+            className="w-full h-auto rounded-lg"
+            controls
+            playsInline
+          >
+            <source src="/digital-twin.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         </div>
       </section>
 
@@ -183,17 +178,14 @@ export default function TechnologyPage() {
         </div>
       </Section>
 
-      {/* Image Placeholder */}
+      {/* NFC Technology in Action */}
       <section className="w-full" style={{ backgroundColor: '#F7F7F7' }}>
-        <div className="w-full relative bg-gray-200 overflow-hidden" style={{ paddingBottom: '40%' }}>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center">
-              <svg className="w-24 h-24 text-gray-400 mx-auto mb-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              <p className="text-gray-500 text-lg font-semibold">Image: NFC Technology in Action</p>
-            </div>
-          </div>
+        <div className="w-full">
+          <img 
+            src="/images/how-it-works/tap-interaction.jpg" 
+            alt="NFC Technology in Action" 
+            className="w-full h-auto"
+          />
         </div>
       </section>
 
@@ -341,17 +333,14 @@ export default function TechnologyPage() {
         </div>
       </Section>
 
-      {/* Image Placeholder */}
+      {/* Privacy & Security Features */}
       <section className="w-full" style={{ backgroundColor: '#FFFFFF' }}>
-        <div className="w-full relative bg-gray-200 overflow-hidden" style={{ paddingBottom: '40%' }}>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center">
-              <svg className="w-24 h-24 text-gray-400 mx-auto mb-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              <p className="text-gray-500 text-lg font-semibold">Image: Privacy & Security Features</p>
-            </div>
-          </div>
+        <div className="w-full">
+          <img 
+            src="/images/supporting/device-hero-mockup.png" 
+            alt="Privacy & Security Features" 
+            className="w-full h-auto"
+          />
         </div>
       </section>
 
