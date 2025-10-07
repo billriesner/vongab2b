@@ -6,10 +6,6 @@ import Stripe from 'stripe';
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
-  apiVersion: '2025-09-30.clover',
-});
-
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -21,6 +17,11 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       );
     }
+
+    // Initialize Stripe inside the function to ensure env vars are available
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+      apiVersion: '2025-09-30.clover',
+    });
 
     // Calculate total units across all cart items
     const totalUnits = cartItems.reduce((total: number, item: any) => {
