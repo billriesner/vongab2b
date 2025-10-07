@@ -1,21 +1,55 @@
-// Temporary mock Supabase client for build testing
+// Lazy import Supabase to prevent build-time errors
+let createClient: any = null
+
+// Function to create Supabase clients safely
 export const createSupabaseClient = () => {
-  return {
-    from: () => ({ select: () => ({ eq: () => ({ single: () => Promise.resolve({ data: null, error: null }) }) }) }),
-    insert: () => ({ select: () => ({ single: () => Promise.resolve({ data: null, error: null }) }) }),
-    update: () => ({ eq: () => ({ select: () => ({ single: () => Promise.resolve({ data: null, error: null }) }) }) })
-  } as any
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  
+  if (!supabaseUrl || !supabaseAnonKey) {
+    // Return a mock client during build time to prevent errors
+    return {
+      from: () => ({ select: () => ({ eq: () => ({ single: () => Promise.resolve({ data: null, error: null }) }) }) }),
+      insert: () => ({ select: () => ({ single: () => Promise.resolve({ data: null, error: null }) }) }),
+      update: () => ({ eq: () => ({ select: () => ({ single: () => Promise.resolve({ data: null, error: null }) }) }) })
+    } as any
+  }
+  
+  // Lazy load Supabase client
+  if (!createClient) {
+    createClient = require('@supabase/supabase-js').createClient
+  }
+  
+  return createClient(supabaseUrl, supabaseAnonKey)
 }
 
 export const createSupabaseAdminClient = () => {
-  return {
-    from: () => ({ select: () => ({ eq: () => ({ single: () => Promise.resolve({ data: null, error: null }) }) }) }),
-    insert: () => ({ select: () => ({ single: () => Promise.resolve({ data: null, error: null }) }) }),
-    update: () => ({ eq: () => ({ select: () => ({ single: () => Promise.resolve({ data: null, error: null }) }) }) })
-  } as any
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+  
+  if (!supabaseUrl || !supabaseServiceKey) {
+    // Return a mock client during build time to prevent errors
+    return {
+      from: () => ({ select: () => ({ eq: () => ({ single: () => Promise.resolve({ data: null, error: null }) }) }) }),
+      insert: () => ({ select: () => ({ single: () => Promise.resolve({ data: null, error: null }) }) }),
+      update: () => ({ eq: () => ({ select: () => ({ single: () => Promise.resolve({ data: null, error: null }) }) }) })
+    } as any
+  }
+  
+  // Lazy load Supabase client
+  if (!createClient) {
+    createClient = require('@supabase/supabase-js').createClient
+  }
+  
+  return createClient(supabaseUrl, supabaseServiceKey, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false
+    }
+  })
 }
 
-// Export only the factory functions
+// Export only the factory functions - no module-level client creation
 export { createSupabaseClient as supabase, createSupabaseAdminClient as supabaseAdmin }
 
 // Types for our Club Orders
