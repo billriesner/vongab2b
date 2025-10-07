@@ -10,6 +10,8 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Exclude Supabase from server-side bundling during build
+  serverExternalPackages: ['@supabase/supabase-js'],
 };
 
 export default nextConfig;
