@@ -45,15 +45,20 @@ export default function OrderStatusPage() {
 
   const fetchOrder = async () => {
     try {
+      console.log('Fetching order:', orderId, email);
       const response = await fetch(`/api/club/orders?orderId=${orderId}&email=${email}`);
       const data = await response.json();
+      console.log('Order API response:', data);
       
-      if (response.ok) {
+      if (response.ok && data.order) {
+        console.log('Setting order:', data.order);
         setOrder(data.order);
       } else {
+        console.error('Order fetch failed:', data);
         setError(data.error || 'Order not found');
       }
     } catch (err) {
+      console.error('Fetch error:', err);
       setError('Failed to fetch order');
     } finally {
       setLoading(false);
