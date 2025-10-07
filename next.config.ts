@@ -10,8 +10,8 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  // Supabase has been removed - now using Airtable exclusively
-  // serverExternalPackages: ['@supabase/supabase-js'],
+  // External packages that should not be bundled
+  serverExternalPackages: ['stripe', 'airtable'],
   // Skip collecting page data for API routes during build
   typescript: {
     ignoreBuildErrors: false,
