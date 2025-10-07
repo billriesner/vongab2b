@@ -114,12 +114,12 @@ export default function TechnologyPage() {
         </div>
       </Section>
 
-      {/* Wear Device Image */}
+      {/* Visual Image */}
       <section className="w-full" style={{ backgroundColor: '#FFFFFF' }}>
         <div className="w-full">
           <img 
-            src="/images/how-it-works/wear-device.jpg" 
-            alt="Wearing Vonga connected apparel" 
+            src="/hero-2.svg" 
+            alt="Vonga technology showcase" 
             className="w-full h-auto"
           />
         </div>
@@ -189,23 +189,23 @@ export default function TechnologyPage() {
         </div>
       </Section>
 
-      {/* NFC Technology in Action */}
+      {/* NFC Technology Visual */}
       <section className="w-full" style={{ backgroundColor: '#F7F7F7' }}>
         <div className="w-full">
           <img 
-            src="/images/how-it-works/tap-interaction.jpg" 
+            src="/tap-in.svg" 
             alt="NFC Technology in Action" 
             className="w-full h-auto"
           />
         </div>
       </section>
 
-      {/* Unlock Experience Image */}
+      {/* Visual Showcase */}
       <section className="w-full" style={{ backgroundColor: '#FFFFFF' }}>
         <div className="w-full">
           <img 
-            src="/images/how-it-works/unlock-experience.jpg" 
-            alt="Unlocking experiences with Vonga" 
+            src="/placeholder1.svg" 
+            alt="Vonga experience showcase" 
             className="w-full h-auto"
           />
         </div>
@@ -284,11 +284,11 @@ export default function TechnologyPage() {
         </div>
       </Section>
 
-      {/* Product Showcase Image */}
+      {/* Visual Showcase */}
       <section className="w-full" style={{ backgroundColor: '#F7F7F7' }}>
         <div className="w-full">
           <img 
-            src="/images/products/vonga-sport-product.jpg" 
+            src="/placeholder2.svg" 
             alt="Vonga connected apparel showcase" 
             className="w-full h-auto"
           />
@@ -366,11 +366,11 @@ export default function TechnologyPage() {
         </div>
       </Section>
 
-      {/* Privacy & Security Features */}
+      {/* Visual Showcase */}
       <section className="w-full" style={{ backgroundColor: '#FFFFFF' }}>
         <div className="w-full">
           <img 
-            src="/images/supporting/device-hero-mockup.png" 
+            src="/about-hero.svg" 
             alt="Privacy & Security Features" 
             className="w-full h-auto"
           />
@@ -450,12 +450,12 @@ export default function TechnologyPage() {
         </div>
       </Section>
 
-      {/* Hero Device Showcase Image */}
+      {/* Visual Showcase */}
       <section className="w-full" style={{ backgroundColor: '#F7F7F7' }}>
         <div className="w-full">
           <img 
-            src="/images/hero/hero-device-showcase.jpg" 
-            alt="Vonga technology device showcase" 
+            src="/hero-enterprise.svg" 
+            alt="Vonga technology showcase" 
             className="w-full h-auto"
           />
         </div>
