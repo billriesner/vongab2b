@@ -263,20 +263,19 @@ export default function ClubPage() {
         </div>
       </Section>
 
-      {/* Image Placeholder - Dashboard Preview */}
+      {/* Lifestyle Video Showcase */}
       <section className="relative overflow-hidden" style={{ backgroundColor: '#FFFFFF' }}>
         <div className="w-full">
-          <div className="relative bg-navy overflow-hidden" style={{ paddingBottom: '50%' }}>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center">
-                <div className="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-md shadow-lg" style={{ backgroundColor: '#33BECC' }}>
-                  <BarChart3 className="w-12 h-12 text-navy" />
-                </div>
-                <p className="text-xl font-semibold text-accent">Image: Rewards Dashboard Preview</p>
-                <p className="text-sm text-white/70 mt-sm">Placeholder for dashboard screenshot/mockup</p>
-              </div>
-            </div>
-          </div>
+          <video 
+            className="w-full h-auto"
+            autoPlay 
+            loop 
+            muted 
+            playsInline
+          >
+            <source src="/lifestyle-video.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         </div>
       </section>
 
@@ -419,23 +418,6 @@ export default function ClubPage() {
           </Card>
         </div>
       </Section>
-
-      {/* Image Placeholder - Product Showcase */}
-      <section className="relative overflow-hidden" style={{ backgroundColor: '#FFFFFF' }}>
-        <div className="w-full">
-          <div className="relative bg-gray-200 overflow-hidden" style={{ paddingBottom: '40%' }}>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center">
-                <div className="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-md shadow-lg" style={{ backgroundColor: '#303E55' }}>
-                  <Shirt className="w-12 h-12 text-accent" />
-                </div>
-                <p className="text-xl font-semibold text-navy">Image: Branded apparel showcase</p>
-                <p className="text-sm text-text/70 mt-sm">Placeholder for product/lifestyle photo</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Proven Results - Centered Icons Format */}
       <Section 
