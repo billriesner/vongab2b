@@ -7,19 +7,19 @@ import { Badge } from '@/components/ui/badge';
 
 interface ClubOrder {
   id: string;
-  organization_name: string;
-  contact_name: string;
-  email: string;
-  starter_kit: 'core' | 'pro';
-  total_units: number;
-  subtotal: number;
-  deposit_amount: number;
-  second_payment_amount: number;
-  final_payment_amount: number;
-  order_status: 'deposit_paid' | 'design_approved' | 'production_ready' | 'shipped';
-  payment_status: 'deposit_paid' | 'second_payment_due' | 'final_payment_due' | 'fully_paid';
-  created_at: string;
-  cart_items: any[];
+  'Organization Name': string;
+  'Contact Name': string;
+  'Email': string;
+  'Starter Kit': 'Core' | 'Pro';
+  'Total Units': number;
+  'Subtotal': number;
+  'Deposit Amount': number;
+  'Second Payment Amount': number;
+  'Final Payment Amount': number;
+  'Order Status': 'Deposit Paid' | 'Design Approved' | 'Production Ready' | 'Shipped';
+  'Payment Status': 'Deposit Paid' | 'Second Payment Due' | 'Final Payment Due' | 'Fully Paid';
+  'Created At': string;
+  'Cart Items': string; // JSON string from Airtable
 }
 
 export default function AdminClubOrdersPage() {
@@ -91,15 +91,15 @@ export default function AdminClubOrdersPage() {
   };
 
   const getStatusBadge = (orderStatus: string, paymentStatus: string) => {
-    if (paymentStatus === 'fully_paid') {
+    if (paymentStatus === 'Fully Paid') {
       return <Badge className="bg-green-500">Fully Paid</Badge>;
     }
     
-    if (paymentStatus === 'final_payment_due') {
+    if (paymentStatus === 'Final Payment Due') {
       return <Badge className="bg-orange-500">Final Payment Due</Badge>;
     }
     
-    if (paymentStatus === 'second_payment_due') {
+    if (paymentStatus === 'Second Payment Due') {
       return <Badge className="bg-yellow-500">Second Payment Due</Badge>;
     }
     
@@ -156,23 +156,23 @@ export default function AdminClubOrdersPage() {
           </Card>
         ) : (
           <div className="space-y-6">
-            {orders.map((order) => (
+            {orders && Array.isArray(orders) && orders.map((order) => (
               <Card key={order.id}>
                 <CardHeader>
                   <div className="flex justify-between items-start">
                     <div>
-                      <CardTitle className="text-xl text-navy">{order.organization_name}</CardTitle>
+                      <CardTitle className="text-xl text-navy">{order['Organization Name']}</CardTitle>
                       <p className="text-sm text-text/70 mt-1">
-                        {order.contact_name} • {order.email}
+                        {order['Contact Name']} • {order['Email']}
                       </p>
                       <p className="text-sm text-text/70">
-                        {order.starter_kit === 'core' ? 'Core Kit' : 'Pro Kit'} • {order.total_units} units
+                        {order['Starter Kit'] === 'Core' ? 'Core Kit' : 'Pro Kit'} • {order['Total Units']} units
                       </p>
                     </div>
                     <div className="text-right">
-                      {getStatusBadge(order.order_status, order.payment_status)}
+                      {getStatusBadge(order['Order Status'], order['Payment Status'])}
                       <p className="text-sm text-text/70 mt-2">
-                        Created: {new Date(order.created_at).toLocaleDateString()}
+                        Created: {new Date(order['Created At']).toLocaleDateString()}
                       </p>
                     </div>
                   </div>
@@ -181,21 +181,27 @@ export default function AdminClubOrdersPage() {
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                     <div>
                       <p className="text-sm font-semibold text-navy">Order Items</p>
-                      <p className="text-sm text-text/70">{getOrderItems(order.cart_items)}</p>
+                      <p className="text-sm text-text/70">{getOrderItems((() => {
+                        try {
+                          return JSON.parse(order['Cart Items'] || '[]');
+                        } catch {
+                          return [];
+                        }
+                      })())}</p>
                     </div>
                     <div>
                       <p className="text-sm font-semibold text-navy">Payment Breakdown</p>
                       <div className="text-sm text-text/70 space-y-1">
-                        <p>Total: ${order.subtotal.toLocaleString()}</p>
-                        <p>Deposit: ${order.deposit_amount.toLocaleString()} ✓</p>
-                        <p>Second: ${order.second_payment_amount.toLocaleString()}</p>
-                        <p>Final: ${order.final_payment_amount.toLocaleString()}</p>
+                        <p>Total: ${order['Subtotal'].toLocaleString()}</p>
+                        <p>Deposit: ${order['Deposit Amount'].toLocaleString()} ✓</p>
+                        <p>Second: ${order['Second Payment Amount'].toLocaleString()}</p>
+                        <p>Final: ${order['Final Payment Amount'].toLocaleString()}</p>
                       </div>
                     </div>
                     <div>
                       <p className="text-sm font-semibold text-navy">Actions</p>
                       <div className="space-y-2">
-                        {order.payment_status === 'deposit_paid' && (
+                        {order['Payment Status'] === 'Deposit Paid' && (
                           <Button 
                             onClick={() => handleApproveDesign(order.id)}
                             className="w-full bg-accent hover:bg-accent/90 text-navy"
@@ -203,7 +209,7 @@ export default function AdminClubOrdersPage() {
                             Approve Design
                           </Button>
                         )}
-                        {order.payment_status === 'second_payment_due' && (
+                        {order['Payment Status'] === 'Second Payment Due' && (
                           <Button 
                             onClick={() => handleReadyToShip(order.id)}
                             className="w-full bg-accent hover:bg-accent/90 text-navy"
@@ -211,10 +217,10 @@ export default function AdminClubOrdersPage() {
                             Ready to Ship
                           </Button>
                         )}
-                        {order.payment_status === 'final_payment_due' && (
+                        {order['Payment Status'] === 'Final Payment Due' && (
                           <p className="text-sm text-text/70">Waiting for final payment</p>
                         )}
-                        {order.payment_status === 'fully_paid' && (
+                        {order['Payment Status'] === 'Fully Paid' && (
                           <p className="text-sm text-green-600">Order complete</p>
                         )}
                       </div>
