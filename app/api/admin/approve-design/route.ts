@@ -52,10 +52,25 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Send email notification (placeholder - you'll need to implement email service)
-    // For now, we'll just log it
-    console.log(`Design approved for order ${orderId}. Customer: ${order['Email']}`);
-    console.log(`Second payment amount: $${order['Second Payment Amount']}`);
+    // Send payment request email to customer
+    try {
+      const { sendPaymentRequestEmail } = await import('@/lib/email');
+      await sendPaymentRequestEmail({
+        organizationName: order['Organization Name'],
+        contactName: order['Contact Name'],
+        email: order['Email'],
+        orderId: orderId,
+        totalUnits: order['Total Units'],
+        subtotal: order['Subtotal'],
+        paymentAmount: order['Second Payment Amount'],
+        paymentType: 'second',
+        starterKit: order['Starter Kit'],
+      });
+      console.log('Second payment request email sent to:', order['Email']);
+    } catch (emailError) {
+      console.error('Failed to send payment request email:', emailError);
+      // Don't fail the request if email fails
+    }
 
     // Send Slack notification
     if (process.env.SLACK_WEBHOOK_URL) {

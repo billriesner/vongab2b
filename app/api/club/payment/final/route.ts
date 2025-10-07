@@ -70,7 +70,8 @@ export async function POST(request: NextRequest) {
       },
       ui_mode: 'hosted',
       metadata: {
-        orderId: order.id,
+        type: 'club_final_payment',
+        orderId: orderId,
         paymentType: 'final_payment',
         organizationName: order['Organization Name'],
         customerEmail: order['Email'],

@@ -30,28 +30,139 @@ export async function POST(request: NextRequest) {
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object as Stripe.Checkout.Session;
     
+    // Get payment type from metadata
+    const paymentType = session.metadata?.type;
+    
     // Only process Club Vonga orders
-    if (session.metadata?.type !== 'club_deposit') {
+    if (!paymentType || !['club_deposit', 'club_second_payment', 'club_final_payment'].includes(paymentType)) {
+      return NextResponse.json({ received: true });
+    }
+    
+    // Handle second and final payments
+    if (paymentType === 'club_second_payment' || paymentType === 'club_final_payment') {
+      const orderId = session.metadata?.orderId;
+      if (!orderId) {
+        console.error('Missing orderId in session metadata');
+        return NextResponse.json({ error: 'Missing orderId' }, { status: 400 });
+      }
+      
+      try {
+        const { getOrderById, updateOrder } = await import('@/lib/airtable');
+        const order = await getOrderById(orderId);
+        
+        if (!order) {
+          console.error('Order not found:', orderId);
+          return NextResponse.json({ error: 'Order not found' }, { status: 404 });
+        }
+        
+        // Update order based on payment type
+        if (paymentType === 'club_second_payment') {
+          await updateOrder(orderId, {
+            'Payment Status': 'Final Payment Due',
+            'Second Payment Intent ID': session.payment_intent as string
+          });
+          console.log('Second payment completed for order:', orderId);
+        } else if (paymentType === 'club_final_payment') {
+          await updateOrder(orderId, {
+            'Order Status': 'Shipped',
+            'Payment Status': 'Fully Paid',
+            'Final Payment Intent ID': session.payment_intent as string,
+            'Shipped At': new Date().toISOString()
+          });
+          console.log('Final payment completed for order:', orderId);
+          
+          // Send order complete email
+          try {
+            const { sendOrderCompleteEmail } = await import('@/lib/email');
+            await sendOrderCompleteEmail({
+              organizationName: order['Organization Name'],
+              contactName: order['Contact Name'],
+              email: order['Email'],
+              orderId: orderId,
+              totalUnits: order['Total Units'],
+              subtotal: order['Subtotal'],
+              starterKit: order['Starter Kit'],
+            });
+            console.log('Order complete email sent to:', order['Email']);
+          } catch (emailError) {
+            console.error('Failed to send order complete email:', emailError);
+          }
+          
+          // Send Slack notification for order completion
+          if (process.env.SLACK_WEBHOOK_URL) {
+            try {
+              const slackMessage = {
+                text: `🎉 Order Complete - Fully Paid!`,
+                blocks: [
+                  {
+                    type: "header",
+                    text: {
+                      type: "plain_text",
+                      text: "🎉 Order Complete - Fully Paid!"
+                    }
+                  },
+                  {
+                    type: "section",
+                    fields: [
+                      {
+                        type: "mrkdwn",
+                        text: `*Organization:*\n${order['Organization Name']}`
+                      },
+                      {
+                        type: "mrkdwn",
+                        text: `*Order ID:*\n${orderId}`
+                      },
+                      {
+                        type: "mrkdwn",
+                        text: `*Customer Email:*\n${order['Email']}`
+                      },
+                      {
+                        type: "mrkdwn",
+                        text: `*Total Amount:*\n$${order['Subtotal'].toLocaleString()}`
+                      }
+                    ]
+                  }
+                ]
+              };
+              
+              await fetch(process.env.SLACK_WEBHOOK_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(slackMessage),
+              });
+            } catch (slackError) {
+              console.error('Failed to send Slack notification:', slackError);
+            }
+          }
+        }
+        
+        return NextResponse.json({ received: true });
+      } catch (error) {
+        console.error('Error processing payment webhook:', error);
+        return NextResponse.json({ error: 'Processing failed' }, { status: 500 });
+      }
+    }
+    
+    // Handle initial deposit (existing code below)
+    if (paymentType !== 'club_deposit') {
       return NextResponse.json({ received: true });
     }
 
     try {
       // Extract order data from session metadata
-      const {
-        organizationName,
-        customerEmail,
-        kitType,
-        totalUnits,
-        memberCount,
-        itemCount,
-        depositAmount,
-        depositPercentage,
-        subtotalAmount,
-        secondPayment,
-        finalPayment,
-        products,
-        cartItemsJson
-      } = session.metadata;
+      const organizationName = session.metadata?.organizationName || '';
+      const customerEmail = session.metadata?.customerEmail || '';
+      const kitType = session.metadata?.kitType || '';
+      const totalUnits = session.metadata?.totalUnits || '';
+      const memberCount = session.metadata?.memberCount || '';
+      const itemCount = session.metadata?.itemCount || '';
+      const depositAmount = session.metadata?.depositAmount || '';
+      const depositPercentage = session.metadata?.depositPercentage || '';
+      const subtotalAmount = session.metadata?.subtotalAmount || '';
+      const secondPayment = session.metadata?.secondPayment || '';
+      const finalPayment = session.metadata?.finalPayment || '';
+      const products = session.metadata?.products || '';
+      const cartItemsJson = session.metadata?.cartItemsJson || '';
 
       // Parse cart items
       const cartItems = JSON.parse(cartItemsJson || '[]');
@@ -88,6 +199,25 @@ export async function POST(request: NextRequest) {
       }
 
       console.log('Order saved successfully to Airtable:', savedOrder.id);
+
+      // Send order confirmation email to customer
+      try {
+        const { sendOrderConfirmationEmail } = await import('@/lib/email');
+        await sendOrderConfirmationEmail({
+          organizationName,
+          contactName: session.customer_details?.name || 'Customer',
+          email: customerEmail,
+          orderId: savedOrder.id,
+          totalUnits: parseInt(totalUnits || '0'),
+          subtotal: parseFloat(subtotalAmount || '0'),
+          depositAmount: parseFloat(depositAmount || '0'),
+          starterKit: (kitType === 'core' ? 'Core' : 'Pro') as 'Core' | 'Pro',
+        });
+        console.log('Order confirmation email sent to:', customerEmail);
+      } catch (emailError) {
+        console.error('Failed to send order confirmation email:', emailError);
+        // Don't fail the webhook if email fails
+      }
 
       // Send Slack notification about new order
       if (process.env.SLACK_WEBHOOK_URL) {
