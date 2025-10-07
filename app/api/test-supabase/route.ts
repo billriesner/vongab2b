@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
 
 export async function GET() {
   try {
+    // Import Supabase inside the function to avoid build-time initialization
+    const { supabase } = await import('@/lib/supabase');
     // Test Supabase connection with anon key first
     const supabaseClient = supabase();
     

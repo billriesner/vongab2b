@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server';
-import { supabaseAdmin } from '@/lib/supabase';
 
 export async function POST() {
   try {
+    // Import Supabase inside the function to avoid build-time initialization
+    const { supabaseAdmin } = await import('@/lib/supabase');
     const supabaseClient = supabaseAdmin();
     
     // Create the club_orders table
