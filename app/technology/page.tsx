@@ -114,6 +114,17 @@ export default function TechnologyPage() {
         </div>
       </Section>
 
+      {/* Wear Device Image */}
+      <section className="w-full" style={{ backgroundColor: '#FFFFFF' }}>
+        <div className="w-full">
+          <img 
+            src="/images/how-it-works/wear-device.jpg" 
+            alt="Wearing Vonga connected apparel" 
+            className="w-full h-auto"
+          />
+        </div>
+      </section>
+
       {/* Digital Twin Explainer Video */}
       <section id="video" className="py-5xl" style={{ backgroundColor: '#000000' }}>
         <div className="w-full max-w-7xl mx-auto px-4">
@@ -184,6 +195,17 @@ export default function TechnologyPage() {
           <img 
             src="/images/how-it-works/tap-interaction.jpg" 
             alt="NFC Technology in Action" 
+            className="w-full h-auto"
+          />
+        </div>
+      </section>
+
+      {/* Unlock Experience Image */}
+      <section className="w-full" style={{ backgroundColor: '#FFFFFF' }}>
+        <div className="w-full">
+          <img 
+            src="/images/how-it-works/unlock-experience.jpg" 
+            alt="Unlocking experiences with Vonga" 
             className="w-full h-auto"
           />
         </div>
@@ -261,6 +283,17 @@ export default function TechnologyPage() {
           </div>
         </div>
       </Section>
+
+      {/* Product Showcase Image */}
+      <section className="w-full" style={{ backgroundColor: '#F7F7F7' }}>
+        <div className="w-full">
+          <img 
+            src="/images/products/vonga-sport-product.jpg" 
+            alt="Vonga connected apparel showcase" 
+            className="w-full h-auto"
+          />
+        </div>
+      </section>
 
       {/* Visual Divider */}
       <section className="py-4xl" style={{ backgroundColor: '#FFFFFF' }}>
@@ -416,6 +449,17 @@ export default function TechnologyPage() {
           </div>
         </div>
       </Section>
+
+      {/* Hero Device Showcase Image */}
+      <section className="w-full" style={{ backgroundColor: '#F7F7F7' }}>
+        <div className="w-full">
+          <img 
+            src="/images/hero/hero-device-showcase.jpg" 
+            alt="Vonga technology device showcase" 
+            className="w-full h-auto"
+          />
+        </div>
+      </section>
     </div>
   );
 }
