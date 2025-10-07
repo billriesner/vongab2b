@@ -1,52 +1,78 @@
-// Lazy import Supabase to prevent build-time errors
-let createClient: any = null
+// Mock client for build time
+const mockClient = {
+  from: () => ({ 
+    select: () => ({ 
+      eq: () => ({ 
+        single: () => Promise.resolve({ data: null, error: null }),
+        limit: () => Promise.resolve({ data: [], error: null })
+      }) 
+    }),
+    insert: () => ({ 
+      select: () => ({ 
+        single: () => Promise.resolve({ data: null, error: null }) 
+      }) 
+    }),
+    update: () => ({ 
+      eq: () => ({ 
+        select: () => ({ 
+          single: () => Promise.resolve({ data: null, error: null }) 
+        }) 
+      }) 
+    }),
+    rpc: () => Promise.resolve({ data: null, error: null })
+  })
+} as any
 
 // Function to create Supabase clients safely
 export const createSupabaseClient = () => {
+  // During build time or if env vars are missing, return mock client
+  if (typeof window === 'undefined' && process.env.NODE_ENV === 'production' && !process.env.NEXT_PUBLIC_SUPABASE_URL) {
+    return mockClient
+  }
+  
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   
   if (!supabaseUrl || !supabaseAnonKey) {
-    // Return a mock client during build time to prevent errors
-    return {
-      from: () => ({ select: () => ({ eq: () => ({ single: () => Promise.resolve({ data: null, error: null }) }) }) }),
-      insert: () => ({ select: () => ({ single: () => Promise.resolve({ data: null, error: null }) }) }),
-      update: () => ({ eq: () => ({ select: () => ({ single: () => Promise.resolve({ data: null, error: null }) }) }) })
-    } as any
+    return mockClient
   }
   
-  // Lazy load Supabase client
-  if (!createClient) {
-    createClient = require('@supabase/supabase-js').createClient
+  // Only import and create real client at runtime
+  try {
+    const { createClient } = require('@supabase/supabase-js')
+    return createClient(supabaseUrl, supabaseAnonKey)
+  } catch (error) {
+    console.warn('Failed to create Supabase client:', error)
+    return mockClient
   }
-  
-  return createClient(supabaseUrl, supabaseAnonKey)
 }
 
 export const createSupabaseAdminClient = () => {
+  // During build time or if env vars are missing, return mock client
+  if (typeof window === 'undefined' && process.env.NODE_ENV === 'production' && !process.env.NEXT_PUBLIC_SUPABASE_URL) {
+    return mockClient
+  }
+  
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
   const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
   
   if (!supabaseUrl || !supabaseServiceKey) {
-    // Return a mock client during build time to prevent errors
-    return {
-      from: () => ({ select: () => ({ eq: () => ({ single: () => Promise.resolve({ data: null, error: null }) }) }) }),
-      insert: () => ({ select: () => ({ single: () => Promise.resolve({ data: null, error: null }) }) }),
-      update: () => ({ eq: () => ({ select: () => ({ single: () => Promise.resolve({ data: null, error: null }) }) }) })
-    } as any
+    return mockClient
   }
   
-  // Lazy load Supabase client
-  if (!createClient) {
-    createClient = require('@supabase/supabase-js').createClient
+  // Only import and create real client at runtime
+  try {
+    const { createClient } = require('@supabase/supabase-js')
+    return createClient(supabaseUrl, supabaseServiceKey, {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false
+      }
+    })
+  } catch (error) {
+    console.warn('Failed to create Supabase admin client:', error)
+    return mockClient
   }
-  
-  return createClient(supabaseUrl, supabaseServiceKey, {
-    auth: {
-      autoRefreshToken: false,
-      persistSession: false
-    }
-  })
 }
 
 // Export only the factory functions - no module-level client creation
