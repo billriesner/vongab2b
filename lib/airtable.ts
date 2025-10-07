@@ -13,9 +13,9 @@ export const getAirtableBase = () => {
 
 // Table IDs
 export const ORDERS_TABLE = process.env.AIRTABLE_ORDERS_TABLE_ID || 'tbl5hxH53WPrguBAG';
-export const CONTACT_TABLE = process.env.AIRTABLE_CONTACT_TABLE_ID || '';
-export const RETURNS_TABLE = process.env.AIRTABLE_RETURNS_TABLE_ID || '';
-export const NEWSLETTER_TABLE = process.env.AIRTABLE_NEWSLETTER_TABLE_ID || '';
+export const CONTACT_TABLE = process.env.AIRTABLE_CONTACT_TABLE_ID || 'tbl2LARMCfU8Hv2zD';
+export const RETURNS_TABLE = process.env.AIRTABLE_RETURNS_TABLE_ID || 'tblFhH6LbgubfCaeX';
+export const NEWSLETTER_TABLE = process.env.AIRTABLE_NEWSLETTER_TABLE_ID || 'tblQmKpCp9qp1Fex0';
 
 // Type definitions for Club Orders
 export interface ClubOrder {
