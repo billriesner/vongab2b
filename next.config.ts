@@ -10,8 +10,8 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  // Exclude Supabase from server-side bundling during build
-  serverExternalPackages: ['@supabase/supabase-js'],
+  // Supabase has been removed - now using Airtable exclusively
+  // serverExternalPackages: ['@supabase/supabase-js'],
   // Skip collecting page data for API routes during build
   typescript: {
     ignoreBuildErrors: false,
