@@ -17,7 +17,7 @@ const formSchema = z.object({
   email: z.string().email('Valid email is required'),
   phone: z.string().min(10, 'Valid phone number is required'),
   organizationType: z.enum(['gym', 'golf', 'club', 'other']),
-  memberCount: z.number().min(1, 'Member count is required'),
+  memberCount: z.number().min(100, 'Minimum 100 units required'),
   
   // Step 2: Gear Selection (cart items)
   cartItems: z.array(z.object({
@@ -49,27 +49,27 @@ type FormData = z.infer<typeof formSchema>;
 
 const GEAR_PRICING = {
   hat: [
-    { min: 1, max: 499, price: 25 },
+    { min: 100, max: 499, price: 25 },
     { min: 500, max: 999, price: 20 },
     { min: 1000, max: Infinity, price: 0 }, // Custom pricing
   ],
   tshirt: [
-    { min: 1, max: 499, price: 20 },
+    { min: 100, max: 499, price: 20 },
     { min: 500, max: 999, price: 15 },
     { min: 1000, max: Infinity, price: 0 }, // Custom pricing
   ],
   tank: [
-    { min: 1, max: 499, price: 20 },
+    { min: 100, max: 499, price: 20 },
     { min: 500, max: 999, price: 15 },
     { min: 1000, max: Infinity, price: 0 }, // Custom pricing
   ],
   polo: [
-    { min: 1, max: 499, price: 25 },
+    { min: 100, max: 499, price: 25 },
     { min: 500, max: 999, price: 20 },
     { min: 1000, max: Infinity, price: 0 }, // Custom pricing
   ],
   hoodie: [
-    { min: 1, max: 499, price: 35 },
+    { min: 100, max: 499, price: 35 },
     { min: 500, max: 999, price: 30 },
     { min: 1000, max: Infinity, price: 0 }, // Custom pricing
   ],
@@ -92,7 +92,7 @@ export default function GetStartedPage() {
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      memberCount: 1,
+      memberCount: 100,
       cartItems: [],
       starterKit: 'core',
       rewardCheckIn: false,
@@ -174,7 +174,11 @@ export default function GetStartedPage() {
           alert('Please add at least one item to your cart');
           return;
         }
-        // Removed 100 unit minimum for testing
+        // Validate 100 unit minimum
+        if (cartTotalUnits < 100) {
+          alert('Minimum 100 units required. Please add more items to your cart.');
+          return;
+        }
         fieldsToValidate = ['starterKit'];
         break;
       case 3:
@@ -496,13 +500,10 @@ export default function GetStartedPage() {
                     <input
                       {...register('memberCount', { valueAsNumber: true })}
                       type="number"
-                      min="1"
+                      min="100"
                       className="w-full px-lg py-md border-2 border-muted rounded focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-navy bg-white"
-                      placeholder="1"
+                      placeholder="100"
                     />
-                    <p className="text-sm font-semibold mt-sm" style={{ color: '#33BECC' }}>
-                      ⚠️ Note: Production orders typically require minimum 100 units
-                    </p>
                     {errors.memberCount && (
                       <p className="text-sm text-red-600 mt-sm font-semibold">{errors.memberCount.message}</p>
                     )}
@@ -626,7 +627,14 @@ export default function GetStartedPage() {
                       </div>
                     )}
 
-                    {cartTotalUnits > 0 && (
+                    {cartTotalUnits > 0 && cartTotalUnits < 100 && (
+                      <div className="mt-md p-md bg-red-50 border-2 border-red-300 rounded">
+                        <p className="text-sm font-semibold text-red-600 text-center">
+                          ⚠️ You need {100 - cartTotalUnits} more units to meet the 100 unit minimum
+                        </p>
+                      </div>
+                    )}
+                    {cartTotalUnits >= 100 && (
                       <div className="mt-md p-md bg-green-50 border-2 border-green-300 rounded">
                         <p className="text-sm font-semibold text-green-600 text-center">
                           ✓ {cartTotalUnits} unit{cartTotalUnits !== 1 ? 's' : ''} in cart
