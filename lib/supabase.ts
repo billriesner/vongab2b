@@ -25,19 +25,16 @@ const mockClient = {
 
 // Function to create Supabase clients safely
 export const createSupabaseClient = () => {
-  // Always return mock client during build time
-  if (typeof window === 'undefined' && process.env.NODE_ENV === 'production') {
-    return mockClient
-  }
-  
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   
+  // Return mock client if env vars are missing (build time or misconfiguration)
   if (!supabaseUrl || !supabaseAnonKey) {
+    console.warn('Supabase URL or Anon Key missing, using mock client')
     return mockClient
   }
   
-  // Only import and create real client at runtime
+  // Only import and create real client when we have credentials
   try {
     const { createClient } = require('@supabase/supabase-js')
     return createClient(supabaseUrl, supabaseAnonKey)
@@ -48,19 +45,16 @@ export const createSupabaseClient = () => {
 }
 
 export const createSupabaseAdminClient = () => {
-  // Always return mock client during build time
-  if (typeof window === 'undefined' && process.env.NODE_ENV === 'production') {
-    return mockClient
-  }
-  
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
   const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
   
+  // Return mock client if env vars are missing (build time or misconfiguration)
   if (!supabaseUrl || !supabaseServiceKey) {
+    console.warn('Supabase URL or Service Key missing, using mock client')
     return mockClient
   }
   
-  // Only import and create real client at runtime
+  // Only import and create real client when we have credentials
   try {
     const { createClient } = require('@supabase/supabase-js')
     return createClient(supabaseUrl, supabaseServiceKey, {
