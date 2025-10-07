@@ -241,21 +241,21 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* Video Placeholder Section */}
+      {/* Video Section */}
       <section className="py-5xl" style={{ backgroundColor: '#000000' }}>
-        <div className="w-full">
-          <div className="relative bg-navy overflow-hidden" style={{ paddingBottom: '56.25%' }}>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center">
-                <div className="w-24 h-24 bg-accent rounded-full flex items-center justify-center mx-auto mb-md shadow-lg">
-                  <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </div>
-                <p className="text-accent text-xl font-semibold">Video: See Vonga in Action</p>
-                <p className="text-white/70 text-sm mt-sm">Watch how our technology works</p>
-              </div>
-            </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative overflow-hidden rounded-lg shadow-2xl aspect-video">
+            <video 
+              className="absolute inset-0 w-full h-full object-cover"
+              controls
+              autoPlay
+              muted
+              loop
+              playsInline
+            >
+              <source src="/hero-video.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
           </div>
         </div>
       </section>

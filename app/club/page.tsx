@@ -118,20 +118,10 @@ export default function ClubPage() {
         </div>
       </Section>
 
-      {/* Image Placeholder - Members Using Tech */}
+      {/* Members Using Tech Image */}
       <section className="relative overflow-hidden" style={{ backgroundColor: '#F7F7F7' }}>
         <div className="w-full">
-          <div className="relative bg-gray-200 overflow-hidden" style={{ paddingBottom: '40%' }}>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center">
-                <div className="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-md shadow-lg" style={{ backgroundColor: '#33BECC' }}>
-                  <Smartphone className="w-12 h-12 text-white" />
-                </div>
-                <p className="text-xl font-semibold text-navy">Image: Members checking in with tap</p>
-                <p className="text-sm text-text/70 mt-sm">Placeholder for lifestyle/action photo</p>
-              </div>
-            </div>
-          </div>
+          <img src="/tap-in.svg" alt="Members checking in with Vonga tap technology" className="w-full h-auto" />
         </div>
       </section>
 
