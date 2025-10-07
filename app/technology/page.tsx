@@ -120,7 +120,7 @@ export default function TechnologyPage() {
           <img 
             src="/hero-2.svg" 
             alt="Vonga technology showcase" 
-            className="w-full h-auto"
+            className="w-full h-auto object-cover"
           />
         </div>
       </section>
@@ -130,8 +130,11 @@ export default function TechnologyPage() {
         <div className="w-full max-w-7xl mx-auto px-4">
           <video 
             className="w-full h-auto rounded-lg"
-            controls
+            autoPlay
+            muted
+            loop
             playsInline
+            controls
           >
             <source src="/digital-twin.mp4" type="video/mp4" />
             Your browser does not support the video tag.
@@ -195,7 +198,7 @@ export default function TechnologyPage() {
           <img 
             src="/tap-in.svg" 
             alt="NFC Technology in Action" 
-            className="w-full h-auto"
+            className="w-full h-auto object-cover"
           />
         </div>
       </section>
@@ -206,7 +209,7 @@ export default function TechnologyPage() {
           <img 
             src="/placeholder1.svg" 
             alt="Vonga experience showcase" 
-            className="w-full h-auto"
+            className="w-full h-auto object-cover"
           />
         </div>
       </section>
@@ -290,7 +293,7 @@ export default function TechnologyPage() {
           <img 
             src="/placeholder2.svg" 
             alt="Vonga connected apparel showcase" 
-            className="w-full h-auto"
+            className="w-full h-auto object-cover"
           />
         </div>
       </section>
@@ -372,7 +375,7 @@ export default function TechnologyPage() {
           <img 
             src="/about-hero.svg" 
             alt="Privacy & Security Features" 
-            className="w-full h-auto"
+            className="w-full h-auto object-cover"
           />
         </div>
       </section>
@@ -456,7 +459,7 @@ export default function TechnologyPage() {
           <img 
             src="/hero-enterprise.svg" 
             alt="Vonga technology showcase" 
-            className="w-full h-auto"
+            className="w-full h-auto object-cover"
           />
         </div>
       </section>
