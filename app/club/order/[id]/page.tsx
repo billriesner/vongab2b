@@ -9,19 +9,19 @@ import Link from 'next/link';
 
 interface ClubOrder {
   id: string;
-  organization_name: string;
-  contact_name: string;
-  email: string;
-  starter_kit: 'core' | 'pro';
-  total_units: number;
-  subtotal: number;
-  deposit_amount: number;
-  second_payment_amount: number;
-  final_payment_amount: number;
-  order_status: 'deposit_paid' | 'design_approved' | 'production_ready' | 'shipped';
-  payment_status: 'deposit_paid' | 'second_payment_due' | 'final_payment_due' | 'fully_paid';
-  created_at: string;
-  cart_items: any[];
+  'Organization Name': string;
+  'Contact Name': string;
+  'Email': string;
+  'Starter Kit': 'Core' | 'Pro';
+  'Total Units': number;
+  'Subtotal': number;
+  'Deposit Amount': number;
+  'Second Payment Amount': number;
+  'Final Payment Amount': number;
+  'Order Status': 'Deposit Paid' | 'Design Approved' | 'Production Ready' | 'Shipped';
+  'Payment Status': 'Deposit Paid' | 'Second Payment Due' | 'Final Payment Due' | 'Fully Paid';
+  'Created At': string;
+  'Cart Items': string; // JSON string from Airtable
 }
 
 export default function OrderStatusPage() {
@@ -101,15 +101,15 @@ export default function OrderStatusPage() {
   };
 
   const getStatusBadge = (orderStatus: string, paymentStatus: string) => {
-    if (paymentStatus === 'fully_paid') {
+    if (paymentStatus === 'Fully Paid') {
       return <Badge className="bg-green-500">Fully Paid</Badge>;
     }
     
-    if (paymentStatus === 'final_payment_due') {
+    if (paymentStatus === 'Final Payment Due') {
       return <Badge className="bg-orange-500">Final Payment Due</Badge>;
     }
     
-    if (paymentStatus === 'second_payment_due') {
+    if (paymentStatus === 'Second Payment Due') {
       return <Badge className="bg-yellow-500">Second Payment Due</Badge>;
     }
     
@@ -164,12 +164,12 @@ export default function OrderStatusPage() {
           <CardHeader>
             <div className="flex justify-between items-start">
               <div>
-                <CardTitle className="text-2xl text-navy">{order.organization_name}</CardTitle>
+                <CardTitle className="text-2xl text-navy">{order['Organization Name']}</CardTitle>
                 <p className="text-text/70 mt-1">
-                  Order #{order.id.slice(0, 8)} • {order.starter_kit === 'core' ? 'Core Kit' : 'Pro Kit'}
+                  Order #{order.id.slice(0, 8)} • {order['Starter Kit'] === 'Core' ? 'Core Kit' : 'Pro Kit'}
                 </p>
               </div>
-              {getStatusBadge(order.order_status, order.payment_status)}
+              {getStatusBadge(order['Order Status'], order['Payment Status'])}
             </div>
           </CardHeader>
           <CardContent>
@@ -177,11 +177,11 @@ export default function OrderStatusPage() {
               <div>
                 <h3 className="font-semibold text-navy mb-2">Order Details</h3>
                 <div className="space-y-1 text-sm text-text/70">
-                  <p><strong>Contact:</strong> {order.contact_name}</p>
-                  <p><strong>Email:</strong> {order.email}</p>
-                  <p><strong>Total Units:</strong> {order.total_units}</p>
-                  <p><strong>Items:</strong> {getOrderItems(order.cart_items)}</p>
-                  <p><strong>Order Date:</strong> {new Date(order.created_at).toLocaleDateString()}</p>
+                  <p><strong>Contact:</strong> {order['Contact Name']}</p>
+                  <p><strong>Email:</strong> {order['Email']}</p>
+                  <p><strong>Total Units:</strong> {order['Total Units']}</p>
+                  <p><strong>Items:</strong> {getOrderItems(JSON.parse(order['Cart Items'] || '[]'))}</p>
+                  <p><strong>Order Date:</strong> {new Date(order['Created At']).toLocaleDateString()}</p>
                 </div>
               </div>
               <div>
@@ -189,54 +189,54 @@ export default function OrderStatusPage() {
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span>Initial Deposit (10%):</span>
-                    <span className="font-semibold text-green-600">${order.deposit_amount.toLocaleString()} ✓</span>
+                    <span className="font-semibold text-green-600">${order['Deposit Amount'].toLocaleString()} ✓</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Design Approval (40%):</span>
-                    <span className={`font-semibold ${order.payment_status === 'second_payment_due' || order.payment_status === 'final_payment_due' || order.payment_status === 'fully_paid' ? 'text-green-600' : 'text-text/70'}`}>
-                      ${order.second_payment_amount.toLocaleString()} {order.payment_status === 'second_payment_due' || order.payment_status === 'final_payment_due' || order.payment_status === 'fully_paid' ? '✓' : ''}
+                    <span className={`font-semibold ${order['Payment Status'] === 'Second Payment Due' || order['Payment Status'] === 'Final Payment Due' || order['Payment Status'] === 'Fully Paid' ? 'text-green-600' : 'text-text/70'}`}>
+                      ${order['Second Payment Amount'].toLocaleString()} {order['Payment Status'] === 'Second Payment Due' || order['Payment Status'] === 'Final Payment Due' || order['Payment Status'] === 'Fully Paid' ? '✓' : ''}
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span>Before Shipment (50%):</span>
-                    <span className={`font-semibold ${order.payment_status === 'final_payment_due' || order.payment_status === 'fully_paid' ? 'text-green-600' : 'text-text/70'}`}>
-                      ${order.final_payment_amount.toLocaleString()} {order.payment_status === 'final_payment_due' || order.payment_status === 'fully_paid' ? '✓' : ''}
+                    <span className={`font-semibold ${order['Payment Status'] === 'Final Payment Due' || order['Payment Status'] === 'Fully Paid' ? 'text-green-600' : 'text-text/70'}`}>
+                      ${order['Final Payment Amount'].toLocaleString()} {order['Payment Status'] === 'Final Payment Due' || order['Payment Status'] === 'Fully Paid' ? '✓' : ''}
                     </span>
                   </div>
                   <div className="border-t pt-2 flex justify-between font-bold">
                     <span>Total:</span>
-                    <span>${order.subtotal.toLocaleString()}</span>
+                    <span>${order['Subtotal'].toLocaleString()}</span>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Payment Actions */}
-            {order.payment_status === 'second_payment_due' && (
+            {order['Payment Status'] === 'Second Payment Due' && (
               <div className="mt-6 p-4 bg-yellow-50 border-2 border-yellow-300 rounded-lg">
                 <h3 className="font-semibold text-navy mb-2">Design Approved - Payment Required</h3>
                 <p className="text-sm text-text/70 mb-4">
-                  Your design has been approved! Please complete the second payment of ${order.second_payment_amount.toLocaleString()} to begin production.
+                  Your design has been approved! Please complete the second payment of ${order['Second Payment Amount'].toLocaleString()} to begin production.
                 </p>
                 <Button onClick={handleSecondPayment} className="bg-accent hover:bg-accent/90 text-navy">
-                  Pay ${order.second_payment_amount.toLocaleString()} (40%)
+                  Pay ${order['Second Payment Amount'].toLocaleString()} (40%)
                 </Button>
               </div>
             )}
 
-            {order.payment_status === 'final_payment_due' && (
+            {order['Payment Status'] === 'Final Payment Due' && (
               <div className="mt-6 p-4 bg-orange-50 border-2 border-orange-300 rounded-lg">
                 <h3 className="font-semibold text-navy mb-2">Ready to Ship - Final Payment Required</h3>
                 <p className="text-sm text-text/70 mb-4">
-                  Your order is ready to ship! Please complete the final payment of ${order.final_payment_amount.toLocaleString()} to initiate shipment.
+                  Your order is ready to ship! Please complete the final payment of ${order['Final Payment Amount'].toLocaleString()} to initiate shipment.
                 </p>
                 <Button onClick={handleFinalPayment} className="bg-accent hover:bg-accent/90 text-navy">
-                  Pay ${order.final_payment_amount.toLocaleString()} (50%)
+                  Pay ${order['Final Payment Amount'].toLocaleString()} (50%)
                 </Button>
               </div>
             )}
 
-            {order.payment_status === 'fully_paid' && (
+            {order['Payment Status'] === 'Fully Paid' && (
               <div className="mt-6 p-4 bg-green-50 border-2 border-green-300 rounded-lg">
                 <h3 className="font-semibold text-navy mb-2">Order Complete!</h3>
                 <p className="text-sm text-text/70">
