@@ -17,7 +17,7 @@ const formSchema = z.object({
   email: z.string().email('Valid email is required'),
   phone: z.string().min(10, 'Valid phone number is required'),
   organizationType: z.enum(['gym', 'golf', 'club', 'other']),
-  memberCount: z.number().min(100, 'Minimum 100 units required'),
+  memberCount: z.number().min(1, 'Member count is required'),
   
   // Step 2: Gear Selection (cart items)
   cartItems: z.array(z.object({
@@ -43,38 +43,33 @@ const formSchema = z.object({
   rewardMilestone: z.boolean(),
   rewardReferral: z.boolean(),
   rewardEvents: z.boolean(),
-}).refine((data) => {
-  return data.memberCount >= 100;
-}, {
-  message: "Minimum 100 units required",
-  path: ["memberCount"],
 });
 
 type FormData = z.infer<typeof formSchema>;
 
 const GEAR_PRICING = {
   hat: [
-    { min: 100, max: 499, price: 25 },
+    { min: 1, max: 499, price: 25 },
     { min: 500, max: 999, price: 20 },
     { min: 1000, max: Infinity, price: 0 }, // Custom pricing
   ],
   tshirt: [
-    { min: 100, max: 499, price: 20 },
+    { min: 1, max: 499, price: 20 },
     { min: 500, max: 999, price: 15 },
     { min: 1000, max: Infinity, price: 0 }, // Custom pricing
   ],
   tank: [
-    { min: 100, max: 499, price: 20 },
+    { min: 1, max: 499, price: 20 },
     { min: 500, max: 999, price: 15 },
     { min: 1000, max: Infinity, price: 0 }, // Custom pricing
   ],
   polo: [
-    { min: 100, max: 499, price: 25 },
+    { min: 1, max: 499, price: 25 },
     { min: 500, max: 999, price: 20 },
     { min: 1000, max: Infinity, price: 0 }, // Custom pricing
   ],
   hoodie: [
-    { min: 100, max: 499, price: 35 },
+    { min: 1, max: 499, price: 35 },
     { min: 500, max: 999, price: 30 },
     { min: 1000, max: Infinity, price: 0 }, // Custom pricing
   ],
@@ -97,7 +92,7 @@ export default function GetStartedPage() {
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      memberCount: 100,
+      memberCount: 1,
       cartItems: [],
       starterKit: 'core',
       rewardCheckIn: false,
@@ -504,12 +499,12 @@ export default function GetStartedPage() {
                     <input
                       {...register('memberCount', { valueAsNumber: true })}
                       type="number"
-                      min="100"
+                      min="1"
                       className="w-full px-lg py-md border-2 border-muted rounded focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-navy bg-white"
-                      placeholder="100"
+                      placeholder="1"
                     />
                     <p className="text-sm font-semibold mt-sm" style={{ color: '#33BECC' }}>
-                      ⚠️ Minimum 100 units required
+                      ⚠️ Note: Production orders typically require minimum 100 units
                     </p>
                     {errors.memberCount && (
                       <p className="text-sm text-red-600 mt-sm font-semibold">{errors.memberCount.message}</p>
