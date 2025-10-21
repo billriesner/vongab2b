@@ -12,23 +12,18 @@ export function Footer() {
             </Link>
           </div>
 
-          {/* Products */}
+          {/* Solutions */}
           <div>
-            <h3 className="font-semibold mb-4" style={{ color: '#33BECC' }}>Products</h3>
+            <h3 className="font-semibold mb-4" style={{ color: '#33BECC' }}>Solutions</h3>
             <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="/shop" className="text-gray-300 hover:text-accent transition-colors">
-                  Shop
-                </Link>
-              </li>
-              <li>
-                <Link href="/club" className="text-gray-300 hover:text-accent transition-colors">
-                  Club
-                </Link>
-              </li>
               <li>
                 <Link href="/enterprise" className="text-gray-300 hover:text-accent transition-colors">
                   Enterprise
+                </Link>
+              </li>
+              <li>
+                <Link href="/technology" className="text-gray-300 hover:text-accent transition-colors">
+                  Technology
                 </Link>
               </li>
             </ul>
@@ -38,11 +33,6 @@ export function Footer() {
           <div>
             <h3 className="font-semibold mb-4" style={{ color: '#33BECC' }}>Company</h3>
             <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="/technology" className="text-gray-300 hover:text-accent transition-colors">
-                  Tech
-                </Link>
-              </li>
               <li>
                 <Link href="/about" className="text-gray-300 hover:text-accent transition-colors">
                   About

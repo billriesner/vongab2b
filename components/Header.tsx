@@ -21,17 +21,14 @@ export function Header() {
           {/* Right Side - Buttons + Burger Menu */}
           <div className="flex items-center space-x-3">
             <div className="hidden sm:flex items-center space-x-3">
-              <Button size="sm" variant="primary" asChild>
-                <Link href="/shop">Shop Vonga</Link>
-              </Button>
-              <Button variant="outline" size="sm" asChild>
-                <Link href="/enterprise#talk">Let's Talk</Link>
+              <Button variant="primary" size="sm" asChild style={{ backgroundColor: '#F5856E', color: '#FFFFFF', border: 'none' }}>
+                <Link href="/contact">Let's Talk</Link>
               </Button>
             </div>
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" style={{ color: '#33BECC' }}>
-                  <Menu className="h-10 w-10" style={{ color: '#33BECC' }} />
+                  <Menu className="h-20 w-20" style={{ color: '#33BECC' }} />
                   <span className="sr-only">Toggle menu</span>
                 </Button>
               </SheetTrigger>
@@ -42,20 +39,6 @@ export function Header() {
                   </div>
                   
                   <nav className="flex flex-col space-y-4">
-                    <Link
-                      href="/shop"
-                      className="text-lg font-medium text-foreground hover:text-accent transition-colors text-center"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      Shop
-                    </Link>
-                    <Link
-                      href="/club"
-                      className="text-lg font-medium text-foreground hover:text-accent transition-colors text-center"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      Club Vonga
-                    </Link>
                     <Link
                       href="/enterprise"
                       className="text-lg font-medium text-foreground hover:text-accent transition-colors text-center"
@@ -87,13 +70,8 @@ export function Header() {
                   </nav>
 
                   <div className="flex flex-col space-y-3 pt-4 border-t">
-                    <Button variant="primary" asChild style={{ backgroundColor: '#E5E5E5', color: '#0A0A0A' }}>
-                      <Link href="/shop" onClick={() => setIsOpen(false)}>
-                        Shop Vonga
-                      </Link>
-                    </Button>
-                    <Button variant="secondary" asChild style={{ backgroundColor: '#E5E5E5', color: '#0A0A0A' }}>
-                      <Link href="/enterprise#talk" onClick={() => setIsOpen(false)}>
+                    <Button variant="primary" asChild style={{ backgroundColor: '#F5856E', color: '#FFFFFF', border: 'none' }}>
+                      <Link href="/contact" onClick={() => setIsOpen(false)}>
                         Let's Talk
                       </Link>
                     </Button>

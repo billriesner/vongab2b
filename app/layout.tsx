@@ -7,7 +7,7 @@ import { Footer } from "@/components/Footer";
 export const metadata: Metadata = {
   metadataBase: new URL('https://vonga.io'),
   title: {
-    default: 'Vonga — Live Connected: NFC Apparel, Loyalty & Enterprise Activations',
+    default: 'Vonga Live Connected: NFC Apparel, Loyalty & Enterprise Activations',
     template: '%s | Vonga'
   },
   description: 'Vonga makes connected apparel that unlocks rewards and real-world access. Shop tap-ready gear, launch Club Vonga for communities, or scale Enterprise activations.',
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   creator: 'Vonga',
   publisher: 'Vonga',
   openGraph: {
-    title: 'Vonga — Live Connected: NFC Apparel, Loyalty & Enterprise Activations',
+    title: 'Vonga Live Connected: NFC Apparel, Loyalty & Enterprise Activations',
     description: 'Vonga makes connected apparel that unlocks rewards and real-world access. Shop tap-ready gear, launch Club Vonga for communities, or scale Enterprise activations.',
     url: 'https://vonga.io',
     siteName: 'Vonga',
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Vonga — Live Connected: NFC Apparel, Loyalty & Enterprise Activations',
+    title: 'Vonga Live Connected: NFC Apparel, Loyalty & Enterprise Activations',
     description: 'Vonga makes connected apparel that unlocks rewards and real-world access. Shop tap-ready gear, launch Club Vonga for communities, or scale Enterprise activations.',
     images: ['/hero-placeholder.jpg'],
   },

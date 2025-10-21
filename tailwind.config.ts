@@ -16,6 +16,16 @@ const config = {
     extend: {
       colors: {
         // Brand colors with opacity support
+        brand: { 
+          navy: "#303E55", 
+          aqua: "#33BECC", 
+          coral: "#F5856E" 
+        },
+        gray: { 
+          100: "#F5F7FA", 
+          500: "#9BA6B3", 
+          900: "#1B1E25" 
+        },
         accent: "#33BECC",
         navy: "#303E55",
         text: "#0A0A0A",
@@ -37,6 +47,11 @@ const config = {
       },
       boxShadow: {
         DEFAULT: "var(--shadow-soft)",
+        glow: "0 0 15px rgba(51,190,204,0.45)",
+        "glow-coral": "0 0 15px rgba(245,133,110,0.45)",
+      },
+      transitionTimingFunction: {
+        brand: "cubic-bezier(0.25,0.1,0.25,1.0)",
       },
       spacing: {
         // 8px grid system

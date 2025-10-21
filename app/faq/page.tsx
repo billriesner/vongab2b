@@ -101,128 +101,7 @@ export default function FAQPage() {
                 </AccordionContent>
               </AccordionItem>
 
-              {/* RETAIL */}
-              <AccordionItem value="retail" className="border-2 border-muted rounded-lg mb-lg p-lg bg-white shadow-md">
-                <AccordionTrigger className="text-xl font-bold text-navy hover:text-accent">
-                  Shop Vonga (Retail)
-                </AccordionTrigger>
-                <AccordionContent>
-                  <Accordion type="single" collapsible className="w-full mt-md">
-                    <AccordionItem value="retail-different">
-                      <AccordionTrigger className="text-base font-semibold text-navy">
-                        What makes Vonga clothing different?
-                      </AccordionTrigger>
-                      <AccordionContent className="text-base text-black">
-                        Comfort and style meet technology. Every Vonga garment comes with NFC tech inside, so your apparel connects you to exclusive content, rewards, or community access.
-                      </AccordionContent>
-                    </AccordionItem>
 
-                    <AccordionItem value="tap-ready">
-                      <AccordionTrigger className="text-base font-semibold text-navy">
-                        Are all items Tap-Ready?
-                      </AccordionTrigger>
-                      <AccordionContent className="text-base text-black">
-                        Yes. All Vonga products are NFC-enabled. Look for the <strong>Tap-Ready</strong> badge on product pages.
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem value="scan">
-                      <AccordionTrigger className="text-base font-semibold text-navy">
-                        How do I scan my apparel?
-                      </AccordionTrigger>
-                      <AccordionContent className="text-base text-black">
-                        Hold your phone near the NFC tag (usually in the sleeve or hem) and tap. The experience launches instantly in your browser.
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem value="returns">
-                      <AccordionTrigger className="text-base font-semibold text-navy">
-                        What's your return policy?
-                      </AccordionTrigger>
-                      <AccordionContent className="text-base text-black">
-                        Returns and exchanges are accepted within 30 days of delivery for unworn items. See our{' '}
-                        <Link href="/shipping-returns" className="hover:underline font-semibold" style={{ color: '#33BECC' }}>
-                          Shipping & Returns
-                        </Link>{' '}
-                        page for details.
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem value="intl">
-                      <AccordionTrigger className="text-base font-semibold text-navy">
-                        Does NFC work internationally?
-                      </AccordionTrigger>
-                      <AccordionContent className="text-base text-black">
-                        Yes. NFC scanning works anywhere in the world on supported smartphones.
-                      </AccordionContent>
-                    </AccordionItem>
-                  </Accordion>
-                </AccordionContent>
-              </AccordionItem>
-
-              {/* CLUB VONGA */}
-              <AccordionItem value="club" className="border-2 border-muted rounded-lg mb-lg p-lg bg-white shadow-md">
-                <AccordionTrigger className="text-xl font-bold text-navy hover:text-accent">
-                  Club Vonga
-                </AccordionTrigger>
-                <AccordionContent>
-                  <Accordion type="single" collapsible className="w-full mt-md">
-                    <AccordionItem value="club-what">
-                      <AccordionTrigger className="text-base font-semibold text-navy">
-                        What is Club Vonga?
-                      </AccordionTrigger>
-                      <AccordionContent className="text-base text-black">
-                        A loyalty platform for gyms, sports clubs, creators, and communities. We pair custom-branded gear with built-in NFC rewards.
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem value="club-min">
-                      <AccordionTrigger className="text-base font-semibold text-navy">
-                        What's the minimum order?
-                      </AccordionTrigger>
-                      <AccordionContent className="text-base text-black">
-                        100 units. This ensures scale for your members and keeps the platform efficient to manage.
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem value="club-pricing">
-                      <AccordionTrigger className="text-base font-semibold text-navy">
-                        How does pricing work?
-                      </AccordionTrigger>
-                      <AccordionContent className="text-base text-black">
-                        Club Vonga combines apparel costs with a monthly SaaS platform fee. Larger orders lower per-unit cost.
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem value="club-rewards">
-                      <AccordionTrigger className="text-base font-semibold text-navy">
-                        What rewards can we set up?
-                      </AccordionTrigger>
-                      <AccordionContent className="text-base text-black">
-                        Options include check-in rewards, milestone achievements, referral incentives, and custom rewards unique to your community.
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem value="club-use">
-                      <AccordionTrigger className="text-base font-semibold text-navy">
-                        How do members use it?
-                      </AccordionTrigger>
-                      <AccordionContent className="text-base text-black">
-                        Members simply tap their gear with a smartphone to check in, unlock rewards, or view exclusive content. No apps or passwords needed.
-                      </AccordionContent>
-                    </AccordionItem>
-
-                    <AccordionItem value="club-tech">
-                      <AccordionTrigger className="text-base font-semibold text-navy">
-                        Do we need technical staff?
-                      </AccordionTrigger>
-                      <AccordionContent className="text-base text-black">
-                        No. Everything is managed via a simple dashboard. Most clubs can be live in days.
-                      </AccordionContent>
-                    </AccordionItem>
-                  </Accordion>
-                </AccordionContent>
-              </AccordionItem>
 
               {/* ENTERPRISE */}
               <AccordionItem value="enterprise" className="border-2 border-muted rounded-lg mb-lg p-lg bg-white shadow-md">
@@ -242,7 +121,7 @@ export default function FAQPage() {
 
                     <AccordionItem value="ent-diff">
                       <AccordionTrigger className="text-base font-semibold text-navy">
-                        How is it different from Club Vonga?
+                        What makes Enterprise different?
                       </AccordionTrigger>
                       <AccordionContent className="text-base text-black">
                         Enterprise includes larger-scale activations, multi-location deployments, deeper integrations (CRM, ticketing, sponsorships), and custom campaigns.
@@ -282,8 +161,8 @@ export default function FAQPage() {
                       </AccordionTrigger>
                       <AccordionContent className="text-base text-black">
                         Yes.{' '}
-                        <Link href="/enterprise#talk" className="hover:underline font-semibold" style={{ color: '#33BECC' }}>
-                          Let's talk
+                        <Link href="/contact" className="hover:underline font-semibold" style={{ color: '#33BECC' }}>
+                          Let's Talk
                         </Link>{' '}
                         and we'll show you how Vonga can fit your organization.
                       </AccordionContent>
