@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { theme } from "@/src/styles/theme";
+import Link from "next/link";
 
 interface HeroProps {
   headline: string;
@@ -63,7 +64,7 @@ export function Hero({
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <Button 
               variant="primary"
-              href={primaryHref}
+              asChild
               className="min-w-[160px]"
               style={{
                 backgroundColor: theme.colors.coral,
@@ -72,12 +73,14 @@ export function Hero({
                 transition: `all ${theme.motion.base}ms ${theme.motion.curve}`
               }}
             >
-              {theme.ctaLabel}
+              <Link href={primaryHref}>
+                {theme.ctaLabel}
+              </Link>
             </Button>
             {secondaryHref && (
               <Button 
                 variant="secondary"
-                href={secondaryHref}
+                asChild
                 className="min-w-[160px]"
                 style={{
                   borderColor: theme.colors.aqua,
@@ -86,7 +89,9 @@ export function Hero({
                   transition: `all ${theme.motion.base}ms ${theme.motion.curve}`
                 }}
               >
-                See How It Works
+                <Link href={secondaryHref}>
+                  See How It Works
+                </Link>
               </Button>
             )}
           </div>

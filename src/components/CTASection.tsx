@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { theme } from "@/src/styles/theme";
+import Link from "next/link";
 
 interface CTASectionProps {
   title?: string;
@@ -45,7 +46,7 @@ export function CTASection({
         )}
         <Button 
           variant="primary"
-          href={href}
+          asChild
           className="min-w-[160px]"
           style={{
             backgroundColor: theme.colors.coral,
@@ -54,7 +55,9 @@ export function CTASection({
             transition: `all ${theme.motion.base}ms ${theme.motion.curve}`
           }}
         >
-          {theme.ctaLabel}
+          <Link href={href}>
+            {theme.ctaLabel}
+          </Link>
         </Button>
       </div>
     </section>

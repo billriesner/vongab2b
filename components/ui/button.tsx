@@ -9,10 +9,11 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: "bg-accent text-navy hover:bg-accent/90",
+        primary: "bg-[#F5856E] text-white hover:brightness-110 transition",
         secondary: "bg-navy text-accent hover:bg-navy/90",
         ghost: "text-navy hover:bg-accent/20 hover:text-accent",
         outline: "border-2 border-accent bg-bg text-accent hover:bg-accent hover:text-navy",
+        dark: "bg-[#303e55] text-white hover:brightness-110 transition",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",

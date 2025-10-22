@@ -21,8 +21,8 @@ export function Header() {
           {/* Right Side - Buttons + Burger Menu */}
           <div className="flex items-center space-x-3">
             <div className="hidden sm:flex items-center space-x-3">
-              <Button variant="primary" size="sm" asChild style={{ backgroundColor: '#F5856E', color: '#FFFFFF', border: 'none' }}>
-                <Link href="/contact">Let's Talk</Link>
+              <Button variant="primary" size="sm" asChild>
+                <Link href="/intake">Let's Connect</Link>
               </Button>
             </div>
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -70,9 +70,9 @@ export function Header() {
                   </nav>
 
                   <div className="flex flex-col space-y-3 pt-4 border-t">
-                    <Button variant="primary" asChild style={{ backgroundColor: '#F5856E', color: '#FFFFFF', border: 'none' }}>
-                      <Link href="/contact" onClick={() => setIsOpen(false)}>
-                        Let's Talk
+                    <Button variant="primary" asChild>
+                      <Link href="/intake" onClick={() => setIsOpen(false)}>
+                        Let's Connect
                       </Link>
                     </Button>
                   </div>

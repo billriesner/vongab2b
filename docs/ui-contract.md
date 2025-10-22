@@ -11,7 +11,8 @@
 - `children?`: ReactNode (default = theme.ctaLabel)
 
 **Rules**
-- Primary label = **"Let's Talk."**
+- Primary label = **"Let's Connect."** (except intake form submit button)
+- Intake form submit button = **"Submit"**
 - Primary = coral bg, white text, glow hover (coral glow)
 - Secondary = transparent, aqua border, aqua hover fill (10%)
 - No other variants allowed.
@@ -30,7 +31,7 @@
 - `secondaryHref?`: string (optional anchor link)
 
 **Rules**
-- Must include two buttons: "Let's Talk" (primary) + "See How It Works" (secondary).
+- Must include two buttons: "Let's Connect" (primary) + "See How It Works" (secondary).
 - Overlay color: brand.navy @ 0.6 opacity.
 - Minimum hero height: 80vh (responsive).
 
@@ -112,7 +113,7 @@
 **Rules**
 - Gradient background: aqua → coral (45°).  
 - Center-aligned text, bold typography.  
-- Single primary CTA = "Let's Talk." (coral bg, white text)
+- Single primary CTA = "Let's Connect." (coral bg, white text)
 - Use coral glow hover state.
 
 **Emotion:** *Lasting Belonging* — continuity and forward motion.
@@ -124,7 +125,7 @@
 **Rules**
 - Fixed top, navy background (70% opacity) with blur.  
 - Links: Enterprise / Technology / About / Contact.  
-- Right-aligned primary CTA "Let's Talk." (coral background)
+- Right-aligned primary CTA "Let's Connect." (coral background)
 - Collapse into mobile dropdown under 768px.
 
 ---
@@ -154,7 +155,37 @@
 ## Accessibility
 - Minimum contrast: 4.5:1 (body), 3:1 (heading).  
 - Focus ring: 2px solid brand.aqua.  
-- All CTA buttons labeled `aria-label="Let's Talk"` where appropriate.
+- All CTA buttons labeled `aria-label="Let's Connect"` where appropriate.
+
+---
+
+## Confirmation Pages
+**When to use:** After successful form submissions, bookings, or conversions.
+
+**Layout Requirements:**
+- Full-screen background (`min-h-screen bg-gray-50`)
+- Centered white card with shadow (`bg-white rounded-xl shadow-lg`)
+- Generous spacing (`space-y-8`)
+
+**Required Elements:**
+1. **Success Icon:** Green checkmark in circle (`w-16 h-16 bg-green-100`)
+2. **Celebratory Headline:** Positive, specific messaging
+3. **Value Description:** What they get from next step
+4. **Expectations Section:** Gray background card with checkmark list
+5. **Primary CTA:** Coral button with icon and descriptive text
+6. **Contextual Help:** Small text about process/timing
+
+**Button Standards:**
+- Coral background (`bg-[#F5856E]`)
+- Icon + text combination
+- Shadow for depth (`shadow-lg`)
+- Hover effect (`hover:brightness-110`)
+
+**Content Guidelines:**
+- Use "Perfect match!", "Success!", "You're all set!" for headlines
+- Keep expectations list to 3-4 items maximum
+- Focus on benefits, not features
+- Include timing context ("Takes about 2 minutes")
 
 ---
 

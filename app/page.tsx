@@ -61,7 +61,7 @@ export default function HomePage() {
           headline="From Moment to Memory."
           subhead="The world doesn't need more merch. It needs more meaning. We make that meaning last through connected experiences fans never forget."
           videoSrc="/Vonga - Hero Video.mp4"
-          primaryHref="/contact"
+          primaryHref="/intake"
           secondaryHref="/technology"
         />
 
@@ -95,6 +95,7 @@ export default function HomePage() {
         <CTASection
           title="Let's make belonging tangible"
           subtitle="Start a conversation about how connected apparel can serve your community."
+          href="/intake"
         />
       </main>
     </>

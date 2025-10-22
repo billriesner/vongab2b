@@ -1,7 +1,8 @@
 # VONGA Phrasing Rules (Keep Language On-Brand)
 
 ## Primary CTA
-- Use exactly **"Let's Talk"** everywhere.
+- Use exactly **"Let's Connect"** everywhere except intake form submit button.
+- Intake form submit button: **"Submit"**.
 - Secondary CTA: **"See How It Works"**.
 - Tertiary: "Meet Vonga", "Learn more →".
 

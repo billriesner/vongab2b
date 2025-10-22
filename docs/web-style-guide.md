@@ -31,11 +31,13 @@ Each layout must reflect the three brand pillars:
 ---
 
 ## Components (visual intent)
-- **Hero:** Full-bleed video, headline, subhead, CTAs ("Let's Talk", "See How It Works").  
+- **Hero:** Full-bleed video, headline, subhead, CTAs ("Let's Connect", "See How It Works").  
 - **SplitSection:** Text+image with alternating layout.  
 - **CardGrid:** Three cards (Teams & Leagues, Universities, Communities) → map to Human Connection.  
 - **Pillars:** Three horizontal cards → Human Connection / Effortless Technology / Lasting Belonging.  
-- **CTASection:** Gradient (aqua → coral) banner with single CTA "Let's Talk."
+- **CTASection:** Gradient (aqua → coral) banner with single CTA "Let's Connect."
+- **Intake Form:** Submit button labeled "Submit" (not "Let's Connect").
+- **Confirmation Pages:** Success-focused design with clear next steps and expectations.
 
 ---
 
@@ -69,7 +71,7 @@ Each layout must reflect the three brand pillars:
 ## Do / Don't
 ✅ Do:
 - Lead with people and stories.  
-- Keep CTAs human ("Let's Talk").  
+- Keep CTAs human ("Let's Connect", except intake form uses "Submit").  
 - Let visuals breathe.
 
 🚫 Don't:
@@ -81,8 +83,43 @@ Each layout must reflect the three brand pillars:
 ---
 
 ## Page-Level CTAs
-- Sticky top-right **"Let's Talk"** button.  
+- Sticky top-right **"Let's Connect"** button.  
 - Every page ends with CTA banner using aqua → coral gradient.
+- Intake form submit button: **"Submit"**.
+
+---
+
+## Confirmation Pages
+**Purpose:** Celebrate success and guide users to next steps.
+
+**Layout:**
+- Full-screen background (`bg-gray-50`)
+- Centered card (`max-w-xl mx-auto`) with white background and shadow
+- Generous padding (`p-8`) and spacing (`space-y-8`)
+
+**Visual Elements:**
+- **Success Icon:** Green checkmark in circular background (`bg-green-100`, `text-green-600`)
+- **Headline:** Celebratory tone ("Perfect match!", "Success!", "You're all set!")
+- **Description:** Clear, helpful context about what happens next
+
+**Content Structure:**
+1. **Success indicator** (icon + headline)
+2. **Value proposition** (what they get from next step)
+3. **Expectations list** (what to expect from the experience)
+4. **Primary CTA** (coral button with icon)
+5. **Contextual help** (small text about process)
+
+**Button Design:**
+- Coral background (`bg-[#F5856E]`)
+- White text with hover effect (`hover:brightness-110`)
+- Icon + text combination
+- Shadow for depth (`shadow-lg`)
+
+**Expectations List:**
+- Left-aligned with checkmark icons
+- Green checkmarks (`text-green-500`)
+- Clear, benefit-focused copy
+- No more than 3-4 items
 
 ---
 

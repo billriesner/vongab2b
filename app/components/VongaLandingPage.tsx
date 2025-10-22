@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Handshake, BarChart3, Shirt, MapPin } from "lucide-react";
 import type { JSX } from "react";
 import { SubscribeForm } from "@/components/SubscribeForm";
+import Link from "next/link";
 
 const ACCENT = "#33becc";
 const DARK = "#303e55";
@@ -51,7 +52,7 @@ export default function VongaLandingPage(): JSX.Element {
               </a>
             ))}
           </nav>
-          <Button size="sm" className="md:hidden text-white" style={{ backgroundColor: ACCENT }} asChild>
+          <Button size="sm" className="md:hidden" variant="primary" asChild>
             <a href="#contact">Contact Us</a>
           </Button>
         </div>
@@ -68,7 +69,7 @@ export default function VongaLandingPage(): JSX.Element {
               Connected apparel that rewards your community when they show up, and keeps you connected long after they leave.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Button size="lg" className="px-8 py-4 text-white" style={{ backgroundColor: ACCENT }} asChild>
+              <Button size="lg" className="px-8 py-4" variant="primary" asChild>
                 <a href="#solution">See how it works</a>
               </Button>
               <Button variant="outline" size="lg" className="px-8 py-4" style={{ borderColor: ACCENT, color: ACCENT }} asChild>
@@ -86,7 +87,7 @@ export default function VongaLandingPage(): JSX.Element {
               <p className="text-gray-700 text-lg mb-6">
                 Half of new members drift away within six months. Swag collects dust and margins are razor‑thin. Why burn budget on acquisition if you can’t retain?
               </p>
-              <Button style={{ backgroundColor: DARK, color: "#fff" }} asChild>
+              <Button variant="dark" asChild>
                 <a href="#solution">The Solution</a>
               </Button>
             </div>
@@ -149,12 +150,12 @@ export default function VongaLandingPage(): JSX.Element {
         {/* --- Contact --- */}
         <section id="contact" className="py-20 bg-white border-t text-center px-6">
           <div className="max-w-xl mx-auto">
-            <h2 className="text-3xl font-bold mb-4" style={{ color: DARK }}>Let's talk</h2>
-            <p className="text-gray-700 mb-6">Want a demo or custom quote? Shoot us an email and let’s see how Vonga can help your community.</p>
-            <Button style={{ backgroundColor: DARK, color: "#fff" }} asChild>
-              <a href="mailto:sales@vonga.io?subject=Interested%20in%20Vonga&body=Hi%2C%20I%E2%80%99d%20like%20to%20learn%20more%20about%20how%20Vonga%20can%20work%20for%20my%20community." target="_blank" rel="noopener noreferrer">
-                Contact Us
-              </a>
+            <h2 className="text-3xl font-bold mb-4" style={{ color: DARK }}>Let's Connect</h2>
+            <p className="text-gray-700 mb-6">Want a demo or custom quote? Shoot us an email and let's see how Vonga can help your community.</p>
+            <Button variant="primary" asChild>
+              <Link href="/intake">
+                Let's Connect
+              </Link>
             </Button>
           </div>
         </section>

@@ -409,10 +409,10 @@ export default function ClubPage() {
               </p>
               <Button 
                 size="lg"
-                className="bg-accent hover:bg-accent/90 text-navy font-semibold shadow-md"
+                className="bg-accent hover:brightness-110 transition text-navy font-semibold shadow-md"
                 asChild
               >
-                <Link href="/enterprise#talk">Let's Talk</Link>
+                <Link href="/intake">Let's Connect</Link>
               </Button>
             </CardContent>
           </Card>

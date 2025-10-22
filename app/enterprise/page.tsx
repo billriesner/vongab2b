@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Building2, Users, Trophy, BarChart3, Zap, Shield } from "lucide-react";
 import { ContactForm } from "@/components/ContactForm";
 import { Breadcrumb } from "@/components/Breadcrumb";
+import Link from "next/link";
 
 export default function EnterprisePage() {
   return (
@@ -39,10 +40,10 @@ export default function EnterprisePage() {
             </p>
             <Button 
               size="lg" 
-              className="bg-accent hover:bg-accent/90 text-navy shadow-lg font-semibold"
+              className="bg-accent hover:brightness-110 transition text-navy shadow-lg font-semibold"
               asChild
             >
-              <a href="#talk">Let's Talk</a>
+              <Link href="/intake">Let's Connect</Link>
             </Button>
           </div>
         </div>
@@ -170,7 +171,7 @@ export default function EnterprisePage() {
               <Shield className="w-10 h-10 text-accent" />
             </div>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-black" style={{ marginBottom: '32px' }}>Let's Talk</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-black" style={{ marginBottom: '32px' }}>Let's Connect</h2>
           <h3 className="text-2xl md:text-3xl font-bold" style={{ color: '#33BECC', marginBottom: '32px' }}>Schedule a call to explore what Vonga can do for you</h3>
           
           <p className="text-lg text-black leading-relaxed max-w-2xl mx-auto" style={{ marginBottom: '64px' }}>

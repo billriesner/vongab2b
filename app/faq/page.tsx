@@ -161,8 +161,8 @@ export default function FAQPage() {
                       </AccordionTrigger>
                       <AccordionContent className="text-base text-black">
                         Yes.{' '}
-                        <Link href="/contact" className="hover:underline font-semibold" style={{ color: '#33BECC' }}>
-                          Let's Talk
+                        <Link href="/intake" className="hover:underline font-semibold" style={{ color: '#33BECC' }}>
+                          Let's Connect
                         </Link>{' '}
                         and we'll show you how Vonga can fit your organization.
                       </AccordionContent>

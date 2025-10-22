@@ -47,8 +47,8 @@
   /* Design Tokens */
   
   /* Colors */
-  --color-accent: #33BECC;
-  --color-accent-rgb: 51, 190, 204;
+  --color-accent: #F5856E;
+  --color-accent-rgb: 245, 133, 110;
   --color-navy: #303E55;
   --color-navy-rgb: 48, 62, 85;
   --color-text: #0A0A0A;
@@ -153,3 +153,8 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Intake Form Styles */
+.input { @apply w-full rounded-xl bg-white text-gray-900 px-4 py-3 outline-none ring-1 ring-gray-300 focus:ring-[#33BECC]/40 placeholder:text-gray-500 border border-gray-300; }
+.btn { @apply inline-flex items-center justify-center rounded-xl px-5 py-3 font-medium; }
+.btn-primary { @apply bg-[#F5856E] text-white hover:brightness-110 transition; }

@@ -105,7 +105,8 @@ Together, they turn Vonga from a merch solution into a relationship platform, on
 ---
 
 ## Non-Negotiables
-- Primary CTA everywhere: **"Let's Talk."**  
+- Primary CTA everywhere: **"Let's Connect."** (except intake form submit button)
+- Intake form submit button: **"Submit"**
 - No hard-coded colors; always use `/styles/tokens.json`.  
 - Motion curve: `cubic-bezier(0.25,0.1,0.25,1.0)`.  
 - Typeface: Inter / Helvetica Now only.
