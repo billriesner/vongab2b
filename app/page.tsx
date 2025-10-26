@@ -3,7 +3,7 @@ import { SplitSection } from "@/src/components/SplitSection";
 import { CardGrid } from "@/src/components/CardGrid";
 import { Pillars } from "@/src/components/Pillars";
 import { CTASection } from "@/src/components/CTASection";
-import { Users, Building2, Heart } from "lucide-react";
+import { Users, Building2, Heart, Dumbbell } from "lucide-react";
 
 export default function HomePage() {
   const structuredData = {
@@ -30,20 +30,26 @@ export default function HomePage() {
     {
       icon: <Users className="w-10 h-10" />,
       title: "Teams & Leagues",
-      text: "Turn fandom into loyalty",
+      text: "Turn fandom into lasting loyalty that extends beyond game day",
       href: "/sports-teams"
     },
     {
       icon: <Building2 className="w-10 h-10" />,
       title: "Schools & Universities", 
-      text: "Keep pride alive from orientation to alumni reunion",
+      text: "Keep pride alive from orientation to alumni reunion and beyond",
       href: "/schools"
     },
     {
       icon: <Heart className="w-10 h-10" />,
       title: "Creators & Communities",
-      text: "Build belonging at human scale",
+      text: "Build belonging at human scale through meaningful connections",
       href: "/creators"
+    },
+    {
+      icon: <Dumbbell className="w-10 h-10" />,
+      title: "Studios & Clubs",
+      text: "Create connection beyond the club that members carry daily",
+      href: "/studios-clubs"
     }
   ];
 
