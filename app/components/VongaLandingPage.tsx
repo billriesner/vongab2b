@@ -69,7 +69,7 @@ export default function VongaLandingPage(): JSX.Element {
               Connected apparel that rewards your community when they show up, and keeps you connected long after they leave.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Button size="lg" className="px-8 py-4" variant="primary" asChild>
+              <Button size="lg" className="px-8 py-4" variant="cyan" asChild>
                 <a href="#solution">See how it works</a>
               </Button>
               <Button variant="outline" size="lg" className="px-8 py-4" style={{ borderColor: ACCENT, color: ACCENT }} asChild>

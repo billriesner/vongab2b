@@ -47,16 +47,18 @@ export function SplitSection({
             </p>
             {ctaHref && (
               <Button 
-                variant="secondary"
-                href={ctaHref}
+                variant="cyan"
+                asChild
                 style={{
-                  borderColor: theme.colors.aqua,
-                  color: theme.colors.aqua,
-                  backgroundColor: 'transparent',
+                  backgroundColor: theme.colors.aqua,
+                  color: theme.colors.white,
+                  boxShadow: theme.shadow.glowAqua,
                   transition: `all ${theme.motion.base}ms ${theme.motion.curve}`
                 }}
               >
-                {ctaText}
+                <a href={ctaHref}>
+                  {ctaText}
+                </a>
               </Button>
             )}
           </div>

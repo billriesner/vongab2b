@@ -79,13 +79,13 @@ export function Hero({
             </Button>
             {secondaryHref && (
               <Button 
-                variant="secondary"
+                variant="cyan"
                 asChild
                 className="min-w-[160px]"
                 style={{
-                  borderColor: theme.colors.aqua,
-                  color: theme.colors.white,
                   backgroundColor: theme.colors.aqua,
+                  color: theme.colors.white,
+                  boxShadow: theme.shadow.glowAqua,
                   transition: `all ${theme.motion.base}ms ${theme.motion.curve}`
                 }}
               >

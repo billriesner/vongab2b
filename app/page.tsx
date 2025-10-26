@@ -31,19 +31,19 @@ export default function HomePage() {
       icon: <Users className="w-10 h-10" />,
       title: "Teams & Leagues",
       text: "Turn fandom into loyalty",
-      href: "/enterprise"
+      href: "/sports-teams"
     },
     {
       icon: <Building2 className="w-10 h-10" />,
-      title: "Universities", 
+      title: "Schools & Universities", 
       text: "Keep pride alive from orientation to alumni reunion",
-      href: "/enterprise"
+      href: "/schools"
     },
     {
       icon: <Heart className="w-10 h-10" />,
-      title: "Communities",
+      title: "Creators & Communities",
       text: "Build belonging at human scale",
-      href: "/club"
+      href: "/creators"
     }
   ];
 
@@ -67,10 +67,11 @@ export default function HomePage() {
 
         {/* Problem Statement */}
         <SplitSection
-          title="Emotion is your most valuable asset, but it's the hardest one to measure"
-          body="In a world of screens, connection has become transactional. Vonga turns emotion into engagement you can see, feel, and measure, without losing the humanity that makes it matter."
+          title="Moments fade, but meaning doesn't have to."
+          body="Vonga builds a bridge between moments and memories, woven into what people wear every day. Real, measurable, unforgettable connection."
           image="/images/hero/hero-device-showcase.jpg"
           ctaHref="#solutions"
+          ctaText="See how it works"
         />
 
         {/* Solutions Grid */}
