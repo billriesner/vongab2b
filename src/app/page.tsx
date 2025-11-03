@@ -16,7 +16,7 @@ export default function HomePage() {
           <div className="flex flex-wrap gap-4">
             <Link
               href="/connect"
-              className="px-6 py-3 rounded-2xl font-medium bg-[#33BECC] text-[#0a1422] hover:brightness-110 transition"
+              className="px-6 py-3 rounded-2xl font-medium bg-[#F5856E] text-white hover:brightness-110 transition"
             >
               Let's Connect
             </Link>
@@ -172,7 +172,7 @@ export default function HomePage() {
           </p>
           <div className="rounded-2xl overflow-hidden border border-white/10 aspect-[16/9] bg-black/30 max-w-3xl mx-auto">
             <img
-              src="/images/how-band.jpg"
+              src="/images/how-band.svg"
               alt="Subtle aqua and coral light strands suggesting on-body connection."
               className="w-full h-full object-cover opacity-90"
             />
