@@ -42,7 +42,7 @@ export default function VongaLandingPage(): JSX.Element {
       <header className="fixed top-0 z-50 w-full bg-white/90 backdrop-blur border-b border-gray-200">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-3">
           <a href="#hero" className="flex items-center gap-2">
-            <img src="/logo.svg" alt="Vonga logo" className="h-8 w-auto" />
+            <img src="/images/logos/logo.svg" alt="Vonga logo" className="h-8 w-auto" />
             <span className="sr-only">Vonga</span>
           </a>
           <nav className="hidden md:flex gap-8 text-sm font-medium">
@@ -60,7 +60,7 @@ export default function VongaLandingPage(): JSX.Element {
 
       {/* --- Hero --- */}
       <main>
-        <section id="hero" className="pt-32 pb-24 bg-cover bg-center" style={{ backgroundImage: "url('/hero-placeholder.jpg')" }}>
+        <section id="hero" className="pt-32 pb-24 bg-cover bg-center" style={{ backgroundImage: "url('/images/heroes/hero-placeholder.jpg')" }}>
           <div className="max-w-5xl mx-auto text-center px-6 bg-white/80 py-12 rounded">
             <h1 className="text-4xl md:text-5xl font-extrabold leading-tight mb-4">
               From first touch to <span style={{ color: ACCENT }}>lasting loyalty.</span>

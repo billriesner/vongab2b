@@ -3,30 +3,15 @@ import { FileText, Users, ShoppingCart, Shield, Scale, AlertCircle, HelpCircle }
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { TermsContactForm } from "@/components/TermsContactForm";
-import { Breadcrumb } from "@/components/Breadcrumb";
 
 export default function TermsPage() {
   return (
     <div>
-      {/* Breadcrumb Section */}
-      <section className="bg-white py-4">
-        <div className="max-w-7xl mx-auto px-4">
-          <Breadcrumb 
-            items={[
-              { label: 'Home', href: '/' },
-              { label: 'Legal', href: '/legal/terms' },
-              { label: 'Terms & Conditions' }
-            ]}
-            light={false}
-          />
-        </div>
-      </section>
-
       {/* Hero Section */}
       <div 
         className="relative min-h-[400px] flex items-center justify-center text-center"
         style={{
-          backgroundImage: 'url(/hero-placeholder.jpg)',
+          backgroundImage: 'url(/images/heroes/hero-placeholder.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}

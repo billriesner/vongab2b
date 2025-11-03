@@ -77,7 +77,7 @@ export default function StudiosClubsPage() {
             <P className="mt-4">
               Membership isn't just access — it's identity that endures. Vonga connects every class, every round, and every interaction into one living sense of belonging.
             </P>
-            <CTA href="/connect">Let's Connect</CTA>
+            <CTA href="/contact">Let's Connect</CTA>
           </div>
           <div className="rounded-2xl overflow-hidden border border-white/10">
             <img

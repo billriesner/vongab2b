@@ -15,7 +15,7 @@ export function Header() {
         <div className="flex h-24 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <img src="/logo.svg" alt="Vonga" className="h-30 w-auto" style={{ filter: 'brightness(0) saturate(100%) invert(68%) sepia(66%) saturate(459%) hue-rotate(140deg) brightness(94%) contrast(87%)' }} />
+            <img src="/images/logos/logo.svg" alt="Vonga" className="h-30 w-auto" style={{ filter: 'brightness(0) saturate(100%) invert(68%) sepia(66%) saturate(459%) hue-rotate(140deg) brightness(94%) contrast(87%)' }} />
           </Link>
 
           {/* Right Side - Buttons + Burger Menu */}

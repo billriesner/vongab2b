@@ -3,29 +3,15 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Smartphone, Shirt, Lock, Zap, CheckCircle2, Shield, Code, BarChart3, Sparkles, Gift, Trophy, TrendingUp } from "lucide-react";
 import Link from "next/link";
-import { Breadcrumb } from "@/components/Breadcrumb";
 
 export default function TechnologyPage() {
   return (
     <div>
-      {/* Breadcrumb Section */}
-      <section className="bg-white py-4">
-        <div className="max-w-7xl mx-auto px-4">
-          <Breadcrumb 
-            items={[
-              { label: 'Home', href: '/' },
-              { label: 'Technology' }
-            ]}
-            light={false}
-          />
-        </div>
-      </section>
-
       {/* Hero Section */}
       <section className="relative overflow-hidden min-h-[500px] flex items-center">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: 'url(/hero-tech.svg)' }}
+          style={{ backgroundImage: 'url(/images/heroes/hero-tech.svg)' }}
         ></div>
         <div className="absolute inset-0 bg-white/60"></div>
         <div className="max-w-7xl mx-auto px-4 py-5xl relative z-10 w-full">
@@ -118,7 +104,7 @@ export default function TechnologyPage() {
       <section className="w-full" style={{ backgroundColor: '#FFFFFF' }}>
         <div className="w-full">
           <img 
-            src="/hero-2.svg" 
+            src="/images/icons/hero-2.svg" 
             alt="Vonga technology showcase" 
             className="w-full h-auto object-cover"
           />
@@ -136,7 +122,7 @@ export default function TechnologyPage() {
             playsInline
             controls
           >
-            <source src="/digital-twin.mp4" type="video/mp4" />
+            <source src="/videos/digital-twin.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
@@ -196,7 +182,7 @@ export default function TechnologyPage() {
       <section className="w-full" style={{ backgroundColor: '#F7F7F7' }}>
         <div className="w-full">
           <img 
-            src="/tap-in.svg" 
+            src="/images/icons/tap-in.svg" 
             alt="NFC Technology in Action" 
             className="w-full h-auto object-cover"
           />
@@ -207,7 +193,7 @@ export default function TechnologyPage() {
       <section className="w-full" style={{ backgroundColor: '#FFFFFF' }}>
         <div className="w-full">
           <img 
-            src="/placeholder1.svg" 
+            src="/images/icons/placeholder1.svg" 
             alt="Vonga experience showcase" 
             className="w-full h-auto object-cover"
           />
@@ -291,7 +277,7 @@ export default function TechnologyPage() {
       <section className="w-full" style={{ backgroundColor: '#F7F7F7' }}>
         <div className="w-full">
           <img 
-            src="/placeholder2.svg" 
+            src="/images/icons/placeholder2.svg" 
             alt="Vonga connected apparel showcase" 
             className="w-full h-auto object-cover"
           />
@@ -373,7 +359,7 @@ export default function TechnologyPage() {
       <section className="w-full" style={{ backgroundColor: '#FFFFFF' }}>
         <div className="w-full">
           <img 
-            src="/about-hero.svg" 
+            src="/images/heroes/about-hero.svg" 
             alt="Privacy & Security Features" 
             className="w-full h-auto object-cover"
           />
@@ -457,7 +443,7 @@ export default function TechnologyPage() {
       <section className="w-full" style={{ backgroundColor: '#F7F7F7' }}>
         <div className="w-full">
           <img 
-            src="/hero-enterprise.svg" 
+            src="/images/heroes/hero-enterprise.svg" 
             alt="Vonga technology showcase" 
             className="w-full h-auto object-cover"
           />

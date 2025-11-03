@@ -3,30 +3,15 @@ import { Shield, Eye, Lock, UserCheck, Globe, HelpCircle } from "lucide-react";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { PrivacyForm } from "@/components/PrivacyForm";
-import { Breadcrumb } from "@/components/Breadcrumb";
 
 export default function PrivacyPage() {
   return (
     <div>
-      {/* Breadcrumb Section */}
-      <section className="bg-white py-4">
-        <div className="max-w-7xl mx-auto px-4">
-          <Breadcrumb 
-            items={[
-              { label: 'Home', href: '/' },
-              { label: 'Legal', href: '/legal/privacy' },
-              { label: 'Privacy Policy' }
-            ]}
-            light={false}
-          />
-        </div>
-      </section>
-
       {/* Hero Section */}
       <div 
         className="relative min-h-[400px] flex items-center justify-center text-center"
         style={{
-          backgroundImage: 'url(/hero-placeholder.jpg)',
+          backgroundImage: 'url(/images/heroes/hero-placeholder.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}

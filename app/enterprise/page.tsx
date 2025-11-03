@@ -3,28 +3,14 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Building2, Users, Trophy, BarChart3, Zap, Shield } from "lucide-react";
 import { ContactForm } from "@/components/ContactForm";
-import { Breadcrumb } from "@/components/Breadcrumb";
 import Link from "next/link";
 
 export default function EnterprisePage() {
   return (
     <div>
-      {/* Breadcrumb Section */}
-      <section className="bg-white py-4">
-        <div className="max-w-7xl mx-auto px-4">
-          <Breadcrumb 
-            items={[
-              { label: 'Home', href: '/' },
-              { label: 'Enterprise' }
-            ]}
-            light={false}
-          />
-        </div>
-      </section>
-
       {/* Hero Section */}
       <section className="relative min-h-[60vh] flex items-center justify-center" style={{
-        backgroundImage: 'url(/hero-enterprise.svg)',
+        backgroundImage: 'url(/images/heroes/hero-enterprise.svg)',
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }}>

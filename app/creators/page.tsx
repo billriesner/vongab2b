@@ -79,7 +79,7 @@ export default function CreatorsPage() {
           </div>
           <div className="rounded-2xl overflow-hidden border border-white/10">
             <img
-              src="/images/creators-hero.jpg"
+              src="/images/heroes/creators-hero.jpg"
               alt="Creator on stage or in studio, followers subtly connected by soft aqua light trails."
               className="w-full h-full object-cover"
             />
@@ -191,7 +191,7 @@ export default function CreatorsPage() {
           <P className="mt-4">
             You've built something people care about. Now give them a way to carry it with them, every day.
           </P>
-          <CTA href="/intake">Let's Connect</CTA>
+          <CTA href="/resources/intake">Let's Connect</CTA>
         </div>
       </Section>
     </main>

@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/hero-placeholder.jpg',
+        url: '/images/heroes/hero-placeholder.jpg',
         width: 1200,
         height: 630,
         alt: 'Vonga - Connected Apparel',
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Vonga Live Connected: NFC Apparel, Loyalty & Enterprise Activations',
     description: 'Vonga makes connected apparel that unlocks rewards and real-world access. Shop tap-ready gear, launch Club Vonga for communities, or scale Enterprise activations.',
-    images: ['/hero-placeholder.jpg'],
+    images: ['/images/heroes/hero-placeholder.jpg'],
   },
   robots: {
     index: true,

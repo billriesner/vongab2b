@@ -15,7 +15,7 @@ export default function HomePage() {
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src="/Vonga - Hero Video.mp4" type="video/mp4" />
+          <source src="/videos/Vonga - Hero Video.mp4" type="video/mp4" />
         </video>
         
         {/* Dark Overlay */}
@@ -32,7 +32,7 @@ export default function HomePage() {
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Button variant="primary" size="lg" asChild>
-              <Link href="/connect">
+              <Link href="/contact">
                 Let's Connect
               </Link>
             </Button>
@@ -71,7 +71,7 @@ export default function HomePage() {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="rounded-2xl overflow-hidden border border-gray-200 aspect-[16/10] bg-gray-100">
                 <img
-                  src="/images/sports-hero.svg"
+                  src="/images/heroes/sports-hero.svg"
                   alt="Stadium after game, lights dimming, fans still connected by subtle light ribbons."
                   className="w-full h-full object-cover opacity-90"
                 />
@@ -104,7 +104,7 @@ export default function HomePage() {
               </div>
               <div className="order-1 lg:order-2 rounded-2xl overflow-hidden border border-gray-200 aspect-[16/10] bg-gray-100">
                 <img
-                  src="/images/schools-hero.svg"
+                  src="/images/heroes/schools-hero.svg"
                   alt="Diverse students on the quad in school colors, subtly connected by light ribbons."
                   className="w-full h-full object-cover opacity-90"
                 />
@@ -115,7 +115,7 @@ export default function HomePage() {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="rounded-2xl overflow-hidden border border-gray-200 aspect-[16/10] bg-gray-100">
                 <img
-                  src="/images/creators-hero.svg"
+                  src="/images/heroes/creators-hero.svg"
                   alt="Creator on stage or in studio, followers subtly connected by soft aqua light trails."
                   className="w-full h-full object-cover opacity-90"
                 />
@@ -148,7 +148,7 @@ export default function HomePage() {
               </div>
               <div className="order-1 lg:order-2 rounded-2xl overflow-hidden border border-gray-200 aspect-[16/10] bg-gray-100">
                 <img
-                  src="/images/studiosclubs-hero.svg"
+                  src="/images/heroes/studiosclubs-hero.svg"
                   alt="Members connected through motion and apparel in a fitness studio setting."
                   className="w-full h-full object-cover opacity-90"
                 />
@@ -167,7 +167,7 @@ export default function HomePage() {
           </p>
           <div className="rounded-2xl overflow-hidden border border-gray-200 aspect-[16/9] bg-gray-100 max-w-3xl mx-auto">
             <img
-              src="/images/how-band.svg"
+              src="/images/heroes/how-band.svg"
               alt="Subtle aqua and coral light strands suggesting on-body connection."
               className="w-full h-full object-cover opacity-90"
             />
@@ -179,7 +179,7 @@ export default function HomePage() {
       <section className="text-center py-16 px-6 bg-gradient-to-b from-[#0e1b2f] to-[#0a1422]">
         <h2 className="text-3xl md:text-4xl font-semibold mb-6">Ready to Create Belonging That Lasts?</h2>
         <Button variant="primary" size="lg" asChild>
-          <Link href="/connect">
+          <Link href="/contact">
             Let's Connect
           </Link>
         </Button>

@@ -13,7 +13,7 @@ export default function ClubPage() {
       <section className="relative overflow-hidden min-h-[600px] flex items-center">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: 'url(/hero-placeholder.jpg)' }}
+          style={{ backgroundImage: 'url(/images/heroes/hero-placeholder.jpg)' }}
         ></div>
         <div className="absolute inset-0 bg-white/60"></div>
         <div className="max-w-7xl mx-auto px-4 py-5xl md:py-[120px] relative z-10 w-full">
@@ -121,7 +121,7 @@ export default function ClubPage() {
       {/* Members Using Tech Image */}
       <section className="relative overflow-hidden" style={{ backgroundColor: '#F7F7F7' }}>
         <div className="w-full">
-          <img src="/tap-in.svg" alt="Members checking in with Vonga tap technology" className="w-full h-auto" />
+          <img src="/images/icons/tap-in.svg" alt="Members checking in with Vonga tap technology" className="w-full h-auto" />
         </div>
       </section>
 
@@ -273,7 +273,7 @@ export default function ClubPage() {
             muted 
             playsInline
           >
-            <source src="/lifestyle-video.mp4" type="video/mp4" />
+            <source src="/videos/lifestyle-video.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>

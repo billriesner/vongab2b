@@ -79,7 +79,7 @@ export default function SchoolsPage() {
           </div>
           <div className="rounded-2xl overflow-hidden border border-white/10">
             <img
-              src="/images/schools-hero.jpg"
+              src="/images/heroes/schools-hero.jpg"
               alt="Diverse students on the quad in school colors, subtly connected by light ribbons."
               className="w-full h-full object-cover"
             />
@@ -183,7 +183,7 @@ export default function SchoolsPage() {
         <div className="text-center max-w-3xl mx-auto">
           <H2>Belonging shouldn't end with a diploma.</H2>
           <P className="mt-4">Let's create experiences your students, alumni, and fans carry for life.</P>
-          <CTA href="/intake">Let's Connect</CTA>
+          <CTA href="/resources/intake">Let's Connect</CTA>
         </div>
       </Section>
     </main>

@@ -8,7 +8,7 @@ export function Footer() {
           {/* Company */}
           <div>
             <Link href="/" className="flex items-center justify-start mb-4">
-              <img src="/logo.svg" alt="Vonga" className="h-30 w-auto" style={{ filter: 'brightness(0) saturate(100%) invert(68%) sepia(66%) saturate(459%) hue-rotate(140deg) brightness(94%) contrast(87%)' }} />
+              <img src="/images/logos/logo.svg" alt="Vonga" className="h-30 w-auto" style={{ filter: 'brightness(0) saturate(100%) invert(68%) sepia(66%) saturate(459%) hue-rotate(140deg) brightness(94%) contrast(87%)' }} />
             </Link>
           </div>
 

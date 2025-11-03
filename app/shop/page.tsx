@@ -4,7 +4,6 @@ import { ShoppingBag } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { getAllProducts } from "@/lib/shopify";
-import { Breadcrumb } from "@/components/Breadcrumb";
 
 export const revalidate = 60; // Revalidate every 60 seconds
 
@@ -13,24 +12,11 @@ export default async function ShopPage() {
 
   return (
     <div>
-      {/* Breadcrumb Section */}
-      <section className="bg-white py-4">
-        <div className="max-w-7xl mx-auto px-4">
-          <Breadcrumb 
-            items={[
-              { label: 'Home', href: '/' },
-              { label: 'Shop' }
-            ]}
-            light={false}
-          />
-        </div>
-      </section>
-
       {/* Hero Section */}
       <div 
         className="relative min-h-[400px] flex items-center justify-center text-center"
         style={{
-          backgroundImage: 'url(/hero-placeholder.jpg)',
+          backgroundImage: 'url(/images/heroes/hero-placeholder.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}

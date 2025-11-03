@@ -1,29 +1,14 @@
 import { Section } from "@/components/Section";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Target, Eye, BookOpen, Lock, Users, Award } from "lucide-react";
-import { Breadcrumb } from "@/components/Breadcrumb";
-
 export default function AboutPage() {
   return (
     <div>
-      {/* Breadcrumb Section */}
-      <section className="bg-white py-4">
-        <div className="max-w-7xl mx-auto px-4">
-          <Breadcrumb 
-            items={[
-              { label: 'Home', href: '/' },
-              { label: 'About' }
-            ]}
-            light={false}
-          />
-        </div>
-      </section>
-
       {/* Hero Section */}
       <section className="relative overflow-hidden min-h-[500px] flex items-center">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: 'url(/about-hero.svg)' }}
+          style={{ backgroundImage: 'url(/images/heroes/about-hero.svg)' }}
         ></div>
         <div className="absolute inset-0 bg-white/60"></div>
         <div className="max-w-7xl mx-auto px-4 py-5xl relative z-10 w-full">

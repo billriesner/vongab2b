@@ -2,27 +2,13 @@ import { Section } from "@/components/Section";
 import { Card, CardContent } from "@/components/ui/card";
 import { Mail } from "lucide-react";
 import { ContactForm } from "@/components/ContactForm";
-import { Breadcrumb } from "@/components/Breadcrumb";
 
 export default function ContactPage() {
   return (
     <div>
-      {/* Breadcrumb Section */}
-      <section className="bg-white py-4">
-        <div className="max-w-7xl mx-auto px-4">
-          <Breadcrumb 
-            items={[
-              { label: 'Home', href: '/' },
-              { label: 'Contact' }
-            ]}
-            light={false}
-          />
-        </div>
-      </section>
-
       {/* Hero Section */}
       <section className="relative min-h-[60vh] flex items-center justify-center" style={{
-        backgroundImage: 'url(/hero-contact.svg)',
+        backgroundImage: 'url(/images/heroes/hero-contact.svg)',
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }}>

@@ -79,7 +79,7 @@ export default function SportsTeamsPage() {
           </div>
           <div className="rounded-2xl overflow-hidden border border-white/10">
             <img
-              src="/images/sports-hero.jpg"
+              src="/images/heroes/sports-hero.jpg"
               alt="Stadium crowd mid-celebration with subtle light ribbons connecting fans."
               className="w-full h-full object-cover"
             />
@@ -188,7 +188,7 @@ export default function SportsTeamsPage() {
           <P className="mt-4">
             The next great fan experience won't be louder. It'll be closer. Let's create something your fans can feel every day.
           </P>
-          <CTA href="/intake">Let's Connect</CTA>
+          <CTA href="/resources/intake">Let's Connect</CTA>
         </div>
       </Section>
     </main>

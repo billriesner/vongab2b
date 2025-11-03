@@ -4,7 +4,6 @@ import { Card, CardContent } from '@/components/ui/card';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
-import { Breadcrumb } from '@/components/Breadcrumb';
 
 interface CollectionPageProps {
   params: Promise<{
@@ -32,25 +31,11 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
 
   return (
     <div>
-      {/* Breadcrumb Section */}
-      <section className="bg-white py-4">
-        <div className="max-w-7xl mx-auto px-4">
-          <Breadcrumb 
-            items={[
-              { label: 'Home', href: '/' },
-              { label: 'Shop', href: '/shop' },
-              { label: collection.title }
-            ]}
-            light={false}
-          />
-        </div>
-      </section>
-
       {/* Hero Section */}
       <div
         className="relative bg-cover bg-center py-5xl text-white flex items-center justify-center"
         style={{
-          backgroundImage: 'url(/hero-placeholder.jpg)',
+          backgroundImage: 'url(/images/heroes/hero-placeholder.jpg)',
           backgroundColor: '#303E55',
           minHeight: '400px',
         }}
