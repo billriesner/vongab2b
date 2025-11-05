@@ -21,6 +21,9 @@ export function Header() {
           {/* Right Side - Buttons + Burger Menu */}
           <div className="flex items-center space-x-3">
             <div className="hidden sm:flex items-center space-x-3">
+              <Button variant="secondary" size="sm" asChild>
+                <Link href="/how-it-works">See How It Works</Link>
+              </Button>
               <Button variant="primary" size="sm" asChild>
                 <Link href="/intake">Let's Connect</Link>
               </Button>
@@ -70,6 +73,11 @@ export function Header() {
                   </nav>
 
                   <div className="flex flex-col space-y-3 pt-4 border-t">
+                    <Button variant="secondary" asChild>
+                      <Link href="/how-it-works" onClick={() => setIsOpen(false)}>
+                        See How It Works
+                      </Link>
+                    </Button>
                     <Button variant="primary" asChild>
                       <Link href="/intake" onClick={() => setIsOpen(false)}>
                         Let's Connect

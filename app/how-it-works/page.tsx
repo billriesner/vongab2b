@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Link as LinkIcon, Smartphone, Zap, BarChart3, RefreshCw } from 'lucide-react';
@@ -137,20 +138,120 @@ const FAQS_BY_CATEGORY = [
   },
 ];
 
+interface UseCaseCardProps {
+  card: {
+    h: string;
+    p: string;
+    img: string;
+    subtitle: string;
+    bullets: string[];
+  };
+}
+
+function UseCaseCard({ card }: UseCaseCardProps) {
+  const [isHovered, setIsHovered] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && (isHovered || isFocused)) {
+        setIsHovered(false);
+        setIsFocused(false);
+        cardRef.current?.blur();
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [isHovered, isFocused]);
+
+  const showOverlay = isHovered || isFocused;
+
+  return (
+    <div
+      ref={cardRef}
+      role="button"
+      tabIndex={0}
+      aria-label={`${card.h} - more info`}
+      className="group relative rounded-2xl overflow-hidden border border-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#33BECC] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A1422]"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onFocus={() => setIsFocused(true)}
+      onBlur={() => setIsFocused(false)}
+    >
+      <Image
+        key={card.img}
+        src={card.img}
+        alt=""
+        width={1600}
+        height={900}
+        className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-200"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-black/10" />
+      
+      {/* Overlay */}
+      <div
+        className={`absolute inset-0 bg-black/60 transition-opacity duration-200 ease-out ${
+          showOverlay ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`}
+        aria-hidden={!showOverlay}
+      >
+        <div className="absolute inset-0 flex items-center justify-center p-5">
+          <div className="rounded-2xl border border-white/10 bg-white/[0.06] backdrop-blur-md shadow-[0_10px_30px_rgba(0,0,0,0.35)] p-5 max-w-md w-full">
+            <div className="text-sm font-semibold text-[#33BECC] mb-3 text-center">
+              {card.subtitle}
+            </div>
+            <ul className="space-y-2">
+              {card.bullets.map((bullet, idx) => (
+                <li key={idx} className="flex items-start gap-2 text-white/90 text-sm">
+                  <span className="text-[#33BECC] mt-1.5 flex-shrink-0">•</span>
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* Title strip at bottom */}
+      <div className="absolute bottom-0 p-5 left-0 right-0 z-10">
+        <div className="text-xl font-medium text-center">{card.h}</div>
+        <div className="text-white/80 text-sm text-center">{card.p}</div>
+      </div>
+    </div>
+  );
+}
+
 export default function HowItWorksPage() {
   return (
     <main className="bg-[#0A1422] text-white">
       {/* SECTION 1 — Hero */}
-      <section id="hero" className="relative overflow-hidden">
-        <div className="mx-auto max-w-7xl px-6 lg:px-12 py-24 grid lg:grid-cols-12 gap-10 items-center">
-          <div className="lg:col-span-7">
-            <h1 className="text-4xl md:text-5xl font-semibold tracking-tight mb-5">
+      <section id="hero" className="relative overflow-hidden min-h-[600px] flex items-center">
+        {/* Background Video */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/videos/how-it-works-hero.mp4" type="video/mp4" />
+        </video>
+        
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-black/50"></div>
+        
+        {/* Content */}
+        <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12 py-24 w-full">
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight mb-5" style={{ color: '#33BECC' }}>
               Make apparel interactive.
             </h1>
-            <p className="text-lg md:text-xl text-white/80 leading-relaxed mb-8 max-w-2xl">
-              Each item connects to a branded mobile experience. No app required.
+            <p className="text-lg md:text-xl text-white/90 leading-relaxed mb-8 max-w-2xl mx-auto">
+              We combine apparel with technology to create lasting connections.
             </p>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-4 justify-center">
               <Link
                 href="/contact"
                 className="px-6 py-3 rounded-2xl font-medium bg-[#F5856E] text-white hover:brightness-110 transition"
@@ -158,17 +259,6 @@ export default function HowItWorksPage() {
                 Let&apos;s Connect
               </Link>
             </div>
-          </div>
-
-          <div className="lg:col-span-5 rounded-2xl overflow-hidden border border-white/10 aspect-[16/10] bg-black/30">
-            {/* Placeholder visual: phone tap */}
-            <Image
-              src="/images/placeholders/how-it-works/hero-tap.jpg"
-              alt="Tap apparel to launch a mobile experience"
-              width={1280}
-              height={800}
-              className="w-full h-full object-cover opacity-90"
-            />
           </div>
         </div>
       </section>
@@ -178,9 +268,9 @@ export default function HowItWorksPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-12 py-16">
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { title: 'Tag on Apparel', desc: 'Each garment includes a discreet NFC tag.' },
-              { title: 'Tap to Open', desc: 'A phone tap launches a branded mobile experience.' },
-              { title: 'Act and Track', desc: 'Fans or members engage and every interaction is measurable.' },
+              { title: 'Tag on Apparel', desc: 'Each garment includes a discreet NFC tag.', image: '/images/how-it-works/tag-on-apparel.png' },
+              { title: 'Tap to Open', desc: 'A phone tap launches a branded mobile experience.', image: '/images/how-it-works/tap-to-open.png' },
+              { title: 'Act and Track', desc: 'Fans or members engage and every interaction is measurable.', image: '/images/how-it-works/act-and-track.png' },
             ].map((item) => (
               <div
                 key={item.title}
@@ -188,7 +278,7 @@ export default function HowItWorksPage() {
               >
                 <div className="aspect-[16/9] rounded-xl overflow-hidden border border-white/10 mb-4 bg-black/30">
                   <Image
-                    src="/images/placeholders/how-it-works/icon-strip.svg"
+                    src={item.image}
                     alt=""
                     width={1200}
                     height={675}
@@ -240,11 +330,11 @@ export default function HowItWorksPage() {
           <h2 className="text-3xl font-semibold mb-8">What powers it</h2>
           <div className="flex flex-wrap justify-center gap-6">
             {[
-              { h: 'Garment + NFC tag', p: 'Durable, wash-safe, unique ID per item.' },
-              { h: 'Mobile experience', p: 'Fast loading on your domain.' },
-              { h: 'Campaign engine', p: 'Rules for time, place, and rewards.' },
-              { h: 'Integrations', p: 'HubSpot, CSV, webhooks, analytics feed.' },
-              { h: 'Analytics dashboard', p: 'Scans, uniques, conversion, trends.' },
+              { h: 'Garment + NFC tag', p: 'Durable, wash-safe, unique ID per item.', image: '/images/how-it-works/garment-NFC-tag.png' },
+              { h: 'Mobile experience', p: 'Fast loading on your domain.', image: '/images/how-it-works/mobile-experience.png' },
+              { h: 'Campaign engine', p: 'Rules for time, place, and rewards.', image: '/images/how-it-works/campaign-engine.png' },
+              { h: 'Integrations', p: 'HubSpot, CSV, webhooks, analytics feed.', image: '/images/how-it-works/integrations.png' },
+              { h: 'Analytics dashboard', p: 'Scans, uniques, conversion, trends.', image: '/images/how-it-works/analytics-dashboard.png' },
             ].map((card) => (
               <div
                 key={card.h}
@@ -252,7 +342,7 @@ export default function HowItWorksPage() {
               >
                 <div className="aspect-[16/9] rounded-xl overflow-hidden border border-white/10 mb-4 bg-black/30">
                   <Image
-                    src="/images/placeholders/how-it-works/component.svg"
+                    src={card.image}
                     alt=""
                     width={1200}
                     height={675}
@@ -273,28 +363,52 @@ export default function HowItWorksPage() {
           <h2 className="text-3xl font-semibold mb-8">What you can launch now</h2>
           <div className="grid md:grid-cols-2 gap-6">
             {[
-              { h: 'Geofenced check ins', p: 'Reward verified in person attendance.', img: '/images/navigation/nav-sports.svg' },
-              { h: 'Time bound drops', p: 'Create urgency with timed rewards.', img: '/images/navigation/nav-schools.svg' },
-              { h: 'Raffles and giveaways', p: 'Run fair, trackable digital draws.', img: '/images/navigation/nav-creators.svg' },
-              { h: 'Redeemable perks', p: 'Unlock offers tied to item ownership.', img: '/images/navigation/nav-studiosclubs.svg' },
+              { 
+                h: 'Geofenced check ins', 
+                p: 'Reward verified in person attendance.', 
+                img: '/images/how-it-works/geofenced-checkins.png',
+                subtitle: 'Verified presence',
+                bullets: [
+                  'Reward verified in-person attendance without QR codes.',
+                  'Tap apparel at locations to unlock access or rewards.',
+                  'Measure engagement tied to real-world participation.'
+                ]
+              },
+              { 
+                h: 'Time bound drops', 
+                p: 'Create urgency with timed rewards.', 
+                img: '/images/how-it-works/time-bound-drops.png',
+                subtitle: 'The countdown moment',
+                bullets: [
+                  'Launch rewards that only unlock within a set time window.',
+                  'Create excitement and urgency that drives real engagement.',
+                  'Exclusive, immediate, and measurable.'
+                ]
+              },
+              { 
+                h: 'Raffles and giveaways', 
+                p: 'Run fair, trackable digital draws.', 
+                img: '/images/how-it-works/raffles-and-giveaways.png',
+                subtitle: 'The fair draw',
+                bullets: [
+                  'Run verifiable, trackable giveaways with each tap logged.',
+                  'Randomize rewards transparently - no forms, no bias.',
+                  'Announce winners instantly.'
+                ]
+              },
+              { 
+                h: 'Redeemable perks', 
+                p: 'Unlock offers tied to item ownership.', 
+                img: '/images/how-it-works/redeemable-perks.png',
+                subtitle: 'Reward in motion',
+                bullets: [
+                  'Unlock offers, access, or upgrades through what fans wear.',
+                  'Redemption works via the garment - no apps or codes.',
+                  'Turn each item into an ongoing loyalty touchpoint.'
+                ]
+              },
             ].map((card) => (
-              <div
-                key={card.h}
-                className="group relative rounded-2xl overflow-hidden border border-white/10"
-              >
-                <Image
-                  src={card.img}
-                  alt=""
-                  width={1600}
-                  height={900}
-                  className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-black/10" />
-                <div className="absolute bottom-0 p-5 left-0 right-0">
-                  <div className="text-xl font-medium text-center">{card.h}</div>
-                  <div className="text-white/80 text-sm text-center">{card.p}</div>
-                </div>
-              </div>
+              <UseCaseCard key={card.h} card={card} />
             ))}
           </div>
         </div>
@@ -312,10 +426,9 @@ export default function HowItWorksPage() {
             </ul>
           </div>
           <div className="lg:col-span-6 rounded-2xl overflow-hidden border border-white/10 bg-black/30 p-4">
-            {/* Placeholder chart */}
             <Image
-              src="/images/placeholders/how-it-works/chart-placeholder.svg"
-              alt="Engagement chart placeholder"
+              src="/images/how-it-works/measure-what-matters.png"
+              alt="Measure what matters"
               width={1200}
               height={700}
               className="w-full h-full object-cover opacity-90"
