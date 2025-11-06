@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 
-function Section({ id, children, className = '' }) {
+function Section({ id, children, className = '' }: { id?: string; children: any; className?: string }) {
   return (
     <section id={id} className={`px-6 md:px-10 lg:px-16 py-16 md:py-24 ${className}`}>
       <div className="max-w-6xl mx-auto">{children}</div>

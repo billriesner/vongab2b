@@ -1,7 +1,8 @@
 'use client';
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 
-function Section({ id, children, className = '' }) {
+function Section({ id, children, className = '' }: { id?: string; children: ReactNode; className?: string }) {
   return (
     <section id={id} className={`px-6 md:px-10 lg:px-16 py-16 md:py-24 ${className}`}>
       <div className="max-w-6xl mx-auto">{children}</div>
@@ -9,16 +10,16 @@ function Section({ id, children, className = '' }) {
   );
 }
 
-function H1({ children }) {
+function H1({ children }: { children: ReactNode }) {
   return <h1 className="text-4xl md:text-5xl font-semibold tracking-tight">{children}</h1>;
 }
-function H2({ children }) {
+function H2({ children }: { children: ReactNode }) {
   return <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">{children}</h2>;
 }
-function P({ children, className = '' }) {
+function P({ children, className = '' }: { children: ReactNode; className?: string }) {
   return <p className={`text-base md:text-lg text-white/80 leading-relaxed ${className}`}>{children}</p>;
 }
-function CTA({ href, children }) {
+function CTA({ href, children }: { href: string; children: ReactNode }) {
   return (
     <Link
       href={href}
@@ -29,7 +30,7 @@ function CTA({ href, children }) {
   );
 }
 
-function SecondaryCTA({ href, children }) {
+function SecondaryCTA({ href, children }: { href: string; children: ReactNode }) {
   return (
     <Link
       href={href}
@@ -40,7 +41,7 @@ function SecondaryCTA({ href, children }) {
   );
 }
 
-function UseCaseCard({ title, looksLike, whyItWorks, imgSrc, imgAlt }) {
+function UseCaseCard({ title, looksLike, whyItWorks, imgSrc, imgAlt }: { title: string; looksLike: string; whyItWorks: string; imgSrc: string; imgAlt: string }) {
   return (
     <div className="rounded-2xl bg-white/5 border border-white/10 overflow-hidden">
       <div className="aspect-[16/9] bg-black/30">
