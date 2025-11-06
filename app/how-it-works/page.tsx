@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Link as LinkIcon, Smartphone, Zap, BarChart3, RefreshCw } from 'lucide-react';
+import SEO from '@/components/SEO';
 // --- Vonga: See How It Works — Final FAQ Set (no QR fallback) ---
 
 const FAQS_BY_CATEGORY = [
@@ -85,10 +86,6 @@ const FAQS_BY_CATEGORY = [
         a: 'Signed links, per-user limits, and real-time anomaly detection protect each campaign. We monitor for suspicious patterns and can automatically block or flag problematic activity.',
       },
       {
-        q: 'Can many people tap the same item?',
-        a: 'Yes, if you allow it. Campaign rules control how many times a tag can be scanned, by whom, and under what conditions. You can set limits per user, per item, or per campaign.',
-      },
-      {
         q: 'What if someone gives the item to a friend?',
         a: "Ownership transfers with the item. The new owner becomes the active user, and the scan will no longer connect to the original owner's account. This ensures each item maintains its connection to the current owner.",
       },
@@ -107,15 +104,11 @@ const FAQS_BY_CATEGORY = [
     items: [
       {
         q: 'Can this connect to our CRM?',
-        a: 'Yes. We support most major CRMs and analytics tools that allow API integrations, including HubSpot, Salesforce, and others. Data syncs automatically based on your configuration.',
+        a: 'Yes. We support most major CRMs and analytics tools that allow API integrations. Data syncs automatically based on your configuration.',
       },
       {
         q: 'What reports are included?',
         a: 'The dashboard includes scans, unique users, repeat engagement, and conversion metrics by item or campaign. You can view time and location insights, plus top-performing campaigns and items.',
-      },
-      {
-        q: 'Can we use UTM links or tracking pixels?',
-        a: 'Yes, as long as it complies with your privacy policies. You can add UTM parameters, tracking pixels, and other analytics tools to measure campaign performance across your existing tools.',
       },
     ],
   },
@@ -124,15 +117,17 @@ const FAQS_BY_CATEGORY = [
     items: [
       {
         q: 'How do we get started?',
-        a: 'Define your goals, select a use case, and we will help you scope a pilot. We typically start with a small batch to test the experience, analyze results, and refine before scaling.',
-      },
-      {
-        q: 'How long does a pilot take?',
-        a: 'A simple pilot can be produced in a few weeks. Large-scale campaigns may take several months to plan, manufacture, and deploy, depending on garment production timelines.',
-      },
-      {
-        q: 'What do you need from us?',
-        a: 'We need brand assets, legal review of data collection practices, and access to CRM or analytics tools if you want integrations. We handle the technical setup and tag integration.',
+        a: (
+          <>
+            <p className="mb-4">Start by defining your engagement objectives and measurement priorities. We'll help you design and develop both the clothing and NFC chip integration, then handle tag integration, technical setup, and campaign configuration.</p>
+            <Link
+              href="/intake"
+              className="inline-block px-6 py-3 rounded-2xl font-medium bg-[#F5856E] text-white hover:brightness-110 transition"
+            >
+              Let&apos;s Connect
+            </Link>
+          </>
+        ),
       },
     ],
   },
@@ -224,8 +219,21 @@ function UseCaseCard({ card }: UseCaseCardProps) {
 }
 
 export default function HowItWorksPage() {
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": FAQS_BY_CATEGORY.flatMap(cat =>
+      cat.items.map((f: any) => ({
+        "@type": "Question",
+        "name": f.q,
+        "acceptedAnswer": { "@type": "Answer", "text": typeof f.a === 'string' ? f.a : 'See page for details' }
+      }))
+    ),
+  };
   return (
-    <main className="bg-[#0A1422] text-white">
+    <>
+      <SEO pathname="/how-it-works" jsonLd={faqJsonLd} />
+      <main className="bg-[#0A1422] text-white">
       {/* SECTION 1 — Hero */}
       <section id="hero" className="relative overflow-hidden min-h-[600px] flex items-center">
         {/* Background Video */}
@@ -253,7 +261,7 @@ export default function HowItWorksPage() {
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link
-                href="/contact"
+                href="/intake"
                 className="px-6 py-3 rounded-2xl font-medium bg-[#F5856E] text-white hover:brightness-110 transition"
               >
                 Let&apos;s Connect
@@ -442,11 +450,12 @@ export default function HowItWorksPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-12 py-20 grid lg:grid-cols-12 gap-10 items-center">
           <div className="lg:col-span-6 rounded-2xl overflow-hidden border border-white/10 bg-black/30">
             <Image
-              src="/images/placeholders/how-it-works/lock-energy.svg"
+              src="/images/how-it-works/privacy-and-security.png"
               alt=""
               width={1200}
               height={800}
               className="w-full h-full object-cover opacity-90"
+              style={{ transform: 'scaleX(-1)' }}
             />
           </div>
           <div className="lg:col-span-6 flex flex-col justify-center">
@@ -488,7 +497,7 @@ export default function HowItWorksPage() {
           </div>
           <div className="text-center">
             <Link
-              href="/connect"
+              href="/intake"
               className="inline-block px-8 py-4 rounded-2xl font-semibold text-lg bg-[#F5856E] text-white hover:brightness-110 transition"
             >
               Let&apos;s Connect
@@ -496,6 +505,31 @@ export default function HowItWorksPage() {
             <p className="mt-4 text-sm text-white/60">
               We&apos;ll respond within 24 hours to discuss your goals.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 8.5 — Explore Solutions */}
+      <section className="border-t border-white/5 bg-white/5">
+        <div className="mx-auto max-w-7xl px-6 lg:px-12 py-16">
+          <h2 className="text-2xl font-semibold mb-6 text-center">Explore Solutions</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <Link href="/sports-teams" className="text-center p-4 rounded-xl bg-white/5 hover:bg-white/10 transition border border-white/10">
+              <h3 className="font-medium mb-2">Sports Teams</h3>
+              <p className="text-sm text-white/70">Fan engagement that lasts</p>
+            </Link>
+            <Link href="/schools" className="text-center p-4 rounded-xl bg-white/5 hover:bg-white/10 transition border border-white/10">
+              <h3 className="font-medium mb-2">Schools & Universities</h3>
+              <p className="text-sm text-white/70">Pride that endures</p>
+            </Link>
+            <Link href="/creators" className="text-center p-4 rounded-xl bg-white/5 hover:bg-white/10 transition border border-white/10">
+              <h3 className="font-medium mb-2">Creators & Communities</h3>
+              <p className="text-sm text-white/70">From viral to enduring</p>
+            </Link>
+            <Link href="/studios-clubs" className="text-center p-4 rounded-xl bg-white/5 hover:bg-white/10 transition border border-white/10">
+              <h3 className="font-medium mb-2">Studios & Clubs</h3>
+              <p className="text-sm text-white/70">Belonging beyond the property</p>
+            </Link>
           </div>
         </div>
       </section>
@@ -519,7 +553,7 @@ export default function HowItWorksPage() {
                         <span className="text-lg font-medium">{f.q}</span>
                         <span className="text-white/60">+</span>
                       </summary>
-                      <p className="mt-2 text-white/75">{f.a}</p>
+                      <div className="mt-2 text-white/75">{typeof f.a === 'string' ? <p>{f.a}</p> : f.a}</div>
                     </details>
                   ))}
                 </div>
@@ -553,6 +587,7 @@ export default function HowItWorksPage() {
         </div>
       </section>
     </main>
+    </>
   );
 }
 

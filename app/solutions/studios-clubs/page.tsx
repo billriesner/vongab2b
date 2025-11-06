@@ -36,7 +36,7 @@ function SecondaryCTA({ href, children }) {
   return (
     <Link
       href={href}
-      className="inline-flex items-center justify-center rounded-2xl px-5 py-3 mt-6 font-medium bg-[#33BECC] text-[#0a1422] hover:brightness-110 transition"
+      className="inline-flex items-center justify-center rounded-2xl px-5 py-3 mt-6 font-medium bg-[#33BECC] text-white hover:brightness-110 transition"
     >
       {children}
     </Link>
@@ -75,9 +75,9 @@ export default function StudiosClubsPage() {
           <div>
             <H1>Connection Beyond the Club</H1>
             <P className="mt-4">
-              Membership isn't just access — it's identity that endures. Vonga connects every class, every round, and every interaction into one living sense of belonging.
+              Membership isn't just access. It's identity that endures. Vonga connects every class, every round, and every interaction into one living sense of belonging.
             </P>
-            <CTA href="/contact">Let's Connect</CTA>
+            <CTA href="/intake">Let's Connect</CTA>
           </div>
           <div className="rounded-2xl overflow-hidden border border-white/10">
             <img
@@ -114,7 +114,7 @@ export default function StudiosClubsPage() {
           <div>
             <H2>The Connected Club</H2>
             <P className="mt-4">
-              Vonga transforms apparel and access into continuity. With embedded on-body tech, each piece becomes a living symbol of membership — bridging physical and digital loyalty.
+              Vonga transforms apparel and access into continuity. With embedded on-body tech, each piece becomes a living symbol of membership, bridging physical and digital loyalty.
             </P>
             <SecondaryCTA href="/how-it-works">See How It Works</SecondaryCTA>
           </div>
@@ -180,9 +180,9 @@ export default function StudiosClubsPage() {
         <div className="text-center max-w-3xl mx-auto">
           <H2>Ready to create belonging that lasts?</H2>
           <P className="mt-4">
-            Your members already love what you offer. Now give them a way to carry that connection with them — every day.
+            Your members already love what you offer. Now give them a way to carry that connection with them, every day.
           </P>
-          <CTA href="/connect">Let's Connect</CTA>
+          <CTA href="/intake">Let's Connect</CTA>
         </div>
       </Section>
     </main>

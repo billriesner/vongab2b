@@ -121,7 +121,7 @@ export default function CreatorsPage() {
             <P className="mt-4">
               Each piece becomes a thread that connects them back to you and to each other. It's not merch. It's meaning.
             </P>
-            <SecondaryCTA href="/company/technology">See How It Works</SecondaryCTA>
+            <SecondaryCTA href="/how-it-works">See How It Works</SecondaryCTA>
           </div>
           <div className="rounded-2xl overflow-hidden border border-white/10">
             <img

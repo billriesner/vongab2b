@@ -34,7 +34,7 @@ export function LabeledSelect({
 
   return (
     <div className="space-y-1">
-      <label htmlFor={id} className="block text-gray-700 mb-1 font-medium">
+      <label htmlFor={id} className="block text-white/80 mb-1 font-medium">
         {label}{required ? ' *' : ''}
       </label>
       <select
@@ -46,20 +46,24 @@ export function LabeledSelect({
         aria-invalid={Boolean(error) || undefined}
         required={required}
         disabled={disabled}
-        className={`w-full rounded-xl bg-white text-gray-900 px-4 py-3 outline-none ring-1 ring-gray-300 focus:ring-[#33BECC]/40 border border-gray-300 ${
-          error ? 'ring-2 ring-red-400/60' : ''
+        className={`w-full rounded-xl bg-white/5 border border-white/10 text-white px-4 py-3 outline-none focus:ring-2 focus:ring-[#33BECC]/40 focus:border-[#33BECC] ${
+          error ? 'ring-2 ring-red-400/60 border-red-500/30' : ''
         }`}
+        style={{ 
+          backgroundColor: 'rgba(255, 255, 255, 0.05)',
+          color: 'white'
+        }}
       >
-        <option value="" disabled>
+        <option value="" disabled style={{ backgroundColor: '#0a1422', color: 'white' }}>
           {placeholder}
         </option>
         {options.map((opt) => (
-          <option key={opt.value} value={opt.value}>
+          <option key={opt.value} value={opt.value} style={{ backgroundColor: '#0a1422', color: 'white' }}>
             {opt.label}
           </option>
         ))}
       </select>
-      {helperText && <p id={helpId} className="text-gray-500 text-xs">{helperText}</p>}
+      {helperText && <p id={helpId} className="text-white/60 text-xs">{helperText}</p>}
       {error && <p id={errId} className="text-red-400 text-xs">{error}</p>}
     </div>
   );

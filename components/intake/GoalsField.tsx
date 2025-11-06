@@ -87,7 +87,7 @@ export function GoalsField({
 
   return (
     <fieldset className="space-y-3">
-      <legend className="text-sm uppercase tracking-wider text-gray-700">
+      <legend className="text-sm uppercase tracking-wider text-white/80">
         What are you hoping to accomplish?
       </legend>
 
@@ -99,7 +99,7 @@ export function GoalsField({
             <label
               key={opt.id}
               htmlFor={opt.id}
-              className={`group rounded-xl border border-gray-300 bg-white p-4 hover:border-[#33BECC]/60 transition ${checked ? 'ring-2 ring-[#33BECC]/40 border-[#33BECC] bg-[#33BECC]/5' : ''}`}
+              className={`group rounded-xl border border-white/10 bg-white/5 p-4 hover:border-[#33BECC]/60 transition ${checked ? 'ring-2 ring-[#33BECC]/40 border-[#33BECC] bg-[#33BECC]/10' : ''}`}
             >
               <div className="flex items-start gap-3">
                 <input
@@ -112,8 +112,8 @@ export function GoalsField({
                   disabled={disabled}
                 />
                 <div>
-                  <div className="font-medium text-gray-900">{opt.label}</div>
-                  <p id={helpId} className="text-gray-600 text-sm">
+                  <div className="font-medium text-white">{opt.label}</div>
+                  <p id={helpId} className="text-white/70 text-sm">
                     {opt.help}
                   </p>
                 </div>
@@ -129,13 +129,13 @@ export function GoalsField({
       </div>
 
       <div className="mt-2">
-        <label className="block text-sm text-gray-700 mb-1" htmlFor="goal-other">
+        <label className="block text-sm text-white/80 mb-1" htmlFor="goal-other">
           Other goal or challenge?
         </label>
         <input
           id="goal-other"
           type="text"
-          className="w-full rounded-xl bg-white text-gray-900 px-4 py-3 outline-none ring-1 ring-gray-300 focus:ring-[#33BECC]/40 placeholder:text-gray-500 border border-gray-300"
+          className="w-full rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/40 px-4 py-3 outline-none focus:ring-2 focus:ring-[#33BECC]/40 focus:border-[#33BECC]"
           placeholder="Tell us in a sentence or two…"
           value={otherText ?? ''}
           onChange={e => onOtherTextChange?.(e.target.value)}

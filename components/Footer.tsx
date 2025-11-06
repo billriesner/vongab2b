@@ -8,7 +8,7 @@ export function Footer() {
           {/* Company */}
           <div>
             <Link href="/" className="flex items-center justify-start mb-4">
-              <img src="/images/logos/logo.svg" alt="Vonga" className="h-30 w-auto" style={{ filter: 'brightness(0) saturate(100%) invert(68%) sepia(66%) saturate(459%) hue-rotate(140deg) brightness(94%) contrast(87%)' }} />
+              <img src="/images/logos/logo.svg" alt="Vonga" className="h-40 w-auto" style={{ filter: 'brightness(0) saturate(100%) invert(68%) sepia(66%) saturate(459%) hue-rotate(140deg) brightness(94%) contrast(87%)' }} />
             </Link>
           </div>
 
@@ -48,21 +48,6 @@ export function Footer() {
                   About
                 </Link>
               </li>
-              <li>
-                <Link href="/technology" className="text-gray-300 hover:text-accent transition-colors">
-                  Technology
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="text-gray-300 hover:text-accent transition-colors">
-                  Contact
-                </Link>
-              </li>
-              <li>
-                <Link href="/faq" className="text-gray-300 hover:text-accent transition-colors">
-                  FAQ
-                </Link>
-              </li>
             </ul>
           </div>
 
@@ -76,8 +61,13 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/glossary" className="text-gray-300 hover:text-accent transition-colors">
+                  Glossary
+                </Link>
+              </li>
+              <li>
                 <Link href="/intake" className="text-gray-300 hover:text-accent transition-colors">
-                  Get Started
+                  Let's Connect
                 </Link>
               </li>
             </ul>

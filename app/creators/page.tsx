@@ -1,5 +1,7 @@
 'use client';
 import Link from 'next/link';
+import { Users, Ticket, Award } from 'lucide-react';
+import SEO from '@/components/SEO';
 
 function Section({ id, children, className = '' }) {
   return (
@@ -33,18 +35,20 @@ function SecondaryCTA({ href, children }) {
   return (
     <Link
       href={href}
-      className="inline-flex items-center justify-center rounded-2xl px-5 py-3 mt-6 font-medium bg-[#33BECC] text-[#0a1422] hover:brightness-110 transition"
+      className="inline-flex items-center justify-center rounded-2xl px-5 py-3 mt-6 font-medium bg-[#33BECC] text-white hover:brightness-110 transition"
     >
       {children}
     </Link>
   );
 }
 
-function UseCaseCard({ title, looksLike, whyItWorks, imgSrc, imgAlt }) {
+function UseCaseCard({ title, looksLike, whyItWorks, icon: Icon }) {
   return (
     <div className="rounded-2xl bg-white/5 border border-white/10 overflow-hidden">
-      <div className="aspect-[16/9] bg-black/30">
-        <img src={imgSrc} alt={imgAlt} className="w-full h-full object-cover opacity-90" />
+      <div className="flex items-center justify-center p-8 bg-black/30">
+        <div className="w-20 h-20 rounded-full flex items-center justify-center shadow-lg" style={{ backgroundColor: '#33BECC' }}>
+          <Icon className="w-10 h-10 text-white" />
+        </div>
       </div>
       <div className="p-6">
         <h3 className="text-xl font-semibold mb-4">{title}</h3>
@@ -64,28 +68,44 @@ function UseCaseCard({ title, looksLike, whyItWorks, imgSrc, imgAlt }) {
 }
 
 export default function CreatorsPage() {
+  const crumbs = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.vonga.com/" },
+      { "@type": "ListItem", position: 2, name: "Solutions", item: "https://www.vonga.com/solutions" },
+      { "@type": "ListItem", position: 3, name: "Creators & Communities", item: "https://www.vonga.com/creators" },
+    ],
+  };
   return (
-    <main className="bg-[#0a1422] text-white">
+    <>
+      <SEO pathname="/creators" jsonLd={crumbs} />
+      <main className="bg-[#0a1422] text-white">
       {/* 1) Hero — Problem + Promise */}
-      <Section className="pt-24 md:pt-28">
-        <div className="grid lg:grid-cols-2 gap-10 items-center">
-          <div>
+      <section className="relative overflow-hidden pt-24 md:pt-28 px-6 md:px-10 lg:px-16 py-16 md:py-24">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
+          style={{ backgroundImage: 'url(/images/solutions/creators/creators-1.png)' }}
+        ></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a1422]/80 via-[#0a1422]/70 to-[#0a1422]/95"></div>
+        <div 
+          className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent via-[#0a1422]/50 to-[#0a1422]"
+          style={{ zIndex: 1 }}
+        ></div>
+        <div className="relative z-10 max-w-6xl mx-auto">
+          <div className="max-w-3xl">
             <H1>You build moments that go viral. We help them last.</H1>
+            <p className="text-white/70 mb-4">
+              <Link href="/how-it-works" className="text-[#33BECC] hover:underline">See how it works</Link>
+            </p>
             <P className="mt-4">
               Vonga helps creators and communities turn short bursts of excitement into long-term connection,
               making belonging something your people can see, feel, and carry every day.
             </P>
             <CTA href="/intake">Let's Connect</CTA>
           </div>
-          <div className="rounded-2xl overflow-hidden border border-white/10">
-            <img
-              src="/images/heroes/creators-hero.jpg"
-              alt="Creator on stage or in studio, followers subtly connected by soft aqua light trails."
-              className="w-full h-full object-cover"
-            />
-          </div>
         </div>
-      </Section>
+      </section>
 
       {/* 2) Challenge — Engagement Cliff */}
       <Section id="challenge" className="bg-white/5 rounded-3xl mx-6 md:mx-10 lg:mx-16">
@@ -101,7 +121,7 @@ export default function CreatorsPage() {
           </div>
           <div className="rounded-2xl overflow-hidden border border-white/10">
             <img
-              src="/images/creators-challenge.jpg"
+              src="/images/solutions/creators/creators-2.png"
               alt="Empty livestream set or studio after a session, moody cinematic lighting."
               className="w-full h-full object-cover"
             />
@@ -112,6 +132,14 @@ export default function CreatorsPage() {
       {/* 3) Opportunity — Followers vs Belonging */}
       <Section id="opportunity">
         <div className="grid lg:grid-cols-2 gap-10 items-center">
+          <div className="rounded-2xl overflow-hidden border border-white/10">
+            <img
+              src="/images/solutions/creators/creators-3.png"
+              alt="Fans in a real-world setting connected by faint light ribbons, moody cinematic tone."
+              className="w-full h-full object-cover"
+              style={{ transform: 'scaleX(-1)' }}
+            />
+          </div>
           <div>
             <H2>Your audience doesn't want more content. They want connection.</H2>
             <P className="mt-4">
@@ -121,42 +149,32 @@ export default function CreatorsPage() {
             <P className="mt-4">
               Each piece becomes a thread that connects them back to you and to each other. It's not merch. It's meaning.
             </P>
-            <SecondaryCTA href="/technology">See How It Works</SecondaryCTA>
-          </div>
-          <div className="rounded-2xl overflow-hidden border border-white/10">
-            <img
-              src="/images/creators-opportunity.jpg"
-              alt="Fans in a real-world setting connected by faint light ribbons, moody cinematic tone."
-              className="w-full h-full object-cover"
-            />
+            <SecondaryCTA href="/how-it-works">See How It Works</SecondaryCTA>
           </div>
         </div>
       </Section>
 
       {/* 4) Use Cases — Tangible Proof */}
       <Section id="use-cases" className="bg-white/5 rounded-3xl mx-6 md:mx-10 lg:mx-16">
-        <H2>How creators and communities are using Vonga</H2>
+        <H2>Activate community connection. Every day.</H2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
           <UseCaseCard
             title="Community Memberships"
             looksLike="Members receive connected apparel that unlocks access to private content, IRL meetups, and drops."
             whyItWorks="Builds a real sense of belonging and identity beyond the platform."
-            imgSrc="/images/usecase-memberships.jpg"
-            imgAlt="Community gathering with subtle connection cues."
+            icon={Users}
           />
           <UseCaseCard
             title="Event & Tour Merch"
             looksLike="Fans activate apparel at live events to unlock digital keepsakes or exclusive moments."
             whyItWorks="Extends the emotional high of an event long after it's over."
-            imgSrc="/images/usecase-events.jpg"
-            imgAlt="Live event moment with apparel activation."
+            icon={Ticket}
           />
           <UseCaseCard
             title="Creator Loyalty Programs"
             looksLike="Supporters earn recognition and perks by engaging with your world over time."
             whyItWorks="Turns passive fans into active advocates while staying human."
-            imgSrc="/images/usecase-loyalty-creators.jpg"
-            imgAlt="Supporters recognized for ongoing engagement."
+            icon={Award}
           />
         </div>
       </Section>
@@ -176,7 +194,7 @@ export default function CreatorsPage() {
           </div>
           <div className="rounded-2xl overflow-hidden border border-white/10">
             <img
-              src="/images/creators-proof.jpg"
+              src="/images/solutions/creators/creators-4.png"
               alt="Close-up montage: connected apparel glow, human expressions, subtle data overlays."
               className="w-full h-full object-cover"
             />
@@ -185,15 +203,27 @@ export default function CreatorsPage() {
       </Section>
 
       {/* 6) Close — Invitation */}
-      <Section id="close" className="bg-gradient-to-b from-[#0a1422] to-[#0e1b2f]">
-        <div className="text-center max-w-3xl mx-auto">
-          <H2>Build a community that endures.</H2>
-          <P className="mt-4">
-            You've built something people care about. Now give them a way to carry it with them, every day.
-          </P>
-          <CTA href="/resources/intake">Let's Connect</CTA>
+      <section id="close" className="relative overflow-hidden px-6 md:px-10 lg:px-16 py-16 md:py-24">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40"
+          style={{ backgroundImage: 'url(/images/solutions/creators/creators-5.png)' }}
+        ></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a1422]/80 to-[#0e1b2f]/90"></div>
+        <div 
+          className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-[#0a1422] via-[#0a1422]/50 to-transparent"
+          style={{ zIndex: 1 }}
+        ></div>
+        <div className="relative z-10 max-w-6xl mx-auto">
+          <div className="text-center max-w-3xl mx-auto">
+            <H2>Build a community that endures.</H2>
+            <P className="mt-4">
+              You've built something people care about. Now give them a way to carry it with them, every day.
+            </P>
+            <CTA href="/intake">Let's Connect</CTA>
+          </div>
         </div>
-      </Section>
+      </section>
     </main>
+    </>
   );
 }

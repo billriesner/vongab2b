@@ -123,7 +123,7 @@ export default async function ShopPage() {
                   return (
                     <Link 
                       key={product.id} 
-                      href={`/products/${product.handle}`}
+                      href={`/shop/products/products/${product.handle}`}
                       className="group"
                     >
                       <Card className="border-2 border-muted hover:border-accent transition-all hover:shadow-xl bg-white h-full flex flex-col">

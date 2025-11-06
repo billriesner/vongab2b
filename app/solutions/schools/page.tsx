@@ -33,7 +33,7 @@ function SecondaryCTA({ href, children }) {
   return (
     <Link
       href={href}
-      className="inline-flex items-center justify-center rounded-2xl px-5 py-3 mt-6 font-medium bg-[#33BECC] text-[#0a1422] hover:brightness-110 transition"
+      className="inline-flex items-center justify-center rounded-2xl px-5 py-3 mt-6 font-medium bg-[#33BECC] text-white hover:brightness-110 transition"
     >
       {children}
     </Link>
@@ -118,12 +118,12 @@ export default function SchoolsPage() {
               identity into daily life. Each item, a hoodie, a hat, a jersey, becomes a living touchpoint for rewards,
               updates, and shared moments that deepen school spirit. Connection that once faded now travels with them.
             </P>
-            <SecondaryCTA href="/technology">See How It Works</SecondaryCTA>
+            <SecondaryCTA href="/how-it-works">See How It Works</SecondaryCTA>
           </div>
           <div className="rounded-2xl overflow-hidden border border-white/10">
             <img
               src="/images/schools-solution.jpg"
-              alt="Student brushing sleeve of hoodie as soft light responds — a quiet moment of connection."
+              alt="Student brushing sleeve of hoodie as soft light responds, a quiet moment of connection."
               className="w-full h-full object-cover"
             />
           </div>
@@ -183,7 +183,7 @@ export default function SchoolsPage() {
         <div className="text-center max-w-3xl mx-auto">
           <H2>Belonging shouldn't end with a diploma.</H2>
           <P className="mt-4">Let's create experiences your students, alumni, and fans carry for life.</P>
-          <CTA href="/resources/intake">Let's Connect</CTA>
+          <CTA href="/intake">Let's Connect</CTA>
         </div>
       </Section>
     </main>

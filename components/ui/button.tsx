@@ -15,7 +15,7 @@ const buttonVariants = cva(
         outline: "border-2 border-accent bg-bg text-accent hover:bg-accent hover:text-navy",
         dark: "bg-[#303e55] text-white hover:brightness-110 transition",
         cyan: "bg-[#33BECC] text-white hover:brightness-110 transition shadow-lg hover:shadow-xl",
-        learnMore: "bg-transparent border-2 border-[#0a1422] text-[#0a1422] hover:bg-[#0a1422] hover:text-white transition-all duration-300",
+        learnMore: "bg-transparent border-2 border-white/20 text-white hover:bg-white/10 hover:border-white/40 transition-all duration-300",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",

@@ -33,7 +33,7 @@ function SecondaryCTA({ href, children }) {
   return (
     <Link
       href={href}
-      className="inline-flex items-center justify-center rounded-2xl px-5 py-3 mt-6 font-medium bg-[#33BECC] text-[#0a1422] hover:brightness-110 transition"
+      className="inline-flex items-center justify-center rounded-2xl px-5 py-3 mt-6 font-medium bg-[#33BECC] text-white hover:brightness-110 transition"
     >
       {children}
     </Link>
@@ -121,7 +121,7 @@ export default function CreatorsPage() {
             <P className="mt-4">
               Each piece becomes a thread that connects them back to you and to each other. It's not merch. It's meaning.
             </P>
-            <SecondaryCTA href="/technology">See How It Works</SecondaryCTA>
+            <SecondaryCTA href="/how-it-works">See How It Works</SecondaryCTA>
           </div>
           <div className="rounded-2xl overflow-hidden border border-white/10">
             <img
@@ -191,7 +191,7 @@ export default function CreatorsPage() {
           <P className="mt-4">
             You've built something people care about. Now give them a way to carry it with them, every day.
           </P>
-          <CTA href="/resources/intake">Let's Connect</CTA>
+          <CTA href="/intake">Let's Connect</CTA>
         </div>
       </Section>
     </main>

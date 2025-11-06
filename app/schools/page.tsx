@@ -1,5 +1,7 @@
 'use client';
 import Link from 'next/link';
+import { GraduationCap, Trophy, Users } from 'lucide-react';
+import SEO from '@/components/SEO';
 
 function Section({ id, children, className = '' }) {
   return (
@@ -33,18 +35,20 @@ function SecondaryCTA({ href, children }) {
   return (
     <Link
       href={href}
-      className="inline-flex items-center justify-center rounded-2xl px-5 py-3 mt-6 font-medium bg-[#33BECC] text-[#0a1422] hover:brightness-110 transition"
+      className="inline-flex items-center justify-center rounded-2xl px-5 py-3 mt-6 font-medium bg-[#33BECC] text-white hover:brightness-110 transition"
     >
       {children}
     </Link>
   );
 }
 
-function UseCaseCard({ title, looksLike, whyItWorks, imgSrc, imgAlt }) {
+function UseCaseCard({ title, looksLike, whyItWorks, icon: Icon }) {
   return (
     <div className="rounded-2xl bg-white/5 border border-white/10 overflow-hidden">
-      <div className="aspect-[16/9] bg-black/30">
-        <img src={imgSrc} alt={imgAlt} className="w-full h-full object-cover opacity-90" />
+      <div className="flex items-center justify-center p-8 bg-black/30">
+        <div className="w-20 h-20 rounded-full flex items-center justify-center shadow-lg" style={{ backgroundColor: '#33BECC' }}>
+          <Icon className="w-10 h-10 text-white" />
+        </div>
       </div>
       <div className="p-6">
         <h3 className="text-xl font-semibold mb-4">{title}</h3>
@@ -64,28 +68,44 @@ function UseCaseCard({ title, looksLike, whyItWorks, imgSrc, imgAlt }) {
 }
 
 export default function SchoolsPage() {
+  const crumbs = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.vonga.com/" },
+      { "@type": "ListItem", position: 2, name: "Solutions", item: "https://www.vonga.com/solutions" },
+      { "@type": "ListItem", position: 3, name: "Schools & Universities", item: "https://www.vonga.com/schools" },
+    ],
+  };
   return (
-    <main className="bg-[#0a1422] text-white">
+    <>
+      <SEO pathname="/schools" jsonLd={crumbs} />
+      <main className="bg-[#0a1422] text-white">
       {/* 1) Hero — Problem + Promise */}
-      <Section className="pt-24 md:pt-28">
-        <div className="grid lg:grid-cols-2 gap-10 items-center">
-          <div>
+      <section className="relative overflow-hidden pt-24 md:pt-28 px-6 md:px-10 lg:px-16 py-16 md:py-24">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
+          style={{ backgroundImage: 'url(/images/solutions/schools/schools-1.png)' }}
+        ></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a1422]/80 via-[#0a1422]/70 to-[#0a1422]/95"></div>
+        <div 
+          className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent via-[#0a1422]/50 to-[#0a1422]"
+          style={{ zIndex: 1 }}
+        ></div>
+        <div className="relative z-10 max-w-6xl mx-auto">
+          <div className="max-w-3xl">
             <H1>Your students wear the same colors. Now help them feel part of the same community.</H1>
+            <p className="text-white/70 mb-4">
+              <Link href="/how-it-works" className="text-[#33BECC] hover:underline">See how it works</Link>
+            </p>
             <P className="mt-4">
               Vonga helps universities turn moments of pride into lasting connection, linking students, alumni,
               and fans through everyday experiences that build lifelong belonging.
             </P>
             <CTA href="/intake">Let's Connect</CTA>
           </div>
-          <div className="rounded-2xl overflow-hidden border border-white/10">
-            <img
-              src="/images/heroes/schools-hero.jpg"
-              alt="Diverse students on the quad in school colors, subtly connected by light ribbons."
-              className="w-full h-full object-cover"
-            />
-          </div>
         </div>
-      </Section>
+      </section>
 
       {/* 2) Challenge — Fragmented Belonging */}
       <Section id="challenge" className="bg-white/5 rounded-3xl mx-6 md:mx-10 lg:mx-16">
@@ -100,7 +120,7 @@ export default function SchoolsPage() {
           </div>
           <div className="rounded-2xl overflow-hidden border border-white/10">
             <img
-              src="/images/schools-challenge.jpg"
+              src="/images/solutions/schools/schools-2.png"
               alt="Quiet campus after graduation, caps on the ground, feeling of energy gone."
               className="w-full h-full object-cover"
             />
@@ -111,6 +131,14 @@ export default function SchoolsPage() {
       {/* 3) Solution — Make Belonging Tangible */}
       <Section id="solution">
         <div className="grid lg:grid-cols-2 gap-10 items-center">
+          <div className="rounded-2xl overflow-hidden border border-white/10">
+            <img
+              src="/images/solutions/schools/schools-3.png"
+              alt="Student brushing sleeve of hoodie as soft light responds, a quiet moment of connection."
+              className="w-full h-full object-cover"
+              style={{ transform: 'scaleX(-1)' }}
+            />
+          </div>
           <div>
             <H2>We make connection something you can wear.</H2>
             <P className="mt-4">
@@ -118,42 +146,32 @@ export default function SchoolsPage() {
               identity into daily life. Each item, a hoodie, a hat, a jersey, becomes a living touchpoint for rewards,
               updates, and shared moments that deepen school spirit. Connection that once faded now travels with them.
             </P>
-            <SecondaryCTA href="/technology">See How It Works</SecondaryCTA>
-          </div>
-          <div className="rounded-2xl overflow-hidden border border-white/10">
-            <img
-              src="/images/schools-solution.jpg"
-              alt="Student brushing sleeve of hoodie as soft light responds — a quiet moment of connection."
-              className="w-full h-full object-cover"
-            />
+            <SecondaryCTA href="/how-it-works">See How It Works</SecondaryCTA>
           </div>
         </div>
       </Section>
 
       {/* 4) Use Cases — Tangible Proof */}
       <Section id="use-cases" className="bg-white/5 rounded-3xl mx-6 md:mx-10 lg:mx-16">
-        <H2>How schools are using Vonga</H2>
+        <H2>Activate student connection. Every day.</H2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
           <UseCaseCard
             title="Orientation & First-Year Experience"
             looksLike="Connected apparel during welcome week unlocks events, campus challenges, and perks that encourage participation."
             whyItWorks="Builds early belonging and lets student life teams see engagement signals in the first semester."
-            imgSrc="/images/usecase-orientation.jpg"
-            imgAlt="First-year students at orientation engaging with connected apparel."
+            icon={GraduationCap}
           />
           <UseCaseCard
             title="Athletics & Spirit Merchandising"
             looksLike="Fans and students wear gear that triggers rewards or exclusive moments at games and across campus."
             whyItWorks="Extends school spirit beyond the stands and turns merch into an ongoing relationship."
-            imgSrc="/images/usecase-spirit.jpg"
-            imgAlt="Game-day spirit moment with connected gear."
+            icon={Trophy}
           />
           <UseCaseCard
             title="Alumni & Donor Relations"
             looksLike="Limited-edition items unlock milestone updates, reunion invites, and giving opportunities over time."
             whyItWorks="Keeps alumni emotionally connected and informed long after graduation."
-            imgSrc="/images/usecase-alumni.jpg"
-            imgAlt="Alumni reunion moment with subtle connection cues."
+            icon={Users}
           />
         </div>
       </Section>
@@ -170,7 +188,7 @@ export default function SchoolsPage() {
           </div>
           <div className="rounded-2xl overflow-hidden border border-white/10">
             <img
-              src="/images/schools-results.jpg"
+              src="/images/solutions/schools/schools-4.png"
               alt="Montage of student life, graduation, and alumni reunion connected by soft light trails."
               className="w-full h-full object-cover"
             />
@@ -179,14 +197,26 @@ export default function SchoolsPage() {
       </Section>
 
       {/* 6) Close — Invitation */}
-      <Section id="close" className="bg-gradient-to-b from-[#0a1422] to-[#0e1b2f]">
-        <div className="text-center max-w-3xl mx-auto">
-          <H2>Belonging shouldn't end with a diploma.</H2>
-          <P className="mt-4">Let's create experiences your students, alumni, and fans carry for life.</P>
-          <CTA href="/resources/intake">Let's Connect</CTA>
+      <section id="close" className="relative overflow-hidden px-6 md:px-10 lg:px-16 py-16 md:py-24">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40"
+          style={{ backgroundImage: 'url(/images/solutions/schools/schools-4.png)' }}
+        ></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a1422]/80 to-[#0e1b2f]/90"></div>
+        <div 
+          className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-[#0a1422] via-[#0a1422]/50 to-transparent"
+          style={{ zIndex: 1 }}
+        ></div>
+        <div className="relative z-10 max-w-6xl mx-auto">
+          <div className="text-center max-w-3xl mx-auto">
+            <H2>Belonging shouldn't end with a diploma.</H2>
+            <P className="mt-4">Let's create experiences your students, alumni, and fans carry for life.</P>
+            <CTA href="/intake">Let's Connect</CTA>
+          </div>
         </div>
-      </Section>
+      </section>
     </main>
+    </>
   );
 }
 

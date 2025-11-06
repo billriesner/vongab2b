@@ -154,7 +154,7 @@ export default function ClubSuccessPage() {
                 style={{ backgroundColor: '#33BECC' }}
                 asChild
               >
-                <Link href="/contact">Contact Support</Link>
+                <Link href="/intake">Contact Support</Link>
               </Button>
               <Button 
                 variant="outline"

@@ -63,134 +63,130 @@ function UseCaseCard({ title, looksLike, whyItWorks, imgSrc, imgAlt }) {
   );
 }
 
-export default function SportsTeamsPage() {
+export default function SchoolsPage() {
   return (
     <main className="bg-[#0a1422] text-white">
       {/* 1) Hero — Problem + Promise */}
       <Section className="pt-24 md:pt-28">
         <div className="grid lg:grid-cols-2 gap-10 items-center">
           <div>
-            <H1>Your fans' passion shouldn't fade after game day.</H1>
+            <H1>Your students wear the same colors. Now help them feel part of the same community.</H1>
             <P className="mt-4">
-              Vonga helps teams turn emotion into connection that lasts, building loyalty, sponsorship value,
-              and year-round engagement through everyday experiences.
+              Vonga helps universities turn moments of pride into lasting connection, linking students, alumni,
+              and fans through everyday experiences that build lifelong belonging.
             </P>
             <CTA href="/resources/intake">Let's Connect</CTA>
           </div>
           <div className="rounded-2xl overflow-hidden border border-white/10">
             <img
-              src="/images/heroes/sports-hero.jpg"
-              alt="Stadium crowd mid-celebration with subtle light ribbons connecting fans."
+              src="/images/heroes/schools-hero.jpg"
+              alt="Diverse students on the quad in school colors, subtly connected by light ribbons."
               className="w-full h-full object-cover"
             />
           </div>
         </div>
       </Section>
 
-      {/* 2) Challenge */}
+      {/* 2) Challenge — Fragmented Belonging */}
       <Section id="challenge" className="bg-white/5 rounded-3xl mx-6 md:mx-10 lg:mx-16">
         <div className="grid lg:grid-cols-2 gap-10 items-center">
           <div>
-            <H2>Game-day energy is unmatched. But it disappears overnight.</H2>
+            <H2>School pride is powerful. But it's also fleeting.</H2>
             <P className="mt-4">
-              Every chant, jersey, and shared moment builds emotion, and then it's gone. Merch sells, but it doesn't connect.
-              Fans engage online, but the spark fades by Monday. You're surrounded by data, yet the human part of fandom slips through.
-            </P>
-            <P className="mt-4">
-              Vonga closes that gap by turning what fans wear into a living link between your team and their daily lives.
+              From move-in to graduation, each moment of connection fades as fast as it appears. Merchandise becomes a logo,
+              not a memory. Alumni outreach becomes another email. What's missing is continuity, the emotional thread that keeps
+              people feeling part of something bigger.
             </P>
           </div>
           <div className="rounded-2xl overflow-hidden border border-white/10">
             <img
-              src="/images/sports-challenge.jpg"
-              alt="Empty stands glowing faintly after a game."
+              src="/images/schools-challenge.jpg"
+              alt="Quiet campus after graduation, caps on the ground, feeling of energy gone."
               className="w-full h-full object-cover"
             />
           </div>
         </div>
       </Section>
 
-      {/* 3) Solution */}
+      {/* 3) Solution — Make Belonging Tangible */}
       <Section id="solution">
         <div className="grid lg:grid-cols-2 gap-10 items-center">
           <div>
-            <H2>We make connection part of the experience.</H2>
+            <H2>We make connection something you can wear.</H2>
             <P className="mt-4">
-              Our platform blends physical and digital touchpoints to extend fandom beyond the arena. Each item,
-              activation, or reward becomes a simple, trackable moment of belonging, something fans feel, partners
-              can measure, and teams can grow.
+              Vonga blends physical apparel with digital experiences, letting your students and alumni carry their school
+              identity into daily life. Each item, a hoodie, a hat, a jersey, becomes a living touchpoint for rewards,
+              updates, and shared moments that deepen school spirit. Connection that once faded now travels with them.
             </P>
-            <SecondaryCTA href="/company/technology">See How It Works</SecondaryCTA>
+            <SecondaryCTA href="/how-it-works">See How It Works</SecondaryCTA>
           </div>
           <div className="rounded-2xl overflow-hidden border border-white/10">
             <img
-              src="/images/sports-solution.jpg"
-              alt="Fan interacting with team gear and receiving a digital reward."
+              src="/images/schools-solution.jpg"
+              alt="Student brushing sleeve of hoodie as soft light responds — a quiet moment of connection."
               className="w-full h-full object-cover"
             />
           </div>
         </div>
       </Section>
 
-      {/* 4) Use Cases */}
+      {/* 4) Use Cases — Tangible Proof */}
       <Section id="use-cases" className="bg-white/5 rounded-3xl mx-6 md:mx-10 lg:mx-16">
-        <H2>How teams are using Vonga today</H2>
+        <H2>How schools are using Vonga</H2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
           <UseCaseCard
-            title="Fan Loyalty Loop"
-            looksLike="Fans scan gear to unlock exclusive content, early drops, and tickets."
-            whyItWorks="Keeps fans engaged all season with simple touchpoints they already enjoy."
-            imgSrc="/images/usecase-loyalty.jpg"
-            imgAlt="Fan scanning jersey and unlocking content."
+            title="Orientation & First-Year Experience"
+            looksLike="Connected apparel during welcome week unlocks events, campus challenges, and perks that encourage participation."
+            whyItWorks="Builds early belonging and lets student life teams see engagement signals in the first semester."
+            imgSrc="/images/usecase-orientation.jpg"
+            imgAlt="First-year students at orientation engaging with connected apparel."
           />
           <UseCaseCard
-            title="Sponsor Activations"
-            looksLike="Partners tie rewards directly to what fans wear at games."
-            whyItWorks="Turns impressions into measurable ROI with clear engagement data."
-            imgSrc="/images/usecase-sponsor.jpg"
-            imgAlt="Sponsor moment triggered by apparel interaction."
+            title="Athletics & Spirit Merchandising"
+            looksLike="Fans and students wear gear that triggers rewards or exclusive moments at games and across campus."
+            whyItWorks="Extends school spirit beyond the stands and turns merch into an ongoing relationship."
+            imgSrc="/images/usecase-spirit.jpg"
+            imgAlt="Game-day spirit moment with connected gear."
           />
           <UseCaseCard
-            title="Community Connection"
-            looksLike="Local clubs use scans to trigger donations and team events."
-            whyItWorks="Builds belonging beyond the scoreboard while creating reasons to reconnect."
-            imgSrc="/images/usecase-community.jpg"
-            imgAlt="Community event tied to team gear."
+            title="Alumni & Donor Relations"
+            looksLike="Limited-edition items unlock milestone updates, reunion invites, and giving opportunities over time."
+            whyItWorks="Keeps alumni emotionally connected and informed long after graduation."
+            imgSrc="/images/usecase-alumni.jpg"
+            imgAlt="Alumni reunion moment with subtle connection cues."
           />
         </div>
       </Section>
 
-      {/* 5) Impact */}
-      <Section id="impact">
+      {/* 5) Results — Continuity Payoff */}
+      <Section id="results">
         <div className="grid lg:grid-cols-2 gap-10 items-center">
           <div>
-            <H2>Connection you can see. Loyalty you can measure.</H2>
+            <H2>From moment to memory, and back again.</H2>
             <P className="mt-4">
-              When emotion lasts, everything changes. Fans become community. Merch becomes relationship.
-              Sponsorship becomes partnership. With Vonga, every moment builds toward something bigger, a season
-              that never really ends.
+              When connection lasts, pride grows stronger. Students become advocates. Alumni become lifelong ambassadors.
+              Your school's story doesn't end at graduation, it evolves with every touchpoint.
             </P>
           </div>
           <div className="rounded-2xl overflow-hidden border border-white/10">
             <img
-              src="/images/sports-impact.jpg"
-              alt="Fan scenes blended with subtle engagement metrics overlay."
+              src="/images/schools-results.jpg"
+              alt="Montage of student life, graduation, and alumni reunion connected by soft light trails."
               className="w-full h-full object-cover"
             />
           </div>
         </div>
       </Section>
 
-      {/* 6) Close */}
+      {/* 6) Close — Invitation */}
       <Section id="close" className="bg-gradient-to-b from-[#0a1422] to-[#0e1b2f]">
         <div className="text-center max-w-3xl mx-auto">
-          <H2>Make belonging your competitive edge.</H2>
-          <P className="mt-4">
-            The next great fan experience won't be louder. It'll be closer. Let's create something your fans can feel every day.
-          </P>
+          <H2>Belonging shouldn't end with a diploma.</H2>
+          <P className="mt-4">Let's create experiences your students, alumni, and fans carry for life.</P>
           <CTA href="/resources/intake">Let's Connect</CTA>
         </div>
       </Section>
     </main>
   );
 }
+

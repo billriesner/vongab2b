@@ -126,7 +126,7 @@ export default function ShippingReturnsPage() {
               Delays & Issues
             </h3>
             <ul className="space-y-md text-lg text-black leading-relaxed">
-              <li><strong>Missing or Delayed Shipments:</strong> If your order hasn't arrived on time, contact us via our <Link href="/contact" className="font-semibold hover:underline" style={{ color: '#33BECC' }}>Contact Page</Link>.</li>
+              <li><strong>Missing or Delayed Shipments:</strong> If your order hasn't arrived on time, please reach out to us through our intake form.</li>
               <li><strong>Damaged Packages:</strong> If your package arrives damaged, notify us within 7 days and we'll replace or refund at no cost to you.</li>
             </ul>
           </div>

@@ -516,7 +516,7 @@ export default function ClubPage() {
               className="min-w-[200px] border-2 border-white bg-transparent text-white hover:bg-white hover:text-navy shadow-lg font-semibold"
               asChild
             >
-              <Link href="/contact">Contact Us</Link>
+              <Link href="/intake">Contact Us</Link>
             </Button>
           </div>
         </div>

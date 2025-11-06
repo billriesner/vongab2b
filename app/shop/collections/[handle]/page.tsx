@@ -75,7 +75,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
                 const isConcept = collectionName.toLowerCase().includes('concept');
 
                 return (
-                  <Link href={`/products/${product.handle}`} key={product.id}>
+                  <Link href={`/shop/products/products/${product.handle}`} key={product.id}>
                     <Card className="border-2 border-muted bg-white hover:border-accent transition-all hover:shadow-xl cursor-pointer h-full">
                       <CardContent className="p-md">
                         <div className="relative w-full aspect-square mb-md overflow-hidden rounded bg-muted">

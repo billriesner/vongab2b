@@ -33,7 +33,7 @@ function SecondaryCTA({ href, children }) {
   return (
     <Link
       href={href}
-      className="inline-flex items-center justify-center rounded-2xl px-5 py-3 mt-6 font-medium bg-[#33BECC] text-[#0a1422] hover:brightness-110 transition"
+      className="inline-flex items-center justify-center rounded-2xl px-5 py-3 mt-6 font-medium bg-[#33BECC] text-white hover:brightness-110 transition"
     >
       {children}
     </Link>
@@ -120,7 +120,7 @@ export default function SportsTeamsPage() {
               activation, or reward becomes a simple, trackable moment of belonging, something fans feel, partners
               can measure, and teams can grow.
             </P>
-            <SecondaryCTA href="/technology">See How It Works</SecondaryCTA>
+            <SecondaryCTA href="/how-it-works">See How It Works</SecondaryCTA>
           </div>
           <div className="rounded-2xl overflow-hidden border border-white/10">
             <img
@@ -188,7 +188,7 @@ export default function SportsTeamsPage() {
           <P className="mt-4">
             The next great fan experience won't be louder. It'll be closer. Let's create something your fans can feel every day.
           </P>
-          <CTA href="/resources/intake">Let's Connect</CTA>
+          <CTA href="/intake">Let's Connect</CTA>
         </div>
       </Section>
     </main>

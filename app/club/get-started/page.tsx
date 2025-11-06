@@ -850,7 +850,7 @@ export default function GetStartedPage() {
                     <div className="bg-navy rounded-lg p-xl text-center">
                       <h3 className="text-2xl font-bold text-accent mb-md">Qualify for White-Glove Service</h3>
                       <p className="text-white mb-lg">
-                        Your order qualifies for our premium onboarding experience. Book a personalized demo to discuss your needs.
+                        Your order qualifies for our premium onboarding experience. Let's connect to discuss your needs.
                       </p>
                       <Button
                         type="button"
@@ -858,7 +858,7 @@ export default function GetStartedPage() {
                         className="bg-accent hover:bg-accent/90 text-navy font-semibold shadow-md"
                         size="lg"
                       >
-                        Book Premium Demo
+                        Let's Connect
                       </Button>
                     </div>
                   )}
@@ -955,7 +955,7 @@ export default function GetStartedPage() {
         <div className="mt-xl text-center">
           <p className="text-sm text-text/70 mb-sm">
             Questions? Need help?{' '}
-            <Link href="/contact" className="text-navy font-semibold hover:underline">
+            <Link href="/intake" className="text-navy font-semibold hover:underline">
               Contact our team
             </Link>
           </p>
