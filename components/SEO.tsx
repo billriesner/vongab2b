@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo } from "react";
+import { canonical } from "@/lib/seo";
 
 export default function SEO({
   pathname,
@@ -10,8 +11,7 @@ export default function SEO({
   jsonLd?: Record<string, any> | Record<string, any>[];
 }) {
   const url = useMemo(() => {
-    const clean = pathname.endsWith("/") && pathname !== "/" ? pathname.slice(0, -1) : pathname;
-    return `https://www.vonga.com${clean}`;
+    return canonical(pathname);
   }, [pathname]);
   
   const blocks = useMemo(() => {

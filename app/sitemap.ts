@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = "https://www.vonga.com";
+  const base = "https://vonga.io";
   const paths = [
     "/",
     "/how-it-works",

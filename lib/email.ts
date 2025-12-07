@@ -1,4 +1,6 @@
 import { Resend } from 'resend';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 
 // Initialize Resend client
 const getResendClient = () => {
@@ -10,7 +12,21 @@ const getResendClient = () => {
 };
 
 const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || 'orders@vonga.io';
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://vonga.io' : 'http://localhost:3000');
+
+// Load and encode logo as base64 for email embedding (works better than external URLs in email clients)
+const getLogoDataUri = () => {
+  try {
+    const logoPath = join(process.cwd(), 'public', 'images', 'logos', 'logo.svg');
+    const svg = readFileSync(logoPath, 'utf8');
+    const base64 = Buffer.from(svg).toString('base64');
+    return `data:image/svg+xml;base64,${base64}`;
+  } catch (error) {
+    console.error('Failed to load logo for email:', error);
+    // Fallback to URL if file read fails
+    return 'https://vonga.io/images/logos/logo.svg';
+  }
+};
 
 // Email template styles
 const emailStyles = {
@@ -237,6 +253,170 @@ export async function sendOrderCompleteEmail(data: OrderEmailData) {
     return { success: true, data: result };
   } catch (error) {
     console.error('Failed to send order complete email:', error);
+    return { success: false, error };
+  }
+}
+
+interface WilliamsRacingSampleRequest {
+  name: string;
+  email: string;
+  phone?: string;
+  organization: string;
+  size: string;
+  street: string;
+  city: string;
+  state?: string;
+  zip: string;
+  country: string;
+  notes?: string;
+}
+
+export async function sendWilliamsRacingSampleRequestEmail(data: WilliamsRacingSampleRequest) {
+  const resend = getResendClient();
+  if (!resend) {
+    console.error('Resend client not available. RESEND_API_KEY:', process.env.RESEND_API_KEY ? 'Set' : 'Not set');
+    return { success: false, error: 'Email service not configured' };
+  }
+
+  const fullAddress = `${data.street}\n${data.city}${data.state ? `, ${data.state}` : ''} ${data.zip}\n${data.country}`;
+  const timestamp = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
+  
+  console.log('Attempting to send email to bill@vonga.io');
+  console.log('From email:', FROM_EMAIL);
+
+  const html = `
+    <div style="${emailStyles.container}">
+      <div style="${emailStyles.header}">
+        <h1 style="${emailStyles.logo}">VONGA</h1>
+        <p style="margin: 0; font-size: 18px; color: white;">🎁 New Williams Racing Sample Request</p>
+      </div>
+      
+      <div style="${emailStyles.content}">
+        <h2 style="color: #303E55;">New Sample Request</h2>
+        
+        <div style="${emailStyles.card}">
+          <h3 style="color: #303E55; margin-top: 0;">Contact Information</h3>
+          <p><strong>Name:</strong> ${data.name}</p>
+          <p><strong>Email:</strong> <a href="mailto:${data.email}">${data.email}</a></p>
+          <p><strong>Phone:</strong> ${data.phone || 'Not provided'}</p>
+          <p><strong>Organization:</strong> ${data.organization}</p>
+        </div>
+
+        <div style="${emailStyles.card}">
+          <h3 style="color: #303E55; margin-top: 0;">Sample Details</h3>
+          <p><strong>T-shirt Size:</strong> ${data.size}</p>
+        </div>
+
+        <div style="${emailStyles.card}">
+          <h3 style="color: #303E55; margin-top: 0;">Shipping Address</h3>
+          <p style="white-space: pre-line;">${fullAddress}</p>
+        </div>
+
+        ${data.notes ? `
+          <div style="${emailStyles.card}">
+            <h3 style="color: #303E55; margin-top: 0;">Additional Notes</h3>
+            <p>${data.notes}</p>
+          </div>
+        ` : ''}
+
+        <div style="${emailStyles.divider}"></div>
+
+        <p style="color: #666; font-size: 12px;">Submitted at: ${timestamp}</p>
+      </div>
+
+      <div style="${emailStyles.footer}">
+        <p>© ${new Date().getFullYear()} Vonga. All rights reserved.</p>
+      </div>
+    </div>
+  `;
+
+  try {
+    const result = await resend.emails.send({
+      from: FROM_EMAIL,
+      to: 'bill@vonga.io',
+      subject: `Williams Racing Sample Request - ${data.name} (${data.organization})`,
+      html,
+    });
+    console.log('Email sent successfully. Result:', JSON.stringify(result, null, 2));
+    return { success: true, data: result };
+  } catch (error) {
+    console.error('Failed to send Williams Racing sample request email:', error);
+    if (error instanceof Error) {
+      console.error('Error message:', error.message);
+      console.error('Error stack:', error.stack);
+    }
+    // Also check if it's a Resend API error
+    if (error && typeof error === 'object' && 'message' in error) {
+      console.error('Resend API error:', JSON.stringify(error, null, 2));
+    }
+    return { success: false, error };
+  }
+}
+
+export async function sendWilliamsRacingSampleRequestConfirmationEmail(data: WilliamsRacingSampleRequest) {
+  const resend = getResendClient();
+  if (!resend) {
+    console.error('Resend client not available. RESEND_API_KEY:', process.env.RESEND_API_KEY ? 'Set' : 'Not set');
+    return { success: false, error: 'Email service not configured' };
+  }
+
+  const fullAddress = `${data.street}\n${data.city}${data.state ? `, ${data.state}` : ''} ${data.zip}\n${data.country}`;
+
+  const html = `
+    <div style="${emailStyles.container}">
+      <div style="${emailStyles.header}">
+        <h1 style="${emailStyles.logo}">VONGA</h1>
+        <p style="margin: 0; font-size: 18px; color: white;">Sample Request Received</p>
+      </div>
+      
+      <div style="${emailStyles.content}">
+        <h2 style="color: #303E55;">Thank you, ${data.name}!</h2>
+        
+        <p style="font-size: 16px; line-height: 1.6;">We've received your Williams Racing sample request and will send a ${data.size} t-shirt to the address you provided.</p>
+
+        <div style="${emailStyles.card}">
+          <h3 style="color: #303E55; margin-top: 0;">Your Request Details</h3>
+          <p><strong>Organization:</strong> ${data.organization}</p>
+          <p><strong>T-shirt Size:</strong> ${data.size}</p>
+          <p><strong>Shipping Address:</strong></p>
+          <p style="white-space: pre-line; margin-left: 20px;">${fullAddress}</p>
+        </div>
+
+        <div style="${emailStyles.card}; background-color: #E8F5E9; border-left: 4px solid #4CAF50;">
+          <p style="margin: 0; font-weight: bold; color: #2E7D32;">✓ Request Confirmed</p>
+          <p style="margin: 5px 0 0 0; color: #666;">We'll process your sample request and ship it to you soon.</p>
+        </div>
+
+        <div style="${emailStyles.divider}"></div>
+
+        <h3 style="color: #303E55;">What's Next?</h3>
+        <p>Our team will review your request and prepare your Williams Racing sample. You'll receive tracking information once your sample ships.</p>
+
+        <p style="margin-top: 30px;">If you have any questions, feel free to reach out to us.</p>
+      </div>
+
+      <div style="${emailStyles.footer}">
+        <p>© ${new Date().getFullYear()} Vonga. All rights reserved.</p>
+        <p>Questions? Contact us at <a href="mailto:support@vonga.io">support@vonga.io</a></p>
+      </div>
+    </div>
+  `;
+
+  try {
+    const result = await resend.emails.send({
+      from: FROM_EMAIL,
+      to: data.email,
+      subject: `Williams Racing Sample Request Confirmation - ${data.organization}`,
+      html,
+    });
+    console.log('Confirmation email sent successfully to:', data.email);
+    return { success: true, data: result };
+  } catch (error) {
+    console.error('Failed to send confirmation email:', error);
+    if (error instanceof Error) {
+      console.error('Error message:', error.message);
+      console.error('Error stack:', error.stack);
+    }
     return { success: false, error };
   }
 }

@@ -1,6 +1,6 @@
 export const SITE = {
   name: "Vonga",
-  domain: "https://www.vonga.com",
+  domain: "https://vonga.io",
   twitter: "@vonga",
   description:
     "Vonga turns apparel into living digital experiences — connecting fans, students, and members through on-body moments you can see, feel, and measure.",
