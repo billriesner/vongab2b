@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { cookies } from "next/headers";
+import { AuthWrapper } from "./AuthWrapper";
 
 export const metadata: Metadata = {
   title: "Live Connected. Williams Racing Everywhere. | Vonga",
@@ -11,7 +13,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function WilliamsRacingLayout({ children }: { children: ReactNode }) {
+export default async function WilliamsRacingLayout({ children }: { children: ReactNode }) {
+  const cookieStore = await cookies();
+  const authCookie = cookieStore.get('williams-auth');
+  const isAuthenticated = authCookie?.value === 'authenticated';
+
+  if (!isAuthenticated) {
+    return <AuthWrapper />;
+  }
+
   return (
     <>
       <GoogleAnalytics />
