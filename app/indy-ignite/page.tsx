@@ -311,7 +311,7 @@ export default function IndyIgnitePage() {
               transition={{ duration: 0.6 }}
             >
               {/* Smartphone Frame */}
-              <div className="relative w-full max-w-xs md:max-w-sm">
+              <div className="relative w-full max-w-[256px] md:max-w-[307px]">
                 {/* Phone Frame Outer */}
                 <div className="relative bg-[#1a1a1a] rounded-[3rem] p-3 shadow-2xl border border-white/20">
                   {/* Phone Screen Bezel */}
