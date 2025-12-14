@@ -421,3 +421,72 @@ export async function sendWilliamsRacingSampleRequestConfirmationEmail(data: Wil
   }
 }
 
+interface MicrositeContactForm {
+  name: string;
+  email: string;
+  organization?: string;
+  message?: string;
+  source?: string; // e.g., "indy-ignite"
+}
+
+export async function sendMicrositeContactEmail(data: MicrositeContactForm) {
+  const resend = getResendClient();
+  if (!resend) {
+    console.error('Resend client not available');
+    return { success: false, error: 'Email service not configured' };
+  }
+
+  const timestamp = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
+  const sourceLabel = data.source ? data.source.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase()) : 'Microsite';
+
+  const html = `
+    <div style="${emailStyles.container}">
+      <div style="${emailStyles.header}">
+        <h1 style="${emailStyles.logo}">VONGA</h1>
+        <p style="margin: 0; font-size: 18px; color: white;">📧 New Contact Form Submission</p>
+      </div>
+      
+      <div style="${emailStyles.content}">
+        <h2 style="color: #303E55;">New Contact from ${sourceLabel}</h2>
+        
+        <div style="${emailStyles.card}">
+          <h3 style="color: #303E55; margin-top: 0;">Contact Information</h3>
+          <p><strong>Name:</strong> ${data.name}</p>
+          <p><strong>Email:</strong> <a href="mailto:${data.email}">${data.email}</a></p>
+          ${data.organization ? `<p><strong>Organization:</strong> ${data.organization}</p>` : ''}
+          ${data.source ? `<p><strong>Source:</strong> ${sourceLabel}</p>` : ''}
+        </div>
+
+        ${data.message ? `
+          <div style="${emailStyles.card}">
+            <h3 style="color: #303E55; margin-top: 0;">Message</h3>
+            <p style="white-space: pre-wrap;">${data.message}</p>
+          </div>
+        ` : ''}
+
+        <div style="${emailStyles.divider}"></div>
+
+        <p style="color: #666; font-size: 12px;">Submitted at: ${timestamp}</p>
+      </div>
+
+      <div style="${emailStyles.footer}">
+        <p>© ${new Date().getFullYear()} Vonga. All rights reserved.</p>
+      </div>
+    </div>
+  `;
+
+  try {
+    const result = await resend.emails.send({
+      from: FROM_EMAIL,
+      to: 'bill@vonga.io',
+      subject: `Contact Form - ${data.name}${data.organization ? ` (${data.organization})` : ''}${data.source ? ` [${sourceLabel}]` : ''}`,
+      html,
+    });
+    console.log('Microsite contact email sent successfully');
+    return { success: true, data: result };
+  } catch (error) {
+    console.error('Failed to send microsite contact email:', error);
+    return { success: false, error };
+  }
+}
+
