@@ -5,8 +5,26 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import SEO from '@/components/SEO';
 import { Hand, Rocket, Gift } from 'lucide-react';
+import { useEffect } from 'react';
 
 export default function IndyIgnitePage() {
+  // Track page visit
+  useEffect(() => {
+    // Track visit when page loads
+    fetch('/api/track-visit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        pathname: '/indy-ignite',
+        referrer: document.referrer || 'Direct visit',
+        userAgent: navigator.userAgent
+      })
+    }).catch(err => {
+      console.error('Failed to track visit:', err);
+      // Silently fail - don't interrupt user experience
+    });
+  }, []);
+
   return (
     <>
       <SEO 
