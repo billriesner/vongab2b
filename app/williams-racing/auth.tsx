@@ -35,13 +35,13 @@ export function PasswordAuth({ onSuccess }: { onSuccess: () => void }) {
   };
 
   return (
-    <div className="bg-[#0F172A] text-white min-h-screen flex items-center justify-center px-6">
-      <div className="max-w-md w-full bg-white/5 rounded-2xl border border-white/10 p-8 md:p-12">
+    <div className="bg-[#0f0f0f] text-white min-h-screen flex items-center justify-center px-6">
+      <div className="max-w-md w-full bg-[#1a1a1a] rounded-2xl border border-white/10 p-8 md:p-12">
         <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-white to-[#00A0E1] bg-clip-text text-transparent">
-            VONGA
+          <h1 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: '#00A0E1' }}>
+            Live Connected.
           </h1>
-          <p className="text-white/80 text-lg">Williams Racing</p>
+          <p className="text-white/80 text-lg">Williams Racing x Vonga</p>
           <p className="text-white/60 text-sm mt-2">Please enter the password to continue</p>
         </div>
 

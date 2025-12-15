@@ -1,341 +1,501 @@
 'use client';
 
-import { useRef, useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Smartphone, MapPin, Users, BarChart3, Shield, Droplets, Lock } from 'lucide-react';
+import Link from 'next/link';
+import SEO from '@/components/SEO';
+import { Hand, Rocket, Gift, Smartphone, MapPin, Users, BarChart3, Shield, Droplets, Lock } from 'lucide-react';
 
 export default function WilliamsRacingPage() {
-  const demoSectionRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
+  // Track page visit (same pattern as Indy Ignite)
   useEffect(() => {
-    setIsVisible(true);
+    fetch('/api/track-visit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        pathname: '/williams-racing',
+        referrer: document.referrer || 'Direct visit',
+        userAgent: navigator.userAgent,
+      }),
+    }).catch((err) => {
+      console.error('Failed to track visit:', err);
+      // Silently fail - don't interrupt user experience
+    });
   }, []);
 
-  const scrollToDemo = () => {
-    demoSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
-    <div className="bg-[#0F172A] text-white min-h-screen">
-      <style dangerouslySetInnerHTML={{ __html: `
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
-        }
-        
-        @keyframes pulse {
-          0%, 100% {
-            opacity: 0.6;
-          }
-          50% {
-            opacity: 1;
-          }
-        }
-        
-        .williams-fade-in-up {
-          animation: fadeInUp 0.8s ease-out forwards;
-        }
-        
-        .williams-fade-in {
-          animation: fadeIn 1s ease-out forwards;
-        }
-        
-        .williams-pulse-slow {
-          animation: pulse 3s ease-in-out infinite;
-        }
-      `}} />
-      
-      {/* Hero Section */}
-      <section className={`relative min-h-screen flex items-center justify-center overflow-hidden ${isVisible ? 'williams-fade-in' : 'opacity-0'}`}>
-        {/* Dark Background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#000000] via-[#0F172A] to-[#000000]"></div>
-        
-        {/* Subtle animated gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#040044]/20 via-transparent to-[#00A0E1]/10"></div>
-        
-        {/* Content */}
-        <div className="relative z-10 text-center px-6 md:px-12 lg:px-20 max-w-6xl mx-auto">
-          {/* Image Placeholder for Williams Racing Hoodie */}
-          <div className="mb-12 flex justify-center williams-fade-in-up" style={{ animationDelay: '0.2s', opacity: 0 }}>
-            <div className="relative w-full max-w-2xl aspect-[4/3] rounded-2xl overflow-hidden border border-[#00A0E1]/20 bg-gradient-to-br from-[#040044]/30 to-[#00A0E1]/10 backdrop-blur-sm shadow-2xl shadow-[#00A0E1]/10">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#00A0E1] to-[#33BECC] opacity-30 blur-2xl williams-pulse-slow"></div>
-                  <p className="text-white/50 text-sm font-medium">Williams Racing Hoodie<br />with NFC Tag</p>
-                </div>
-              </div>
-            </div>
+    <>
+      <SEO 
+        pathname="/williams-racing" 
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          name: "Williams Racing x Vonga",
+          description: "Live Connected. Williams Racing Everywhere. Turn your team apparel into an always-on fan touchpoint. From the Paddock to the rest of the world.",
+        }} 
+      />
+      <main className="bg-[#0f0f0f] text-white min-h-screen overflow-x-hidden">
+        {/* SECTION 1: HERO */}
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+          {/* Animated Background - Glowing Lines */}
+          <div className="absolute inset-0 overflow-hidden">
+            {/* Primary Aqua Line - Horizontal */}
+            <motion.div
+              className="absolute top-1/4 left-1/4 w-96 h-0.5 bg-gradient-to-r from-transparent via-[#33BECC] to-transparent opacity-60"
+              style={{ boxShadow: '0 0 20px rgba(51, 190, 204, 0.5)' }}
+              animate={{
+                x: [0, 100, 0],
+                opacity: [0.5, 0.8, 0.5],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+            {/* Primary Blue Line - Horizontal */}
+            <motion.div
+              className="absolute bottom-1/4 right-1/4 w-96 h-0.5 bg-gradient-to-r from-transparent via-[#00A0E1] to-transparent opacity-60"
+              style={{ boxShadow: '0 0 20px rgba(0, 160, 225, 0.5)' }}
+              animate={{
+                x: [0, -100, 0],
+                opacity: [0.5, 0.8, 0.5],
+              }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 1,
+              }}
+            />
+            {/* Rotating Diagonal Aqua Line */}
+            <motion.div
+              className="absolute top-1/2 left-1/2 w-64 h-0.5 bg-gradient-to-r from-transparent via-[#33BECC] to-transparent opacity-50"
+              style={{ boxShadow: '0 0 15px rgba(51, 190, 204, 0.4)' }}
+              animate={{
+                rotate: [45, 225, 45],
+                opacity: [0.4, 0.7, 0.4],
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+            {/* Additional Blue Diagonal Line */}
+            <motion.div
+              className="absolute top-1/3 right-1/3 w-80 h-0.5 bg-gradient-to-r from-transparent via-[#00A0E1] to-transparent opacity-50"
+              style={{ boxShadow: '0 0 15px rgba(0, 160, 225, 0.4)' }}
+              animate={{
+                rotate: [-30, 150, -30],
+                opacity: [0.4, 0.7, 0.4],
+              }}
+              transition={{
+                duration: 10,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 2,
+              }}
+            />
+            {/* Vertical Aqua Line */}
+            <motion.div
+              className="absolute top-1/5 right-1/5 w-0.5 h-64 bg-gradient-to-b from-transparent via-[#33BECC] to-transparent opacity-50"
+              style={{ boxShadow: '0 0 15px rgba(51, 190, 204, 0.4)' }}
+              animate={{
+                y: [0, 50, 0],
+                opacity: [0.4, 0.7, 0.4],
+              }}
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 0.5,
+              }}
+            />
+            {/* Vertical Blue Line */}
+            <motion.div
+              className="absolute bottom-1/5 left-1/5 w-0.5 h-64 bg-gradient-to-b from-transparent via-[#00A0E1] to-transparent opacity-50"
+              style={{ boxShadow: '0 0 15px rgba(0, 160, 225, 0.4)' }}
+              animate={{
+                y: [0, -50, 0],
+                opacity: [0.4, 0.7, 0.4],
+              }}
+              transition={{
+                duration: 7,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 1.5,
+              }}
+            />
+            {/* Glowing Particles/Orbs */}
+            <motion.div
+              className="absolute top-1/6 left-1/6 w-2 h-2 rounded-full bg-[#33BECC] opacity-60"
+              style={{ boxShadow: '0 0 20px rgba(51, 190, 204, 0.8)' }}
+              animate={{
+                scale: [1, 1.5, 1],
+                opacity: [0.4, 0.8, 0.4],
+                x: [0, 30, 0],
+                y: [0, 20, 0],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+            <motion.div
+              className="absolute bottom-1/6 right-1/6 w-2 h-2 rounded-full bg-[#00A0E1] opacity-60"
+              style={{ boxShadow: '0 0 20px rgba(0, 160, 225, 0.8)' }}
+              animate={{
+                scale: [1, 1.5, 1],
+                opacity: [0.4, 0.8, 0.4],
+                x: [0, -30, 0],
+                y: [0, -20, 0],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 1,
+              }}
+            />
+            <motion.div
+              className="absolute top-2/3 left-2/3 w-1.5 h-1.5 rounded-full bg-[#33BECC] opacity-50"
+              style={{ boxShadow: '0 0 15px rgba(51, 190, 204, 0.6)' }}
+              animate={{
+                scale: [1, 2, 1],
+                opacity: [0.3, 0.7, 0.3],
+              }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 2,
+              }}
+            />
           </div>
-          
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 bg-gradient-to-r from-white via-[#00A0E1] to-[#33BECC] bg-clip-text text-transparent williams-fade-in-up" style={{ animationDelay: '0.4s', opacity: 0 }}>
-            Live Connected.
-          </h1>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight mb-8 text-white/90 williams-fade-in-up" style={{ animationDelay: '0.6s', opacity: 0 }}>
-            Williams Racing Everywhere.
-          </h2>
-          <p className="text-xl md:text-2xl text-white/80 leading-relaxed mb-10 max-w-4xl mx-auto williams-fade-in-up" style={{ animationDelay: '0.8s', opacity: 0 }}>
-            Turn your team apparel into an always-on fan touchpoint.<br />
-            From the Paddock to the rest of the world.
-          </p>
-          <div className="williams-fade-in-up" style={{ animationDelay: '1s', opacity: 0 }}>
-            <Button 
-              onClick={scrollToDemo}
-              size="lg" 
-              className="bg-gradient-to-r from-[#00A0E1] to-[#33BECC] hover:from-[#00A0E1]/90 hover:to-[#33BECC]/90 text-white border-0 px-8 py-6 text-lg font-semibold shadow-lg shadow-[#00A0E1]/20 hover:shadow-xl hover:shadow-[#00A0E1]/30 transition-all duration-300"
+
+          {/* Content */}
+          <div className="relative z-10 text-center px-6 md:px-12 lg:px-20 max-w-6xl mx-auto">
+            <motion.h1
+              className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
             >
-              See the Experience
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* The Gap - Split Screen */}
-      <section className="relative py-24 md:py-32 border-t border-white/10">
-        <div className="mx-auto max-w-7xl px-6 lg:px-12">
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-            {/* Left Column - Inside the Track */}
-            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 bg-gradient-to-br from-[#040044]/20 to-[#0F172A]">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center">
-                  <Users className="w-24 h-24 mx-auto mb-4 text-[#00A0E1] opacity-30" />
-                  <p className="text-white/40 text-sm">Image Placeholder</p>
-                </div>
-              </div>
-              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
-                <p className="text-lg font-semibold text-white">Inside the Track: ~100k Fans.</p>
-              </div>
-            </div>
-
-            {/* Right Column - Outside the Track */}
-            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 bg-gradient-to-br from-[#00A0E1]/10 to-[#040044]/20">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center">
-                  <MapPin className="w-24 h-24 mx-auto mb-4 text-[#33BECC] opacity-30" />
-                  <p className="text-white/40 text-sm">Map Graphic Placeholder</p>
-                </div>
-              </div>
-              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
-                <p className="text-lg font-semibold text-white">Outside the Track: Millions of Fans.</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Main Text */}
-          <div className="mt-16 max-w-4xl mx-auto text-center">
-            <p className="text-2xl md:text-3xl font-medium leading-relaxed text-white/90">
-              You have a massive global community. But once the race ends or the app closes, the connection breaks. 
-              <span className="text-[#33BECC]"> Vonga turns the jersey itself into the bridge.</span>
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* The Solution - Interactive Demo */}
-      <section ref={demoSectionRef} className="relative py-24 md:py-32 border-t border-white/10 bg-gradient-to-b from-[#0F172A] to-[#000000]">
-        <div className="mx-auto max-w-7xl px-6 lg:px-12">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white to-[#00A0E1] bg-clip-text text-transparent">
-              The Garment is the Interface.
-            </h2>
-            <p className="text-xl md:text-2xl text-white/80">
-              No apps to download. No logins. Just a tap.
-            </p>
-          </div>
-
-          {/* Visual: Phone Tapping Sleeve */}
-          <div className="mb-20 flex justify-center">
-            <div className="relative">
-              {/* Phone */}
-              <div className="relative w-64 h-96 rounded-[3rem] border-4 border-white/20 bg-gradient-to-br from-[#040044] to-[#0F172A] p-4 shadow-2xl">
-                <div className="w-full h-full rounded-[2rem] bg-gradient-to-br from-[#00A0E1]/20 to-[#33BECC]/20 flex items-center justify-center">
-                  <div className="text-center">
-                    <Smartphone className="w-16 h-16 mx-auto mb-4 text-[#33BECC]" />
-                    <p className="text-white/60 text-sm">Mobile Experience</p>
-                  </div>
-                </div>
-              </div>
-              
-              {/* NFC Tag Glow Effect */}
-              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-24 h-24 rounded-full bg-gradient-to-br from-[#00A0E1] to-[#33BECC] opacity-60 blur-xl williams-pulse-slow"></div>
-              
-              {/* Tap Indicator */}
-              <div className="absolute -right-12 top-1/2 -translate-y-1/2 hidden md:block">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#00A0E1] to-[#33BECC] flex items-center justify-center shadow-lg shadow-[#00A0E1]/50 williams-pulse-slow">
-                  <span className="text-2xl">👆</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Steps - 3 Column Grid */}
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                title: 'Wear',
-                description: 'Premium Williams apparel designed for race day and travel days.',
-                icon: '👕',
-              },
-              {
-                title: 'Tap',
-                description: 'Embedded NFC triggers a tailored mobile experience instantly.',
-                icon: '📱',
-                highlight: true,
-              },
-              {
-                title: 'Unlock',
-                description: 'Fans unlock telemetry data, pit lane videos, and partner rewards.',
-                icon: '🔓',
-              },
-            ].map((step, index) => (
-              <div
-                key={index}
-                className={`relative rounded-2xl p-8 border transition-all duration-300 ${
-                  index === 1
-                    ? 'border-[#00A0E1]/50 bg-white/[0.08] backdrop-blur-xl shadow-2xl shadow-[#00A0E1]/20 hover:shadow-[#00A0E1]/30 hover:border-[#00A0E1]/70'
-                    : 'border-white/10 bg-white/[0.02] hover:bg-white/[0.04]'
-                }`}
+              Live Connected.
+            </motion.h1>
+            <motion.p
+              className="text-xl md:text-2xl lg:text-3xl text-white/80 leading-relaxed mb-10 max-w-4xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              Williams Racing Everywhere.
+            </motion.p>
+            <motion.p
+              className="text-lg md:text-xl text-white/70 leading-relaxed mb-10 max-w-4xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            >
+              Turn your team apparel into an always-on fan touchpoint.<br />
+              From the Paddock to the rest of the world.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              <Button
+                variant="primary"
+                size="lg"
+                className="bg-gradient-to-r from-[#00A0E1] to-[#33BECC] hover:from-[#00A0E1]/90 hover:to-[#33BECC]/90 text-white"
+                asChild
               >
-                <div className="text-5xl mb-4">{step.icon}</div>
-                <h3 className="text-2xl font-bold mb-3 text-white">{step.title}</h3>
-                <p className="text-white/80 leading-relaxed">{step.description}</p>
-                {index === 1 && (
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#00A0E1]/5 to-[#33BECC]/5 pointer-events-none"></div>
-                )}
-              </div>
-            ))}
+                <Link href="#see-it-in-action">See the Experience</Link>
+              </Button>
+            </motion.div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* The Platform - Club Vonga */}
-      <section className="relative py-24 md:py-32 border-t border-white/10">
-        <div className="mx-auto max-w-7xl px-6 lg:px-12">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-center bg-gradient-to-r from-white to-[#00A0E1] bg-clip-text text-transparent">
-              Control the Engagement.
-            </h2>
-            <p className="text-xl md:text-2xl text-white/80 text-center mb-12 leading-relaxed">
-              Track behavior, not just impressions. Segment your fanbase by engagement level and update rewards in real-time.
-            </p>
+        {/* SECTION 2: THE OPPORTUNITY */}
+        <section className="px-6 md:px-12 lg:px-20 py-20 md:py-32 bg-[#1a1a1a]">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+                  You have a massive global community. But once the race ends or the app closes, the connection breaks.
+                </h2>
+              </motion.div>
+              <motion.div
+                className="space-y-4 text-lg md:text-xl text-white/80 leading-relaxed"
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                <p>
+                  Inside the Track: ~100k Fans.
+                </p>
+                <p>
+                  Outside the Track: Millions of Fans.
+                </p>
+                <p className="text-[#33BECC] font-semibold">
+                  Vonga turns the jersey itself into the bridge.
+                </p>
+              </motion.div>
+            </div>
+          </div>
+        </section>
 
-            <div className="grid md:grid-cols-3 gap-6">
+        {/* SECTION 3: HOW IT WORKS */}
+        <section id="how-it-works" className="px-6 md:px-12 lg:px-20 py-20 md:py-32 bg-[#0f0f0f]">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              className="text-center mb-16"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
+                The Garment is the Interface.
+              </h2>
+              <p className="text-xl text-white/70 max-w-3xl mx-auto">
+                No apps to download. No logins. Just a tap.
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
               {[
-                { title: 'Campaign Builder', icon: BarChart3 },
-                { title: 'Sponsor ROI Tracking', icon: Users },
-                { title: 'Fan Geography', icon: MapPin },
-              ].map((feature, index) => {
-                const Icon = feature.icon;
+                {
+                  title: "Wear",
+                  text: "Premium Williams apparel designed for race day and travel days.",
+                  icon: Hand,
+                },
+                {
+                  title: "Tap",
+                  text: "Embedded NFC triggers a tailored mobile experience instantly.",
+                  icon: Rocket,
+                },
+                {
+                  title: "Unlock",
+                  text: "Fans unlock telemetry data, pit lane videos, and partner rewards.",
+                  icon: Gift,
+                },
+              ].map((card, index) => {
+                const IconComponent = card.icon;
                 return (
-                  <div
+                  <motion.div
                     key={index}
-                    className="rounded-2xl p-6 border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] transition"
+                    className="bg-[#1a1a1a] border border-white/10 rounded-lg p-8 hover:border-[#33BECC]/50 transition-all duration-300"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    whileHover={{ y: -5 }}
                   >
-                    <Icon className="w-8 h-8 mb-4 text-[#33BECC]" />
-                    <h3 className="text-xl font-semibold text-white">{feature.title}</h3>
-                  </div>
+                    <div className="w-16 h-16 rounded-full flex items-center justify-center mb-6 bg-[#33BECC]/20 border border-[#33BECC]/30">
+                      <IconComponent className="w-8 h-8 text-[#33BECC]" />
+                    </div>
+                    <h3 className="text-2xl font-bold mb-3 text-white">{card.title}</h3>
+                    <p className="text-white/70 leading-relaxed">{card.text}</p>
+                  </motion.div>
                 );
               })}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* The Dream Use Case - F1 Specific */}
-      <section className="relative py-24 md:py-32 border-t border-white/10 bg-gradient-to-b from-[#000000] to-[#0F172A]">
-        <div className="mx-auto max-w-7xl px-6 lg:px-12">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-white via-[#00A0E1] to-[#33BECC] bg-clip-text text-transparent">
-              The Paddock in Their Pocket.
-            </h2>
-            <div className="relative rounded-2xl p-8 md:p-12 border border-[#00A0E1]/20 bg-gradient-to-br from-[#040044]/20 to-[#00A0E1]/10 backdrop-blur-sm">
-              <p className="text-xl md:text-2xl text-white/90 leading-relaxed">
-                Imagine a fan in Austin tapping their Williams hoodie during the Silverstone GP. 
-                They instantly unlock a live garage cam and a 20% offer from your tire partner. 
-                <span className="text-[#33BECC] font-semibold"> You get the data; they get the magic.</span>
-              </p>
+        {/* SECTION 4: VIDEO */}
+        <section id="see-it-in-action" className="px-6 md:px-12 lg:px-20 py-20 md:py-32 bg-[#1a1a1a]">
+          <div className="max-w-5xl mx-auto">
+            <motion.div
+              className="text-center mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
+                See it in action.
+              </h2>
+            </motion.div>
+
+            <motion.div
+              className="flex justify-center mb-6"
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              {/* Smartphone Frame */}
+              <div className="relative w-full max-w-[256px] md:max-w-[307px]">
+                {/* Phone Frame Outer */}
+                <div className="relative bg-[#1a1a1a] rounded-[3rem] p-3 shadow-2xl border border-white/20">
+                  {/* Phone Screen Bezel */}
+                  <div className="bg-black rounded-[2.5rem] overflow-hidden">
+                    {/* Notch */}
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-[#1a1a1a] rounded-b-2xl z-10"></div>
+                    
+                    {/* Screen Content */}
+                    <div className="relative aspect-[15/32] bg-[#0f0f0f] overflow-hidden flex items-center justify-center">
+                      {/* Video */}
+                      <video
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        className="w-full h-full object-contain"
+                      >
+                        <source src="/videos/williams-experience.mp4" type="video/mp4" />
+                      </video>
+                    </div>
+                    
+                    {/* Home Indicator */}
+                    <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-white/30 rounded-full z-10"></div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.p
+              className="text-center text-white/60 text-lg"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              This is what a fan sees. Simple, fast, and fully branded to Williams Racing.
+            </motion.p>
+          </div>
+        </section>
+
+        {/* SECTION 5: USE CASES */}
+        <section className="px-6 md:px-12 lg:px-20 py-20 md:py-32 bg-[#0f0f0f]">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              className="text-center mb-16"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
+                The Paddock in Their Pocket.
+              </h2>
+            </motion.div>
+
+            <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
+              {[
+                {
+                  title: "Extend Fan Zones Beyond the Track",
+                  text: "Your Fan Zones create incredible moments at race weekends. Vonga lets fans take that energy home. Tap their Williams apparel to unlock exclusive Fan Zone content, behind-the-scenes access, and special offers—long after they've left the venue.",
+                },
+                {
+                  title: "Bridge Physical and Digital Experiences",
+                  text: "Connect the in-person Fan Zone experience with ongoing digital engagement. Fans who visit your Fan Zone can tap their apparel later to access exclusive content, partner rewards, and community features that keep them connected to Williams Racing.",
+                },
+                {
+                  title: "Measure Fan Zone Impact",
+                  text: "Track which Fan Zone visitors become your most engaged fans. See how apparel taps correlate with Fan Zone attendance, and use that data to optimize future experiences and prove ROI to partners.",
+                },
+              ].map((card, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-[#1a1a1a] border border-white/10 rounded-lg p-8 hover:border-[#00A0E1]/50 transition-all duration-300"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  whileHover={{ y: -5 }}
+                >
+                  <h3 className="text-2xl font-bold mb-4 text-white">{card.title}</h3>
+                  <p className="text-white/70 leading-relaxed">{card.text}</p>
+                </motion.div>
+              ))}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Tech Assurance */}
-      <section className="relative py-24 md:py-32 border-t border-white/10">
-        <div className="mx-auto max-w-7xl px-6 lg:px-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center bg-gradient-to-r from-white to-[#00A0E1] bg-clip-text text-transparent">
-            Built for Real Life.
-          </h2>
-          
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {[
-              {
-                title: 'Wash-Tested',
-                subtitle: 'Laundry safe',
-                icon: Droplets,
-                color: '#00A0E1',
-              },
-              {
-                title: 'Secure',
-                subtitle: 'Non-clonable',
-                icon: Shield,
-                color: '#33BECC',
-              },
-              {
-                title: 'Permanent',
-                subtitle: 'No QR codes',
-                icon: Lock,
-                color: '#00A0E1',
-              },
-            ].map((point, index) => {
-              const Icon = point.icon;
-              return (
-                <div
-                  key={index}
-                  className="text-center rounded-2xl p-8 border border-white/10 bg-white/[0.02]"
-                >
-                  <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-[#00A0E1]/20 to-[#33BECC]/20 flex items-center justify-center">
-                    <Icon className="w-10 h-10" style={{ color: point.color }} />
-                  </div>
-                  <h3 className="text-2xl font-bold mb-2 text-white">{point.title}</h3>
-                  <p className="text-white/70">{point.subtitle}</p>
-                </div>
-              );
-            })}
+        {/* SECTION 6: THE TECH */}
+        <section className="px-6 md:px-12 lg:px-20 py-20 md:py-32 bg-[#1a1a1a]">
+          <div className="max-w-4xl mx-auto">
+            <motion.div
+              className="text-center mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
+                Built for Real Life.
+              </h2>
+            </motion.div>
+
+            <motion.div
+              className="space-y-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <div className="flex items-start gap-4">
+                <div className="text-[#33BECC] text-2xl font-bold mt-1">•</div>
+                <p className="text-xl text-white/80 leading-relaxed">
+                  <span className="font-semibold text-white">Wash-Tested:</span> Laundry safe and permanent.
+                </p>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="text-[#33BECC] text-2xl font-bold mt-1">•</div>
+                <p className="text-xl text-white/80 leading-relaxed">
+                  <span className="font-semibold text-white">Secure:</span> Each tag is unique and non-clonable.
+                </p>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="text-[#33BECC] text-2xl font-bold mt-1">•</div>
+                <p className="text-xl text-white/80 leading-relaxed">
+                  <span className="font-semibold text-white">No QR Codes:</span> It&apos;s premium tech, not a restaurant menu.
+                </p>
+              </div>
+            </motion.div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Footer */}
-      <section className="relative py-24 md:py-32 border-t border-white/10 bg-gradient-to-b from-[#0F172A] to-[#000000]">
-        <div className="mx-auto max-w-4xl px-6 lg:px-12 text-center">
-          <p className="text-2xl md:text-3xl font-medium mb-10 text-white/90 leading-relaxed">
-            Ready to pilot? Let us know where we can send a sample so you can experience this for yourself.
-          </p>
-          <Button
-            size="lg"
-            className="bg-gradient-to-r from-[#00A0E1] to-[#33BECC] hover:from-[#00A0E1]/90 hover:to-[#33BECC]/90 text-white border-0 px-10 py-6 text-lg font-semibold shadow-lg shadow-[#00A0E1]/20"
-            asChild
-          >
-            <a href="/williams-racing/request-sample">Request a Sample</a>
-          </Button>
-        </div>
-      </section>
-    </div>
+        {/* SECTION 7: FOOTER */}
+        <section className="px-6 md:px-12 lg:px-20 py-20 md:py-32 bg-gradient-to-b from-[#0f0f0f] to-[#1a1a1a]">
+          <div className="max-w-4xl mx-auto text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+                Ready to pilot?
+              </h2>
+              <p className="text-xl md:text-2xl text-white/80 mb-10 leading-relaxed">
+                Let us know where we can send a sample so you can experience this for yourself.
+              </p>
+              <Button
+                variant="primary"
+                size="lg"
+                className="bg-gradient-to-r from-[#00A0E1] to-[#33BECC] hover:from-[#00A0E1]/90 hover:to-[#33BECC]/90 text-white"
+                asChild
+              >
+                <Link href="/williams-racing/request-sample">Request a Sample</Link>
+              </Button>
+            </motion.div>
+          </div>
+        </section>
+      </main>
+    </>
   );
 }
-

@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
-import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { cookies } from "next/headers";
 import { AuthWrapper } from "./AuthWrapper";
 
@@ -22,13 +21,6 @@ export default async function WilliamsRacingLayout({ children }: { children: Rea
     return <AuthWrapper />;
   }
 
-  return (
-    <>
-      <GoogleAnalytics />
-      <main className="min-h-screen">
-        {children}
-      </main>
-    </>
-  );
+  return <>{children}</>;
 }
 

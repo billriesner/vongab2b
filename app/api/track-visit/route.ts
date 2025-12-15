@@ -11,8 +11,9 @@ export async function POST(request: NextRequest) {
                request.headers.get('x-real-ip') || 
                'unknown';
 
-    // Basic deduplication: only alert for /indy-ignite visits
-    if (pathname !== '/indy-ignite') {
+    // Basic deduplication: only alert for specific microsite visits
+    const alertPaths = ['/indy-ignite', '/williams-racing'];
+    if (!alertPaths.includes(pathname)) {
       return NextResponse.json({ success: true, message: 'Visit tracked (not alerting)' });
     }
 
@@ -24,14 +25,19 @@ export async function POST(request: NextRequest) {
 
     // Send Slack notification
     if (process.env.SLACK_WEBHOOK_URL) {
+      const label =
+        pathname === '/indy-ignite'
+          ? 'Indy Ignite Microsite Visit'
+          : 'Williams Racing Microsite Visit';
+
       const slackMessage = {
-        text: '👀 Indy Ignite Microsite Visit',
+        text: `👀 ${label}`,
         blocks: [
           {
             type: 'header',
             text: {
               type: 'plain_text',
-              text: '👀 Indy Ignite Microsite Visit'
+              text: `👀 ${label}`
             }
           },
           {
