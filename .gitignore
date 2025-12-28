@@ -39,3 +39,25 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+
+# AI Agent sensitive files
+credentials.json
+token.json
+.streamlit/secrets.toml
+*.pyc
+
+# Knowledge base
+knowledge_base/
+knowledge_base_update.log
+knowledge_base_update_error.log
