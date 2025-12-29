@@ -1,19 +1,20 @@
 """
-LangGraph agent setup for Chief of Staff AI Agent.
+Chief of Staff Agent for Vonga OS.
+Handles operational tasks: calendar, email, tasks, and can consult the Strategist.
 """
 
 import os
-from typing import TypedDict, Annotated, List, Dict, Any
+from typing import List, Optional
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.tools import BaseTool
-from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain_core.messages import BaseMessage, HumanMessage, AIMessage, SystemMessage, ToolMessage
+from langchain_core.messages import AIMessage, SystemMessage, ToolMessage
+from pydantic import Field
 from langgraph.graph import StateGraph, END
 from langgraph.prebuilt import ToolNode
-from langgraph.graph.message import add_messages
 from langgraph.checkpoint.memory import MemorySaver
-from datetime import datetime
+from google.oauth2.credentials import Credentials
 
+from agents.shared import AgentState, MemoryLogger, run_agent
 from tools.gmail_tools import get_gmail_tools
 from tools.calendar_tools import get_calendar_tools
 from tools.drive_tools import get_drive_tools
@@ -21,141 +22,77 @@ from tools.task_tools import get_task_tools
 from tools.knowledge_tools import get_knowledge_tools
 from tools.search_tools import get_search_tools
 from knowledge_base import initialize_knowledge_base
-from google.oauth2.credentials import Credentials
 
 
-class AgentState(TypedDict):
-    """State for the agent graph."""
-    messages: Annotated[List[BaseMessage], add_messages]
-
-
-class MemoryLogger:
-    """Handles logging conversations and actions to Google Doc."""
+class ConsultStrategistTool(BaseTool):
+    """Tool for Chief of Staff to consult the Head of Strategy."""
+    name: str = "consult_head_of_strategy"
+    description: str = """Consult the Head of Strategy (CSO) for strategic questions, idea audits, or strategic planning.
+    Use this when the user asks:
+    - Strategic questions about company direction, product decisions, or business strategy
+    - "Should we do X?" or "Is this a good idea?"
+    - "What am I missing?" or "Critique this plan"
+    - "Ask Strategy about..." or similar requests to consult strategy
     
-    def __init__(self, creds: Credentials):
-        self.creds = creds
-        self.doc_id = None
-        self._ensure_memory_doc()
+    REQUIRES: question (string) - the strategic question or idea to present to the Head of Strategy.
     
-    def _ensure_memory_doc(self):
-        """Ensure the Agent_Memory_Log document exists, create if not."""
-        from googleapiclient.discovery import build
+    The Head of Strategy will provide a "Green Light / Red Light" verdict or strategic guidance based on the company's strategic documents."""
+    
+    strategist_agent: Optional[object] = Field(default=None, exclude=True)
+    strategist_memory_logger: Optional[MemoryLogger] = Field(default=None, exclude=True)
+    
+    def __init__(self, strategist_agent=None, strategist_memory_logger=None, **kwargs):
+        super().__init__(**kwargs)
+        self.strategist_agent = strategist_agent
+        self.strategist_memory_logger = strategist_memory_logger
+    
+    def _run(self, question: str) -> str:
+        """Execute the consultation."""
+        if not self.strategist_agent or not self.strategist_memory_logger:
+            return "Error: Head of Strategy is not available. Please ensure the strategist agent is initialized."
         
-        docs_service = build('docs', 'v1', credentials=self.creds)
-        drive_service = build('drive', 'v3', credentials=self.creds)
-        
-        # Search for existing document
-        results = drive_service.files().list(
-            q="name='Agent_Memory_Log' and mimeType='application/vnd.google-apps.document'",
-            fields="files(id, name)"
-        ).execute()
-        
-        files = results.get('files', [])
-        
-        if files:
-            self.doc_id = files[0]['id']
-        else:
-            # Create new document
-            doc = docs_service.documents().create(body={'title': 'Agent_Memory_Log'}).execute()
-            self.doc_id = doc.get('documentId')
+        try:
+            # Use a unique thread ID for this consultation
+            import uuid
+            consultation_thread = f"consultation_{uuid.uuid4().hex[:8]}"
             
-            # Add initial header
-            requests = [
-                {
-                    'insertText': {
-                        'location': {'index': 1},
-                        'text': 'Agent Memory Log\n\n'
-                    }
-                }
-            ]
-            docs_service.documents().batchUpdate(
-                documentId=self.doc_id,
-                body={'requests': requests}
-            ).execute()
+            # Run the strategist agent with the question
+            response = run_agent(
+                self.strategist_agent,
+                self.strategist_memory_logger,
+                question,
+                thread_id=consultation_thread,
+                agent_name="Head of Strategy"
+            )
+            
+            return f"Head of Strategy Response:\n{response}"
+        except Exception as e:
+            return f"Error consulting Head of Strategy: {str(e)}"
     
-    def log_conversation(self, user_message: str, agent_response: str):
-        """Log a conversation turn to the memory doc."""
-        from googleapiclient.discovery import build
-        
-        docs_service = build('docs', 'v1', credentials=self.creds)
-        
-        # Get current document end index
-        doc = docs_service.documents().get(documentId=self.doc_id).execute()
-        end_index = doc.get('body', {}).get('content', [{}])[-1].get('endIndex', 1)
-        insert_index = end_index - 1
-        
-        timestamp = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC')
-        
-        log_text = f"\n\n--- Conversation Log ({timestamp}) ---\n"
-        log_text += f"User: {user_message}\n\n"
-        log_text += f"Agent: {agent_response}\n"
-        log_text += "--- End of Log Entry ---\n"
-        
-        requests = [
-            {
-                'insertText': {
-                    'location': {'index': insert_index},
-                    'text': log_text
-                }
-            }
-        ]
-        
-        docs_service.documents().batchUpdate(
-            documentId=self.doc_id,
-            body={'requests': requests}
-        ).execute()
-    
-    def log_action(self, action: str, details: str = ""):
-        """Log an action (tool call) to the memory doc."""
-        from googleapiclient.discovery import build
-        
-        docs_service = build('docs', 'v1', credentials=self.creds)
-        
-        # Get current document end index
-        doc = docs_service.documents().get(documentId=self.doc_id).execute()
-        end_index = doc.get('body', {}).get('content', [{}])[-1].get('endIndex', 1)
-        insert_index = end_index - 1
-        
-        timestamp = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC')
-        
-        log_text = f"\n[Action Log {timestamp}] {action}"
-        if details:
-            log_text += f" - {details}"
-        log_text += "\n"
-        
-        requests = [
-            {
-                'insertText': {
-                    'location': {'index': insert_index},
-                    'text': log_text
-                }
-            }
-        ]
-        
-        docs_service.documents().batchUpdate(
-            documentId=self.doc_id,
-            body={'requests': requests}
-        ).execute()
+    async def _arun(self, question: str) -> str:
+        """Async version - not implemented."""
+        raise NotImplementedError("Async not implemented")
 
 
-def create_agent(creds: Credentials, api_key: str = None):
+def create_chief_of_staff_agent(creds: Credentials, api_key: str = None, strategist_agent=None, strategist_memory_logger=None):
     """
     Create and configure the Chief of Staff agent.
     
     Args:
         creds: Google credentials for API access
         api_key: Google Gemini API key (optional, can use env var)
+        strategist_agent: Optional strategist agent instance for consultation
+        strategist_memory_logger: Optional strategist memory logger
     
     Returns:
-        Compiled LangGraph agent
+        Compiled LangGraph agent and MemoryLogger
     """
-    # Initialize LLM
-    # Using gemini-2.5-flash (latest available model) - can also use gemini-2.5-pro or gemini-pro-latest
+    # Initialize LLM with higher temperature for more thoughtful analysis
     llm = ChatGoogleGenerativeAI(
         model="gemini-2.5-flash",
         google_api_key=api_key,
-        temperature=0.7,
-        convert_system_message_to_human=True  # Helps with system messages
+        temperature=0.85,  # Increased for more analytical thinking while maintaining efficiency
+        convert_system_message_to_human=True
     )
     
     # Initialize knowledge base
@@ -177,7 +114,6 @@ def create_agent(creds: Credentials, api_key: str = None):
         all_tools.extend(get_knowledge_tools(knowledge_base))
     
     # Add search tools if API key and engine ID are configured
-    # Try to get from environment or use the provided api_key as fallback
     search_api_key = os.getenv("GOOGLE_SEARCH_API_KEY") or api_key
     search_engine_id = os.getenv("GOOGLE_SEARCH_ENGINE_ID")
     
@@ -186,10 +122,15 @@ def create_agent(creds: Credentials, api_key: str = None):
         if search_tools:
             all_tools.extend(search_tools)
             print("✓ Google Search tools enabled")
-        else:
-            print("⚠️ Google Search tools not available (API key or engine ID issue)")
-    else:
-        print("⚠️ Google Search tools not available (missing GOOGLE_SEARCH_ENGINE_ID)")
+    
+    # Add consultation tool if strategist is available
+    if strategist_agent and strategist_memory_logger:
+        consult_tool = ConsultStrategistTool(
+            strategist_agent=strategist_agent,
+            strategist_memory_logger=strategist_memory_logger
+        )
+        all_tools.append(consult_tool)
+        print("✓ Strategist consultation tool enabled")
     
     # Bind tools to LLM
     llm_with_tools = llm.bind_tools(all_tools)
@@ -198,11 +139,18 @@ def create_agent(creds: Credentials, api_key: str = None):
     tool_node = ToolNode(all_tools)
     
     # Initialize memory logger
-    memory_logger = MemoryLogger(creds)
+    memory_logger = MemoryLogger(creds, doc_name="Chief_of_Staff_Memory_Log")
     
     # System prompt
     system_prompt = """You are an efficient Chief of Staff. You manage the user's time and communications. 
 Always check the calendar before proposing meetings. Always log your significant actions.
+
+ANALYSIS DEPTH REQUIREMENTS:
+- When providing information or recommendations, go beyond surface-level responses
+- Synthesize information from multiple sources (calendar, emails, documents, knowledge base)
+- Provide context-rich answers that connect dots and show understanding
+- When analyzing situations, consider multiple perspectives and implications
+- Think critically: what are the underlying factors? What might be missing? What are the second-order effects?
 
 EFFICIENCY RULES (CRITICAL):
 - Be concise in your responses - aim to complete tasks efficiently
@@ -220,6 +168,11 @@ WEB SEARCH RULES:
 - When searching, read the results carefully and extract the key information to answer the user's question
 - If the first search doesn't provide enough information, try a different query with different keywords
 - Combine information from search results with your knowledge base when appropriate
+
+STRATEGIC CONSULTATION:
+- When the user asks strategic questions (e.g., "Should we do X?", "Is this a good idea?", "What am I missing?"), use consult_head_of_strategy to get the Head of Strategy's input
+- The Head of Strategy will provide Green Light/Red Light verdicts and strategic guidance
+- Present the Strategist's response clearly to the user
 
 KNOWLEDGE BASE:
 You have access to a knowledge base that contains indexed information from company documents in Google Drive.
@@ -310,7 +263,7 @@ Problem-solving approach:
     workflow = StateGraph(AgentState)
     
     # Track iterations to prevent infinite loops
-    max_iterations = 25  # Maximum tool call iterations (increased to support batch operations like multiple meetings)
+    max_iterations = 25
     
     def should_continue(state: AgentState) -> str:
         """Determine if we should continue or end."""
@@ -325,30 +278,23 @@ Problem-solving approach:
         tool_call_count = sum(1 for msg in messages if isinstance(msg, AIMessage) and hasattr(msg, 'tool_calls') and msg.tool_calls)
         
         if tool_call_count >= max_iterations:
-            # Force end if we've exceeded max iterations
             return "end"
         
-        # If the last message is an AIMessage with tool calls, we need to continue to execute tools
         if isinstance(last_message, AIMessage) and hasattr(last_message, 'tool_calls') and last_message.tool_calls:
             return "continue"
         
-        # If the last message is a ToolMessage, we should continue to let the agent process the results
-        from langchain_core.messages import ToolMessage
         if isinstance(last_message, ToolMessage):
             return "continue"
         
-        # If the last message is an AIMessage without tool calls, we're done (agent has provided final response)
         if isinstance(last_message, AIMessage):
             return "end"
         
-        # Otherwise, we're done
         return "end"
     
     def call_model(state: AgentState):
         """Call the LLM with the current state."""
         messages = state["messages"]
         
-        # Add system message at the start if not present
         if not messages or not isinstance(messages[0], SystemMessage):
             messages = [SystemMessage(content=system_prompt)] + messages
         
@@ -360,15 +306,14 @@ Problem-solving approach:
         messages = state["messages"]
         last_message = messages[-1]
         
-        # Log tool calls before execution
         if hasattr(last_message, 'tool_calls') and last_message.tool_calls:
             for tool_call in last_message.tool_calls:
                 memory_logger.log_action(
                     action=f"Tool Called: {tool_call['name']}",
-                    details=str(tool_call.get("args", {}))
+                    details=str(tool_call.get("args", {})),
+                    agent_name="Chief of Staff"
                 )
         
-        # Use ToolNode to execute tools (it handles the execution automatically)
         return tool_node.invoke(state)
     
     # Add nodes
@@ -399,66 +344,7 @@ Problem-solving approach:
     return app, memory_logger
 
 
-def run_agent(agent, memory_logger: MemoryLogger, user_input: str, thread_id: str = "default", progress_callback=None) -> str:
-    """
-    Run the agent with user input and return the response.
-    
-    Args:
-        agent: Compiled LangGraph agent
-        memory_logger: MemoryLogger instance
-        user_input: User's message
-        thread_id: Thread ID for maintaining conversation state
-        progress_callback: Optional callback function(status_message) for progress updates
-    
-    Returns:
-        Agent's response text
-    """
-    import time
-    
-    config = {"configurable": {"thread_id": thread_id}}
-    timeout_seconds = 90  # 90 second timeout
-    
-    if progress_callback:
-        progress_callback("🤔 Thinking...")
-    
-    start_time = time.time()
-    
-    try:
-        # Invoke the agent (LangGraph will maintain state per thread_id using checkpointer)
-        # Set recursion_limit in config to support batch operations (e.g., scheduling multiple meetings)
-        # Set to 30 to allow for multiple sequential operations with some buffer
-        config["recursion_limit"] = 30
-        result = agent.invoke(
-            {"messages": [HumanMessage(content=user_input)]},
-            config
-        )
-        
-        # Check if we exceeded timeout (manual check since signal-based timeout doesn't work well with Streamlit)
-        elapsed = time.time() - start_time
-        if elapsed > timeout_seconds:
-            return "⏱️ The request took too long to process. Please try rephrasing your request or breaking it into smaller parts."
-        
-    except Exception as e:
-        if progress_callback:
-            progress_callback(f"❌ Error: {str(e)}")
-        raise
-    
-    # Extract the final response (last non-tool message)
-    messages = result["messages"]
-    final_response = None
-    for msg in reversed(messages):
-        if isinstance(msg, AIMessage):
-            # Check if this message has tool calls
-            has_tool_calls = hasattr(msg, 'tool_calls') and msg.tool_calls
-            if not has_tool_calls:
-                final_response = msg.content
-                break
-    
-    if not final_response:
-        final_response = messages[-1].content if messages else "No response generated."
-    
-    # Log the conversation
-    memory_logger.log_conversation(user_input, final_response)
-    
-    return final_response
-
+def run_chief_of_staff(agent, memory_logger: MemoryLogger, user_input: str, thread_id: str = "cos_default", 
+                       progress_callback=None) -> str:
+    """Run the Chief of Staff agent."""
+    return run_agent(agent, memory_logger, user_input, thread_id, progress_callback, agent_name="Chief of Staff")

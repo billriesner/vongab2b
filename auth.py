@@ -16,7 +16,7 @@ SCOPES = [
     'https://www.googleapis.com/auth/calendar',
     'https://www.googleapis.com/auth/drive.readonly',
     'https://www.googleapis.com/auth/drive.file',
-    'https://www.googleapis.com/auth/spreadsheets.readonly',  # For reading Google Sheets
+    'https://www.googleapis.com/auth/spreadsheets',  # For reading and writing Google Sheets
     'https://www.googleapis.com/auth/tasks',
 ]
 

@@ -47,6 +47,88 @@ def get_sheets_service(creds: Credentials):
     return build('sheets', 'v4', credentials=creds)
 
 
+def read_google_doc_by_name(creds: Credentials, filename: str) -> str:
+    """
+    Read a Google Doc by its filename and return the full text content.
+    
+    Args:
+        creds: Google credentials for API access
+        filename: Name of the Google Doc to read (without extension)
+    
+    Returns:
+        Full text content of the document, or error message if not found
+    """
+    try:
+        drive_service = get_drive_service(creds)
+        docs_service = get_docs_service(creds)
+        
+        # Search for the document - try multiple variations
+        search_queries = [
+            f"name='{filename}'",
+            f"name contains '{filename}'",
+            f"fullText contains '{filename}'"
+        ]
+        
+        file_id = None
+        file_type = None
+        
+        for query in search_queries:
+            results = drive_service.files().list(
+                q=f"{query} and mimeType='application/vnd.google-apps.document'",
+                pageSize=5,
+                fields="files(id, name, mimeType)"
+            ).execute()
+            
+            files = results.get('files', [])
+            if files:
+                # Prefer exact match
+                exact_match = [f for f in files if f.get('name') == filename]
+                if exact_match:
+                    file_id = exact_match[0]['id']
+                    file_type = exact_match[0].get('mimeType', '')
+                    break
+                else:
+                    file_id = files[0]['id']
+                    file_type = files[0].get('mimeType', '')
+                    break
+        
+        if not file_id:
+            return f"Error: Google Doc '{filename}' not found. Please ensure the document exists in Google Drive."
+        
+        # Read the document content
+        doc = docs_service.documents().get(documentId=file_id).execute()
+        title = doc.get('title', filename)
+        body_content = doc.get('body', {}).get('content', [])
+        
+        # Extract text from document elements
+        content = ""
+        for element in body_content:
+            if 'paragraph' in element:
+                para = element['paragraph']
+                for elem in para.get('elements', []):
+                    if 'textRun' in elem:
+                        content += elem['textRun'].get('content', '')
+            elif 'table' in element:
+                # Handle tables
+                for row in element['table'].get('tableRows', []):
+                    row_text = []
+                    for cell in row.get('tableCells', []):
+                        cell_content = cell.get('content', [])
+                        cell_text = ""
+                        for cell_elem in cell_content:
+                            if 'paragraph' in cell_elem:
+                                for para_elem in cell_elem['paragraph'].get('elements', []):
+                                    if 'textRun' in para_elem:
+                                        cell_text += para_elem['textRun'].get('content', '')
+                        row_text.append(cell_text)
+                    content += ' | '.join(row_text) + '\n'
+        
+        return content
+        
+    except Exception as e:
+        return f"Error reading document '{filename}': {str(e)}"
+
+
 class DriveSearchTool(BaseTool):
     """Tool for searching Google Drive files."""
     name: str = "drive_search"
