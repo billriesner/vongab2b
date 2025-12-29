@@ -4,7 +4,7 @@ Handles operational tasks: calendar, email, tasks, and can consult the Strategis
 """
 
 import os
-from typing import List, Optional
+from typing import List, Optional, Dict
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.tools import BaseTool
 from langchain_core.messages import AIMessage, SystemMessage, ToolMessage
@@ -348,3 +348,488 @@ def run_chief_of_staff(agent, memory_logger: MemoryLogger, user_input: str, thre
                        progress_callback=None) -> str:
     """Run the Chief of Staff agent."""
     return run_agent(agent, memory_logger, user_input, thread_id, progress_callback, agent_name="Chief of Staff")
+
+
+# Quick Actions Workflow Functions
+
+def generate_daily_briefing(creds: Credentials) -> str:
+    """
+    Generate a daily briefing with today's calendar, high priority emails, and due tasks.
+    Returns a formatted string.
+    """
+    from tools.calendar_tools import get_calendar_service
+    from tools.gmail_tools import get_gmail_service
+    from googleapiclient.discovery import build
+    from datetime import datetime, timedelta
+    import base64
+    
+    briefing_parts = []
+    briefing_parts.append("=" * 60)
+    briefing_parts.append("DAILY BRIEFING")
+    briefing_parts.append("=" * 60)
+    briefing_parts.append("")
+    
+    # Get today's date
+    today = datetime.now()
+    today_start = today.replace(hour=0, minute=0, second=0, microsecond=0).isoformat() + 'Z'
+    today_end = today.replace(hour=23, minute=59, second=59, microsecond=0).isoformat() + 'Z'
+    
+    # 1. Today's Calendar
+    try:
+        calendar_service = get_calendar_service(creds)
+        events_result = calendar_service.events().list(
+            calendarId='primary',
+            timeMin=today_start,
+            timeMax=today_end,
+            maxResults=20,
+            singleEvents=True,
+            orderBy='startTime'
+        ).execute()
+        
+        events = events_result.get('items', [])
+        briefing_parts.append("TODAY'S CALENDAR")
+        if events:
+            for event in events:
+                start = event['start'].get('dateTime', event['start'].get('date'))
+                summary = event.get('summary', 'No Title')
+                # Parse and format time
+                try:
+                    if 'T' in start:
+                        dt = datetime.fromisoformat(start.replace('Z', '+00:00'))
+                        time_str = dt.strftime('%I:%M %p')
+                    else:
+                        time_str = "All Day"
+                    briefing_parts.append(f"  • {time_str}: {summary}")
+                except:
+                    briefing_parts.append(f"  • {summary}")
+        else:
+            briefing_parts.append("  No events scheduled for today.")
+        briefing_parts.append("")
+    except Exception as e:
+        briefing_parts.append("TODAY'S CALENDAR")
+        briefing_parts.append(f"  Error retrieving calendar: {str(e)}")
+        briefing_parts.append("")
+    
+    # 2. High Priority Emails (unread, important)
+    try:
+        gmail_service = get_gmail_service(creds)
+        # Search for unread important emails
+        results = gmail_service.users().messages().list(
+            userId='me',
+            q='is:unread is:important',
+            maxResults=5
+        ).execute()
+        
+        messages = results.get('messages', [])
+        briefing_parts.append("HIGH PRIORITY EMAILS")
+        if messages:
+            for msg in messages[:5]:  # Top 5
+                msg_detail = gmail_service.users().messages().get(userId='me', id=msg['id']).execute()
+                payload = msg_detail['payload']
+                headers = payload.get('headers', [])
+                subject = next((h['value'] for h in headers if h['name'] == 'Subject'), 'No Subject')
+                sender = next((h['value'] for h in headers if h['name'] == 'From'), 'Unknown')
+                # Extract email from sender (may include name)
+                sender_email = sender.split('<')[-1].replace('>', '').strip() if '<' in sender else sender
+                briefing_parts.append(f"  • From: {sender_email}")
+                briefing_parts.append(f"    Subject: {subject}")
+        else:
+            briefing_parts.append("  No unread important emails.")
+        briefing_parts.append("")
+    except Exception as e:
+        briefing_parts.append("HIGH PRIORITY EMAILS")
+        briefing_parts.append(f"  Error retrieving emails: {str(e)}")
+        briefing_parts.append("")
+    
+    # 3. Due Tasks
+    try:
+        tasks_service = build('tasks', 'v1', credentials=creds)
+        tasklists = tasks_service.tasklists().list(maxResults=10).execute()
+        tasklist_items = tasklists.get('items', [])
+        
+        briefing_parts.append("DUE TASKS")
+        found_tasks = False
+        
+        # Check default task list first, then others
+        default_list_id = None
+        for tasklist in tasklist_items:
+            if tasklist.get('id') == '@default':
+                default_list_id = tasklist['id']
+                break
+        
+        if default_list_id:
+            tasks = tasks_service.tasks().list(tasklist=default_list_id, showCompleted=False, maxResults=10).execute()
+            task_items = tasks.get('items', [])
+            
+            for task in task_items:
+                title = task.get('title', 'Untitled')
+                due = task.get('due')
+                if due:
+                    try:
+                        due_date = datetime.fromisoformat(due.replace('Z', '+00:00'))
+                        if due_date.date() <= today.date():
+                            briefing_parts.append(f"  • {title}")
+                            found_tasks = True
+                    except:
+                        # If date parsing fails, include the task anyway
+                        briefing_parts.append(f"  • {title}")
+                        found_tasks = True
+        
+        if not found_tasks:
+            briefing_parts.append("  No overdue tasks found.")
+        briefing_parts.append("")
+    except Exception as e:
+        briefing_parts.append("DUE TASKS")
+        briefing_parts.append(f"  Error retrieving tasks: {str(e)}")
+        briefing_parts.append("")
+    
+    briefing_parts.append("=" * 60)
+    
+    return "\n".join(briefing_parts)
+
+
+def find_and_block_focus_time(creds: Credentials) -> str:
+    """
+    Find the next 2-hour gap in the next 3 days and block it as "Deep Work".
+    Returns the time blocked or error message.
+    """
+    from tools.calendar_tools import get_calendar_service
+    from datetime import datetime, timedelta
+    from dateutil import tz
+    
+    try:
+        calendar_service = get_calendar_service(creds)
+        
+        # Get current time
+        now = datetime.now(tz.tzlocal())
+        end_search = now + timedelta(days=3)
+        
+        # Get all events in the next 3 days
+        events_result = calendar_service.events().list(
+            calendarId='primary',
+            timeMin=now.isoformat(),
+            timeMax=end_search.isoformat(),
+            maxResults=250,
+            singleEvents=True,
+            orderBy='startTime'
+        ).execute()
+        
+        events = events_result.get('items', [])
+        
+        # Convert to local timezone and sort by start time
+        event_times = []
+        for event in events:
+            start = event['start'].get('dateTime')
+            end = event['end'].get('dateTime')
+            if start and end:
+                try:
+                    start_dt = datetime.fromisoformat(start.replace('Z', '+00:00'))
+                    end_dt = datetime.fromisoformat(end.replace('Z', '+00:00'))
+                    # Convert to local timezone
+                    start_local = start_dt.astimezone(tz.tzlocal())
+                    end_local = end_dt.astimezone(tz.tzlocal())
+                    event_times.append((start_local, end_local))
+                except:
+                    continue
+        
+        # Sort by start time
+        event_times.sort(key=lambda x: x[0])
+        
+        # Business hours: 7am-6pm EST/EDT
+        business_start = 7
+        business_end = 18
+        
+        # Find a 2-hour gap
+        current_time = now
+        if current_time.hour < business_start:
+            current_time = current_time.replace(hour=business_start, minute=0, second=0, microsecond=0)
+        
+        # Check gaps between events
+        for start_event, end_event in event_times:
+            # Check if there's a gap before this event
+            if start_event > current_time:
+                gap_duration = (start_event - current_time).total_seconds() / 3600  # hours
+                # Check if gap is at least 2 hours and within business hours
+                if gap_duration >= 2 and current_time.hour >= business_start and start_event.hour < business_end:
+                    # Found a gap - block it
+                    focus_start = current_time
+                    focus_end = focus_start + timedelta(hours=2)
+                    
+                    # Convert to UTC for Google Calendar API
+                    focus_start_utc = focus_start.astimezone(tz.UTC)
+                    focus_end_utc = focus_end.astimezone(tz.UTC)
+                    
+                    # Create the event
+                    event = {
+                        'summary': 'Deep Work',
+                        'description': 'Focus time blocked by Chief of Staff',
+                        'start': {
+                            'dateTime': focus_start_utc.strftime('%Y-%m-%dT%H:%M:%S') + 'Z',
+                            'timeZone': 'UTC'
+                        },
+                        'end': {
+                            'dateTime': focus_end_utc.strftime('%Y-%m-%dT%H:%M:%S') + 'Z',
+                            'timeZone': 'UTC'
+                        }
+                    }
+                    
+                    created_event = calendar_service.events().insert(calendarId='primary', body=event).execute()
+                    
+                    start_str = focus_start.strftime('%A, %B %d at %I:%M %p')
+                    return f"Blocked 2-hour focus time: {start_str} - {focus_end.strftime('%I:%M %p')}"
+            
+            # Update current_time to after this event
+            if end_event > current_time:
+                current_time = end_event
+                # Move to next business hour if needed
+                if current_time.hour >= business_end:
+                    # Move to next day at 7am
+                    current_time = current_time + timedelta(days=1)
+                    current_time = current_time.replace(hour=business_start, minute=0, second=0, microsecond=0)
+        
+        # Check if there's a gap at the end of the search window
+        if current_time < end_search:
+            gap_duration = (end_search - current_time).total_seconds() / 3600
+            if gap_duration >= 2 and current_time.hour >= business_start:
+                focus_start = current_time
+                focus_end = focus_start + timedelta(hours=2)
+                
+                # Convert to UTC for Google Calendar API
+                focus_start_utc = focus_start.astimezone(tz.UTC)
+                focus_end_utc = focus_end.astimezone(tz.UTC)
+                
+                event = {
+                    'summary': 'Deep Work',
+                    'description': 'Focus time blocked by Chief of Staff',
+                    'start': {
+                        'dateTime': focus_start_utc.strftime('%Y-%m-%dT%H:%M:%S') + 'Z',
+                        'timeZone': 'UTC'
+                    },
+                    'end': {
+                        'dateTime': focus_end_utc.strftime('%Y-%m-%dT%H:%M:%S') + 'Z',
+                        'timeZone': 'UTC'
+                    }
+                }
+                
+                created_event = calendar_service.events().insert(calendarId='primary', body=event).execute()
+                
+                start_str = focus_start.strftime('%A, %B %d at %I:%M %p')
+                return f"Blocked 2-hour focus time: {start_str} - {focus_end.strftime('%I:%M %p')}"
+        
+        return "No 2-hour gap found in the next 3 days during business hours (7am-6pm)."
+        
+    except Exception as e:
+        import traceback
+        return f"Error blocking focus time: {str(e)}\n{traceback.format_exc()[-500:]}"
+
+
+def generate_meeting_prep(creds: Credentials) -> str:
+    """
+    Identify the next event, search Gmail/Drive for context on attendees, and return a summary.
+    """
+    from tools.calendar_tools import get_calendar_service
+    from tools.gmail_tools import get_gmail_service
+    from tools.drive_tools import get_drive_service, get_docs_service
+    from datetime import datetime, timedelta
+    from dateutil import tz
+    
+    try:
+        calendar_service = get_calendar_service(creds)
+        
+        # Get next event
+        now = datetime.now(tz.tzlocal())
+        events_result = calendar_service.events().list(
+            calendarId='primary',
+            timeMin=now.isoformat(),
+            maxResults=1,
+            singleEvents=True,
+            orderBy='startTime'
+        ).execute()
+        
+        events = events_result.get('items', [])
+        if not events:
+            return "No upcoming events found."
+        
+        event = events[0]
+        summary = event.get('summary', 'Untitled Event')
+        start = event['start'].get('dateTime', event['start'].get('date'))
+        description = event.get('description', '')
+        attendees = event.get('attendees', [])
+        
+        # Parse start time
+        try:
+            if 'T' in start:
+                start_dt = datetime.fromisoformat(start.replace('Z', '+00:00'))
+                start_local = start_dt.astimezone(tz.tzlocal())
+                time_str = start_local.strftime('%A, %B %d at %I:%M %p')
+            else:
+                time_str = start
+        except:
+            time_str = start
+        
+        prep_parts = []
+        prep_parts.append("=" * 60)
+        prep_parts.append("MEETING PREP: " + summary)
+        prep_parts.append("=" * 60)
+        prep_parts.append(f"\nWhen: {time_str}")
+        prep_parts.append("")
+        
+        # Get attendee emails
+        attendee_emails = []
+        attendee_names = []
+        for attendee in attendees:
+            email = attendee.get('email', '')
+            name = attendee.get('displayName', email)
+            if email:
+                attendee_emails.append(email)
+                attendee_names.append(name)
+        
+        if attendee_emails:
+            prep_parts.append("Attendees:")
+            for name in attendee_names:
+                prep_parts.append(f"  • {name}")
+            prep_parts.append("")
+        
+        if description:
+            prep_parts.append("Description:")
+            prep_parts.append(description)
+            prep_parts.append("")
+        
+        # Search Gmail for recent emails with attendees
+        context_parts = []
+        if attendee_emails:
+            try:
+                gmail_service = get_gmail_service(creds)
+                # Search for emails from/to attendees in last 30 days
+                search_query = f"({' OR '.join([f'from:{email} OR to:{email}' for email in attendee_emails[:3]])}) newer_than:30d"
+                results = gmail_service.users().messages().list(
+                    userId='me',
+                    q=search_query,
+                    maxResults=5
+                ).execute()
+                
+                messages = results.get('messages', [])
+                if messages:
+                    context_parts.append("Recent Email Context:")
+                    for msg in messages[:3]:  # Top 3
+                        msg_detail = gmail_service.users().messages().get(userId='me', id=msg['id']).execute()
+                        payload = msg_detail['payload']
+                        headers = payload.get('headers', [])
+                        subject = next((h['value'] for h in headers if h['name'] == 'Subject'), 'No Subject')
+                        sender = next((h['value'] for h in headers if h['name'] == 'From'), 'Unknown')
+                        context_parts.append(f"  • {subject} (from {sender})")
+                    context_parts.append("")
+            except Exception as e:
+                context_parts.append(f"Note: Could not retrieve email context: {str(e)}")
+        
+        # Search Drive for relevant documents (search for attendee names or event summary)
+        try:
+            drive_service = get_drive_service(creds)
+            # Search for documents mentioning the event summary or attendee names
+            search_terms = [summary] + attendee_names[:2]
+            for term in search_terms:
+                if term and len(term) > 3:
+                    results = drive_service.files().list(
+                        q=f"fullText contains '{term}' and mimeType='application/vnd.google-apps.document'",
+                        pageSize=3,
+                        fields="files(id, name)"
+                    ).execute()
+                    files = results.get('files', [])
+                    if files:
+                        context_parts.append(f"Related Documents (mentioning '{term}'):")
+                        for file in files[:2]:
+                            context_parts.append(f"  • {file['name']}")
+                        context_parts.append("")
+                        break  # Only show results from first match
+        except Exception as e:
+            pass  # Silently fail on Drive search
+        
+        if context_parts:
+            prep_parts.extend(context_parts)
+        
+        prep_parts.append("=" * 60)
+        
+        return "\n".join(prep_parts)
+        
+    except Exception as e:
+        import traceback
+        return f"Error generating meeting prep: {str(e)}\n{traceback.format_exc()[-500:]}"
+
+
+def inbox_triage(creds: Credentials) -> List[Dict[str, str]]:
+    """
+    Read top 10 unread emails and return a list of dicts with: sender, subject, summary, suggested_action.
+    For now, summary and suggested_action will be basic - can be enhanced with LLM later.
+    """
+    from tools.gmail_tools import get_gmail_service
+    import base64
+    
+    try:
+        gmail_service = get_gmail_service(creds)
+        
+        # Get top 10 unread emails
+        results = gmail_service.users().messages().list(
+            userId='me',
+            q='is:unread',
+            maxResults=10
+        ).execute()
+        
+        messages = results.get('messages', [])
+        if not messages:
+            return []
+        
+        triage_list = []
+        
+        for msg in messages[:10]:
+            try:
+                msg_detail = gmail_service.users().messages().get(userId='me', id=msg['id']).execute()
+                payload = msg_detail['payload']
+                headers = payload.get('headers', [])
+                
+                subject = next((h['value'] for h in headers if h['name'] == 'Subject'), 'No Subject')
+                sender_header = next((h['value'] for h in headers if h['name'] == 'From'), 'Unknown')
+                # Extract email from sender
+                sender = sender_header.split('<')[-1].replace('>', '').strip() if '<' in sender_header else sender_header
+                
+                # Get body for summary (first 200 chars)
+                body = ""
+                try:
+                    if 'parts' in payload:
+                        for part in payload['parts']:
+                            if part['mimeType'] == 'text/plain':
+                                data = part['body']['data']
+                                body = base64.urlsafe_b64decode(data).decode('utf-8')
+                                break
+                    else:
+                        if payload['mimeType'] == 'text/plain':
+                            data = payload['body']['data']
+                            body = base64.urlsafe_b64decode(data).decode('utf-8')
+                except:
+                    body = ""
+                
+                summary = body[:200].replace('\n', ' ').strip() if body else "No preview available"
+                if len(summary) == 200:
+                    summary += "..."
+                
+                # Basic suggested action (can be enhanced)
+                suggested_action = "Review"
+                if any(keyword in subject.lower() for keyword in ['urgent', 'asap', 'important']):
+                    suggested_action = "Action Required"
+                elif any(keyword in subject.lower() for keyword in ['meeting', 'calendar', 'schedule']):
+                    suggested_action = "Check Calendar"
+                
+                triage_list.append({
+                    'Sender': sender,
+                    'Subject': subject,
+                    'Summary': summary,
+                    'Suggested Action': suggested_action
+                })
+            except Exception as e:
+                # Skip this message if there's an error
+                continue
+        
+        return triage_list
+        
+    except Exception as e:
+        import traceback
+        return [{'Sender': 'Error', 'Subject': 'Error retrieving emails', 'Summary': str(e), 'Suggested Action': 'Retry'}]
